@@ -1,0 +1,38 @@
+export const reactionSchema = `#graphql
+  type React {
+    id: ID
+    user: User
+    target: ID
+    targetType: ReactionTargetType
+    type: ReactionType
+    createdAt: String
+  }
+
+  enum ReactionType {
+    LIKE
+    CARE
+    WOW
+    LOVE
+    HAHA
+    SAD
+    ANGRY
+  }
+
+  enum ReactionTargetType {
+    Post
+    Comment
+    Message
+  }
+
+  extend type Query {
+    getReactions(target: ID!, type: ReactionType): [React]
+  }
+
+  extend type Mutation {
+    toggleReaction(
+      type: ReactionType
+      targetType: ReactionTargetType!
+      target: ID!
+    ): React
+  }
+`;

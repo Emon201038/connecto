@@ -1,0 +1,34 @@
+type Comment {
+  id: ID
+  text: String
+  createdAt: String
+  updatedAt: String
+  parent: Comment
+  post: Post!
+  author: User
+  replyCount: Int
+  reactionCount: Int
+  replies: [Comment]
+  entities: [Entity]
+  reactionSummary: [ReactionSummary]
+  myReaction: React
+}
+
+type CommentResponse {
+  comments: [Comment]
+  meta: Meta
+}
+
+extend type Query {
+  comments(post: ID!, limit: Int, page: Int): CommentResponse!
+  comment(id: ID!): Comment
+}
+
+extend type Mutation {
+  createComment(
+    post: ID!
+    text: String!
+    parent: ID
+    entities: [EntityInput]
+  ): Comment
+}

@@ -1,0 +1,9 @@
+type SendOtpResponse {
+  s_id: String
+  o_id: String
+}
+extend type Mutation {
+  sendOtp(s_id: String!, type: String!): SendOtpResponse
+  verify2FA(s_id: String!, o_id: String!, token: String!): Boolean
+  sendResetCode(email: String!, id: ID!): ID
+}

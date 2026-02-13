@@ -1,0 +1,61 @@
+export const friendSchema = `#graphql
+  enum FriendRequestStatus {
+    PENDING
+    ACCEPTED
+    DECLINED
+  }
+
+  type User {
+    id: ID!
+    name: String!
+  }
+
+  type Friendship {
+    id: ID!
+    requester: User!
+    recipient: User!
+    status: FriendRequestStatus!
+    createdAt: String!
+  }
+
+  type SuggestedUserResponse {
+    users: [User]
+    meta: Meta
+  }
+
+  type FriendshipModified {
+    friendshipId: ID!
+    status: FriendRequestStatus!
+    user: User
+  }
+
+  type FriendshipResponse {
+    users: [FriendshipModified]
+    meta: Meta
+  }
+
+  type Query {
+    myFriends(
+      page: Int = 1
+      limit: Int = 15
+      search: String = ""
+    ): FriendshipResponse
+    pendingRequests(
+      page: Int = 1
+      limit: Int = 15
+      search: String = ""
+    ): FriendshipResponse
+    suggestedUser(
+      page: Int = 1
+      limit: Int = 15
+      search: String = ""
+    ): SuggestedUserResponse
+  }
+
+  type Mutation {
+    sendFriendRequest(recipientId: ID!): Friendship!
+    acceptFriendRequest(requestId: ID!): Friendship!
+    deleteFriendRequest(requestId: ID!): Boolean!
+    unfriend(friendId: ID!): Boolean!
+  }
+`;

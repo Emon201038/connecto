@@ -1,0 +1,94 @@
+type PhotoType {
+  url: String
+  pub_id: String
+}
+
+type Settings {
+  isPrivate: Boolean
+  isVerified: Boolean
+  isBanned: Boolean
+  darkMode: Boolean
+  notifications: Boolean
+}
+
+type TwoFactor {
+  active: Boolean
+  secret: String
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+type User {
+  id: ID!
+  _id: ID
+  firstName: String!
+  lastName: String
+  fullName: String
+  username: String
+  nickname: String
+  email: String!
+  phone: String
+  password: String!
+  profilePicture: PhotoType
+  coverPicture: PhotoType
+  bio: String
+  createdAt: String
+  updatedAt: String
+  friends: [User]
+  followings: [User]
+  followers: [User]
+  friendRequests: [User]
+  settings: Settings
+  twoFactor: TwoFactor
+  role: UserRole!
+}
+
+type UserResponse {
+  users: [User]
+  meta: Meta
+}
+
+input RegisterInput {
+  firstName: String!
+  email: String!
+  password: String!
+}
+
+type Meta {
+  page: Int
+  limit: Int
+  prevPage: Int
+  nextPage: Int
+  totalPage: Int
+  totalResult: Int
+}
+
+extend type Query {
+  # getUser(id: ID!): User
+  user(id: ID!): User
+  userByusername(username: String!): User
+  users(
+    page: Int = 1
+    limit: Int = 10
+    search: String
+    filter: String
+    sortBy: String = "createdAt"
+    sortOrder: String = "DESC"
+  ): UserResponse
+  friends(
+    page: Int = 1
+    limit: Int = 10
+    search: String
+    sortBy: String = "fullName"
+    sortOrder: String = "DESC"
+  ): UserResponse
+}
+
+extend type Mutation {
+  registerUser(input: RegisterInput!): User
+  deleteUser(id: ID!): Boolean
+}
