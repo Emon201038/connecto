@@ -1,22 +1,9 @@
 import Link from "next/link";
-import React from "react";
 import LoginForm from "./LoginForm";
-import Logo from "@/components/icons/logo";
-import { redirect } from "next/navigation";
-import { auth } from "@/auth";
 import Image from "next/image";
+import { Suspense } from "react";
 
-const LoginPage = async ({
-  searchParams,
-}: {
-  searchParams: Promise<{ callback?: string }>;
-}) => {
-  const session = await auth();
-  const params = await searchParams;
-  const callback = params?.callback;
-  if (session?.user?.id) {
-    redirect(callback && callback.startsWith("/") ? callback : "/");
-  }
+const LoginPage = () => {
   return (
     <div className="min-h-screen  flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md flex flex-col justify-center items-center gap-1">
@@ -34,7 +21,9 @@ const LoginPage = async ({
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="dark:bg-accent py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <LoginForm />
+          <Suspense fallback={<div>Loading...</div>}>
+            <LoginForm />
+          </Suspense>
 
           <div className="mt-3">
             <div className="relative">
