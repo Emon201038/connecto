@@ -4,7 +4,7 @@ import { IUser } from "@/types";
 import React from "react";
 import { AcceptButton, DeclineButton } from "../(home)/@requests/Button";
 import Image from "next/image";
-import defaultImage from "@/../public/images/default-profile.jpeg";
+import defaultImage from "@/public/images/default-profile.jpeg";
 
 interface Props {
   friend: IUser;

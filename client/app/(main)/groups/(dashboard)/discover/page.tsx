@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { useGroupsQuery } from "@/redux/features/group/groupApi";
 import Image from "next/image";
 import React from "react";
-import defaultImage from "@/../public/images/groups-default-cover-photo.png";
+import defaultImage from "@/public/images/groups-default-cover-photo.png";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import JoinButton from "./JoinButton";

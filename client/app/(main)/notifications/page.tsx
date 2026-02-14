@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
-import defaultImage from "@/../public/images/default-profile.jpeg";
+import defaultImage from "@/public/images/default-profile.jpeg";
 
 const page = () => {
   const notifications = [
@@ -231,12 +231,13 @@ const page = () => {
                       <span className="font-semibold">
                         {n.author.fullName}
                       </span>{" "}
-                      {n.text} Lorem ipsum dolor sit amet sdfsadfs asdfasdfsdf{" "}
+                      {n.text} Lorem ipsum dolor sit amet sdfsadfs
+                      asdfasdfsdf{" "}
                     </p>
                   </div>
                   <p>
                     {formatMaxUnit(
-                      new Date().getTime() - new Date(n.createdAt).getTime()
+                      new Date().getTime() - new Date(n.createdAt).getTime(),
                     )}
                   </p>
                 </div>
