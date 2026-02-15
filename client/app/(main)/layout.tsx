@@ -85,20 +85,24 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
               <div
                 data-title="Menu"
                 data-position="bottom"
-                className="size-10 rounded-full bg-[#e2e5eb] flex justify-center items-center cursor-pointer tooltip"
+                className="size-10 rounded-full bg-[#e2e5eb] dark:bg-muted flex justify-center items-center cursor-pointer tooltip"
               >
                 <GridIcon className="size-6" />
               </div>
               <div
                 data-title="Messenger"
                 data-position="bottom"
-                className="size-10 rounded-full bg-[#e2e5eb] flex justify-center items-center tooltip"
+                className="size-10 rounded-full bg-[#e2e5eb] dark:bg-muted flex justify-center items-center tooltip"
               >
                 <Link href="/inbox">
                   <MessengerIcon className="size-8" />
                 </Link>
               </div>
-              <div data-title="Menu" className="tooltip" data-position="bottom">
+              <div
+                data-title="Menu"
+                className="size-10 rounded-full bg-[#e2e5eb] dark:bg-muted flex justify-center items-center tooltip"
+                data-position="bottom"
+              >
                 {/* <ProfileDropdown /> */}
                 <ProfilePopover />
               </div>
@@ -111,21 +115,21 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
             <div
               data-title="Menu"
               data-position="bottom"
-              className="size-10 rounded-full bg-[#e2e5eb] flex justify-center items-center cursor-pointer tooltip"
+              className="size-10 rounded-full bg-[#e2e5eb] dark:bg-muted flex justify-center items-center cursor-pointer tooltip"
             >
               <GridIcon className="size-6" />
             </div>
             <div
               data-title="Search"
               data-position="bottom"
-              className="size-10 rounded-full bg-[#e2e5eb] flex justify-center items-center tooltip"
+              className="size-10 rounded-full bg-[#e2e5eb] dark:bg-muted flex justify-center items-center tooltip"
             >
               <Search />
             </div>
             <div
               data-title="Messenger"
               data-position="bottom"
-              className="size-10 rounded-full bg-[#e2e5eb] flex justify-center items-center tooltip"
+              className="size-10 rounded-full bg-[#e2e5eb] dark:bg-muted flex justify-center items-center tooltip"
             >
               <Link href="/inbox">
                 <MessengerIcon className="size-8" />

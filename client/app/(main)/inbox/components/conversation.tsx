@@ -22,12 +22,10 @@ const Conversation = ({
       key={conversation.id}
       href={`/inbox/${conversation.id}`}
       className={cn(
-        "w-full flex items-center gap-4 hover:bg-slate-50 pl-1 pr-4 py-2 rounded-sm",
+        "w-full flex items-center gap-4 hover:bg-muted pl-1 pr-4 py-2 rounded-sm",
         {
-          "bg-[rgb(235,245,255)]": pathname === `/inbox/${conversation.id}`,
-          "hover:bg-[rgb(235,245,255)]":
-            pathname === `/inbox/${conversation.id}`,
-        }
+          "bg-muted": pathname === `/inbox/${conversation.id}`,
+        },
       )}
     >
       <div className="relative">

@@ -380,7 +380,7 @@ const ChatArea = () => {
         {
           hidden: openRightSidebar,
           "md:block": true,
-        }
+        },
       )}
     >
       {/* Header */}
@@ -394,7 +394,7 @@ const ChatArea = () => {
       <div
         ref={containerRef}
         className={cn(
-          `flex-1 w-full h-[calc(100%_-_112px)] overflow-y-auto space-y-3`
+          `flex-1 w-full h-[calc(100%_-_112px)] overflow-y-auto space-y-3`,
         )}
       >
         <Messages conversation={conversation as IConversationMember} />
@@ -404,7 +404,7 @@ const ChatArea = () => {
       <form
         onSubmit={sendMessage}
         className={cn(
-          "relative py-3 border-t bg-white flex items-center  rounded-b-sm gap-2"
+          "relative py-3 border-t  flex items-center  rounded-b-sm gap-2",
         )}
       >
         {typingUsers.size > 0 && (

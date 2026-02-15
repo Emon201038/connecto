@@ -254,7 +254,7 @@ export function ProfilePopover({
     <Popover>
       <PopoverTrigger asChild>
         <div className="relative">
-          <Avatar className="size-10 ">
+          <Avatar className="size-6">
             <AvatarImage
               src={
                 session?.data?.user?.profilePicture?.url ||
@@ -266,7 +266,7 @@ export function ProfilePopover({
               {session?.data?.user?.fullName?.charAt(0)}
             </AvatarFallback>
           </Avatar>
-          <div className="absolute bottom-0 -right-px size-3 bg-[#e2e5eb] rounded-full">
+          <div className="absolute bottom-0 -right-px size-3 bg-[#e2e5eb] dark:bg-muted rounded-full">
             <ChevronDown size={15} />
           </div>
         </div>
