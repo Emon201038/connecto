@@ -33,7 +33,7 @@ import { useTogglePostReactionMutation } from "@/redux/features/reaction/reactio
 import { ReactionType } from "@/interface/reaction.interface";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
-import { ShareModal } from "./share-modal";
+import { ShareModal } from "./modules/share/share-modal";
 
 export default function PostCard({ post: rootPost }: { post: IPost }) {
   const [moreDropdownOpen, setMoreDropdownOpen] = useState(false);
@@ -357,12 +357,12 @@ export default function PostCard({ post: rootPost }: { post: IPost }) {
             ) : (
               <button className="hover:underline flex gap-1">
                 <div
-                  style={{
-                    backgroundColor: post.myReaction
-                      ? reactionEmojis[post.myReaction.type].bg
-                      : "white",
-                  }}
-                  className="flex items-center justify-center rounded-full  text-white"
+                  // style={{
+                  //   backgroundColor: post.myReaction
+                  //     ? reactionEmojis[post.myReaction.type].bg
+                  //     : "white",
+                  // }}
+                  className="flex items-center justify-center rounded-full"
                 >
                   {post.reactionSummary && post.reactionSummary.length > 0
                     ? [...post.reactionSummary.filter((r) => r.count > 0)]

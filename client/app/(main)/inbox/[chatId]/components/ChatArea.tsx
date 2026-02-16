@@ -394,7 +394,7 @@ const ChatArea = () => {
       <div
         ref={containerRef}
         className={cn(
-          `flex-1 w-full h-[calc(100%_-_112px)] overflow-y-auto space-y-3`,
+          `flex-1 w-full h-[calc(100%-112px)] overflow-y-auto space-y-3`,
         )}
       >
         <Messages conversation={conversation as IConversationMember} />

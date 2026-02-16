@@ -32,9 +32,9 @@ import {
   ResponsiveDialogContent,
   ResponsiveDialogHeader,
   ResponsiveDialogTitle,
-} from "../app/components/ui/responsive-dialog";
+} from "../../../app/components/ui/responsive-dialog";
 import { useEffect, useRef, useState } from "react";
-import { Textarea } from "../app/components/ui/textarea";
+import { Textarea } from "../../../app/components/ui/textarea";
 
 const messengerContacts = [
   { id: 1, name: "soulmate", avatar: "/couple-avatar.png", hasHeart: true },
@@ -47,6 +47,9 @@ const messengerContacts = [
   { id: 4, name: "Md Arafat", avatar: "/man-outdoor-avatar.jpg" },
   { id: 5, name: "CSE-A2 Group O...", avatar: "/group-chat-avatar.jpg" },
   { id: 6, name: "Jowel Sarkar", avatar: "/casual-man-avatar.png" },
+  { id: 7, name: "Md Arafat", avatar: "/man-outdoor-avatar.jpg" },
+  { id: 8, name: "CSE-A2 Group O...", avatar: "/group-chat-avatar.jpg" },
+  { id: 9, name: "Jowel Sarkar", avatar: "/casual-man-avatar.png" },
 ];
 
 const shareOptions = [
@@ -99,27 +102,27 @@ export function ShareModal({ open, onOpenChange }: ShareModalProps) {
 
   const updateScrollButtons = () => {
     const el = containerRef.current;
-
     if (!el) return;
 
-    setCanScrollLeft(el.scrollLeft > 0);
-    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+
+    setCanScrollLeft(scrollLeft > 5);
+    setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 5);
   };
 
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
+    if (!open) return;
 
-    updateScrollButtons(); // initial check
+    const timeout = setTimeout(() => {
+      const el = containerRef.current;
+      if (!el) return;
 
-    el.addEventListener("scroll", updateScrollButtons);
-    window.addEventListener("resize", updateScrollButtons);
+      updateScrollButtons();
+      el.addEventListener("scroll", updateScrollButtons);
+    }, 0);
 
-    return () => {
-      el.removeEventListener("scroll", updateScrollButtons);
-      window.removeEventListener("resize", updateScrollButtons);
-    };
-  }, []);
+    return () => clearTimeout(timeout);
+  }, [open]);
 
   const scrollNext = () => {
     containerRef.current?.scrollBy({
@@ -136,7 +139,7 @@ export function ShareModal({ open, onOpenChange }: ShareModalProps) {
   };
   return (
     <ResponsiveDialog open={open} onOpenChange={onOpenChange}>
-      <ResponsiveDialogContent className="  rounded-xl bg-accent overflow-hidden">
+      <ResponsiveDialogContent className="rounded-xl rounded-b-none md:rounded-b-xl bg-accent overflow-hidden md:h-auto h-[70vh]">
         {/* Header */}
         <ResponsiveDialogHeader className="p-4 border-b border-[#3a3b3c] relative">
           <ResponsiveDialogTitle className="text-xl font-bold text-center ">
@@ -200,25 +203,25 @@ export function ShareModal({ open, onOpenChange }: ShareModalProps) {
         </div>
 
         {/* Share Now Button */}
-        <div className="px-4 pb-4 w-[93%] flex justify-end items-center">
+        <div className="px-4 pb-4 flex justify-end items-center">
           <Button className="bg-[#0866ff] hover:bg-[#1877f2]  font-semibold h-10 rounded-lg">
             Share now
           </Button>
         </div>
 
         {/* Send in Messenger Section */}
-        <div className="border-t border-[#3a3b3c] p-4">
+        <div className="border-t pt-4 border-[#3a3b3c] w-full ">
           <h3 className="font-semibold text-[15px]  mb-3">Send in Messenger</h3>
-          <div className="relative">
+          <div className="relative ">
             {/* <ScrollArea className="w-full whitespace-nowrap"> */}
             <div
               ref={containerRef}
-              className="flex gap-4 pb-2 overflow-x-auto scroll-smooth snap-x snap-mandatory w-[93%]"
+              className="flex gap-4 pb-2 overflow-x-auto max-w-122 w-full"
             >
               {messengerContacts.map((contact) => (
                 <button
                   key={contact.id}
-                  className="flex flex-col items-center gap-1.5 min-w-[64px] hover:opacity-80 transition-opacity"
+                  className="flex flex-col items-center gap-1.5 w-18 shrink-0"
                 >
                   <div className="relative">
                     <Avatar className="h-14 w-14 border-2 border-transparent">
@@ -227,11 +230,6 @@ export function ShareModal({ open, onOpenChange }: ShareModalProps) {
                         {contact.name[0]}
                       </AvatarFallback>
                     </Avatar>
-                    {contact.hasHeart && (
-                      <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 text-red-500 text-sm">
-                        ❤️
-                      </span>
-                    )}
                   </div>
                   <span className="text-xs text-[#e4e6eb] text-center w-full truncate">
                     {contact.name}
@@ -242,12 +240,7 @@ export function ShareModal({ open, onOpenChange }: ShareModalProps) {
             {canScrollLeft && (
               <button
                 onClick={scrollPrev}
-                className="
-      absolute left-0 top-1/2 -translate-y-1/2
-      w-8 h-8 rounded-full
-      bg-[#3a3b3c] hover:bg-[#4a4b4c]
-      flex items-center justify-center
-    "
+                className="absolute left-0 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#3a3b3c] hover:bg-[#4a4b4c] flex items-center justify-center"
               >
                 <ChevronLeft className="h-5 w-5 " />
               </button>
@@ -270,7 +263,7 @@ export function ShareModal({ open, onOpenChange }: ShareModalProps) {
         </div>
 
         {/* Share To Section */}
-        <div className="border-t border-[#3a3b3c] p-4">
+        <div className="border-[#3a3b3c]">
           <h3 className="font-semibold text-[15px]  mb-3">Share to</h3>
           <div className="flex gap-4 ">
             {shareOptions.map((option) => {

@@ -253,7 +253,7 @@ export function ProfilePopover({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <div className="relative">
+        <div className="relative bg-[#e2e5eb] dark:bg-muted rounded-full size-10 flex justify-center items-center">
           <Avatar className="size-6">
             <AvatarImage
               src={
@@ -271,7 +271,7 @@ export function ProfilePopover({
           </div>
         </div>
       </PopoverTrigger>
-      <PopoverContent className="!w-full p-0 overflow-hidden" align="end">
+      <PopoverContent className="w-full! p-0 overflow-hidden" align="end">
         <div className="relative">
           {/* Main Menu */}
           <div
@@ -283,7 +283,7 @@ export function ProfilePopover({
           >
             <div className="p-4">
               <div className="flex items-center gap-3">
-                <Avatar className="h-12 w-12">
+                <Avatar className="h-6 w-6">
                   <AvatarImage
                     src={avatarUrl || "/images/default-profile.jpeg"}
                     alt={userName}

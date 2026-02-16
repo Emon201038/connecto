@@ -18,7 +18,7 @@ import { EyeIcon, EyeOffIcon } from "lucide-react";
 // Base props (common for all input types)
 interface BaseProps<
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > {
   control: Control<TFieldValues>;
   name: TName;
@@ -47,13 +47,13 @@ interface OtherInputProps {
 // Combine with union
 type RHFInputProps<
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 > = BaseProps<TFieldValues, TName> & (NumberInputProps | OtherInputProps);
 
 // ----------------- Component -----------------
 export function RHFInput<
   TFieldValues extends FieldValues = FieldValues,
-  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({
   control,
   name,
@@ -84,7 +84,7 @@ export function RHFInput<
                 placeholder={placeholder}
                 disabled={disabled}
                 id={rest.id || name}
-                className={cn(rest.inputclassname)}
+                className={cn("autofill:bg-transparent", rest.inputclassname)}
                 {...field}
                 {...rest}
               />

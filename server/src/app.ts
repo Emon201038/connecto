@@ -22,12 +22,13 @@ app.use(
       "https://social-app-one-self.vercel.app",
       "https://facebook-client-five.vercel.app",
       "https://connecto-by-emon.vercel.app",
+      "http://192.168.0.105:3000",
       // CLIENT_URL,
       // SERVER_URL,
     ],
     credentials: true,
     methods: ["GET", "POST", "DELETE", "PUT"],
-  })
+  }),
 );
 
 // app.use("/v1/users", userRouter);

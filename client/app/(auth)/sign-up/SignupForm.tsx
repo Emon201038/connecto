@@ -168,7 +168,7 @@ const SignupForm: React.FC<Props> = ({ user }: { user?: IUser }) => {
 
         <Button
           type="submit"
-          className="w-full bg-green-600 hover:bg-green-700"
+          className="w-full bg-primary text-primary-text hover:bg-primary/80"
           disabled={isRegisterLoading}
         >
           {isRegisterLoading ? "Creating account..." : "Sign Up"}

@@ -165,9 +165,9 @@ const page = () => {
   }
 
   return (
-    <div className="h-full min-h-full w-full flex justify-center items-center md:py-6 py-0">
+    <div className="h-full md:h-[calc(100vh-74px)] w-full flex justify-center items-center md:py-6 py-0">
       <div
-        className={`bg-white flex flex-col rounded-lg shadow-lg border overflow-hidden mx-auto md:max-w-lg w-full`}
+        className={`bg-muted flex flex-col md:rounded-lg shadow-lg border overflow-hidden mx-auto md:max-w-lg w-full h-full`}
       >
         <div className="p-4 border-b mx-auto w-full">
           <div className="flex items-center justify-between">
@@ -182,7 +182,7 @@ const page = () => {
             <div
               id={"notification-" + n.id.toString()}
               key={n.id}
-              className="flex justify-between hover:bg-gray-200 px-4 py-2"
+              className="flex justify-between hover:bg-muted-foreground/40 cursor-pointer px-4 py-2"
             >
               <div className="flex gap-3">
                 <div className="rounded-full size-14 relative">
