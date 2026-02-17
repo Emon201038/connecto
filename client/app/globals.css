@@ -158,45 +158,71 @@
   cursor: pointer;
 }
 
-/* Common tooltip style */
+/* Base tooltip style */
 .tooltip::after {
   content: attr(data-title);
   position: absolute;
   z-index: 2000;
-  left: 50%;
-  transform: translateX(-50%);
   background: var(--tooltip-bg, #333);
   color: var(--tooltip-text, #fff);
-  padding: 2px 4px;
+  padding: 4px 8px;
   font-size: 12px;
   border-radius: 6px;
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.7s;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
-/* Tooltip shown */
+/* Show tooltip */
 .tooltip:hover::after {
   opacity: 1;
 }
 
-/* Position top (default) */
-.tooltip[data-position="top"]::after {
-  bottom: 105%;
-  transform: translate(-50%, 0px);
+/* ===== TOP (default) ===== */
+.tooltip[dir="top"]::after {
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%) translateY(5px);
 }
-.tooltip[data-position="top"]:hover::after {
+
+.tooltip[dir="top"]:hover::after {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ===== BOTTOM ===== */
+.tooltip[dir="bottom"]::after {
+  left: 50%;
+  top: 100%;
   transform: translate(-50%, 0);
 }
 
-/* Position bottom */
-.tooltip[data-position="bottom"]::after {
-  top: 110%;
-  transform: translate(-50%, 0px);
+.tooltip[dir="bottom"]:hover::after {
+  transform: translateX(-50%) translateY(0);
 }
-.tooltip[data-position="bottom"]:hover::after {
-  transform: translate(-50%, 0);
+
+/* ===== LEFT ===== */
+.tooltip[dir="left"]::after {
+  top: 50%;
+  right: 120%;
+  transform: translateY(-50%) translateX(5px);
+}
+
+.tooltip[dir="left"]:hover::after {
+  transform: translateY(-50%) translateX(0);
+}
+
+/* ===== RIGHT ===== */
+.tooltip[dir="right"]::after {
+  top: 50%;
+  left: 120%;
+  transform: translateY(-50%) translateX(-10px);
+}
+
+.tooltip[dir="right"]:hover::after {
+  transform: translateY(-50%) translateX(-10px);
 }
 
 ::-webkit-scrollbar {

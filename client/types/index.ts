@@ -126,8 +126,8 @@ export interface IMessage {
   attachments: string[];
   deletedBy: IUser[];
   type: IMessageType;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   status: string;
 }
 

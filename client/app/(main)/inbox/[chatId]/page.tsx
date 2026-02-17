@@ -41,7 +41,7 @@ const page = async ({ params }: { params: Promise<{ chatId: string }> }) => {
     await res.json();
 
   return (
-    <div className="flex w-full h-full p-4 bg-shade md:space-x-4">
+    <div className="flex w-full h-full bg-shade md:space-x-4">
       {/* Main Chat Area */}
 
       <ChatArea />

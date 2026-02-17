@@ -22,6 +22,8 @@ import { IConversationMember, IMessage } from "@/types";
 import { useSession } from "next-auth/react";
 import { messengerThemes } from "@/constants/themes";
 import twemoji from "twemoji";
+import { formatDate } from "./helper";
+import MessageReactModal from "@/components/modules/reaction/MessageReactModal";
 
 const reactions = [
   {
@@ -108,8 +110,8 @@ const TextMessage = ({ message, conversation }: TextMessageProps) => {
         <Card
           className={`peer px-3 py-2 max-w-[80%] ${
             message.sender.id === session?.data?.user?.id
-              ? "bg-primary text-primary-foreground "
-              : "bg-transparent text-black"
+              ? "bg-primary text-primary-foreground dark:text-white "
+              : "bg-transparent text-black dark:text-white"
           }`}
           // style={{
           //   backgroundColor: theme?.colors?.messageOutgoingBg,
@@ -117,7 +119,9 @@ const TextMessage = ({ message, conversation }: TextMessageProps) => {
           // }}
         >
           <div
-            className="text-sm"
+            className="text-sm tooltip"
+            data-title={formatDate(new Date(parseInt(message?.createdAt)))}
+            dir="left"
             dangerouslySetInnerHTML={{ __html: message?.content }}
           />
         </Card>
@@ -129,71 +133,14 @@ const TextMessage = ({ message, conversation }: TextMessageProps) => {
               : "flex-row"
           }`}
         >
-          <Popover
-            open={showReactionsModal}
-            onOpenChange={setShowReactionsModal}
-          >
-            <PopoverTrigger>
-              <Button
-                asChild
-                onMouseEnter={() => setShowButtons(true)}
-                onMouseLeave={() => {
-                  if (!showReactionsModal) setShowButtons(false);
-                }}
-                onClick={() => setShowReactionsModal(true)}
-                variant={"ghost"}
-                className="relative rounded-full size-7 p-1"
-              >
-                <SmileIcon />
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent
-              ref={popoverRef}
-              className={`${
-                showReactionsModal ? "block" : "hidden"
-              } p-0 border-none shadow-none`}
-            >
-              <div
-                // initial={{ scale: 0.8, opacity: 0 }}
-                // animate={{ scale: 1, opacity: 1 }}
-                // exit={{ scale: 0.8, opacity: 0 }}
-                // transition={{ type: "spring", damping: 20, stiffness: 300 }}
-                style={{
-                  pointerEvents: "auto",
-                }}
-                className="bg-background rounded-full shadow-lg border p-1 flex items-center gap-0"
-              >
-                {reactions.map((reaction) => (
-                  <button
-                    key={reaction.name}
-                    // whileHover={{ scale: 1.3 }}
-                    // whileTap={{ scale: 0.95 }}
-                    className="w-10 h-10 rounded-full flex items-center justify-center relative group"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      setShowReactionsModal(false);
-                      setShowButtons(false);
-                      // onReactionSelect(reaction.name, e)
-                      // onClose()
-                    }}
-                  >
-                    <span className="text-2xl">{reaction.emoji}</span>
-                    <div className="absolute -bottom-6 opacity-0 group-hover:opacity-100 transition-opacity bg-black text-white text-xs rounded px-1 py-0.5 capitalize">
-                      {reaction.name}
-                    </div>
-                  </button>
-                ))}
-                <button
-                  // whileHover={{ scale: 1.3 }}
-                  // whileTap={{ scale: 0.95 }}
-                  className="w-10 h-10 rounded-full flex items-center justify-center relative group"
-                >
-                  <PlusIcon />
-                </button>
-              </div>
-            </PopoverContent>
-          </Popover>
+          <MessageReactModal
+            showButtons={showButtons}
+            setShowButtons={setShowButtons}
+            showReactionsModal={showReactionsModal}
+            setShowReactionsModal={setShowReactionsModal}
+            messageId={message.id}
+            ref={popoverRef}
+          />
           {/* <Tooltip content="Reply" delayDuration={100} > */}
           <Button variant={"ghost"} className="rounded-full size-7 p-1">
             <ForwardIcon style={{ transform: "rotateY(180deg)" }} />
@@ -233,7 +180,7 @@ const TextMessage = ({ message, conversation }: TextMessageProps) => {
                 return (
                   <div
                     key={option.name}
-                    className="flex items-center gap-2 hover:bg-slate-100 px-2 py-1 cursor-pointer font-semibold"
+                    className="flex items-center gap-2 hover:bg-muted px-2 py-1 cursor-pointer font-semibold"
                   >
                     <span>{option.name}</span>
                   </div>
