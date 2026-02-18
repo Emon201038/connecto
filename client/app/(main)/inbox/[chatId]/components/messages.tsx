@@ -16,6 +16,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import LoadingMessages from "./loading";
 import { Like } from "./RightSideBar";
 import EmojiMessage from "./EmojiMessage";
+import SingleMessage from "@/components/modules/message/SingleMessage";
 
 const Messages = forwardRef<
   HTMLDivElement,
@@ -29,7 +30,7 @@ const Messages = forwardRef<
 
   const { data, isFetching, isLoading } = useGetMessagesQuery(
     { conversationId: params.chatId, page, limit: 20, search: "" },
-    { refetchOnMountOrArgChange: true }
+    { refetchOnMountOrArgChange: true },
   );
 
   const messages = data?.messages || [];
@@ -50,7 +51,7 @@ const Messages = forwardRef<
           setPage((prev) => prev + 1);
         }
       },
-      { threshold: 0.6 }
+      { threshold: 0.6 },
     );
 
     const current = loaderRef.current;
@@ -88,14 +89,11 @@ const Messages = forwardRef<
 
       {/* messages */}
       {messages.map((message) => (
-        <div id={message.id} key={message.id}>
-          {message.type === "TEXT" && (
-            <TextMessage message={message} conversation={conversation} />
-          )}
-          {message.type === "EMOJI" && (
-            <EmojiMessage message={message} conversation={conversation} />
-          )}
-        </div>
+        <SingleMessage
+          message={message}
+          conversation={conversation}
+          key={message.id}
+        />
       ))}
 
       {/* loader at top (for loading older messages) */}

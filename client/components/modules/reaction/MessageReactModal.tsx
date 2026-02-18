@@ -75,6 +75,7 @@ const MessageReactModal = React.forwardRef<HTMLDivElement, Props>(
           className={`${
             showReactionsModal ? "block" : "hidden"
           } p-0 border-none shadow-none bg-transparent`}
+          onClick={(e) => e.preventDefault()}
         >
           <div
             // initial={{ scale: 0.8, opacity: 0 }}
