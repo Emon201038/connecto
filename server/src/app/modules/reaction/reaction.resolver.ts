@@ -8,16 +8,17 @@ export const reactionResolver = {
   Query: {
     getReactions: async (
       parent: null,
-      args: { target: string; type?: ReactionType }
+      args: { target: string; type?: ReactionType },
     ) => {
       return await ReactionService.getReactions(args.target, args.type);
     },
   },
+
   Mutation: {
     toggleReaction: async (
       parent: null,
       args: Record<string, string>,
-      context: IResolverContext
+      context: IResolverContext,
     ) => {
       const { user } = context;
       if (!user) throw new Error("Unauthorized");

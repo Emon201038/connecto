@@ -46,14 +46,14 @@ export const reactionApi = baseApi.injectEndpoints({
             { page: 1, limit: 15 },
             (draft) => {
               const postIndex = draft.data.posts.findIndex(
-                (p) => p.id === arg.target
+                (p) => p.id === arg.target,
               );
               if (postIndex === -1) return;
 
               const targetedPost = draft.data.posts[postIndex];
               const myReaction = targetedPost?.myReaction?.type;
               const reactionIndex = targetedPost.reactionSummary.findIndex(
-                (r) => r.reactionType === arg.type
+                (r) => r.reactionType === arg.type,
               );
 
               if (myReaction) {
@@ -64,7 +64,7 @@ export const reactionApi = baseApi.injectEndpoints({
 
                   // decrement summary count
                   const existing = targetedPost.reactionSummary.find(
-                    (r) => r.reactionType === myReaction
+                    (r) => r.reactionType === myReaction,
                   );
                   if (existing) existing.count -= 1;
                 } else {
@@ -73,7 +73,7 @@ export const reactionApi = baseApi.injectEndpoints({
 
                   // decrement old one
                   const old = targetedPost.reactionSummary.find(
-                    (r) => r.reactionType === myReaction
+                    (r) => r.reactionType === myReaction,
                   );
                   if (old) old.count -= 1;
 
@@ -103,8 +103,8 @@ export const reactionApi = baseApi.injectEndpoints({
                   });
                 }
               }
-            }
-          )
+            },
+          ),
         );
         // optimistic cache update end
 
@@ -155,14 +155,14 @@ export const reactionApi = baseApi.injectEndpoints({
             { post: arg.post },
             (draft) => {
               const commentIndex = draft.data.comments.findIndex(
-                (p) => p.id === arg.target
+                (p) => p.id === arg.target,
               );
               if (commentIndex === -1) return;
 
               const targetedComment = draft.data.comments[commentIndex];
               const myReaction = targetedComment?.myReaction?.type;
               const reactionIndex = targetedComment.reactionSummary.findIndex(
-                (r) => r.reactionType === arg.type
+                (r) => r.reactionType === arg.type,
               );
 
               if (myReaction) {
@@ -173,7 +173,7 @@ export const reactionApi = baseApi.injectEndpoints({
 
                   // decrement summary count
                   const existing = targetedComment.reactionSummary.find(
-                    (r) => r.reactionType === myReaction
+                    (r) => r.reactionType === myReaction,
                   );
                   if (existing) existing.count -= 1;
                 } else {
@@ -182,7 +182,7 @@ export const reactionApi = baseApi.injectEndpoints({
 
                   // decrement old one
                   const old = targetedComment.reactionSummary.find(
-                    (r) => r.reactionType === myReaction
+                    (r) => r.reactionType === myReaction,
                   );
                   if (old) old.count -= 1;
 
@@ -212,8 +212,8 @@ export const reactionApi = baseApi.injectEndpoints({
                   });
                 }
               }
-            }
-          )
+            },
+          ),
         );
         // optimistic cache update end
 
@@ -224,6 +224,38 @@ export const reactionApi = baseApi.injectEndpoints({
           console.log(error);
         }
       },
+    }),
+    toggleMessageReaction: builder.mutation<
+      IResponse<IReaction>,
+      Record<string, string>
+    >({
+      query: ({ post, ...data }) => ({
+        url: "/",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          query: `
+            mutation ToggleReaction($type: ReactionType, $targetType: ReactionTargetType!, $target: ID!) {
+              toggleReaction(type: $type, targetType: $targetType, target: $target) {
+                id
+                type
+                user {
+                  id
+                  fullName
+                  profilePicture {
+                    url
+                    pub_id
+                  }
+                }
+              }
+            }
+          `,
+          variables: data,
+        }),
+      }),
     }),
     getReactions: builder.query<
       IResponse<IReaction[]>,
@@ -258,7 +290,7 @@ export const reactionApi = baseApi.injectEndpoints({
         }),
       }),
       transformResponse: (
-        response: IResponse<{ getReactions: IReaction[] }>
+        response: IResponse<{ getReactions: IReaction[] }>,
       ) => ({
         data: response.data.getReactions,
         errors: response.errors,
@@ -270,5 +302,6 @@ export const reactionApi = baseApi.injectEndpoints({
 export const {
   useTogglePostReactionMutation,
   useToggleCommentReactionMutation,
+  useToggleMessageReactionMutation,
   useGetReactionsQuery,
 } = reactionApi;

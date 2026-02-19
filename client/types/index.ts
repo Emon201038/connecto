@@ -129,6 +129,7 @@ export interface IMessage {
   createdAt: string;
   updatedAt: string;
   status: string;
+  reactions: IReaction[];
 }
 
 export enum IMessageType {

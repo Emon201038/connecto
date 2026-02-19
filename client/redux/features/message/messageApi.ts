@@ -25,6 +25,17 @@ export const messageApi = baseApi.injectEndpoints({
                 url
               }
             }
+            reactions {
+              id
+              user {
+                id
+                fullName
+                profilePicture {
+                  url
+                }
+              }
+              type
+            }
             content
             createdAt
           }
@@ -65,7 +76,7 @@ export const messageApi = baseApi.injectEndpoints({
           ];
 
           const uniqueMessages = Array.from(
-            new Map(allMessages.map((m) => [m.id, m])).values()
+            new Map(allMessages.map((m) => [m.id, m])).values(),
           );
 
           currentCache.messages = uniqueMessages;
@@ -137,8 +148,8 @@ export const messageApi = baseApi.injectEndpoints({
                 ...args,
                 sender: { id: args.sender },
               } as unknown as IMessage);
-            }
-          )
+            },
+          ),
         );
 
         const patch2 = dispatch(
@@ -147,7 +158,7 @@ export const messageApi = baseApi.injectEndpoints({
             { page: 1, limit: 10, search: "" },
             (draft) => {
               const conversation = draft.conversations.find(
-                (c) => c.id === args.conversationId
+                (c) => c.id === args.conversationId,
               );
               if (conversation) {
                 conversation.lastMessage = {
@@ -155,8 +166,8 @@ export const messageApi = baseApi.injectEndpoints({
                   sender: { id: args.sender },
                 } as unknown as IMessage;
               }
-            }
-          )
+            },
+          ),
         );
         try {
           await queryFulfilled;

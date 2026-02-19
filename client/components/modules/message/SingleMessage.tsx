@@ -118,6 +118,10 @@ const SingleMessage = ({ message, conversation }: Props) => {
           </PopoverContent>
         </Popover>
       </div>
+      {/* Reactions */}
+      {message.reactions.length > 0 && (
+        <div className="absolute -bottom-2 right-0 size-4 rounded-full bg-muted"></div>
+      )}
     </div>
   );
 };

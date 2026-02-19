@@ -6,7 +6,7 @@ export const messageSchema = `#graphql
     content: String
     attachments: [Attachment]
     replyTo: Message
-    reactions: [MessageReaction]
+    reactions: [React]
     createdAt: String!
     updatedAt: String
     type: MessageType
@@ -35,13 +35,6 @@ export const messageSchema = `#graphql
     file
   }
 
-  type MessageReaction {
-    id: ID!
-    user: User!
-    emoji: String!
-    createdAt: String!
-  }
-
   type PaginatedMessages {
     meta: Meta
     messages: [Message]
@@ -53,7 +46,7 @@ export const messageSchema = `#graphql
 
   extend type Mutation {
     sendMessage(conversationId: ID!, content: String, attachments: [Upload], type: MessageType, replyTo: ID): Message!
-    addReaction(messageId: ID!, emoji: String!): MessageReaction!
+    addReaction(messageId: ID!, emoji: String!): React!
     markAsSeen(messageId: ID!): Boolean!
   }
 `;

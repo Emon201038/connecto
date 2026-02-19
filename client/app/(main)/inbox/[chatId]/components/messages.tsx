@@ -78,7 +78,7 @@ const Messages = forwardRef<
   }, [messages, page]);
 
   return (
-    <div className="w-full h-full flex-1 overflow-auto flex flex-col-reverse p-4">
+    <div className="w-full h-full flex-1 overflow-auto flex flex-col-reverse gap-3 p-4">
       {/* bottom spacer for scroll */}
       <div
         ref={(node) => {

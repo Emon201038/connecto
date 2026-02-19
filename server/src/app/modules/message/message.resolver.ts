@@ -1,4 +1,5 @@
 import { IResolverContext } from "../../types/graphql";
+import { IReaction } from "../reaction/reaction.interface";
 import User from "../user/user.model";
 import { IMessage } from "./message.interface";
 import { MessageService } from "./message.service";
@@ -13,7 +14,7 @@ export const messageResolver = {
         search: string;
         conversationId: string;
       },
-      context: IResolverContext
+      context: IResolverContext,
     ) => {
       if (!context.user?.id) throw new Error("Unauthorized");
       return await MessageService.getMessages(
@@ -21,7 +22,7 @@ export const messageResolver = {
         args.conversationId,
         args.page,
         args.limit,
-        args.search
+        args.search,
       );
     },
   },
@@ -29,12 +30,33 @@ export const messageResolver = {
     sender: async (
       message: IMessage,
       _args: null,
-      context: IResolverContext
+      context: IResolverContext,
     ) => {
       if (!context.user?.id) throw new Error("Unauthorized");
       return await User.findById(message.sender);
     },
+    reactions: async (
+      message: IMessage,
+      _args: null,
+      context: IResolverContext,
+    ) => {
+      if (!context.user?.id) throw new Error("Unauthorized");
+      console.log(message);
+      // return [];
+      return await MessageService.getReactions(message._id as string);
+    },
   },
+  // reactions: {
+  //   user: async (
+  //     reaction: IReaction,
+  //     _args: null,
+  //     context: IResolverContext,
+  //   ) => {
+  //     if (!context.user?.id) throw new Error("Unauthorized");
+  //     console.log(reaction);
+  //     return await User.findById(reaction.user);
+  //   },
+  // },
   Mutation: {
     sendMessage: async (
       _parent: null,
@@ -43,7 +65,7 @@ export const messageResolver = {
         content: string;
         type: "TEXT" | "IMAGE" | "VIDEO" | "AUDIO";
       },
-      context: IResolverContext
+      context: IResolverContext,
     ) => {
       if (!context.user?.id) throw new Error("Unauthorized");
       return await MessageService.sendMessage(args, context.user.id);

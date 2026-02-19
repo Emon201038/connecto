@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { Message } from "./message.model";
 import { QueryBuilder } from "../../lib/queryBuilder";
+import Reaction from "../reaction/reaction.model";
 
 const getMessages = async (
   userId: string,
@@ -57,8 +58,19 @@ const sendMessage = async (
   }
 };
 
+const getReactions = async (target: string) => {
+  try {
+    const reactions = await Reaction.find({ target, targetType: "Message" });
+    return reactions;
+  } catch (error) {
+    console.error("Error fetching reactions:", error);
+    throw new Error("Failed to fetch reactions");
+  }
+};
+
 export const MessageService = {
   getMessagById,
   getMessages,
   sendMessage,
+  getReactions,
 };

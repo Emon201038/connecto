@@ -4,38 +4,39 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useToggleMessageReactionMutation } from "@/redux/features/reaction/reactionApi";
 import { PlusIcon, SmileIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
 const reactions = [
   {
-    name: "like",
+    name: "LIKE",
     emoji: <Image src="/images/like.svg" alt="like" width={24} height={24} />,
     color: "#2078f4",
   },
   {
-    name: "love",
+    name: "LOVE",
     emoji: <Image src="/images/love.svg" alt="angry" width={24} height={24} />,
     color: "#f33e58",
   },
   {
-    name: "haha",
+    name: "HAHA",
     emoji: <Image src="/images/haha.svg" alt="angry" width={24} height={24} />,
     color: "#f7b125",
   },
   {
-    name: "wow",
+    name: "WOW",
     emoji: <Image src="/images/wow.svg" alt="angry" width={24} height={24} />,
     color: "#f7b125",
   },
   {
-    name: "sad",
+    name: "SAD",
     emoji: <Image src="/images/sad.svg" alt="angry" width={24} height={24} />,
     color: "#f7b125",
   },
   {
-    name: "angry",
+    name: "ANGRY",
     emoji: <Image src="/images/angry.svg" alt="angry" width={24} height={24} />,
     color: "#e9710f",
   },
@@ -54,6 +55,16 @@ const MessageReactModal = React.forwardRef<HTMLDivElement, Props>(
     { showReactionsModal, setShowReactionsModal, setShowButtons, messageId },
     popoverRef,
   ) => {
+    const [toggleReaction] = useToggleMessageReactionMutation();
+
+    const handleReaction = (reaction: string) => {
+      toggleReaction({
+        target: messageId,
+        targetType: "Message",
+        type: reaction,
+      });
+      setShowReactionsModal(false);
+    };
     return (
       <Popover open={showReactionsModal} onOpenChange={setShowReactionsModal}>
         <PopoverTrigger>
@@ -98,7 +109,7 @@ const MessageReactModal = React.forwardRef<HTMLDivElement, Props>(
                   e.stopPropagation();
                   setShowReactionsModal(false);
                   setShowButtons(false);
-                  console.log(reaction, messageId);
+                  handleReaction(reaction.name);
                   // onReactionSelect(reaction.name, e)
                   // onClose()
                 }}
