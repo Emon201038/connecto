@@ -1,9 +1,16 @@
-import { IReaction, ReactionType } from "@/interface/reaction.interface";
+import {
+  IReaction,
+  ReactionTargetType,
+  ReactionType,
+} from "@/interface/reaction.interface";
 import { baseApi } from "@/redux/baseApi";
-import { IResponse } from "@/types";
+import { IMessage, IResponse, IUser } from "@/types";
 import { postApi } from "../post/postApi";
 import { ta } from "date-fns/locale";
 import { commentsApi } from "../comments/commentsApi";
+import { messageApi } from "../message/messageApi";
+import { IMeta } from "@/lib/type";
+import { RootState } from "@/redux/store";
 
 export const reactionApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -227,9 +234,21 @@ export const reactionApi = baseApi.injectEndpoints({
     }),
     toggleMessageReaction: builder.mutation<
       IResponse<IReaction>,
-      Record<string, string>
+      {
+        conversationId: string;
+        target: string;
+        type: string;
+        user: {
+          id: string;
+          fullName: string;
+          profilePicture?: {
+            url: string;
+            pub_id: string;
+          };
+        };
+      }
     >({
-      query: ({ post, ...data }) => ({
+      query: (data) => ({
         url: "/",
         method: "POST",
         headers: {
@@ -253,9 +272,74 @@ export const reactionApi = baseApi.injectEndpoints({
               }
             }
           `,
-          variables: data,
+          variables: {
+            type: data.type,
+            targetType: "Message",
+            target: data.target,
+          },
         }),
       }),
+      onQueryStarted: async (arg, { queryFulfilled, dispatch, getState }) => {
+        const state = getState() as RootState;
+
+        const queries = state.api.queries;
+
+        let patchResult: any;
+
+        Object.values(queries).forEach((query: any) => {
+          if (
+            query?.endpointName === "getMessages" &&
+            query?.originalArgs?.conversationId === arg.conversationId
+          ) {
+            patchResult = dispatch(
+              messageApi.util.updateQueryData(
+                "getMessages",
+                query.originalArgs, // 👈 exact original args
+                (draft) => {
+                  const messageIndex = draft.messages.findIndex(
+                    (m) => m.id === arg.target,
+                  );
+
+                  if (messageIndex === -1) return;
+
+                  const targetedMessage = draft.messages[messageIndex];
+
+                  const myReaction = targetedMessage.reactions.find(
+                    (r) => r.user.id === arg.user.id,
+                  );
+
+                  if (myReaction) {
+                    if (myReaction.type === arg.type) {
+                      targetedMessage.reactions =
+                        targetedMessage.reactions.filter(
+                          (r) => r.user.id !== arg.user.id,
+                        );
+                    } else {
+                      myReaction.type = arg.type as ReactionType;
+                    }
+                  } else {
+                    targetedMessage.reactions.push({
+                      id: Date.now().toString(),
+                      type: arg.type as ReactionType,
+                      user: arg.user as IUser,
+                      target: arg.target,
+                      targetType: ReactionTargetType.MESSAGE,
+                      createdAt: new Date().toISOString(),
+                      updatedAt: new Date().toISOString(),
+                    });
+                  }
+                },
+              ),
+            );
+          }
+        });
+
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult?.undo();
+        }
+      },
     }),
     getReactions: builder.query<
       IResponse<IReaction[]>,

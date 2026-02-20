@@ -1,4 +1,4 @@
-import { IUser } from "@/types";
+import { IMessage, IUser } from "@/types";
 import { IPost } from "./post.interface";
 import { IComment } from "./comment.interfce";
 
@@ -18,11 +18,11 @@ export enum ReactionTargetType {
   MESSAGE = "Message",
 }
 
-export interface IReaction extends Document {
+export interface IReaction {
   id: string;
-  user: IUser | null;
-  target: IPost | IComment | null;
-  type: ReactionType | null;
+  user: IUser;
+  target: IPost | IComment | IMessage | string | null;
+  type: ReactionType;
   targetType: ReactionTargetType | null;
   createdAt: string | null;
   updatedAt: string | null;

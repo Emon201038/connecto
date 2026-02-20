@@ -13,8 +13,8 @@ import { useGetMessagesQuery } from "@/redux/features/message/messageApi";
 import TextMessage from "./TextMessage";
 import type { IConversationMember } from "@/types";
 import { Skeleton } from "@/components/ui/skeleton";
-import LoadingMessages from "./loading";
-import { Like } from "./RightSideBar";
+import LoadingMessages from "../../../app/(main)/inbox/[chatId]/components/loading";
+import { Like } from "../../../app/(main)/inbox/[chatId]/components/RightSideBar";
 import EmojiMessage from "./EmojiMessage";
 import SingleMessage from "@/components/modules/message/SingleMessage";
 

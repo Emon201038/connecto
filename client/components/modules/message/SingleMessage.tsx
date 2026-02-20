@@ -1,7 +1,7 @@
 "use client";
-import EmojiMessage from "@/app/(main)/inbox/[chatId]/components/EmojiMessage";
-import TextMessage from "@/app/(main)/inbox/[chatId]/components/TextMessage";
-import { IConversationMember, IMessage } from "@/types";
+import EmojiMessage from "@/components/modules/message/EmojiMessage";
+import TextMessage from "@/components/modules/message/TextMessage";
+import { IConversationMember, IMessage, IUser } from "@/types";
 import React from "react";
 import MessageReactModal from "../reaction/MessageReactModal";
 import { Button } from "@/components/ui/button";
@@ -19,6 +19,9 @@ import {
 } from "@/components/ui/popover";
 import { useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ReactionType } from "@/interface/reaction.interface";
+import Image from "next/image";
+import { reactions } from "@/constants/reactions";
 
 type Props = { message: IMessage; conversation: IConversationMember };
 
@@ -29,6 +32,21 @@ const SingleMessage = ({ message, conversation }: Props) => {
   const popoverRef = React.useRef<HTMLDivElement | null>(null);
 
   const session = useSession();
+
+  const groupedReactions = React.useMemo(() => {
+    const grouped = message.reactions.reduce<
+      Record<string, { count: number; type: ReactionType; user: IUser }>
+    >((acc, curr) => {
+      if (!acc[curr.type]) {
+        acc[curr.type] = { type: curr.type, count: 0, user: curr.user };
+      }
+
+      acc[curr.type].count += 1;
+
+      return acc;
+    }, {});
+    return Object.values(grouped);
+  }, [message.reactions]);
   return (
     <div
       onMouseEnter={() => {
@@ -72,6 +90,7 @@ const SingleMessage = ({ message, conversation }: Props) => {
           showReactionsModal={showReactionsModal}
           setShowReactionsModal={setShowReactionsModal}
           messageId={message.id}
+          conversationId={conversation.id}
           ref={popoverRef}
         />
         <Button variant={"ghost"} className="rounded-full size-7 p-1">
@@ -120,7 +139,29 @@ const SingleMessage = ({ message, conversation }: Props) => {
       </div>
       {/* Reactions */}
       {message.reactions.length > 0 && (
-        <div className="absolute -bottom-2 right-0 size-4 rounded-full bg-muted"></div>
+        <div className="absolute -bottom-2 right-0 h-4 rounded-full">
+          {groupedReactions.map((reaction, index) => {
+            const reactImage = reactions.find((r) => r.type === reaction.type);
+            return (
+              <div
+                key={reaction.type}
+                className={`relative`}
+                style={{
+                  marginLeft: index > 0 ? "-4px" : "0",
+                  zIndex: 3 - index,
+                }}
+              >
+                <Image
+                  src={reactImage?.src || "/images/like.svg"}
+                  alt={reaction.type}
+                  width={16}
+                  height={16}
+                  priority
+                />
+              </div>
+            );
+          })}
+        </div>
       )}
     </div>
   );

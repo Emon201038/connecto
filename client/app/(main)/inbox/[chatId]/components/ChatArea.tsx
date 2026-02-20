@@ -21,7 +21,6 @@ import { useAppSelector } from "@/redux/hooks";
 import { cn } from "@/lib/utils";
 import Header from "./Header";
 import { IConversationMember, IMessageType } from "@/types";
-import Messages from "./messages";
 import { useSession } from "next-auth/react";
 import {
   useGetMessagesQuery,
@@ -34,6 +33,7 @@ import { useGetConversationInfoQuery } from "@/redux/features/conversation/conve
 import HeaderLoading from "./HeaderLoading";
 import { EmojiDisplay } from "@/components/Emoji";
 import { Skeleton } from "@/components/ui/skeleton";
+import Messages from "@/components/modules/message/messages";
 
 interface Props {
   conversation: IConversationMember;

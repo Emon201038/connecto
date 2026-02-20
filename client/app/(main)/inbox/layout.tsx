@@ -7,12 +7,7 @@ export const metadata = {
   title: "Messenger | Connecto",
 };
 
-const layout = async ({ children }: { children: React.ReactNode }) => {
-  const session = await auth();
-  if (!session?.user?.id) {
-    redirect("/login?callback=/inbox");
-  }
-
+const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="flex w-screen overflow-hidden h-[calc(100vh_-_96px)] md:h-[calc(100vh_-_54px)]">
       <div className="hidden md:flex bg-background">

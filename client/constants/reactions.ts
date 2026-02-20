@@ -1,0 +1,51 @@
+export const reactions = [
+  {
+    type: "LIKE",
+    src: "/images/like.svg",
+    bg: "white",
+    name: "Like",
+    text: "#0866FF",
+  },
+  {
+    type: "LOVE",
+    src: "/images/love.svg",
+    bg: "white",
+    name: "Love",
+    text: "#DD2334",
+  },
+  {
+    type: "CARE",
+    src: "/images/care.svg",
+    bg: "white",
+    name: "Care",
+    text: "#887000",
+  },
+  {
+    type: "HAHA",
+    src: "/images/haha.svg",
+    bg: "white",
+    name: "Haha",
+    text: "#887000",
+  },
+  {
+    type: "WOW",
+    src: "/images/wow.svg",
+    bg: "white",
+    name: "Wow",
+    text: "#887000",
+  },
+  {
+    type: "SAD",
+    src: "/images/sad.svg",
+    bg: "white",
+    name: "Sad",
+    text: "#887000",
+  },
+  {
+    type: "ANGRY",
+    src: "/images/angry.svg",
+    bg: "white",
+    name: "Angry",
+    text: "orange",
+  },
+];

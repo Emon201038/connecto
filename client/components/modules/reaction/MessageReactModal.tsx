@@ -4,8 +4,10 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { ReactionTargetType } from "@/interface/reaction.interface";
 import { useToggleMessageReactionMutation } from "@/redux/features/reaction/reactionApi";
 import { PlusIcon, SmileIcon } from "lucide-react";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import React from "react";
 
@@ -48,20 +50,34 @@ type Props = {
   showButtons: boolean;
   setShowButtons: React.Dispatch<React.SetStateAction<boolean>>;
   messageId: string;
+  conversationId: string;
 };
 
 const MessageReactModal = React.forwardRef<HTMLDivElement, Props>(
   (
-    { showReactionsModal, setShowReactionsModal, setShowButtons, messageId },
+    {
+      showReactionsModal,
+      setShowReactionsModal,
+      setShowButtons,
+      messageId,
+      conversationId,
+    },
     popoverRef,
   ) => {
     const [toggleReaction] = useToggleMessageReactionMutation();
 
+    const session = useSession();
+
     const handleReaction = (reaction: string) => {
       toggleReaction({
         target: messageId,
-        targetType: "Message",
         type: reaction,
+        conversationId,
+        user: {
+          id: session!.data!.user.id,
+          fullName: session!.data!.user.fullName,
+          profilePicture: session!.data!.user.profilePicture,
+        },
       });
       setShowReactionsModal(false);
     };
