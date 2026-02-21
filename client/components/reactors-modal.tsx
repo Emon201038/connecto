@@ -15,111 +15,9 @@ import { IReaction, ReactionType } from "@/interface/reaction.interface";
 import { reactionEmojis } from "@/constants/emoji";
 import Link from "next/link";
 import { toast } from "sonner";
-import { Skeleton } from "../app/components/ui/skeleton";
-// import { ScrollArea } from "@/components/ui/scroll-area"
+import { Skeleton } from "@/components/ui/skeleton";
 
 type TReactionType = "ALL" | ReactionType;
-
-interface User {
-  id: number;
-  name: string;
-  avatar: string;
-  reaction: ReactionType;
-  reactionEmoji: React.ReactNode;
-}
-
-// const allReactions: User[] = [
-//   {
-//     id: 1,
-//     name: "Joni Sarkar",
-//     avatar: "/images/default-profile.jpeg",
-//     reaction: "like",
-//     reactionEmoji: (
-//       <Image width={20} height={20} src="/images/like.svg" alt="like" />
-//     ),
-//   },
-//   {
-//     id: 2,
-//     name: "Pranto Saha",
-//     avatar: "/images/default-profile.jpeg",
-//     reaction: "love",
-//     reactionEmoji: (
-//       <Image width={20} height={20} src="/images/love.svg" alt="love" />
-//     ),
-//   },
-//   {
-//     id: 3,
-//     name: "Sharif Meyazi",
-//     avatar: "/images/default-profile.jpeg",
-//     reaction: "like",
-//     reactionEmoji: (
-//       <Image width={20} height={20} src="/images/like.svg" alt="like" />
-//     ),
-//   },
-//   {
-//     id: 4,
-//     name: "Mohammad Shawon",
-//     avatar: "/images/default-profile.jpeg",
-//     reaction: "care",
-//     reactionEmoji: (
-//       <Image width={20} height={20} src="/images/care.svg" alt="like" />
-//     ),
-//   },
-//   {
-//     id: 5,
-//     name: "Ahmed Riad",
-//     avatar: "/images/default-profile.jpeg",
-//     reaction: "like",
-//     reactionEmoji: (
-//       <Image width={20} height={20} src="/images/like.svg" alt="like" />
-//     ),
-//   },
-//   {
-//     id: 6,
-//     name: "Md Zia Uddin",
-//     avatar: "/images/default-profile.jpeg",
-//     reaction: "love",
-//     reactionEmoji: (
-//       <Image width={20} height={20} src="/images/love.svg" alt="love" />
-//     ),
-//   },
-//   {
-//     id: 7,
-//     name: "Md Soron",
-//     avatar: "/images/default-profile.jpeg",
-//     reaction: "wow",
-//     reactionEmoji: (
-//       <Image width={20} height={20} src="/images/wow.svg" alt="wow" />
-//     ),
-//   },
-//   {
-//     id: 8,
-//     name: "Sarah Ahmed",
-//     avatar: "/images/default-profile.jpeg",
-//     reaction: "sad",
-//     reactionEmoji: (
-//       <Image width={20} height={20} src="/images/sad.svg" alt="sad" />
-//     ),
-//   },
-//   {
-//     id: 9,
-//     name: "Karim Hassan",
-//     avatar: "/images/default-profile.jpeg",
-//     reaction: "angry",
-//     reactionEmoji: (
-//       <Image width={20} height={20} src="/images/angry.svg" alt="angry" />
-//     ),
-//   },
-//   {
-//     id: 10,
-//     name: "Fatima Khan",
-//     avatar: "/images/default-profile.jpeg",
-//     reaction: "care",
-//     reactionEmoji: (
-//       <Image width={20} height={20} src="/images/care.svg" alt="like" />
-//     ),
-//   },
-// ];
 
 const reactionTabs = [
   {
@@ -228,7 +126,7 @@ export default function ReactorsModal({
         <ResponsiveDialogContent>
           <ResponsiveDialogHeader>
             <ResponsiveDialogTitle className="sr-only">f</ResponsiveDialogTitle>
-            <div className="flex w-full items-center !gap-2 overflow-x-auto">
+            <div className="flex w-full items-center gap-2! overflow-x-auto">
               {reactionTabs.map((tab) => (
                 <Skeleton key={tab.key} className="w-10 h-8 rounded-md" />
               ))}
@@ -272,7 +170,7 @@ export default function ReactorsModal({
       <ResponsiveDialogContent>
         <ResponsiveDialogHeader>
           <ResponsiveDialogTitle className="sr-only">f</ResponsiveDialogTitle>
-          <div className="flex w-full items-center !gap-2 overflow-x-auto">
+          <div className="flex w-full items-center gap-2! overflow-x-auto">
             {reactionTabs.map((tab) => {
               const count = getReactionCount(tab.key as TReactionType);
               // Show all tabs, but dim the ones with 0 count

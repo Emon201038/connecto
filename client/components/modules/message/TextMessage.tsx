@@ -1,8 +1,8 @@
 "use client";
+import { formatDate } from "@/app/(main)/inbox/[chatId]/components/helper";
 import { Card } from "@/components/ui/card";
 import { IConversationMember, IMessage } from "@/types";
 import { useSession } from "next-auth/react";
-import { formatDate } from "../../../app/(main)/inbox/[chatId]/components/helper";
 
 interface TextMessageProps {
   message: IMessage;

@@ -10,7 +10,7 @@ import Image from "next/image";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { IStory, IUser } from "@/types";
-import { Skeleton } from "../app/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export interface Story {
   id: string;
@@ -93,7 +93,7 @@ export function StoryList({
         <Button
           variant="ghost"
           size="icon"
-          className="absolute left-5 top-1/2 -translate-y-1/2 z-[1] bg-white/90 hover:bg-white shadow-lg rounded-full w-8 h-8"
+          className="absolute left-5 top-1/2 -translate-y-1/2 z-1 bg-white/90 hover:bg-white shadow-lg rounded-full w-8 h-8"
           onClick={scrollLeft}
         >
           <ChevronLeft className="w-4 h-4" />
@@ -104,7 +104,7 @@ export function StoryList({
         <Button
           variant="ghost"
           size="icon"
-          className="absolute right-5 top-1/2 -translate-y-1/2 z-[1] bg-white/90 hover:bg-white shadow-lg rounded-full w-8 h-8"
+          className="absolute right-5 top-1/2 -translate-y-1/2 z-1 bg-white/90 hover:bg-white shadow-lg rounded-full w-8 h-8"
           onClick={scrollRight}
         >
           <ChevronRight className="w-4 h-4" />
@@ -118,14 +118,14 @@ export function StoryList({
       >
         <div
           onClick={() => router.push("/story/create")}
-          className="w-[112.5px] h-[192px] flex flex-col items-center justify-center rounded-xl shrink-0 relative cursor-pointer shadow"
+          className="w-[112.5px] h-48 flex flex-col items-center justify-center rounded-xl shrink-0 relative cursor-pointer shadow"
         >
-          <div className="relative w-full h-[152px] rounded-t-xl overflow-hidden">
+          <div className="relative w-full h-38 rounded-t-xl overflow-hidden">
             <Image
               src="/images/default-profile.svg"
               alt="user"
               fill
-              className="object-cover h-[152px]"
+              className="object-cover h-38"
             />
           </div>
           <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-primary rounded-full p-1">
@@ -139,7 +139,7 @@ export function StoryList({
           ? [1, 2, 3].map((_, index) => (
               <Skeleton
                 key={index}
-                className="w-[110px] h-[192px] animate-pulse"
+                className="w-27.5 h-48 animate-pulse"
               ></Skeleton>
             ))
           : stories.map((user, userIndex) => {
@@ -151,13 +151,13 @@ export function StoryList({
               return (
                 <div
                   key={user.user.id}
-                  className="flex-shrink-0 cursor-pointer group w-[110px] h-[192px]"
+                  className="shrink-0 cursor-pointer group w-27.5 h-48"
                   onClick={() => {
                     onStoryClick(userIndex);
                     toast.info("Coming soon...");
                   }}
                 >
-                  <div className="relative w-full h-full rounded-xl overflow-hidden bg-gradient-to-b from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900">
+                  <div className="relative w-full h-full rounded-xl overflow-hidden bg-linear-to-b from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900">
                     {/* Background image from latest story */}
                     <div
                       className="absolute inset-0 bg-cover bg-center"
@@ -189,7 +189,7 @@ export function StoryList({
                     </div>
 
                     {/* User info at bottom */}
-                    <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-black/20">
+                    <div className="absolute bottom-0 left-0 right-0 p-3 bg-linear-to-t from-black/80 to-black/20">
                       <p
                         className="text-white text-sm font-medium truncate drop-shadow-lg"
                         style={{ textShadow: "0 1px 3px rgba(0,0,0,0.8)" }}

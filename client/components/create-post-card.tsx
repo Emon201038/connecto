@@ -13,19 +13,19 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../app/components/ui/select";
-import PostFeelings from "./post-feelings";
+} from "@/components/ui/select";
+import PostFeelings from "./modules/post/post-feelings";
 import { toast } from "sonner";
 import { EntityInput } from "./entity-form";
 import { Entity } from "@/types";
-import { Separator } from "../app/components/ui/separator";
+import { Separator } from "@/components/ui/separator";
 import {
   ResponsiveDialog,
   ResponsiveDialogContent,
   ResponsiveDialogHeader,
   ResponsiveDialogTitle,
   ResponsiveDialogTrigger,
-} from "../app/components/ui/responsive-dialog";
+} from "@/components/ui/responsive-dialog";
 import { useCreatePostMutation } from "@/redux/features/post/postApi";
 import { PostPrivacy, PostType } from "@/interface/post.interface";
 import { PostCreationSkeleton } from "./create-post-card-loading";
@@ -210,9 +210,9 @@ export default function CreatePostCard({
                     }?`}
               </Button>
             </ResponsiveDialogTrigger>
-            <ResponsiveDialogContent className="gap-0 p-0 !mt-0">
+            <ResponsiveDialogContent className="gap-0 p-0 mt-0!">
               <ResponsiveDialogHeader className="h-15 flex justify-center items-center">
-                <ResponsiveDialogTitle className="text-center !text-[20px]">
+                <ResponsiveDialogTitle className="text-center text-[20px]!">
                   Create Post
                 </ResponsiveDialogTitle>
               </ResponsiveDialogHeader>
@@ -241,7 +241,7 @@ export default function CreatePostCard({
                       formatNames(entities.filter((e) => e.type === "mention"))}
                   </div>
                   <Select value={privacy} onValueChange={setPrivacy}>
-                    <SelectTrigger className="w-auto !h-6 p-1 border-none shadow-none focus-visible:ring-0 focus:ring-offset-0 focus:ring-0 focus-visible::ring-offset-0 text-sm">
+                    <SelectTrigger className="w-auto h-6! p-1 border-none shadow-none focus-visible:ring-0 focus:ring-offset-0 focus:ring-0 focus-visible::ring-offset-0 text-sm">
                       <SelectValue className="h-6">
                         <div className="flex items-center space-x-1 text-xs text-muted-foreground">
                           {getPrivacyIcon(privacy)}
@@ -280,7 +280,7 @@ export default function CreatePostCard({
                   placeholder={`What's on your mind, ${
                     authSession?.user?.fullName || data?.user?.fullName
                   }?`}
-                  className="max-h-[200px] min-h-[50px] md:max-h-[100px] border-none focus-visible:ring-0 focus:ring-0 focus-visible:shadow-none focus-visible:ring-offset-0 focus:ring-offset-transparent focus:ring-transparent"
+                  className="max-h-50 min-h-12.5 md:max-h-25 border-none focus-visible:ring-0 focus:ring-0 focus-visible:shadow-none focus-visible:ring-offset-0 focus:ring-offset-transparent focus:ring-transparent"
                 />
               </div>
               {/* Image Previews */}
@@ -357,7 +357,7 @@ export default function CreatePostCard({
           </ResponsiveDialog>
         </div>
       </CardContent>
-      <CardFooter className="px-2 border-t !pt-2">
+      <CardFooter className="px-2 border-t pt-2!">
         <div className="grid grid-cols-3 w-full ">
           <Button variant="ghost" className="rounded-none p-2 gap-1">
             <Video className="h-5 w-5 text-red-600" />

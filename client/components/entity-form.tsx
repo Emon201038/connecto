@@ -53,7 +53,7 @@ const MOCK_MENTIONS: Suggestion[] = [
 const createEntityNode = (
   type: "mention" | "hashtag",
   text: string,
-  data: { id: string; name: string }
+  data: { id: string; name: string },
 ): HTMLSpanElement => {
   const span = document.createElement("span");
   span.className =
@@ -136,7 +136,7 @@ export function EntityInput({
     if (!editorRef.current || isUpdatingFromSuggestion.current) return;
 
     const { rawText: currentText } = getRawTextAndEntitiesFromDOM(
-      editorRef.current
+      editorRef.current,
     );
 
     // Avoid re-rendering if the text content is the same, which can happen during composition
@@ -174,7 +174,7 @@ export function EntityInput({
     sortedEntities.forEach((entity) => {
       if (entity.offset > lastIndex) {
         editorRef.current!.appendChild(
-          document.createTextNode(value.substring(lastIndex, entity.offset))
+          document.createTextNode(value.substring(lastIndex, entity.offset)),
         );
       }
       const entityText = value.substring(entity.offset, entity.end);
@@ -188,7 +188,7 @@ export function EntityInput({
 
     if (lastIndex < value.length) {
       editorRef.current!.appendChild(
-        document.createTextNode(value.substring(lastIndex))
+        document.createTextNode(value.substring(lastIndex)),
       );
     }
 
@@ -253,7 +253,7 @@ export function EntityInput({
       const matchEnd = match.index + match[0].length;
 
       const isInsideMention = mentionRanges.some(
-        (range) => matchStart >= range.start && matchEnd <= range.end
+        (range) => matchStart >= range.start && matchEnd <= range.end,
       );
 
       if (isInsideMention) continue;
@@ -304,7 +304,7 @@ export function EntityInput({
       const tokenRange = document.createRange();
       tokenRange.setStart(
         startContainer,
-        textBeforeCursor.length - (word.length + 1)
+        textBeforeCursor.length - (word.length + 1),
       );
       tokenRange.setEnd(startContainer, startOffset);
       activeTokenRef.current = { type, word, range: tokenRange };
@@ -317,11 +317,11 @@ export function EntityInput({
         let finalSuggestions: Suggestion[] = [];
         if (type === "mention") {
           finalSuggestions = MOCK_MENTIONS.filter((m) =>
-            m.name.toLowerCase().startsWith(word.toLowerCase())
+            m.name.toLowerCase().startsWith(word.toLowerCase()),
           );
         } else {
           const filteredHashtags = MOCK_HASHTAGS.filter((tag) =>
-            tag.toLowerCase().startsWith(word.toLowerCase())
+            tag.toLowerCase().startsWith(word.toLowerCase()),
           );
           finalSuggestions = filteredHashtags.map((tag) => ({
             id: tag,
@@ -419,14 +419,14 @@ export function EntityInput({
         onBlur={handleBlur}
         data-placeholder={placeholder}
         className={cn(
-          "min-h-[120px] w-full rounded-md border border-input bg-transparent",
-          "px-3 py-2 text-base ring-offset-background",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-          "disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-          "whitespace-pre-wrap break-words",
+          "min-h-30 w-full rounded-md",
+          "px-3 py-2 text-base",
+          "focus-visible:outline-none outline-none ring-0 border-none",
+          "disabled:cursor-not-allowed disabled:opacity-50 md:text-sm bg-input",
+          "whitespace-pre-wrap wrap-break-word",
           !value &&
             "empty:before:content-[attr(data-placeholder)] empty:before:text-muted-foreground empty:before:pointer-events-none",
-          className
+          className,
         )}
       />
       {showSuggestions && (suggestions.length > 0 || loading) && (

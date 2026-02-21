@@ -5,10 +5,11 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { ReactionTargetType } from "@/interface/reaction.interface";
-import { useToggleMessageReactionMutation } from "@/redux/features/reaction/reactionApi";
+import { useToggleMessageReactionMutation } from "@/redux/features/message/messageApi";
 import { PlusIcon, SmileIcon } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useParams } from "next/navigation";
 import React from "react";
 
 const reactions = [
@@ -50,29 +51,25 @@ type Props = {
   showButtons: boolean;
   setShowButtons: React.Dispatch<React.SetStateAction<boolean>>;
   messageId: string;
-  conversationId: string;
 };
 
 const MessageReactModal = React.forwardRef<HTMLDivElement, Props>(
   (
-    {
-      showReactionsModal,
-      setShowReactionsModal,
-      setShowButtons,
-      messageId,
-      conversationId,
-    },
+    { showReactionsModal, setShowReactionsModal, setShowButtons, messageId },
     popoverRef,
   ) => {
     const [toggleReaction] = useToggleMessageReactionMutation();
 
     const session = useSession();
+    const params = useParams<{ chatId: string }>();
+
+    console.log(params);
 
     const handleReaction = (reaction: string) => {
       toggleReaction({
         target: messageId,
+        conversationId: params?.chatId!,
         type: reaction,
-        conversationId,
         user: {
           id: session!.data!.user.id,
           fullName: session!.data!.user.fullName,

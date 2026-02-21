@@ -1,8 +1,8 @@
 "use client";
 import { IConversationMember, IMessage } from "@/types";
 import { useSession } from "next-auth/react";
-import { Like } from "../../../app/(main)/inbox/[chatId]/components/RightSideBar";
 import { EmojiDisplay } from "@/components/Emoji";
+import Like from "@/components/icons/like";
 
 interface TextMessageProps {
   message: IMessage;

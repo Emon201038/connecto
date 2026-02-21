@@ -33,5 +33,5 @@ export const baseApi = createApi({
     },
   }),
   endpoints: (builder) => ({}),
-  tagTypes: ["STORIES"],
+  tagTypes: ["STORIES", "GET_MESSAGES", "GET_CONVERSATIONS"],
 });

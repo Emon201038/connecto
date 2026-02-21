@@ -5,17 +5,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import PostComments from "./post-comments";
-import { TComment } from "@/lib/type";
+import PostComments from "./comments";
 import timeAgo from "@/lib/time-ago";
 import { useAppDispatch } from "@/redux/hooks";
 import { setSelectedPost } from "@/redux/features/post/postSlice";
 import { reactionEmojis } from "@/constants/emoji";
 import { Entity, IUser } from "@/types";
-import { EntityInput, EntityInputRef } from "./entity-form";
-import { Button } from "../app/components/ui/button";
+import { EntityInput, EntityInputRef } from "../../entity-form";
+import { Button } from "@/components/ui/button";
 import { Camera, Loader, SendHorizontal, Smile, SmilePlus } from "lucide-react";
-import Tooltip from "./Tooltip";
 import { IPost } from "@/interface/post.interface";
 import { useGetPostsQuery } from "@/redux/features/post/postApi";
 import { IComment } from "@/interface/comment.interfce";
@@ -26,7 +24,7 @@ import {
   ResponsiveDialogHeader,
   ResponsiveDialogTitle,
   ResponsiveDialogTrigger,
-} from "../app/components/ui/responsive-dialog";
+} from "@/components/ui/responsive-dialog";
 import { useAddCommentMutation } from "@/redux/features/comments/commentsApi";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
@@ -156,7 +154,7 @@ const CommentsContent = ({ post }: { post: IPost }) => {
     setReplyTo({ commentId, author });
     const editableDiv = inputRef.current;
     if (editableDiv) {
-      editableDiv.innerHTML = `<span class="text-primary font-[500] bg-[#c2d6f7] " contenteditable="false">@${author.fullName}</span>&nbsp;`;
+      editableDiv.innerHTML = `<span class="text-primary font-medium bg-[#c2d6f7] " contenteditable="false">@${author.fullName}</span>&nbsp;`;
 
       editableDiv.focus();
       const range = document.createRange();
@@ -169,7 +167,7 @@ const CommentsContent = ({ post }: { post: IPost }) => {
   };
 
   return (
-    <ResponsiveDialogContent className="flex flex-col gap-0 overflow-auto md:h-[100%_-_40px]">
+    <ResponsiveDialogContent className="flex flex-col gap-0 overflow-auto md:h-[100%-40px] p-0 bg-normal">
       <ResponsiveDialogHeader className="hidden md:block p-4 border-b text-center relative">
         <ResponsiveDialogTitle className="w-full text-center">
           {post?.author?.fullName}&apos;s Post
@@ -181,7 +179,10 @@ const CommentsContent = ({ post }: { post: IPost }) => {
           <Link href={`/${post?.author?.username}`} className="shrink-0">
             <Avatar>
               <AvatarImage
-                src={post.author?.profilePicture?.url || "/placeholder.svg"}
+                src={
+                  post.author?.profilePicture?.url ||
+                  "/images/default-profile.jpeg"
+                }
                 alt={post?.author?.fullName}
               />
               <AvatarFallback>
@@ -247,7 +248,7 @@ const CommentsContent = ({ post }: { post: IPost }) => {
           <PostComments post={post} onReply={handleReplyClick} />
         </div>
       </div>
-      <div className="p-4 border-t w-full overflow-auto">
+      <div className="p-4 pb-0 border-t w-full overflow-auto">
         {replyTo && (
           <div className="text-xs opacity-50 flex items-center gap-1">
             <p>
@@ -269,17 +270,17 @@ const CommentsContent = ({ post }: { post: IPost }) => {
           // ref={inputRef2}
           // onSubmit={() => alert("form is submitted")}
           placeholder={"Comment as " + session?.data?.user?.fullName}
-          className="min-h-[60px] p-2 pb-7 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent text-sm font-primary dark:text-[rgb(226,229,233)] tracking-tighter"
+          className="min-h-15 p-2 pb-7 border rounded-lg focus:outline-0 focus:ring-0 focus:border-transparent text-sm font-primary dark:text-[rgb(226,229,233)] tracking-tighter"
         >
-          <div className="relative w-full h-full bg-slate-200">
+          <div className="relative w-full h-full ">
             <div className="absolute bottom-1 right-0 w-full opacity-60 px-1">
               <div className="w-full flex justify-between items-center">
-                <div className="flex gap-0 items-center">
+                <div className="flex gap-0 items-center relative">
                   <Button
                     variant={"ghost"}
                     size={"sm"}
                     data-title="Insert an emoji"
-                    data-position="top"
+                    dir="top"
                     className={`rounded-full flex items-center size-7 tooltip
                       `}
                   >
@@ -289,7 +290,7 @@ const CommentsContent = ({ post }: { post: IPost }) => {
                     variant={"ghost"}
                     size={"sm"}
                     data-title="Attach a photo or video"
-                    data-position="top"
+                    dir="top"
                     className={`rounded-full flex items-center size-7 tooltip
                       `}
                   >
@@ -299,7 +300,7 @@ const CommentsContent = ({ post }: { post: IPost }) => {
                     variant={"ghost"}
                     size={"sm"}
                     data-title="Comment as a gif"
-                    data-position="top"
+                    dir="top"
                     className={`rounded-full flex items-center size-7 tooltip
                       `}
                   >

@@ -1,5 +1,5 @@
 "use client";
-import PostCard from "@/components/post-card";
+import PostCard from "@/components/modules/post/post-card";
 import { IPost } from "@/interface/post.interface";
 import React from "react";
 

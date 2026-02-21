@@ -2,7 +2,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { useAppSelector } from "@/redux/hooks";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
-import { Button } from "../app/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { ThumbsUp } from "lucide-react";
 import ReactionsModal from "./reactions-modal";
 import { IPost } from "@/interface/post.interface";

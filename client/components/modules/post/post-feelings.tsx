@@ -6,16 +6,11 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../app/components/ui/dialog";
+} from "@/components/ui/dialog";
 import { ArrowLeft, ChevronRight, Search, Smile } from "lucide-react";
-import { Button } from "../app/components/ui/button";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "../app/components/ui/tabs";
-import { Input } from "../app/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Input } from "@/components/ui/input";
 
 const feelings = [
   { emoji: "😊", text: "happy" },

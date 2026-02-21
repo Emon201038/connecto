@@ -1,4 +1,4 @@
-import Posts from "./components/post-wraper";
+import Posts from "@/components/modules/post/post-wraper";
 import React from "react";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";

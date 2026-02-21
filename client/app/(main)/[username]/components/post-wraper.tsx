@@ -1,5 +1,5 @@
 "use client";
-import PostCard from "@/components/post-card";
+import PostCard from "@/components/modules/post/post-card";
 import { IPost } from "@/interface/post.interface";
 import { useSession } from "@/providers/session";
 import { useGetUserPostsQuery } from "@/redux/features/user/userApi";
@@ -12,7 +12,7 @@ const Posts = ({ posts }: { posts: IPost[] }) => {
   const params = useParams<{ username: string }>();
   const { data, isLoading } = useGetUserPostsQuery(
     { username: params.username || "", page: page },
-    { refetchOnMountOrArgChange: true, skip: false }
+    { refetchOnMountOrArgChange: true, skip: false },
   );
 
   return (

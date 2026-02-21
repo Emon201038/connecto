@@ -232,115 +232,7 @@ export const reactionApi = baseApi.injectEndpoints({
         }
       },
     }),
-    toggleMessageReaction: builder.mutation<
-      IResponse<IReaction>,
-      {
-        conversationId: string;
-        target: string;
-        type: string;
-        user: {
-          id: string;
-          fullName: string;
-          profilePicture?: {
-            url: string;
-            pub_id: string;
-          };
-        };
-      }
-    >({
-      query: (data) => ({
-        url: "/",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          query: `
-            mutation ToggleReaction($type: ReactionType, $targetType: ReactionTargetType!, $target: ID!) {
-              toggleReaction(type: $type, targetType: $targetType, target: $target) {
-                id
-                type
-                user {
-                  id
-                  fullName
-                  profilePicture {
-                    url
-                    pub_id
-                  }
-                }
-              }
-            }
-          `,
-          variables: {
-            type: data.type,
-            targetType: "Message",
-            target: data.target,
-          },
-        }),
-      }),
-      onQueryStarted: async (arg, { queryFulfilled, dispatch, getState }) => {
-        const state = getState() as RootState;
 
-        const queries = state.api.queries;
-
-        let patchResult: any;
-
-        Object.values(queries).forEach((query: any) => {
-          if (
-            query?.endpointName === "getMessages" &&
-            query?.originalArgs?.conversationId === arg.conversationId
-          ) {
-            patchResult = dispatch(
-              messageApi.util.updateQueryData(
-                "getMessages",
-                query.originalArgs, // 👈 exact original args
-                (draft) => {
-                  const messageIndex = draft.messages.findIndex(
-                    (m) => m.id === arg.target,
-                  );
-
-                  if (messageIndex === -1) return;
-
-                  const targetedMessage = draft.messages[messageIndex];
-
-                  const myReaction = targetedMessage.reactions.find(
-                    (r) => r.user.id === arg.user.id,
-                  );
-
-                  if (myReaction) {
-                    if (myReaction.type === arg.type) {
-                      targetedMessage.reactions =
-                        targetedMessage.reactions.filter(
-                          (r) => r.user.id !== arg.user.id,
-                        );
-                    } else {
-                      myReaction.type = arg.type as ReactionType;
-                    }
-                  } else {
-                    targetedMessage.reactions.push({
-                      id: Date.now().toString(),
-                      type: arg.type as ReactionType,
-                      user: arg.user as IUser,
-                      target: arg.target,
-                      targetType: ReactionTargetType.MESSAGE,
-                      createdAt: new Date().toISOString(),
-                      updatedAt: new Date().toISOString(),
-                    });
-                  }
-                },
-              ),
-            );
-          }
-        });
-
-        try {
-          await queryFulfilled;
-        } catch {
-          patchResult?.undo();
-        }
-      },
-    }),
     getReactions: builder.query<
       IResponse<IReaction[]>,
       { target: string; type?: ReactionType }
@@ -386,6 +278,5 @@ export const reactionApi = baseApi.injectEndpoints({
 export const {
   useTogglePostReactionMutation,
   useToggleCommentReactionMutation,
-  useToggleMessageReactionMutation,
   useGetReactionsQuery,
 } = reactionApi;

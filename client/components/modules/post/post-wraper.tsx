@@ -1,5 +1,5 @@
 "use client";
-import PostCard from "@/components/post-card";
+import PostCard from "@/components/modules/post/post-card";
 import { useGetPostsQuery } from "@/redux/features/post/postApi";
 import React from "react";
 import { LoadingFeed } from "@/components/loading-feed";
@@ -13,7 +13,7 @@ const Posts = () => {
     {
       refetchOnMountOrArgChange: true,
       skip: false,
-    }
+    },
   );
 
   if (isLoading) {

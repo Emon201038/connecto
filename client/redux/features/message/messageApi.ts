@@ -1,7 +1,12 @@
 import { IMeta } from "@/lib/type";
 import { baseApi } from "@/redux/baseApi";
-import { IMessage, IMessageType } from "@/types";
+import { IMessage, IMessageType, IResponse, IUser } from "@/types";
 import { conversationApi } from "../conversation/conversationApi";
+import {
+  IReaction,
+  ReactionTargetType,
+  ReactionType,
+} from "@/interface/reaction.interface";
 
 export const messageApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -58,7 +63,7 @@ export const messageApi = baseApi.injectEndpoints({
       transformResponse: (response: {
         data: { messages: { messages: IMessage[]; meta: IMeta } };
       }) => response.data.messages,
-
+      providesTags: ["GET_MESSAGES"],
       // ---- Infinite scroll setup ----
       serializeQueryArgs: ({ endpointName, queryArgs }) =>
         `${endpointName}-${queryArgs.conversationId}`,
@@ -178,7 +183,117 @@ export const messageApi = baseApi.injectEndpoints({
         }
       },
     }),
+
+    toggleMessageReaction: builder.mutation<
+      IResponse<IReaction>,
+      {
+        conversationId: string;
+        target: string;
+        type: string;
+        user: {
+          id: string;
+          fullName: string;
+          profilePicture?: {
+            url: string;
+            pub_id: string;
+          };
+        };
+      }
+    >({
+      query: (data) => ({
+        url: "/",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          query: `
+            mutation ToggleReaction($type: ReactionType, $targetType: ReactionTargetType!, $target: ID!) {
+              toggleReaction(type: $type, targetType: $targetType, target: $target) {
+                id
+                type
+                user {
+                  id
+                  fullName
+                  profilePicture {
+                    url
+                    pub_id
+                  }
+                }
+              }
+            }
+          `,
+          variables: {
+            type: data.type,
+            targetType: "Message",
+            target: data.target,
+          },
+        }),
+      }),
+      onQueryStarted: async (arg, { queryFulfilled, dispatch, getState }) => {
+        const state = getState() as any;
+        console.log("cache keys:", Object.keys(state.api.queries));
+        console.log("looking for key:", `getMessages-${arg.conversationId}`);
+        console.log("arg.conversationId:", arg.conversationId);
+        console.log("arg:", JSON.stringify(arg));
+        const patchResult = dispatch(
+          messageApi.util.updateQueryData(
+            "getMessages",
+            // ✅ same pattern as sendMessage - full args object
+            {
+              conversationId: arg.conversationId,
+              page: 1,
+              limit: 20,
+              search: "",
+            },
+            (draft) => {
+              console.log("draft messages count:", draft?.messages?.length);
+              console.log("looking for message id:", arg.target);
+
+              const message = draft.messages.find((m) => m.id === arg.target);
+              console.log("found message:", message);
+              if (!message) return;
+
+              const myReaction = message.reactions.find(
+                (r) => r.user.id === arg.user.id,
+              );
+
+              if (myReaction) {
+                if (myReaction.type === arg.type) {
+                  message.reactions = message.reactions.filter(
+                    (r) => r.user.id !== arg.user.id,
+                  );
+                } else {
+                  myReaction.type = arg.type as ReactionType;
+                }
+              } else {
+                message.reactions.push({
+                  id: Date.now().toString(),
+                  type: arg.type as ReactionType,
+                  user: arg.user as IUser,
+                  target: arg.target,
+                  targetType: ReactionTargetType.MESSAGE,
+                  createdAt: new Date().toISOString(),
+                  updatedAt: new Date().toISOString(),
+                });
+              }
+            },
+          ),
+        );
+
+        try {
+          await queryFulfilled;
+        } catch {
+          patchResult.undo();
+        }
+      },
+    }),
   }),
 });
 
-export const { useGetMessagesQuery, useSendMessageMutation } = messageApi;
+export const {
+  useGetMessagesQuery,
+  useSendMessageMutation,
+  useToggleMessageReactionMutation,
+} = messageApi;

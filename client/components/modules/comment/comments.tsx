@@ -7,7 +7,7 @@ import { IComment } from "@/interface/comment.interfce";
 import { useGetCommentsQuery } from "@/redux/features/comments/commentsApi";
 import { useSession } from "next-auth/react";
 import { IUser } from "@/types";
-import { Skeleton } from "../app/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function PostComments({
   post,
@@ -51,7 +51,7 @@ export default function PostComments({
 
   return (
     <div className="p-4 pt-0 flex flex-col h-full justify-between">
-      <div className="flex-1 py-2 md:max-h-[300px] overflow-y-auto">
+      <div className="flex-1 py-2 md:max-h-75 overflow-y-auto">
         {comments?.data?.comments?.length === 0 ? (
           <div className="text-sm text-muted-foreground h-full flex items-center justify-center">
             No comments yet

@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useSingleGroupPostsQuery } from "@/redux/features/group/groupApi";
-import PostCard from "@/components/post-card";
+import PostCard from "@/components/modules/post/post-card";
 import { LoadingFeed } from "@/components/loading-feed";
 
 export default function GroupDetailsPage() {

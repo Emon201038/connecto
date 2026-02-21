@@ -9,31 +9,33 @@ import {
   Share,
   ThumbsUp,
 } from "lucide-react";
-import { Card, CardFooter } from "../app/components/ui/card";
+import { Card, CardFooter } from "@/components/ui/card";
 import Link from "next/link";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../app/components/ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
 import React, { useState } from "react";
 import { useIsMobile } from "@/hooks/use-mobile";
-import Tooltip from "./Tooltip";
+import Tooltip from "../../Tooltip";
 import timeAgo from "@/lib/time-ago";
 import { useAppDispatch } from "@/redux/hooks";
 import { setSelectedPost } from "@/redux/features/post/postSlice";
-import { Separator } from "../app/components/ui/separator";
-import CommentModal from "./comment-modal";
+import { Separator } from "@/components/ui/separator";
+import CommentModal from "../comment/comment-modal";
 import { IPost } from "@/interface/post.interface";
 import { useGetPostsQuery } from "@/redux/features/post/postApi";
-import { HighlightHashtags } from "./highlight-hashtag";
-import { ReactionButton2 } from "./reaction-button-2";
+import { HighlightHashtags } from "../../highlight-hashtag";
+import { ReactionButton2 } from "../../reaction-button-2";
 import { useTogglePostReactionMutation } from "@/redux/features/reaction/reactionApi";
 import { ReactionType } from "@/interface/reaction.interface";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
-import { ShareModal } from "./modules/share/share-modal";
+import { ShareModal } from "../share/share-modal";
+import { reactions as allReact } from "@/constants/reactions";
+import ImageGrid from "./post-image";
 
 export default function PostCard({ post: rootPost }: { post: IPost }) {
   const [moreDropdownOpen, setMoreDropdownOpen] = useState(false);
@@ -61,73 +63,6 @@ export default function PostCard({ post: rootPost }: { post: IPost }) {
   const post = data?.data.posts.find((p) => p.id === rootPost.id) || rootPost;
 
   const [toggleReaction] = useTogglePostReactionMutation();
-
-  // Define the reactions with their emojis
-  const reactionEmojis: Record<
-    "LIKE" | "CARE" | "WOW" | "LOVE" | "HAHA" | "SAD" | "ANGRY",
-    { emoji: React.ReactNode; bg: string; name: string; text: string }
-  > = {
-    LIKE: {
-      emoji: (
-        <Image
-          src="/images/like.svg"
-          alt="love"
-          width={16}
-          height={16}
-          priority
-        />
-      ),
-      bg: "white",
-      text: "#0866FF",
-      name: "Like",
-    },
-    CARE: {
-      emoji: (
-        <Image
-          src="/images/care.svg"
-          alt="care"
-          width={16}
-          height={16}
-          priority
-        />
-      ),
-      bg: "white",
-      name: "Care",
-      text: "#887000",
-    },
-    LOVE: {
-      emoji: <Image src="/images/love.svg" alt="love" width={16} height={16} />,
-      bg: "white",
-      name: "Love",
-      text: "#DD2334",
-    },
-    HAHA: {
-      emoji: <Image src="/images/haha.svg" alt="haha" width={16} height={16} />,
-      bg: "white",
-      name: "Haha",
-      text: "#887000",
-    },
-    WOW: {
-      emoji: <Image src="/images/wow.svg" alt="wow" width={16} height={16} />,
-      bg: "white",
-      name: "Wow",
-      text: "#887000",
-    },
-    SAD: {
-      emoji: <Image src="/images/sad.svg" alt="sad" width={16} height={16} />,
-      bg: "white",
-      name: "Sad",
-      text: "#887000",
-    },
-    ANGRY: {
-      emoji: (
-        <Image src="/images/angry.svg" alt="angry" width={16} height={16} />
-      ),
-      bg: "white",
-      name: "Angry",
-      text: "orange",
-    },
-  };
 
   const openReportModal = (post: IPost) => {
     // setReportingPost(post);
@@ -335,18 +270,29 @@ export default function PostCard({ post: rootPost }: { post: IPost }) {
                       ? [...post.reactionSummary]
                           .sort((a, b) => b.count - a.count)
                           .slice(0, 3)
-                          .map((reaction, index) => (
-                            <div
-                              key={reaction.reactionType}
-                              className={`relative`}
-                              style={{
-                                marginLeft: index > 0 ? "-4px" : "0",
-                                zIndex: 3 - index,
-                              }}
-                            >
-                              {reactionEmojis[reaction.reactionType].emoji}
-                            </div>
-                          ))
+                          .map((reaction, index) => {
+                            const targetedReact = allReact.find(
+                              (r) => r.type === reaction.reactionType,
+                            );
+                            return (
+                              <div
+                                key={reaction.reactionType}
+                                className={`relative`}
+                                style={{
+                                  marginLeft: index > 0 ? "-4px" : "0",
+                                  zIndex: 3 - index,
+                                }}
+                              >
+                                <Image
+                                  src={targetedReact?.src || "/images/like.svg"}
+                                  alt={targetedReact?.name || "react"}
+                                  width={16}
+                                  height={16}
+                                  priority
+                                />
+                              </div>
+                            );
+                          })
                       : null}
                   </div>
                   <p className={`${reactions.length > 0 ? "block" : "hidden"}`}>
@@ -368,18 +314,29 @@ export default function PostCard({ post: rootPost }: { post: IPost }) {
                     ? [...post.reactionSummary.filter((r) => r.count > 0)]
                         .sort((a, b) => b.count - a.count)
                         .slice(0, 3)
-                        .map((reaction, index) => (
-                          <div
-                            key={reaction.reactionType}
-                            className={`relative`}
-                            style={{
-                              marginLeft: index > 0 ? "-4px" : "0",
-                              zIndex: 3 - index,
-                            }}
-                          >
-                            {reactionEmojis[reaction.reactionType].emoji}
-                          </div>
-                        ))
+                        .map((reaction, index) => {
+                          const targetedReact = allReact.find(
+                            (r) => r.type === reaction.reactionType,
+                          );
+                          return (
+                            <div
+                              key={reaction.reactionType}
+                              className={`relative`}
+                              style={{
+                                marginLeft: index > 0 ? "-4px" : "0",
+                                zIndex: 3 - index,
+                              }}
+                            >
+                              <Image
+                                src={targetedReact?.src || "images/like.svg"}
+                                alt={targetedReact?.name || "like"}
+                                width={16}
+                                height={16}
+                                priority
+                              />
+                            </div>
+                          );
+                        })
                     : null}
                 </div>
                 <p className={`${reactions.length > 0 ? "block" : "hidden"}`}>
@@ -444,13 +401,31 @@ export default function PostCard({ post: rootPost }: { post: IPost }) {
           >
             <div className="w-full p-1 flex justify-center items-center gap-2">
               {post.myReaction ? (
-                reactionEmojis[post.myReaction.type].emoji
+                <Image
+                  src={
+                    allReact.find((r) => r.type === post?.myReaction?.type)
+                      ?.src || "images/like.svg"
+                  }
+                  alt={"react"}
+                  width={16}
+                  height={16}
+                  priority
+                />
               ) : (
                 <ThumbsUp />
               )}
               {post.myReaction ? (
-                <p style={{ color: reactionEmojis[post.myReaction.type].text }}>
-                  {reactionEmojis[post.myReaction.type].name}
+                <p
+                  style={{
+                    color: allReact.find(
+                      (r) => r.type === post?.myReaction?.type,
+                    )?.text,
+                  }}
+                >
+                  {
+                    allReact.find((r) => r.type === post?.myReaction?.type)
+                      ?.name
+                  }
                 </p>
               ) : (
                 <p>Like</p>
@@ -484,164 +459,3 @@ export default function PostCard({ post: rootPost }: { post: IPost }) {
     </Card>
   );
 }
-
-const ImageGrid = ({
-  attachments,
-}: {
-  attachments: { url: string; pub_id: string }[];
-}) => {
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-  if (!attachments || attachments.length === 0) return null;
-
-  const renderImageGrid = () => {
-    const count = attachments.length;
-
-    if (count === 1) {
-      return (
-        <div
-          className="relative w-full max-h-[500px] overflow-hidden cursor-pointer"
-          onClick={() => setSelectedImage(attachments[0].url)}
-        >
-          <Image
-            src={attachments[0].url || "/placeholder.svg"}
-            alt="Post image"
-            width={600}
-            height={400}
-            placeholder="blur"
-            blurDataURL={
-              "https://res.cloudinary.com/emadul-hoque-emon/image/upload/e_blur:10000,q_1,q_auto:low,f_webp/v1757695325/facebook/post/dmrgspqrq8knztdrw6wj.png"
-            }
-            className="w-full h-full object-cover hover:opacity-95 transition-opacity"
-          />
-        </div>
-      );
-    }
-
-    if (count === 2) {
-      return (
-        <div className="grid grid-cols-2 gap-0 overflow-hidden max-h-[400px]">
-          {attachments.slice(0, 2).map((attachment, index) => (
-            <div
-              key={attachment.pub_id}
-              className="relative aspect-square overflow-hidden cursor-pointer"
-              onClick={() => setSelectedImage(attachment.url)}
-            >
-              <Image
-                src={attachment.url || "/placeholder.svg"}
-                alt={`Post image ${index + 1}`}
-                fill
-                className="object-cover hover:opacity-95 transition-opacity"
-              />
-            </div>
-          ))}
-        </div>
-      );
-    }
-
-    if (count === 3) {
-      return (
-        <div className="grid grid-cols-2 gap-1 overflow-hidden max-h-[400px]">
-          <div
-            className="relative aspect-square overflow-hidden cursor-pointer"
-            onClick={() => setSelectedImage(attachments[0].url)}
-          >
-            <Image
-              src={attachments[0].url || "/placeholder.svg"}
-              alt="Post image 1"
-              fill
-              className="object-cover hover:opacity-95 transition-opacity"
-            />
-          </div>
-          <div className="grid grid-rows-2 gap-1">
-            {attachments.slice(1, 3).map((attachment, index) => (
-              <div
-                key={attachment.pub_id}
-                className="relative overflow-hidden cursor-pointer"
-                onClick={() => setSelectedImage(attachment.url)}
-              >
-                <Image
-                  src={attachment.url || "/placeholder.svg"}
-                  alt={`Post image ${index + 2}`}
-                  fill
-                  className="object-cover hover:opacity-95 transition-opacity"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      );
-    }
-
-    if (count >= 4) {
-      return (
-        <div className="grid grid-cols-2 gap-1 overflow-hidden max-h-[400px]">
-          {attachments.slice(0, 3).map((attachment, index) => (
-            <div
-              key={attachment.pub_id}
-              className={cn(
-                "relative overflow-hidden cursor-pointer",
-                index === 0 ? "aspect-square" : "aspect-[4/3]",
-              )}
-              onClick={() => setSelectedImage(attachment.url)}
-            >
-              <Image
-                src={attachment.url || "/placeholder.svg"}
-                alt={`Post image ${index + 1}`}
-                fill
-                className="object-cover hover:opacity-95 transition-opacity"
-              />
-            </div>
-          ))}
-          <div
-            className="relative aspect-[4/3] overflow-hidden cursor-pointer bg-black/50"
-            onClick={() => setSelectedImage(attachments[3].url)}
-          >
-            <Image
-              src={attachments[3].url || "/placeholder.svg"}
-              alt="Post image 4"
-              fill
-              className="object-cover"
-            />
-            {count > 4 && (
-              <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
-                <span className="text-white text-2xl font-semibold">
-                  +{count - 4}
-                </span>
-              </div>
-            )}
-          </div>
-        </div>
-      );
-    }
-  };
-
-  return (
-    <>
-      <div className="w-full">{renderImageGrid()}</div>
-
-      {selectedImage && (
-        <div
-          className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-          onClick={() => setSelectedImage(null)}
-        >
-          <div className="relative max-w-4xl max-h-full">
-            <Image
-              src={selectedImage || "/placeholder.svg"}
-              alt="Full size image"
-              width={800}
-              height={600}
-              className="max-w-full max-h-full object-contain"
-            />
-            <button
-              onClick={() => setSelectedImage(null)}
-              className="absolute top-4 right-4 text-white bg-black/50 rounded-full p-2 hover:bg-black/70"
-            >
-              ✕
-            </button>
-          </div>
-        </div>
-      )}
-    </>
-  );
-};

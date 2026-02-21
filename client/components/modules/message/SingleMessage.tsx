@@ -33,6 +33,8 @@ const SingleMessage = ({ message, conversation }: Props) => {
 
   const session = useSession();
 
+  console.log(message);
+
   const groupedReactions = React.useMemo(() => {
     const grouped = message.reactions.reduce<
       Record<string, { count: number; type: ReactionType; user: IUser }>
@@ -90,7 +92,6 @@ const SingleMessage = ({ message, conversation }: Props) => {
           showReactionsModal={showReactionsModal}
           setShowReactionsModal={setShowReactionsModal}
           messageId={message.id}
-          conversationId={conversation.id}
           ref={popoverRef}
         />
         <Button variant={"ghost"} className="rounded-full size-7 p-1">

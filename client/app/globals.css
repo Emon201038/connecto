@@ -184,7 +184,7 @@
 /* ===== TOP (default) ===== */
 .tooltip[dir="top"]::after {
   left: 50%;
-  bottom: 100%;
+  bottom: 120%;
   transform: translateX(-50%) translateY(5px);
 }
 

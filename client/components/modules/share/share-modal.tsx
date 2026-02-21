@@ -32,9 +32,9 @@ import {
   ResponsiveDialogContent,
   ResponsiveDialogHeader,
   ResponsiveDialogTitle,
-} from "../../../app/components/ui/responsive-dialog";
+} from "@/components/ui/responsive-dialog";
 import { useEffect, useRef, useState } from "react";
-import { Textarea } from "../../../app/components/ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
 
 const messengerContacts = [
   { id: 1, name: "soulmate", avatar: "/couple-avatar.png", hasHeart: true },

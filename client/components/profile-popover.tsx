@@ -31,11 +31,11 @@ import {
 import { useSession, signOut } from "next-auth/react";
 import { useLogoutMutation } from "@/redux/features/auth/authApi";
 import { usePathname, useRouter } from "next/navigation";
-import { Skeleton } from "../app/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
 import { logout } from "@/actions";
-import { RadioGroup, RadioGroupItem } from "../app/components/ui/radio-group";
-import { Label } from "../app/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 
@@ -326,7 +326,7 @@ export function ProfilePopover({
               ].map((item) => (
                 <div
                   key={item.menue}
-                  className="w-full gap-3 h-[54px] cursor-pointer flex justify-between items-center hover:bg-shade rounded-sm px-1 font-semibold text-[15px]"
+                  className="w-full gap-3 h-13.5 cursor-pointer flex justify-between items-center hover:bg-shade rounded-sm px-1 font-semibold text-[15px]"
                   onClick={() => handleMenuClick(item.menue)}
                 >
                   <div className="flex justify-start items-center gap-1">
@@ -342,7 +342,7 @@ export function ProfilePopover({
               ))}
 
               <div
-                className="w-full gap-3 h-[54px] cursor-pointer flex justify-between items-center  rounded-sm px-1 font-semibold text-[15px]"
+                className="w-full gap-3 h-13.5 cursor-pointer flex justify-between items-center  rounded-sm px-1 font-semibold text-[15px]"
                 onClick={() => handleMenuClick("Give Feedback")}
               >
                 <div className="flex justify-start items-center gap-1">

@@ -1,13 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 // import { useLazyQuery, gql } from "@apollo/client";
-import { Textarea } from "../app/components/ui/textarea";
+import { Textarea } from "@/components/ui/textarea";
 import { useSession } from "@/providers/session";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "../app/components/ui/avatar";
-import { Badge } from "../app/components/ui/badge";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
 import { X, Hash, AtSign, TrendingUp } from "lucide-react";
 
 // import {

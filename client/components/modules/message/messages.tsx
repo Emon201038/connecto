@@ -13,10 +13,8 @@ import { useGetMessagesQuery } from "@/redux/features/message/messageApi";
 import TextMessage from "./TextMessage";
 import type { IConversationMember } from "@/types";
 import { Skeleton } from "@/components/ui/skeleton";
-import LoadingMessages from "../../../app/(main)/inbox/[chatId]/components/loading";
-import { Like } from "../../../app/(main)/inbox/[chatId]/components/RightSideBar";
-import EmojiMessage from "./EmojiMessage";
 import SingleMessage from "@/components/modules/message/SingleMessage";
+import LoadingMessages from "@/app/(main)/inbox/[chatId]/components/loading";
 
 const Messages = forwardRef<
   HTMLDivElement,
@@ -76,6 +74,8 @@ const Messages = forwardRef<
       }
     }
   }, [messages, page]);
+
+  console.log(conversation);
 
   return (
     <div className="w-full h-full flex-1 overflow-auto flex flex-col-reverse gap-3 p-4">

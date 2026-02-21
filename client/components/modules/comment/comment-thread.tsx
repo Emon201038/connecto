@@ -9,14 +9,14 @@ import { Balancer } from "react-wrap-balancer";
 import timeAgo from "@/lib/time-ago";
 import { useAppSelector } from "@/redux/hooks";
 import { IComment } from "@/interface/comment.interfce";
-import { HighlightHashtags } from "./highlight-hashtag";
-import { ReactionButton2 } from "./reaction-button-2";
+import { HighlightHashtags } from "../../highlight-hashtag";
+import { ReactionButton2 } from "../../reaction-button-2";
 import { ReactionType } from "@/interface/reaction.interface";
 import { useToggleCommentReactionMutation } from "@/redux/features/reaction/reactionApi";
 import { toast } from "sonner";
-import ReusableTooltip from "./Tooltip";
+import ReusableTooltip from "../../Tooltip";
 import Image from "next/image";
-import ReactorsModal from "./reactors-modal";
+import ReactorsModal from "../../reactors-modal";
 import { IUser } from "@/types";
 
 const reactions = [
@@ -163,7 +163,7 @@ const CommentThread = ({
   return (
     <div id={`comment-${comment.id}`}>
       <div className="flex items-start gap-2">
-        <Link href={`/${comment.author.username}`} className="flex-shrink-0">
+        <Link href={`/${comment.author.username}`} className="shrink-0">
           <Avatar className="h-8 w-8">
             <AvatarImage
               src={
@@ -176,19 +176,19 @@ const CommentThread = ({
             <AvatarFallback>{comment.author.fullName.charAt(0)}</AvatarFallback>
           </Avatar>
         </Link>
-        <div className="flex-grow">
+        <div className="grow">
           <div className="relative group">
             <div className="w-fit">
-              <div className="bg-muted px-3 py-2 rounded-xl text-sm">
+              <div className="bg-input px-3 py-2 rounded-xl text-sm">
                 <div className="flex items-center gap-2">
                   <Link
                     href={`/${comment.author.username}`}
-                    className="font-semibold hover:underline text-primary"
+                    className="font-semibold hover:underline"
                   >
                     {comment.author.fullName}
                   </Link>
                   {comment.author.id === postAuthorId && (
-                    <span className="text-xs bg-gray-200 dark:bg-gray-700 text-muted-foreground px-1.5 py-0.5 rounded-md">
+                    <span className="text-xs bg-muted text-muted-foreground px-1.5 py-0.5 rounded-md">
                       Author
                     </span>
                   )}
@@ -209,7 +209,7 @@ const CommentThread = ({
                       handleReactionChange(e?.toUpperCase() as ReactionType)
                     }
                     handleButtonClick={handleReactionClick}
-                    className="w-fit hover:bg-none hover:bg-transparent dark:hover:bg-transparent p-0 !h-fit justify-center items-center"
+                    className="w-fit hover:bg-none hover:bg-transparent dark:hover:bg-transparent p-0 h-fit! justify-center items-center"
                   >
                     <div
                       style={{
@@ -229,7 +229,7 @@ const CommentThread = ({
                                 comment.myReaction.type as ReactionType
                               ].text
                             }]`
-                          : "text-muted-foreground"
+                          : "text-muted-foreground",
                       )}
                     >
                       {comment.myReaction
@@ -327,7 +327,7 @@ const CommentThread = ({
                 ?.filter((c) => c.parentId === comment.id)
                 .map((reply) => (
                   <div key={reply.id} className="relative">
-                    <div className="absolute -left-[11px] top-4 w-5 h-px bg-muted/30"></div>
+                    <div className="absolute -left-2.75 top-4 w-5 h-px bg-muted/30"></div>
                     {/* {visibleReplies.map((c) => ( */}
                     <CommentThread
                       comment={reply as unknown as IComment}
@@ -347,7 +347,7 @@ const CommentThread = ({
                   View{" "}
                   {comment.replyCount -
                     (selectedPost?.comments || []).filter(
-                      (c) => c.parentId === comment.id
+                      (c) => c.parentId === comment.id,
                     ).length}{" "}
                   more replies
                 </button>
