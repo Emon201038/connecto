@@ -3,8 +3,8 @@ model User {
   firstName   String
   lastName    String?
   fullName    String?
-  username    String?   @unique
-  email       String?   @unique
+  username    String    @unique
+  email       String    @unique
   phone       String    @unique
   password    String
   role        UserRole  @default(USER)

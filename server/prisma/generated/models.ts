@@ -8,6 +8,20 @@
  *
  * 🟢 You can import this file directly.
  */
+export type * from './models/Comment'
+export type * from './models/CommentEntity'
+export type * from './models/Conversation'
+export type * from './models/ConversationMember'
+export type * from './models/PostEntity'
+export type * from './models/Group'
+export type * from './models/GroupMember'
+export type * from './models/Hashtag'
+export type * from './models/Message'
+export type * from './models/Attachment'
+export type * from './models/MessageDeleted'
+export type * from './models/Post'
+export type * from './models/PostAttachment'
+export type * from './models/PostShare'
 export type * from './models/User'
 export type * from './models/Follower'
 export type * from './models/Friendship'

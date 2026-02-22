@@ -1,5 +1,4 @@
 import express from "express";
-import { seendUsers } from "../../../modules/user/user.controller";
 import { AuthController } from "./auth.controller";
 const authRoutes = express.Router();
 

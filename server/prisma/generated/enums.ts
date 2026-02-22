@@ -9,6 +9,123 @@
 * 🟢 You can import this file directly.
 */
 
+export const EntityModel = {
+  USER: 'USER',
+  HASHTAG: 'HASHTAG'
+} as const
+
+export type EntityModel = (typeof EntityModel)[keyof typeof EntityModel]
+
+
+export const ConversationType = {
+  DIRECT: 'DIRECT',
+  GROUP: 'GROUP'
+} as const
+
+export type ConversationType = (typeof ConversationType)[keyof typeof ConversationType]
+
+
+export const ConversationRole = {
+  ADMIN: 'ADMIN',
+  MEMBER: 'MEMBER'
+} as const
+
+export type ConversationRole = (typeof ConversationRole)[keyof typeof ConversationRole]
+
+
+export const ConversationTheme = {
+  LIGHT: 'LIGHT',
+  DARK: 'DARK',
+  MIDNIGHT: 'MIDNIGHT',
+  OCEAN: 'OCEAN',
+  SUNSET: 'SUNSET',
+  FOREST: 'FOREST',
+  PASTEL: 'PASTEL',
+  ROSE: 'ROSE',
+  CYBERPUNK: 'CYBERPUNK',
+  AUTUMN: 'AUTUMN'
+} as const
+
+export type ConversationTheme = (typeof ConversationTheme)[keyof typeof ConversationTheme]
+
+
+export const GroupType = {
+  FACEBOOK: 'FACEBOOK',
+  COMMUNITY: 'COMMUNITY',
+  COURSE: 'COURSE',
+  TEAM: 'TEAM'
+} as const
+
+export type GroupType = (typeof GroupType)[keyof typeof GroupType]
+
+
+export const GroupPrivacy = {
+  PUBLIC: 'PUBLIC',
+  PRIVATE: 'PRIVATE',
+  SECRET: 'SECRET'
+} as const
+
+export type GroupPrivacy = (typeof GroupPrivacy)[keyof typeof GroupPrivacy]
+
+
+export const WhoCanPost = {
+  ANY_MEMBER: 'ANY_MEMBER',
+  ADMINS_MODS: 'ADMINS_MODS'
+} as const
+
+export type WhoCanPost = (typeof WhoCanPost)[keyof typeof WhoCanPost]
+
+
+export const GroupRole = {
+  MEMBER: 'MEMBER',
+  ADMIN: 'ADMIN',
+  MODERATOR: 'MODERATOR'
+} as const
+
+export type GroupRole = (typeof GroupRole)[keyof typeof GroupRole]
+
+
+export const MessageType = {
+  TEXT: 'TEXT',
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO',
+  AUDIO: 'AUDIO',
+  FILE: 'FILE',
+  SYSTEM: 'SYSTEM'
+} as const
+
+export type MessageType = (typeof MessageType)[keyof typeof MessageType]
+
+
+export const AttachmentType = {
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO',
+  AUDIO: 'AUDIO',
+  FILE: 'FILE'
+} as const
+
+export type AttachmentType = (typeof AttachmentType)[keyof typeof AttachmentType]
+
+
+export const PostType = {
+  TEXT: 'TEXT',
+  IMAGE: 'IMAGE',
+  VIDEO: 'VIDEO',
+  SHARED: 'SHARED'
+} as const
+
+export type PostType = (typeof PostType)[keyof typeof PostType]
+
+
+export const PostPrivacy = {
+  PUBLIC: 'PUBLIC',
+  FRIENDS: 'FRIENDS',
+  PRIVATE: 'PRIVATE'
+} as const
+
+export type PostPrivacy = (typeof PostPrivacy)[keyof typeof PostPrivacy]
+
+
 export const FriendshipStatus = {
   PENDING: 'PENDING',
   ACCEPTED: 'ACCEPTED',

@@ -18,6 +18,76 @@ export { Prisma }
 export * as $Enums from './enums'
 export * from './enums';
 /**
+ * Model Comment
+ * 
+ */
+export type Comment = Prisma.CommentModel
+/**
+ * Model CommentEntity
+ * 
+ */
+export type CommentEntity = Prisma.CommentEntityModel
+/**
+ * Model Conversation
+ * 
+ */
+export type Conversation = Prisma.ConversationModel
+/**
+ * Model ConversationMember
+ * 
+ */
+export type ConversationMember = Prisma.ConversationMemberModel
+/**
+ * Model PostEntity
+ * 
+ */
+export type PostEntity = Prisma.PostEntityModel
+/**
+ * Model Group
+ * 
+ */
+export type Group = Prisma.GroupModel
+/**
+ * Model GroupMember
+ * 
+ */
+export type GroupMember = Prisma.GroupMemberModel
+/**
+ * Model Hashtag
+ * 
+ */
+export type Hashtag = Prisma.HashtagModel
+/**
+ * Model Message
+ * 
+ */
+export type Message = Prisma.MessageModel
+/**
+ * Model Attachment
+ * 
+ */
+export type Attachment = Prisma.AttachmentModel
+/**
+ * Model MessageDeleted
+ * 
+ */
+export type MessageDeleted = Prisma.MessageDeletedModel
+/**
+ * Model Post
+ * 
+ */
+export type Post = Prisma.PostModel
+/**
+ * Model PostAttachment
+ * 
+ */
+export type PostAttachment = Prisma.PostAttachmentModel
+/**
+ * Model PostShare
+ * 
+ */
+export type PostShare = Prisma.PostShareModel
+/**
  * Model User
  * 
  */

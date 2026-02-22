@@ -51,6 +51,20 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
+  Comment: 'Comment',
+  CommentEntity: 'CommentEntity',
+  Conversation: 'Conversation',
+  ConversationMember: 'ConversationMember',
+  PostEntity: 'PostEntity',
+  Group: 'Group',
+  GroupMember: 'GroupMember',
+  Hashtag: 'Hashtag',
+  Message: 'Message',
+  Attachment: 'Attachment',
+  MessageDeleted: 'MessageDeleted',
+  Post: 'Post',
+  PostAttachment: 'PostAttachment',
+  PostShare: 'PostShare',
   User: 'User',
   Follower: 'Follower',
   Friendship: 'Friendship'
@@ -72,6 +86,189 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const CommentScalarFieldEnum = {
+  id: 'id',
+  text: 'text',
+  parentId: 'parentId',
+  postId: 'postId',
+  authorId: 'authorId',
+  isDeleted: 'isDeleted',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
+
+
+export const CommentEntityScalarFieldEnum = {
+  id: 'id',
+  commentId: 'commentId',
+  type: 'type',
+  offset: 'offset',
+  end: 'end',
+  model: 'model',
+  targetId: 'targetId',
+  text: 'text'
+} as const
+
+export type CommentEntityScalarFieldEnum = (typeof CommentEntityScalarFieldEnum)[keyof typeof CommentEntityScalarFieldEnum]
+
+
+export const ConversationScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  title: 'title',
+  avatar: 'avatar',
+  lastMessageId: 'lastMessageId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ConversationScalarFieldEnum = (typeof ConversationScalarFieldEnum)[keyof typeof ConversationScalarFieldEnum]
+
+
+export const ConversationMemberScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  userId: 'userId',
+  role: 'role',
+  nickname: 'nickname',
+  theme: 'theme',
+  emoji: 'emoji',
+  isMuted: 'isMuted',
+  isPinned: 'isPinned',
+  archived: 'archived',
+  joinedAt: 'joinedAt',
+  leftAt: 'leftAt'
+} as const
+
+export type ConversationMemberScalarFieldEnum = (typeof ConversationMemberScalarFieldEnum)[keyof typeof ConversationMemberScalarFieldEnum]
+
+
+export const PostEntityScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  offset: 'offset',
+  end: 'end',
+  text: 'text',
+  userId: 'userId',
+  hashtagId: 'hashtagId',
+  postId: 'postId'
+} as const
+
+export type PostEntityScalarFieldEnum = (typeof PostEntityScalarFieldEnum)[keyof typeof PostEntityScalarFieldEnum]
+
+
+export const GroupScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  type: 'type',
+  privacy: 'privacy',
+  coverUrl: 'coverUrl',
+  coverPubId: 'coverPubId',
+  createdById: 'createdById',
+  memberCount: 'memberCount',
+  postCount: 'postCount',
+  requirePostApproval: 'requirePostApproval',
+  whoCanPost: 'whoCanPost',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GroupScalarFieldEnum = (typeof GroupScalarFieldEnum)[keyof typeof GroupScalarFieldEnum]
+
+
+export const GroupMemberScalarFieldEnum = {
+  id: 'id',
+  groupId: 'groupId',
+  userId: 'userId',
+  role: 'role',
+  joinedAt: 'joinedAt'
+} as const
+
+export type GroupMemberScalarFieldEnum = (typeof GroupMemberScalarFieldEnum)[keyof typeof GroupMemberScalarFieldEnum]
+
+
+export const HashtagScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+} as const
+
+export type HashtagScalarFieldEnum = (typeof HashtagScalarFieldEnum)[keyof typeof HashtagScalarFieldEnum]
+
+
+export const MessageScalarFieldEnum = {
+  id: 'id',
+  conversationId: 'conversationId',
+  senderId: 'senderId',
+  content: 'content',
+  replyToId: 'replyToId',
+  type: 'type',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
+
+
+export const AttachmentScalarFieldEnum = {
+  id: 'id',
+  messageId: 'messageId',
+  url: 'url',
+  type: 'type',
+  createdAt: 'createdAt'
+} as const
+
+export type AttachmentScalarFieldEnum = (typeof AttachmentScalarFieldEnum)[keyof typeof AttachmentScalarFieldEnum]
+
+
+export const MessageDeletedScalarFieldEnum = {
+  id: 'id',
+  messageId: 'messageId',
+  userId: 'userId',
+  deletedAt: 'deletedAt'
+} as const
+
+export type MessageDeletedScalarFieldEnum = (typeof MessageDeletedScalarFieldEnum)[keyof typeof MessageDeletedScalarFieldEnum]
+
+
+export const PostScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  content: 'content',
+  privacy: 'privacy',
+  authorId: 'authorId',
+  groupId: 'groupId',
+  feelings: 'feelings',
+  isDeleted: 'isDeleted',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PostScalarFieldEnum = (typeof PostScalarFieldEnum)[keyof typeof PostScalarFieldEnum]
+
+
+export const PostAttachmentScalarFieldEnum = {
+  id: 'id',
+  url: 'url',
+  pubId: 'pubId',
+  postId: 'postId'
+} as const
+
+export type PostAttachmentScalarFieldEnum = (typeof PostAttachmentScalarFieldEnum)[keyof typeof PostAttachmentScalarFieldEnum]
+
+
+export const PostShareScalarFieldEnum = {
+  id: 'id',
+  postId: 'postId',
+  userId: 'userId'
+} as const
+
+export type PostShareScalarFieldEnum = (typeof PostShareScalarFieldEnum)[keyof typeof PostShareScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   firstName: 'firstName',
@@ -84,7 +281,6 @@ export const UserScalarFieldEnum = {
   role: 'role',
   gender: 'gender',
   dateOfBirth: 'dateOfBirth',
-  settings: 'settings',
   twoFactor: 'twoFactor',
   isDeleted: 'isDeleted',
   deletedAt: 'deletedAt',
@@ -141,6 +337,14 @@ export const QueryMode = {
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
 export const JsonNullValueFilter = {
   DbNull: DbNull,
   JsonNull: JsonNull,
@@ -148,12 +352,4 @@ export const JsonNullValueFilter = {
 } as const
 
 export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
-
-
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

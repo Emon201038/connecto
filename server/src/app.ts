@@ -3,6 +3,9 @@ import morgan from "morgan";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import router from "./app/routes";
+import routerv2 from "./app/v2/routes";
+import { globalErrorHandler } from "./app/middleware/globalErrorHandler";
+import { notFound } from "./app/middleware/notFound";
 
 const app = express();
 
@@ -33,6 +36,7 @@ app.use(
 );
 
 app.use("/api/v1", router);
+app.use("/api/v2", routerv2);
 // app.use("/v1/users", userRouter);
 // app.use("/v1/conversations", conversationRouter);
 // app.use("/v1/message", messageRouter);
@@ -46,5 +50,11 @@ app.use("/api/v1", router);
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({ message: "Api is working" });
 });
+
+// global error handler
+app.use(globalErrorHandler);
+
+// not found handler
+app.use(notFound);
 
 export { app };
