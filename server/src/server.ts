@@ -39,7 +39,7 @@ export default async function handler(req: Request, res: Response) {
         "https://facebook-client-five.vercel.app",
       ],
       credentials: true,
-    })
+    }),
   );
 
   app.use(
@@ -49,7 +49,7 @@ export default async function handler(req: Request, res: Response) {
     bodyParser.json(),
     expressMiddleware(apolloServer, {
       context: async ({ req, res }) => await context({ req, res }),
-    })
+    }),
   );
 
   return app(req, res);
@@ -63,7 +63,7 @@ if (process.env.NODE_ENV !== "production") {
     const httpServer = createServer(app);
 
     // connect to DB
-    await connectDB();
+    // await connectDB();
 
     // Initialize Socket.IO
     // socketInstance.initialize(httpServer);
@@ -102,7 +102,7 @@ if (process.env.NODE_ENV !== "production") {
       bodyParser.json(),
       expressMiddleware(localApollo, {
         context: async ({ req, res }: any) => await context({ req, res }),
-      })
+      }),
     );
 
     app.listen(PORT, () => {

@@ -1,0 +1,46 @@
+model Comment {
+  id   String @id @default(uuid())
+  text String
+
+  // Self relation (reply system)
+  parentId String?
+  parent   Comment?  @relation("CommentReplies", fields: [parentId], references: [id])
+  replies  Comment[] @relation("CommentReplies")
+
+  // Post relation
+  postId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  // Author relation
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  isDeleted Boolean @default(false)
+
+  // Relations
+  entities CommentEntity[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CommentEntity {
+  id String @id @default(uuid())
+
+  commentId String
+  comment   Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+
+  type   String
+  offset Int
+  end    Int
+  model  EntityModel
+
+  // Instead of refPath → store targetId
+  targetId String
+  text     String
+}
+
+enum EntityModel {
+  USER
+  HASHTAG
+}

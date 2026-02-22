@@ -1,0 +1,101 @@
+import { catchAsync } from "../../../middleware/catchAsync";
+import { sendResponse } from "../../../utils/sendResponse";
+
+const getUsers = catchAsync(async (req, res, next) => {
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "Users fetched successfully",
+    data: [],
+  });
+});
+
+const createUser = catchAsync(async (req, res, next) => {
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "User created successfully",
+    data: {},
+  });
+});
+
+const getUserByUsername = catchAsync(async (req, res, next) => {
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "User fetched successfully",
+    data: {},
+  });
+});
+const getUserById = catchAsync(async (req, res, next) => {
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "User fetched successfully",
+    data: {},
+  });
+});
+
+const updateUserByUsername = catchAsync(async (req, res, next) => {
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "User updated successfully",
+    data: {},
+  });
+});
+const updateUserById = catchAsync(async (req, res, next) => {
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "User updated successfully",
+    data: {},
+  });
+});
+
+const deleteUserByUsername = catchAsync(async (req, res, next) => {
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "User deleted successfully",
+    data: {},
+  });
+});
+const deleteUserById = catchAsync(async (req, res, next) => {
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "User deleted successfully",
+    data: {},
+  });
+});
+
+const softDeleteUserByUsername = catchAsync(async (req, res, next) => {
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "User deleted successfully",
+    data: {},
+  });
+});
+const softDeleteUserById = catchAsync(async (req, res, next) => {
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "User deleted successfully",
+    data: {},
+  });
+});
+
+export const UserController = {
+  getUsers,
+  createUser,
+  getUserByUsername,
+  getUserById,
+  updateUserByUsername,
+  updateUserById,
+  deleteUserByUsername,
+  deleteUserById,
+  softDeleteUserByUsername,
+  softDeleteUserById,
+};

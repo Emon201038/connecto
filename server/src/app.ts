@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import morgan from "morgan";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import router from "./app/routes";
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use(
   }),
 );
 
+app.use("/api/v1", router);
 // app.use("/v1/users", userRouter);
 // app.use("/v1/conversations", conversationRouter);
 // app.use("/v1/message", messageRouter);

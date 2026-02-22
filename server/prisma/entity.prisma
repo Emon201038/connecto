@@ -1,0 +1,18 @@
+model PostEntity {
+  id String @id @default(uuid())
+
+  type   String
+  offset Int
+  end    Int
+  text   String
+
+  // Optional polymorphic targets
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+
+  hashtagId String?
+  hashtag   Hashtag? @relation(fields: [hashtagId], references: [id])
+
+  postId String
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+}

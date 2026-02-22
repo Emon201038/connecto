@@ -1,0 +1,70 @@
+model Group {
+  id          String  @id @default(uuid())
+  name        String
+  slug        String? @unique
+  description String?
+
+  type    GroupType    @default(FACEBOOK)
+  privacy GroupPrivacy @default(PRIVATE)
+
+  // Cover photo split into columns (instead of nested object)
+  coverUrl   String?
+  coverPubId String?
+
+  // Creator relation
+  createdById String
+  createdBy   User   @relation(fields: [createdById], references: [id])
+
+  memberCount Int @default(0)
+  postCount   Int @default(0)
+
+  // Settings (flattened instead of nested object)
+  requirePostApproval Boolean    @default(false)
+  whoCanPost          WhoCanPost @default(ANY_MEMBER)
+
+  // Relations
+  members GroupMember[]
+  posts   Post[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model GroupMember {
+  id String @id @default(uuid())
+
+  groupId String
+  userId  String
+
+  role     GroupRole @default(MEMBER)
+  joinedAt DateTime  @default(now())
+
+  group Group @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([groupId, userId])
+}
+
+enum GroupType {
+  FACEBOOK
+  COMMUNITY
+  COURSE
+  TEAM
+}
+
+enum GroupPrivacy {
+  PUBLIC
+  PRIVATE
+  SECRET
+}
+
+enum WhoCanPost {
+  ANY_MEMBER
+  ADMINS_MODS
+}
+
+enum GroupRole {
+  MEMBER
+  ADMIN
+  MODERATOR
+}

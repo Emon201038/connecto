@@ -1,0 +1,86 @@
+model User {
+  id          String    @id @default(uuid())
+  firstName   String
+  lastName    String?
+  fullName    String?
+  username    String?   @unique
+  email       String?   @unique
+  phone       String    @unique
+  password    String
+  role        UserRole  @default(USER)
+  gender      Gender
+  dateOfBirth DateTime?
+
+  // Followers / Following
+  followers Follower[] @relation("UserFollowers") // people who follow this user
+  following Follower[] @relation("UserFollowing") // people this user follows
+
+  // Friendships
+  friendshipsAsUser1 Friendship[] @relation("User1Friend")
+  friendshipsAsUser2 Friendship[] @relation("User2Friend")
+
+  // JSON fields for flexible objects
+  twoFactor Json? @default("{}")
+
+  // Flags
+  isDeleted  Boolean   @default(false)
+  deletedAt  DateTime?
+  isDisabled Boolean   @default(false)
+
+  createdAt           DateTime             @default(now())
+  updatedAt           DateTime             @updatedAt
+  posts               Post[]
+  postShares          PostShare[]
+  postEntities        PostEntity[]
+  groups              Group[]
+  groupMembers        GroupMember[]
+  comments            Comment[]
+  messages            Message[]
+  messageDeleteds     MessageDeleted[]
+  conversationMembers ConversationMember[]
+}
+
+model Follower {
+  id         String @id @default(uuid())
+  userId     String // The person being followed
+  followerId String // The person who follows
+
+  createdAt DateTime @default(now())
+
+  user     User @relation("UserFollowers", fields: [userId], references: [id])
+  follower User @relation("UserFollowing", fields: [followerId], references: [id])
+
+  @@unique([userId, followerId])
+}
+
+model Friendship {
+  id        String           @id @default(uuid())
+  user1Id   String
+  user2Id   String
+  status    FriendshipStatus @default(PENDING)
+  createdAt DateTime         @default(now())
+
+  user1 User @relation("User1Friend", fields: [user1Id], references: [id])
+  user2 User @relation("User2Friend", fields: [user2Id], references: [id])
+
+  @@unique([user1Id, user2Id])
+}
+
+enum FriendshipStatus {
+  PENDING
+  ACCEPTED
+  BLOCKED
+}
+
+// Enums
+enum UserRole {
+  USER
+  ADMIN
+  MODERATOR
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}

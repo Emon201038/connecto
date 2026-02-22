@@ -1,0 +1,67 @@
+model Message {
+  id String @id @default(uuid())
+
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  senderId String
+  sender   User   @relation(fields: [senderId], references: [id], onDelete: Cascade)
+
+  content String?
+
+  replyToId String?
+  replyTo   Message?  @relation("MessageReply", fields: [replyToId], references: [id])
+  replies   Message[] @relation("MessageReply")
+
+  attachments Attachment[]
+  deletedBy   MessageDeleted[]
+
+  type MessageType @default(TEXT)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([conversationId])
+  @@index([createdAt])
+}
+
+model Attachment {
+  id String @id @default(uuid())
+
+  messageId String
+  message   Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  url       String
+  type      AttachmentType
+  createdAt DateTime       @default(now())
+}
+
+model MessageDeleted {
+  id String @id @default(uuid())
+
+  messageId String
+  userId    String
+
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  deletedAt DateTime @default(now())
+
+  @@unique([messageId, userId])
+}
+
+enum MessageType {
+  TEXT
+  IMAGE
+  VIDEO
+  AUDIO
+  FILE
+  SYSTEM
+}
+
+enum AttachmentType {
+  IMAGE
+  VIDEO
+  AUDIO
+  FILE
+}
