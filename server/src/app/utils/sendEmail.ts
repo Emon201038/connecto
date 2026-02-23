@@ -2,6 +2,7 @@ import ejs from "ejs";
 import path from "path";
 import { ISendEmail, transporter } from "../config/smtp";
 import { envVars } from "../config/env";
+import AppError from "../helpers/appError";
 
 export const sendEmail = async ({
   to,
@@ -27,6 +28,6 @@ export const sendEmail = async ({
     console.log(`\u2709\uFE0F Email sent to ${to}: ${info.messageId}`);
   } catch (error) {
     console.log("Error sending email:", error);
-    throw new Error("Failed to send email");
+    throw new AppError(400, "Failed to send email");
   }
 };

@@ -73,6 +73,11 @@ export type Attachment = Prisma.AttachmentModel
  */
 export type MessageDeleted = Prisma.MessageDeletedModel
 /**
+ * Model Otp
+ * 
+ */
+export type Otp = Prisma.OtpModel
+/**
  * Model Post
  * 
  */

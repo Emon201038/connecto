@@ -38,6 +38,7 @@ model User {
   messages            Message[]
   messageDeleteds     MessageDeleted[]
   conversationMembers ConversationMember[]
+  otps                Otp[]
 }
 
 model Follower {

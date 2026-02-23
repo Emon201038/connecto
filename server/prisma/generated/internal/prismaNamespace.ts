@@ -395,6 +395,7 @@ export const ModelName = {
   Message: 'Message',
   Attachment: 'Attachment',
   MessageDeleted: 'MessageDeleted',
+  Otp: 'Otp',
   Post: 'Post',
   PostAttachment: 'PostAttachment',
   PostShare: 'PostShare',
@@ -416,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "comment" | "commentEntity" | "conversation" | "conversationMember" | "postEntity" | "group" | "groupMember" | "hashtag" | "message" | "attachment" | "messageDeleted" | "post" | "postAttachment" | "postShare" | "user" | "follower" | "friendship"
+    modelProps: "comment" | "commentEntity" | "conversation" | "conversationMember" | "postEntity" | "group" | "groupMember" | "hashtag" | "message" | "attachment" | "messageDeleted" | "otp" | "post" | "postAttachment" | "postShare" | "user" | "follower" | "friendship"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1234,6 +1235,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Otp: {
+      payload: Prisma.$OtpPayload<ExtArgs>
+      fields: Prisma.OtpFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OtpFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OtpFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload>
+        }
+        findFirst: {
+          args: Prisma.OtpFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OtpFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload>
+        }
+        findMany: {
+          args: Prisma.OtpFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload>[]
+        }
+        create: {
+          args: Prisma.OtpCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload>
+        }
+        createMany: {
+          args: Prisma.OtpCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OtpCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload>[]
+        }
+        delete: {
+          args: Prisma.OtpDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload>
+        }
+        update: {
+          args: Prisma.OtpUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload>
+        }
+        deleteMany: {
+          args: Prisma.OtpDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OtpUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OtpUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload>[]
+        }
+        upsert: {
+          args: Prisma.OtpUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OtpPayload>
+        }
+        aggregate: {
+          args: Prisma.OtpAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOtp>
+        }
+        groupBy: {
+          args: Prisma.OtpGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OtpGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OtpCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OtpCountAggregateOutputType> | number
+        }
+      }
+    }
     Post: {
       payload: Prisma.$PostPayload<ExtArgs>
       fields: Prisma.PostFieldRefs
@@ -1865,6 +1940,19 @@ export const MessageDeletedScalarFieldEnum = {
 export type MessageDeletedScalarFieldEnum = (typeof MessageDeletedScalarFieldEnum)[keyof typeof MessageDeletedScalarFieldEnum]
 
 
+export const OtpScalarFieldEnum = {
+  id: 'id',
+  otp: 'otp',
+  token: 'token',
+  userId: 'userId',
+  type: 'type',
+  isUsed: 'isUsed',
+  expiredAt: 'expiredAt'
+} as const
+
+export type OtpScalarFieldEnum = (typeof OtpScalarFieldEnum)[keyof typeof OtpScalarFieldEnum]
+
+
 export const PostScalarFieldEnum = {
   id: 'id',
   type: 'type',
@@ -2181,6 +2269,20 @@ export type ListEnumAttachmentTypeFieldRefInput<$PrismaModel> = FieldRefInputTyp
 
 
 /**
+ * Reference to a field of type 'OtpType'
+ */
+export type EnumOtpTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OtpType'>
+    
+
+
+/**
+ * Reference to a field of type 'OtpType[]'
+ */
+export type ListEnumOtpTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OtpType[]'>
+    
+
+
+/**
  * Reference to a field of type 'PostType'
  */
 export type EnumPostTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PostType'>
@@ -2383,6 +2485,7 @@ export type GlobalOmitConfig = {
   message?: Prisma.MessageOmit
   attachment?: Prisma.AttachmentOmit
   messageDeleted?: Prisma.MessageDeletedOmit
+  otp?: Prisma.OtpOmit
   post?: Prisma.PostOmit
   postAttachment?: Prisma.PostAttachmentOmit
   postShare?: Prisma.PostShareOmit

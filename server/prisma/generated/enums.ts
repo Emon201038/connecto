@@ -107,6 +107,14 @@ export const AttachmentType = {
 export type AttachmentType = (typeof AttachmentType)[keyof typeof AttachmentType]
 
 
+export const OtpType = {
+  TWO_FACTOR: 'TWO_FACTOR',
+  RESET_PASSWORD: 'RESET_PASSWORD'
+} as const
+
+export type OtpType = (typeof OtpType)[keyof typeof OtpType]
+
+
 export const PostType = {
   TEXT: 'TEXT',
   IMAGE: 'IMAGE',

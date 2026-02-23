@@ -62,6 +62,7 @@ export const ModelName = {
   Message: 'Message',
   Attachment: 'Attachment',
   MessageDeleted: 'MessageDeleted',
+  Otp: 'Otp',
   Post: 'Post',
   PostAttachment: 'PostAttachment',
   PostShare: 'PostShare',
@@ -232,6 +233,19 @@ export const MessageDeletedScalarFieldEnum = {
 } as const
 
 export type MessageDeletedScalarFieldEnum = (typeof MessageDeletedScalarFieldEnum)[keyof typeof MessageDeletedScalarFieldEnum]
+
+
+export const OtpScalarFieldEnum = {
+  id: 'id',
+  otp: 'otp',
+  token: 'token',
+  userId: 'userId',
+  type: 'type',
+  isUsed: 'isUsed',
+  expiredAt: 'expiredAt'
+} as const
+
+export type OtpScalarFieldEnum = (typeof OtpScalarFieldEnum)[keyof typeof OtpScalarFieldEnum]
 
 
 export const PostScalarFieldEnum = {
