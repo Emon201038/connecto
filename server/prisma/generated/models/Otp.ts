@@ -20,23 +20,13 @@ export type OtpModel = runtime.Types.Result.DefaultSelection<Prisma.$OtpPayload>
 
 export type AggregateOtp = {
   _count: OtpCountAggregateOutputType | null
-  _avg: OtpAvgAggregateOutputType | null
-  _sum: OtpSumAggregateOutputType | null
   _min: OtpMinAggregateOutputType | null
   _max: OtpMaxAggregateOutputType | null
 }
 
-export type OtpAvgAggregateOutputType = {
-  otp: number | null
-}
-
-export type OtpSumAggregateOutputType = {
-  otp: number | null
-}
-
 export type OtpMinAggregateOutputType = {
   id: string | null
-  otp: number | null
+  otp: string | null
   token: string | null
   userId: string | null
   type: $Enums.OtpType | null
@@ -46,7 +36,7 @@ export type OtpMinAggregateOutputType = {
 
 export type OtpMaxAggregateOutputType = {
   id: string | null
-  otp: number | null
+  otp: string | null
   token: string | null
   userId: string | null
   type: $Enums.OtpType | null
@@ -65,14 +55,6 @@ export type OtpCountAggregateOutputType = {
   _all: number
 }
 
-
-export type OtpAvgAggregateInputType = {
-  otp?: true
-}
-
-export type OtpSumAggregateInputType = {
-  otp?: true
-}
 
 export type OtpMinAggregateInputType = {
   id?: true
@@ -143,18 +125,6 @@ export type OtpAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Select which fields to average
-  **/
-  _avg?: OtpAvgAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
-   * Select which fields to sum
-  **/
-  _sum?: OtpSumAggregateInputType
-  /**
-   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-   * 
    * Select which fields to find the minimum value
   **/
   _min?: OtpMinAggregateInputType
@@ -185,23 +155,19 @@ export type OtpGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
   take?: number
   skip?: number
   _count?: OtpCountAggregateInputType | true
-  _avg?: OtpAvgAggregateInputType
-  _sum?: OtpSumAggregateInputType
   _min?: OtpMinAggregateInputType
   _max?: OtpMaxAggregateInputType
 }
 
 export type OtpGroupByOutputType = {
   id: string
-  otp: number
+  otp: string
   token: string
   userId: string
   type: $Enums.OtpType
   isUsed: boolean
   expiredAt: Date
   _count: OtpCountAggregateOutputType | null
-  _avg: OtpAvgAggregateOutputType | null
-  _sum: OtpSumAggregateOutputType | null
   _min: OtpMinAggregateOutputType | null
   _max: OtpMaxAggregateOutputType | null
 }
@@ -226,7 +192,7 @@ export type OtpWhereInput = {
   OR?: Prisma.OtpWhereInput[]
   NOT?: Prisma.OtpWhereInput | Prisma.OtpWhereInput[]
   id?: Prisma.StringFilter<"Otp"> | string
-  otp?: Prisma.IntFilter<"Otp"> | number
+  otp?: Prisma.StringFilter<"Otp"> | string
   token?: Prisma.StringFilter<"Otp"> | string
   userId?: Prisma.StringFilter<"Otp"> | string
   type?: Prisma.EnumOtpTypeFilter<"Otp"> | $Enums.OtpType
@@ -251,7 +217,7 @@ export type OtpWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.OtpWhereInput | Prisma.OtpWhereInput[]
   OR?: Prisma.OtpWhereInput[]
   NOT?: Prisma.OtpWhereInput | Prisma.OtpWhereInput[]
-  otp?: Prisma.IntFilter<"Otp"> | number
+  otp?: Prisma.StringFilter<"Otp"> | string
   token?: Prisma.StringFilter<"Otp"> | string
   userId?: Prisma.StringFilter<"Otp"> | string
   type?: Prisma.EnumOtpTypeFilter<"Otp"> | $Enums.OtpType
@@ -269,10 +235,8 @@ export type OtpOrderByWithAggregationInput = {
   isUsed?: Prisma.SortOrder
   expiredAt?: Prisma.SortOrder
   _count?: Prisma.OtpCountOrderByAggregateInput
-  _avg?: Prisma.OtpAvgOrderByAggregateInput
   _max?: Prisma.OtpMaxOrderByAggregateInput
   _min?: Prisma.OtpMinOrderByAggregateInput
-  _sum?: Prisma.OtpSumOrderByAggregateInput
 }
 
 export type OtpScalarWhereWithAggregatesInput = {
@@ -280,7 +244,7 @@ export type OtpScalarWhereWithAggregatesInput = {
   OR?: Prisma.OtpScalarWhereWithAggregatesInput[]
   NOT?: Prisma.OtpScalarWhereWithAggregatesInput | Prisma.OtpScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Otp"> | string
-  otp?: Prisma.IntWithAggregatesFilter<"Otp"> | number
+  otp?: Prisma.StringWithAggregatesFilter<"Otp"> | string
   token?: Prisma.StringWithAggregatesFilter<"Otp"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Otp"> | string
   type?: Prisma.EnumOtpTypeWithAggregatesFilter<"Otp"> | $Enums.OtpType
@@ -290,7 +254,7 @@ export type OtpScalarWhereWithAggregatesInput = {
 
 export type OtpCreateInput = {
   id?: string
-  otp: number
+  otp: string
   token: string
   type: $Enums.OtpType
   isUsed?: boolean
@@ -300,7 +264,7 @@ export type OtpCreateInput = {
 
 export type OtpUncheckedCreateInput = {
   id?: string
-  otp: number
+  otp: string
   token: string
   userId: string
   type: $Enums.OtpType
@@ -310,7 +274,7 @@ export type OtpUncheckedCreateInput = {
 
 export type OtpUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  otp?: Prisma.IntFieldUpdateOperationsInput | number
+  otp?: Prisma.StringFieldUpdateOperationsInput | string
   token?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOtpTypeFieldUpdateOperationsInput | $Enums.OtpType
   isUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -320,7 +284,7 @@ export type OtpUpdateInput = {
 
 export type OtpUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  otp?: Prisma.IntFieldUpdateOperationsInput | number
+  otp?: Prisma.StringFieldUpdateOperationsInput | string
   token?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOtpTypeFieldUpdateOperationsInput | $Enums.OtpType
@@ -330,7 +294,7 @@ export type OtpUncheckedUpdateInput = {
 
 export type OtpCreateManyInput = {
   id?: string
-  otp: number
+  otp: string
   token: string
   userId: string
   type: $Enums.OtpType
@@ -340,7 +304,7 @@ export type OtpCreateManyInput = {
 
 export type OtpUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  otp?: Prisma.IntFieldUpdateOperationsInput | number
+  otp?: Prisma.StringFieldUpdateOperationsInput | string
   token?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOtpTypeFieldUpdateOperationsInput | $Enums.OtpType
   isUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -349,7 +313,7 @@ export type OtpUpdateManyMutationInput = {
 
 export type OtpUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  otp?: Prisma.IntFieldUpdateOperationsInput | number
+  otp?: Prisma.StringFieldUpdateOperationsInput | string
   token?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOtpTypeFieldUpdateOperationsInput | $Enums.OtpType
@@ -365,10 +329,6 @@ export type OtpCountOrderByAggregateInput = {
   type?: Prisma.SortOrder
   isUsed?: Prisma.SortOrder
   expiredAt?: Prisma.SortOrder
-}
-
-export type OtpAvgOrderByAggregateInput = {
-  otp?: Prisma.SortOrder
 }
 
 export type OtpMaxOrderByAggregateInput = {
@@ -389,10 +349,6 @@ export type OtpMinOrderByAggregateInput = {
   type?: Prisma.SortOrder
   isUsed?: Prisma.SortOrder
   expiredAt?: Prisma.SortOrder
-}
-
-export type OtpSumOrderByAggregateInput = {
-  otp?: Prisma.SortOrder
 }
 
 export type OtpListRelationFilter = {
@@ -453,7 +409,7 @@ export type OtpUncheckedUpdateManyWithoutUserIdNestedInput = {
 
 export type OtpCreateWithoutUserIdInput = {
   id?: string
-  otp: number
+  otp: string
   token: string
   type: $Enums.OtpType
   isUsed?: boolean
@@ -462,7 +418,7 @@ export type OtpCreateWithoutUserIdInput = {
 
 export type OtpUncheckedCreateWithoutUserIdInput = {
   id?: string
-  otp: number
+  otp: string
   token: string
   type: $Enums.OtpType
   isUsed?: boolean
@@ -500,7 +456,7 @@ export type OtpScalarWhereInput = {
   OR?: Prisma.OtpScalarWhereInput[]
   NOT?: Prisma.OtpScalarWhereInput | Prisma.OtpScalarWhereInput[]
   id?: Prisma.StringFilter<"Otp"> | string
-  otp?: Prisma.IntFilter<"Otp"> | number
+  otp?: Prisma.StringFilter<"Otp"> | string
   token?: Prisma.StringFilter<"Otp"> | string
   userId?: Prisma.StringFilter<"Otp"> | string
   type?: Prisma.EnumOtpTypeFilter<"Otp"> | $Enums.OtpType
@@ -510,7 +466,7 @@ export type OtpScalarWhereInput = {
 
 export type OtpCreateManyUserIdInput = {
   id?: string
-  otp: number
+  otp: string
   token: string
   type: $Enums.OtpType
   isUsed?: boolean
@@ -519,7 +475,7 @@ export type OtpCreateManyUserIdInput = {
 
 export type OtpUpdateWithoutUserIdInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  otp?: Prisma.IntFieldUpdateOperationsInput | number
+  otp?: Prisma.StringFieldUpdateOperationsInput | string
   token?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOtpTypeFieldUpdateOperationsInput | $Enums.OtpType
   isUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -528,7 +484,7 @@ export type OtpUpdateWithoutUserIdInput = {
 
 export type OtpUncheckedUpdateWithoutUserIdInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  otp?: Prisma.IntFieldUpdateOperationsInput | number
+  otp?: Prisma.StringFieldUpdateOperationsInput | string
   token?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOtpTypeFieldUpdateOperationsInput | $Enums.OtpType
   isUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -537,7 +493,7 @@ export type OtpUncheckedUpdateWithoutUserIdInput = {
 
 export type OtpUncheckedUpdateManyWithoutUserIdInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  otp?: Prisma.IntFieldUpdateOperationsInput | number
+  otp?: Prisma.StringFieldUpdateOperationsInput | string
   token?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumOtpTypeFieldUpdateOperationsInput | $Enums.OtpType
   isUsed?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -607,7 +563,7 @@ export type $OtpPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    otp: number
+    otp: string
     token: string
     userId: string
     type: $Enums.OtpType
@@ -1038,7 +994,7 @@ export interface Prisma__OtpClient<T, Null = never, ExtArgs extends runtime.Type
  */
 export interface OtpFieldRefs {
   readonly id: Prisma.FieldRef<"Otp", 'String'>
-  readonly otp: Prisma.FieldRef<"Otp", 'Int'>
+  readonly otp: Prisma.FieldRef<"Otp", 'String'>
   readonly token: Prisma.FieldRef<"Otp", 'String'>
   readonly userId: Prisma.FieldRef<"Otp", 'String'>
   readonly type: Prisma.FieldRef<"Otp", 'OtpType'>

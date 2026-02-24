@@ -1,6 +1,6 @@
 import { users } from "../../../../prisma/seed/user";
 import prisma from "../../config/db";
-import { catchAsync } from "../../middleware/catchAsync";
+import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
 import bcrypt from "bcryptjs";
 

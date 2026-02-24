@@ -2004,6 +2004,8 @@ export const UserScalarFieldEnum = {
   isDeleted: 'isDeleted',
   deletedAt: 'deletedAt',
   isDisabled: 'isDisabled',
+  isOnboarded: 'isOnboarded',
+  isVerified: 'isVerified',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

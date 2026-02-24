@@ -39,6 +39,8 @@ export type UserMinAggregateOutputType = {
   isDeleted: boolean | null
   deletedAt: Date | null
   isDisabled: boolean | null
+  isOnboarded: boolean | null
+  isVerified: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -58,6 +60,8 @@ export type UserMaxAggregateOutputType = {
   isDeleted: boolean | null
   deletedAt: Date | null
   isDisabled: boolean | null
+  isOnboarded: boolean | null
+  isVerified: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -78,6 +82,8 @@ export type UserCountAggregateOutputType = {
   isDeleted: number
   deletedAt: number
   isDisabled: number
+  isOnboarded: number
+  isVerified: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -99,6 +105,8 @@ export type UserMinAggregateInputType = {
   isDeleted?: true
   deletedAt?: true
   isDisabled?: true
+  isOnboarded?: true
+  isVerified?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -118,6 +126,8 @@ export type UserMaxAggregateInputType = {
   isDeleted?: true
   deletedAt?: true
   isDisabled?: true
+  isOnboarded?: true
+  isVerified?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -138,6 +148,8 @@ export type UserCountAggregateInputType = {
   isDeleted?: true
   deletedAt?: true
   isDisabled?: true
+  isOnboarded?: true
+  isVerified?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -231,6 +243,8 @@ export type UserGroupByOutputType = {
   isDeleted: boolean
   deletedAt: Date | null
   isDisabled: boolean
+  isOnboarded: boolean
+  isVerified: boolean
   createdAt: Date
   updatedAt: Date
   _count: UserCountAggregateOutputType | null
@@ -272,6 +286,8 @@ export type UserWhereInput = {
   isDeleted?: Prisma.BoolFilter<"User"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   isDisabled?: Prisma.BoolFilter<"User"> | boolean
+  isOnboarded?: Prisma.BoolFilter<"User"> | boolean
+  isVerified?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   followers?: Prisma.FollowerListRelationFilter
@@ -306,6 +322,8 @@ export type UserOrderByWithRelationInput = {
   isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   isDisabled?: Prisma.SortOrder
+  isOnboarded?: Prisma.SortOrder
+  isVerified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   followers?: Prisma.FollowerOrderByRelationAggregateInput
@@ -343,6 +361,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   isDeleted?: Prisma.BoolFilter<"User"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   isDisabled?: Prisma.BoolFilter<"User"> | boolean
+  isOnboarded?: Prisma.BoolFilter<"User"> | boolean
+  isVerified?: Prisma.BoolFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   followers?: Prisma.FollowerListRelationFilter
@@ -377,6 +397,8 @@ export type UserOrderByWithAggregationInput = {
   isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   isDisabled?: Prisma.SortOrder
+  isOnboarded?: Prisma.SortOrder
+  isVerified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
@@ -403,6 +425,8 @@ export type UserScalarWhereWithAggregatesInput = {
   isDeleted?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   isDisabled?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  isOnboarded?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  isVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
 }
@@ -423,6 +447,8 @@ export type UserCreateInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerCreateNestedManyWithoutUserInput
@@ -457,6 +483,8 @@ export type UserUncheckedCreateInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerUncheckedCreateNestedManyWithoutUserInput
@@ -491,6 +519,8 @@ export type UserUpdateInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUpdateManyWithoutUserNestedInput
@@ -525,6 +555,8 @@ export type UserUncheckedUpdateInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUncheckedUpdateManyWithoutUserNestedInput
@@ -559,6 +591,8 @@ export type UserCreateManyInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -579,6 +613,8 @@ export type UserUpdateManyMutationInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -599,6 +635,8 @@ export type UserUncheckedUpdateManyInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -629,6 +667,8 @@ export type UserCountOrderByAggregateInput = {
   isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   isDisabled?: Prisma.SortOrder
+  isOnboarded?: Prisma.SortOrder
+  isVerified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -648,6 +688,8 @@ export type UserMaxOrderByAggregateInput = {
   isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   isDisabled?: Prisma.SortOrder
+  isOnboarded?: Prisma.SortOrder
+  isVerified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -667,6 +709,8 @@ export type UserMinOrderByAggregateInput = {
   isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   isDisabled?: Prisma.SortOrder
+  isOnboarded?: Prisma.SortOrder
+  isVerified?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -893,6 +937,8 @@ export type UserCreateWithoutCommentsInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerCreateNestedManyWithoutUserInput
@@ -926,6 +972,8 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerUncheckedCreateNestedManyWithoutUserInput
@@ -975,6 +1023,8 @@ export type UserUpdateWithoutCommentsInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUpdateManyWithoutUserNestedInput
@@ -1008,6 +1058,8 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUncheckedUpdateManyWithoutUserNestedInput
@@ -1041,6 +1093,8 @@ export type UserCreateWithoutConversationMembersInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerCreateNestedManyWithoutUserInput
@@ -1074,6 +1128,8 @@ export type UserUncheckedCreateWithoutConversationMembersInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerUncheckedCreateNestedManyWithoutUserInput
@@ -1123,6 +1179,8 @@ export type UserUpdateWithoutConversationMembersInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUpdateManyWithoutUserNestedInput
@@ -1156,6 +1214,8 @@ export type UserUncheckedUpdateWithoutConversationMembersInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUncheckedUpdateManyWithoutUserNestedInput
@@ -1189,6 +1249,8 @@ export type UserCreateWithoutPostEntitiesInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerCreateNestedManyWithoutUserInput
@@ -1222,6 +1284,8 @@ export type UserUncheckedCreateWithoutPostEntitiesInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerUncheckedCreateNestedManyWithoutUserInput
@@ -1271,6 +1335,8 @@ export type UserUpdateWithoutPostEntitiesInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUpdateManyWithoutUserNestedInput
@@ -1304,6 +1370,8 @@ export type UserUncheckedUpdateWithoutPostEntitiesInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUncheckedUpdateManyWithoutUserNestedInput
@@ -1337,6 +1405,8 @@ export type UserCreateWithoutGroupsInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerCreateNestedManyWithoutUserInput
@@ -1370,6 +1440,8 @@ export type UserUncheckedCreateWithoutGroupsInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerUncheckedCreateNestedManyWithoutUserInput
@@ -1419,6 +1491,8 @@ export type UserUpdateWithoutGroupsInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUpdateManyWithoutUserNestedInput
@@ -1452,6 +1526,8 @@ export type UserUncheckedUpdateWithoutGroupsInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUncheckedUpdateManyWithoutUserNestedInput
@@ -1485,6 +1561,8 @@ export type UserCreateWithoutGroupMembersInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerCreateNestedManyWithoutUserInput
@@ -1518,6 +1596,8 @@ export type UserUncheckedCreateWithoutGroupMembersInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerUncheckedCreateNestedManyWithoutUserInput
@@ -1567,6 +1647,8 @@ export type UserUpdateWithoutGroupMembersInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUpdateManyWithoutUserNestedInput
@@ -1600,6 +1682,8 @@ export type UserUncheckedUpdateWithoutGroupMembersInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUncheckedUpdateManyWithoutUserNestedInput
@@ -1633,6 +1717,8 @@ export type UserCreateWithoutMessagesInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerCreateNestedManyWithoutUserInput
@@ -1666,6 +1752,8 @@ export type UserUncheckedCreateWithoutMessagesInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerUncheckedCreateNestedManyWithoutUserInput
@@ -1715,6 +1803,8 @@ export type UserUpdateWithoutMessagesInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUpdateManyWithoutUserNestedInput
@@ -1748,6 +1838,8 @@ export type UserUncheckedUpdateWithoutMessagesInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUncheckedUpdateManyWithoutUserNestedInput
@@ -1781,6 +1873,8 @@ export type UserCreateWithoutMessageDeletedsInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerCreateNestedManyWithoutUserInput
@@ -1814,6 +1908,8 @@ export type UserUncheckedCreateWithoutMessageDeletedsInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerUncheckedCreateNestedManyWithoutUserInput
@@ -1863,6 +1959,8 @@ export type UserUpdateWithoutMessageDeletedsInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUpdateManyWithoutUserNestedInput
@@ -1896,6 +1994,8 @@ export type UserUncheckedUpdateWithoutMessageDeletedsInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUncheckedUpdateManyWithoutUserNestedInput
@@ -1929,6 +2029,8 @@ export type UserCreateWithoutOtpsInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerCreateNestedManyWithoutUserInput
@@ -1962,6 +2064,8 @@ export type UserUncheckedCreateWithoutOtpsInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerUncheckedCreateNestedManyWithoutUserInput
@@ -2011,6 +2115,8 @@ export type UserUpdateWithoutOtpsInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUpdateManyWithoutUserNestedInput
@@ -2044,6 +2150,8 @@ export type UserUncheckedUpdateWithoutOtpsInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUncheckedUpdateManyWithoutUserNestedInput
@@ -2077,6 +2185,8 @@ export type UserCreateWithoutPostsInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerCreateNestedManyWithoutUserInput
@@ -2110,6 +2220,8 @@ export type UserUncheckedCreateWithoutPostsInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerUncheckedCreateNestedManyWithoutUserInput
@@ -2159,6 +2271,8 @@ export type UserUpdateWithoutPostsInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUpdateManyWithoutUserNestedInput
@@ -2192,6 +2306,8 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUncheckedUpdateManyWithoutUserNestedInput
@@ -2225,6 +2341,8 @@ export type UserCreateWithoutPostSharesInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerCreateNestedManyWithoutUserInput
@@ -2258,6 +2376,8 @@ export type UserUncheckedCreateWithoutPostSharesInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerUncheckedCreateNestedManyWithoutUserInput
@@ -2307,6 +2427,8 @@ export type UserUpdateWithoutPostSharesInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUpdateManyWithoutUserNestedInput
@@ -2340,6 +2462,8 @@ export type UserUncheckedUpdateWithoutPostSharesInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUncheckedUpdateManyWithoutUserNestedInput
@@ -2373,6 +2497,8 @@ export type UserCreateWithoutFollowersInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   following?: Prisma.FollowerCreateNestedManyWithoutFollowerInput
@@ -2406,6 +2532,8 @@ export type UserUncheckedCreateWithoutFollowersInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   following?: Prisma.FollowerUncheckedCreateNestedManyWithoutFollowerInput
@@ -2444,6 +2572,8 @@ export type UserCreateWithoutFollowingInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerCreateNestedManyWithoutUserInput
@@ -2477,6 +2607,8 @@ export type UserUncheckedCreateWithoutFollowingInput = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerUncheckedCreateNestedManyWithoutUserInput
@@ -2526,6 +2658,8 @@ export type UserUpdateWithoutFollowersInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   following?: Prisma.FollowerUpdateManyWithoutFollowerNestedInput
@@ -2559,6 +2693,8 @@ export type UserUncheckedUpdateWithoutFollowersInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   following?: Prisma.FollowerUncheckedUpdateManyWithoutFollowerNestedInput
@@ -2603,6 +2739,8 @@ export type UserUpdateWithoutFollowingInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUpdateManyWithoutUserNestedInput
@@ -2636,6 +2774,8 @@ export type UserUncheckedUpdateWithoutFollowingInput = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUncheckedUpdateManyWithoutUserNestedInput
@@ -2669,6 +2809,8 @@ export type UserCreateWithoutFriendshipsAsUser1Input = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerCreateNestedManyWithoutUserInput
@@ -2702,6 +2844,8 @@ export type UserUncheckedCreateWithoutFriendshipsAsUser1Input = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerUncheckedCreateNestedManyWithoutUserInput
@@ -2740,6 +2884,8 @@ export type UserCreateWithoutFriendshipsAsUser2Input = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerCreateNestedManyWithoutUserInput
@@ -2773,6 +2919,8 @@ export type UserUncheckedCreateWithoutFriendshipsAsUser2Input = {
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
   followers?: Prisma.FollowerUncheckedCreateNestedManyWithoutUserInput
@@ -2822,6 +2970,8 @@ export type UserUpdateWithoutFriendshipsAsUser1Input = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUpdateManyWithoutUserNestedInput
@@ -2855,6 +3005,8 @@ export type UserUncheckedUpdateWithoutFriendshipsAsUser1Input = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUncheckedUpdateManyWithoutUserNestedInput
@@ -2899,6 +3051,8 @@ export type UserUpdateWithoutFriendshipsAsUser2Input = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUpdateManyWithoutUserNestedInput
@@ -2932,6 +3086,8 @@ export type UserUncheckedUpdateWithoutFriendshipsAsUser2Input = {
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isOnboarded?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   followers?: Prisma.FollowerUncheckedUpdateManyWithoutUserNestedInput
@@ -3113,6 +3269,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   isDeleted?: boolean
   deletedAt?: boolean
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   followers?: boolean | Prisma.User$followersArgs<ExtArgs>
@@ -3148,6 +3306,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   isDeleted?: boolean
   deletedAt?: boolean
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -3168,6 +3328,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   isDeleted?: boolean
   deletedAt?: boolean
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }, ExtArgs["result"]["user"]>
@@ -3188,11 +3350,13 @@ export type UserSelectScalar = {
   isDeleted?: boolean
   deletedAt?: boolean
   isDisabled?: boolean
+  isOnboarded?: boolean
+  isVerified?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "fullName" | "username" | "email" | "phone" | "password" | "role" | "gender" | "dateOfBirth" | "twoFactor" | "isDeleted" | "deletedAt" | "isDisabled" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "fullName" | "username" | "email" | "phone" | "password" | "role" | "gender" | "dateOfBirth" | "twoFactor" | "isDeleted" | "deletedAt" | "isDisabled" | "isOnboarded" | "isVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   followers?: boolean | Prisma.User$followersArgs<ExtArgs>
   following?: boolean | Prisma.User$followingArgs<ExtArgs>
@@ -3247,6 +3411,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     isDeleted: boolean
     deletedAt: Date | null
     isDisabled: boolean
+    isOnboarded: boolean
+    isVerified: boolean
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["user"]>
@@ -3701,6 +3867,8 @@ export interface UserFieldRefs {
   readonly isDeleted: Prisma.FieldRef<"User", 'Boolean'>
   readonly deletedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly isDisabled: Prisma.FieldRef<"User", 'Boolean'>
+  readonly isOnboarded: Prisma.FieldRef<"User", 'Boolean'>
+  readonly isVerified: Prisma.FieldRef<"User", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
 }

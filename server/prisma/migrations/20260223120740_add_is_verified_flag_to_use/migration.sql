@@ -1,0 +1,5 @@
+-- AlterEnum
+ALTER TYPE "OtpType" ADD VALUE 'REGISTER_ACCOUNT';
+
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "isVerified" BOOLEAN NOT NULL DEFAULT false;

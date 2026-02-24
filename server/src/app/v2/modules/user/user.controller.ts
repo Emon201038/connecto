@@ -1,4 +1,4 @@
-import { catchAsync } from "../../../middleware/catchAsync";
+import { catchAsync } from "../../../utils/catchAsync";
 import { sendResponse } from "../../../utils/sendResponse";
 
 const getUsers = catchAsync(async (req, res, next) => {

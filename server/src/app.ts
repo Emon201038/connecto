@@ -6,6 +6,7 @@ import router from "./app/routes";
 import routerv2 from "./app/v2/routes";
 import { globalErrorHandler } from "./app/middleware/globalErrorHandler";
 import { notFound } from "./app/middleware/notFound";
+import prisma from "./app/config/db";
 
 const app = express();
 
@@ -37,15 +38,10 @@ app.use(
 
 app.use("/api/v1", router);
 app.use("/api/v2", routerv2);
-// app.use("/v1/users", userRouter);
-// app.use("/v1/conversations", conversationRouter);
-// app.use("/v1/message", messageRouter);
-// app.use("/v1/auth", authRouter);
-
-// app.use((req, res, next) => {
-//   console.log('Incoming Request:', req.body);
-//   next();
-// });
+app.use("/test", async (req, res) => {
+  const data = await prisma.otp.deleteMany({});
+  res.status(200).json(data);
+});
 
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({ message: "Api is working" });

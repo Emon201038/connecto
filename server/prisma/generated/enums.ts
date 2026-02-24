@@ -109,7 +109,8 @@ export type AttachmentType = (typeof AttachmentType)[keyof typeof AttachmentType
 
 export const OtpType = {
   TWO_FACTOR: 'TWO_FACTOR',
-  RESET_PASSWORD: 'RESET_PASSWORD'
+  RESET_PASSWORD: 'RESET_PASSWORD',
+  REGISTER_ACCOUNT: 'REGISTER_ACCOUNT'
 } as const
 
 export type OtpType = (typeof OtpType)[keyof typeof OtpType]

@@ -1,6 +1,8 @@
+import { checkAuth } from "./../../../middleware/checkAuth";
 import express from "express";
 import { seendUsers } from "../../../modules/user/user.controller";
 import { UserController } from "./user.controller";
+import { UserRole } from "../../../../../prisma/generated/enums";
 const userRoutes = express.Router();
 
 userRoutes

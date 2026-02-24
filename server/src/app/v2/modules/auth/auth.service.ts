@@ -50,7 +50,7 @@ const credentialsLogin = async (
     );
     await prisma.otp.create({
       data: {
-        otp: Number(otp),
+        otp: bcrypt.hashSync(otp, 10),
         userId: user.id,
         type: OtpType.TWO_FACTOR,
         expiredAt: new Date(Date.now() + 10 * 60 * 1000),
