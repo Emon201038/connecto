@@ -464,7 +464,7 @@ export type UserCreateInput = {
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -500,7 +500,7 @@ export type UserUncheckedCreateInput = {
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -536,7 +536,7 @@ export type UserUpdateInput = {
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -572,7 +572,7 @@ export type UserUncheckedUpdateInput = {
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -953,7 +953,7 @@ export type UserCreateWithoutCommentsInput = {
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -988,7 +988,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -1039,7 +1039,7 @@ export type UserUpdateWithoutCommentsInput = {
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -1074,7 +1074,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutConversationMembersInput = {
@@ -1109,7 +1109,7 @@ export type UserCreateWithoutConversationMembersInput = {
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutConversationMembersInput = {
@@ -1144,7 +1144,7 @@ export type UserUncheckedCreateWithoutConversationMembersInput = {
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutConversationMembersInput = {
@@ -1195,7 +1195,7 @@ export type UserUpdateWithoutConversationMembersInput = {
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutConversationMembersInput = {
@@ -1230,7 +1230,7 @@ export type UserUncheckedUpdateWithoutConversationMembersInput = {
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPostEntitiesInput = {
@@ -1265,7 +1265,7 @@ export type UserCreateWithoutPostEntitiesInput = {
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPostEntitiesInput = {
@@ -1300,7 +1300,7 @@ export type UserUncheckedCreateWithoutPostEntitiesInput = {
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPostEntitiesInput = {
@@ -1351,7 +1351,7 @@ export type UserUpdateWithoutPostEntitiesInput = {
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostEntitiesInput = {
@@ -1386,7 +1386,7 @@ export type UserUncheckedUpdateWithoutPostEntitiesInput = {
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutGroupsInput = {
@@ -1421,7 +1421,7 @@ export type UserCreateWithoutGroupsInput = {
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutGroupsInput = {
@@ -1456,7 +1456,7 @@ export type UserUncheckedCreateWithoutGroupsInput = {
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutGroupsInput = {
@@ -1507,7 +1507,7 @@ export type UserUpdateWithoutGroupsInput = {
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutGroupsInput = {
@@ -1542,7 +1542,7 @@ export type UserUncheckedUpdateWithoutGroupsInput = {
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutGroupMembersInput = {
@@ -1577,7 +1577,7 @@ export type UserCreateWithoutGroupMembersInput = {
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutGroupMembersInput = {
@@ -1612,7 +1612,7 @@ export type UserUncheckedCreateWithoutGroupMembersInput = {
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutGroupMembersInput = {
@@ -1663,7 +1663,7 @@ export type UserUpdateWithoutGroupMembersInput = {
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutGroupMembersInput = {
@@ -1698,7 +1698,7 @@ export type UserUncheckedUpdateWithoutGroupMembersInput = {
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMessagesInput = {
@@ -1733,7 +1733,7 @@ export type UserCreateWithoutMessagesInput = {
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   messageDeleteds?: Prisma.MessageDeletedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMessagesInput = {
@@ -1768,7 +1768,7 @@ export type UserUncheckedCreateWithoutMessagesInput = {
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMessagesInput = {
@@ -1819,7 +1819,7 @@ export type UserUpdateWithoutMessagesInput = {
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   messageDeleteds?: Prisma.MessageDeletedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMessagesInput = {
@@ -1854,7 +1854,7 @@ export type UserUncheckedUpdateWithoutMessagesInput = {
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutMessageDeletedsInput = {
@@ -1889,7 +1889,7 @@ export type UserCreateWithoutMessageDeletedsInput = {
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMessageDeletedsInput = {
@@ -1924,7 +1924,7 @@ export type UserUncheckedCreateWithoutMessageDeletedsInput = {
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMessageDeletedsInput = {
@@ -1975,7 +1975,7 @@ export type UserUpdateWithoutMessageDeletedsInput = {
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMessageDeletedsInput = {
@@ -2010,7 +2010,7 @@ export type UserUncheckedUpdateWithoutMessageDeletedsInput = {
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOtpsInput = {
@@ -2201,7 +2201,7 @@ export type UserCreateWithoutPostsInput = {
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPostsInput = {
@@ -2236,7 +2236,7 @@ export type UserUncheckedCreateWithoutPostsInput = {
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPostsInput = {
@@ -2287,7 +2287,7 @@ export type UserUpdateWithoutPostsInput = {
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostsInput = {
@@ -2322,7 +2322,7 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutPostSharesInput = {
@@ -2357,7 +2357,7 @@ export type UserCreateWithoutPostSharesInput = {
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPostSharesInput = {
@@ -2392,7 +2392,7 @@ export type UserUncheckedCreateWithoutPostSharesInput = {
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPostSharesInput = {
@@ -2443,7 +2443,7 @@ export type UserUpdateWithoutPostSharesInput = {
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPostSharesInput = {
@@ -2478,7 +2478,7 @@ export type UserUncheckedUpdateWithoutPostSharesInput = {
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFollowersInput = {
@@ -2513,7 +2513,7 @@ export type UserCreateWithoutFollowersInput = {
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFollowersInput = {
@@ -2548,7 +2548,7 @@ export type UserUncheckedCreateWithoutFollowersInput = {
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFollowersInput = {
@@ -2588,7 +2588,7 @@ export type UserCreateWithoutFollowingInput = {
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFollowingInput = {
@@ -2623,7 +2623,7 @@ export type UserUncheckedCreateWithoutFollowingInput = {
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFollowingInput = {
@@ -2674,7 +2674,7 @@ export type UserUpdateWithoutFollowersInput = {
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFollowersInput = {
@@ -2709,7 +2709,7 @@ export type UserUncheckedUpdateWithoutFollowersInput = {
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutFollowingInput = {
@@ -2755,7 +2755,7 @@ export type UserUpdateWithoutFollowingInput = {
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFollowingInput = {
@@ -2790,7 +2790,7 @@ export type UserUncheckedUpdateWithoutFollowingInput = {
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFriendshipsAsUser1Input = {
@@ -2825,7 +2825,7 @@ export type UserCreateWithoutFriendshipsAsUser1Input = {
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFriendshipsAsUser1Input = {
@@ -2860,7 +2860,7 @@ export type UserUncheckedCreateWithoutFriendshipsAsUser1Input = {
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFriendshipsAsUser1Input = {
@@ -2900,7 +2900,7 @@ export type UserCreateWithoutFriendshipsAsUser2Input = {
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFriendshipsAsUser2Input = {
@@ -2935,7 +2935,7 @@ export type UserUncheckedCreateWithoutFriendshipsAsUser2Input = {
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedCreateNestedManyWithoutUserInput
   conversationMembers?: Prisma.ConversationMemberUncheckedCreateNestedManyWithoutUserInput
-  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserIdInput
+  otps?: Prisma.OtpUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFriendshipsAsUser2Input = {
@@ -2986,7 +2986,7 @@ export type UserUpdateWithoutFriendshipsAsUser1Input = {
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFriendshipsAsUser1Input = {
@@ -3021,7 +3021,7 @@ export type UserUncheckedUpdateWithoutFriendshipsAsUser1Input = {
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutFriendshipsAsUser2Input = {
@@ -3067,7 +3067,7 @@ export type UserUpdateWithoutFriendshipsAsUser2Input = {
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFriendshipsAsUser2Input = {
@@ -3102,7 +3102,7 @@ export type UserUncheckedUpdateWithoutFriendshipsAsUser2Input = {
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
   messageDeleteds?: Prisma.MessageDeletedUncheckedUpdateManyWithoutUserNestedInput
   conversationMembers?: Prisma.ConversationMemberUncheckedUpdateManyWithoutUserNestedInput
-  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserIdNestedInput
+  otps?: Prisma.OtpUncheckedUpdateManyWithoutUserNestedInput
 }
 
 

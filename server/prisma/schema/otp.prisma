@@ -2,11 +2,12 @@ model Otp {
   id        String   @unique @default(uuid())
   otp       String
   token     String
-  UserId    User     @relation(fields: [userId], references: [id])
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    String
   type      OtpType
   isUsed    Boolean  @default(false)
   expiredAt DateTime
+  createdAt DateTime @default(now())
 }
 
 enum OtpType {

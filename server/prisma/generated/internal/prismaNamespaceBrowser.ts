@@ -242,7 +242,8 @@ export const OtpScalarFieldEnum = {
   userId: 'userId',
   type: 'type',
   isUsed: 'isUsed',
-  expiredAt: 'expiredAt'
+  expiredAt: 'expiredAt',
+  createdAt: 'createdAt'
 } as const
 
 export type OtpScalarFieldEnum = (typeof OtpScalarFieldEnum)[keyof typeof OtpScalarFieldEnum]

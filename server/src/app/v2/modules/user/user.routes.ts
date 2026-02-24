@@ -3,14 +3,18 @@ import express from "express";
 import { seendUsers } from "../../../modules/user/user.controller";
 import { UserController } from "./user.controller";
 import { UserRole } from "../../../../../prisma/generated/enums";
+import { validateRequest } from "../../../middleware/validateRequest";
+import { userValidationSchema } from "./user.validation";
 const userRoutes = express.Router();
 
 userRoutes
   .route("/")
   .get(UserController.getUsers)
-  .post(UserController.createUser);
+  .post(validateRequest(userValidationSchema), UserController.createUser);
 
 userRoutes.get("/seed", seendUsers);
+
+userRoutes.post("/verify-register/:id", UserController.verifyUserRegister);
 
 userRoutes
   .route("/id/:id")

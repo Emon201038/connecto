@@ -6,6 +6,10 @@ import AppError from "../../../helpers/appError";
 import { generateOtp } from "../../../utils/generateOtp";
 import { sendEmail } from "../../../utils/sendEmail";
 import { envVars } from "../../../config/env";
+import { generateJwt } from "../../../utils/jwt";
+import { setAuthCookies } from "../../../utils/cookie";
+import { Response } from "express";
+import { generateUsername } from "../../../utils/generateUsername";
 
 const processRegister = async (payload: UserCreateInput) => {
   const isExist = await prisma.user.findFirst({
@@ -20,8 +24,22 @@ const processRegister = async (payload: UserCreateInput) => {
   const otp = generateOtp(6);
 
   console.log(otp);
-  const res = await prisma.$transaction(async (tx) => {
-    const user = await tx.user.create({ data: payload });
+  const user = await prisma.$transaction(async (tx) => {
+    const fullName = payload.lastName
+      ? `${payload.firstName} ${payload.lastName}`
+      : payload.firstName;
+    const username = await generateUsername(
+      payload.firstName,
+      payload?.lastName,
+    );
+    const user = await tx.user.create({
+      data: {
+        ...payload,
+        fullName,
+        username,
+        password: bcrypt.hashSync(payload.password, 10),
+      },
+    });
     await tx.otp.create({
       data: {
         type: OtpType.REGISTER_ACCOUNT,
@@ -34,7 +52,7 @@ const processRegister = async (payload: UserCreateInput) => {
 
     sendEmail({
       to: user.email,
-      subject: "Verify your account",
+      subject: "Account Activatio Email",
       templateName: "account-activation",
       templateData: {
         companyName: envVars.APP_NAME,
@@ -44,15 +62,31 @@ const processRegister = async (payload: UserCreateInput) => {
         name: user.fullName,
       },
     });
-
     return user;
   });
+
+  return {
+    id: user.id,
+    fullName: user.fullName,
+    email: user.email,
+  };
 };
 
-const verifyUserRegister = async (otp: number, userId: string) => {
+const verifyUserRegister = async (
+  res: Response,
+  otp: number,
+  userId: string,
+) => {
+  if (!otp) {
+    throw new AppError(400, "Otp is required");
+  }
   const user = await prisma.user.findUnique({ where: { id: userId } });
   if (!user) {
     throw new AppError(404, "User not found");
+  }
+
+  if (user.isVerified) {
+    throw new AppError(400, "User already verified");
   }
 
   const otpDoc = await prisma.otp.findFirst({
@@ -75,18 +109,53 @@ const verifyUserRegister = async (otp: number, userId: string) => {
     throw new AppError(400, "Otp expired");
   }
 
-  const res = await prisma.$transaction(async (tx) => {
+  const data = await prisma.$transaction(async (tx) => {
     await tx.otp.update({
       where: { id: otpDoc.id },
       data: { isUsed: true },
     });
-    const updatedUser = await tx.user.update({
+    await tx.user.update({
       where: { id: user.id },
       data: { isVerified: true },
     });
 
-    return updatedUser;
+    const accessToken = generateJwt(
+      { id: user.id, role: user.role, email: user.email },
+      envVars.JWT_ACCESS_TOKEN_SECRET,
+      envVars.JWT_ACCESS_TOKEN_EXPIRES_IN,
+    );
+    const refreshToken = generateJwt(
+      { id: user.id, role: user.role, email: user.email },
+      envVars.JWT_REFRESH_TOKEN_SECRET,
+      envVars.JWT_REFRESH_TOKEN_EXPIRES_IN,
+    );
+
+    setAuthCookies(res, {
+      accessToken,
+      refreshToken,
+    });
+
+    return {
+      user: {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        fullName: user.fullName,
+        email: user.email,
+        phone: user.phone,
+        role: user.role,
+        gender: user.gender,
+        dateOfBirth: user.dateOfBirth,
+        isDeleted: user.isDeleted,
+        deletedAt: user.deletedAt,
+        isDisabled: user.isDisabled,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+      },
+      accessToken,
+      refreshToken,
+    };
   });
 };
 
-export const UserService = { processRegister };
+export const UserService = { processRegister, verifyUserRegister };

@@ -1,5 +1,6 @@
 import { catchAsync } from "../../../utils/catchAsync";
 import { sendResponse } from "../../../utils/sendResponse";
+import { UserService } from "./user.service";
 
 const getUsers = catchAsync(async (req, res, next) => {
   sendResponse(res, {
@@ -15,7 +16,20 @@ const createUser = catchAsync(async (req, res, next) => {
     success: true,
     statusCode: 200,
     message: "User created successfully",
-    data: {},
+    data: await UserService.processRegister(req.body),
+  });
+});
+
+const verifyUserRegister = catchAsync(async (req, res, next) => {
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "User verified successfully",
+    data: await UserService.verifyUserRegister(
+      res,
+      req.body.otp,
+      req.params.id,
+    ),
   });
 });
 
@@ -90,6 +104,7 @@ const softDeleteUserById = catchAsync(async (req, res, next) => {
 export const UserController = {
   getUsers,
   createUser,
+  verifyUserRegister,
   getUserByUsername,
   getUserById,
   updateUserByUsername,
