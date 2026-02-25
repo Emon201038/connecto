@@ -1,13 +1,20 @@
+import { pick } from "../../../helpers/pick";
 import { catchAsync } from "../../../utils/catchAsync";
 import { sendResponse } from "../../../utils/sendResponse";
+import { userFilterableFields } from "./user.constant";
 import { UserService } from "./user.service";
 
 const getUsers = catchAsync(async (req, res, next) => {
+  const options = pick(req.query, ["page", "limit", "sortBy", "sortOrder"]);
+  const filters = pick(req.query, userFilterableFields);
+
+  const users = await UserService.getUsersFromDB(options, filters);
   sendResponse(res, {
     success: true,
     statusCode: 200,
     message: "Users fetched successfully",
-    data: [],
+    meta: users.meta,
+    data: users.data,
   });
 });
 
@@ -38,7 +45,7 @@ const getUserByUsername = catchAsync(async (req, res, next) => {
     success: true,
     statusCode: 200,
     message: "User fetched successfully",
-    data: {},
+    data: await UserService.getUserByUsername(req.params.username),
   });
 });
 const getUserById = catchAsync(async (req, res, next) => {
@@ -46,7 +53,7 @@ const getUserById = catchAsync(async (req, res, next) => {
     success: true,
     statusCode: 200,
     message: "User fetched successfully",
-    data: {},
+    data: await UserService.getUserById(req.params.id),
   });
 });
 

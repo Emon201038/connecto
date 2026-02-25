@@ -10,6 +10,13 @@ import { generateJwt } from "../../../utils/jwt";
 import { setAuthCookies } from "../../../utils/cookie";
 import { Response } from "express";
 import { generateUsername } from "../../../utils/generateUsername";
+import { paginationHelper } from "../../../helpers/paginationHelper";
+import { Prisma } from "../../../../../prisma/generated/browser";
+import {
+  userBooleanFields,
+  userDateFields,
+  userSearchableFields,
+} from "./user.constant";
 
 const processRegister = async (payload: UserCreateInput) => {
   const isExist = await prisma.user.findFirst({
@@ -23,7 +30,6 @@ const processRegister = async (payload: UserCreateInput) => {
 
   const otp = generateOtp(6);
 
-  console.log(otp);
   const user = await prisma.$transaction(async (tx) => {
     const fullName = payload.lastName
       ? `${payload.firstName} ${payload.lastName}`
@@ -158,4 +164,108 @@ const verifyUserRegister = async (
   });
 };
 
-export const UserService = { processRegister, verifyUserRegister };
+const getUsersFromDB = async (options: any, filters: any) => {
+  const { page, limit, skip, sortBy, sortOrder } =
+    paginationHelper.calculatePagination(options);
+
+  const { searchTerm, ...filterData } = filters;
+
+  const andConditions: Prisma.UserWhereInput[] = [];
+  if (searchTerm) {
+    andConditions.push({
+      OR: userSearchableFields.map((field) => ({
+        [field]: {
+          contains: searchTerm,
+          mode: "insensitive",
+        },
+      })),
+    });
+  }
+
+  if (Object.keys(filterData).length > 0) {
+    andConditions.push({
+      AND: Object.keys(filterData).map((key) => {
+        const value = filterData[key];
+
+        if (userBooleanFields.includes(key)) {
+          return {
+            [key]: {
+              equals: value === "true" || value === true,
+            },
+          };
+        }
+
+        if (userDateFields.includes(key)) {
+          return {
+            [key]: {
+              equals: new Date(value),
+            },
+          };
+        }
+
+        return {
+          [key]: {
+            equals: value,
+          },
+        };
+      }),
+    });
+  }
+
+  const users = await prisma.user.findMany({
+    omit: {
+      password: true,
+    },
+    where: { AND: andConditions },
+    skip,
+    take: limit,
+    orderBy: {
+      [sortBy]: sortOrder,
+    },
+  });
+
+  const total = await prisma.user.count({
+    where: {
+      AND: andConditions,
+    },
+  });
+  return {
+    meta: {
+      total,
+      totalPages: Math.ceil(total / limit) || 0,
+      page,
+      limit,
+    },
+    data: users,
+  };
+};
+
+const getUserById = async (id: string) => {
+  const user = await prisma.user.findUnique({
+    where: { id },
+    omit: { password: true },
+  });
+  if (!user) {
+    throw new AppError(404, "User not found");
+  }
+  return user;
+};
+
+const getUserByUsername = async (username: string) => {
+  const user = await prisma.user.findUnique({
+    where: { username },
+    omit: { password: true },
+  });
+  if (!user) {
+    throw new AppError(404, "User not found");
+  }
+  return user;
+};
+
+export const UserService = {
+  processRegister,
+  verifyUserRegister,
+  getUsersFromDB,
+  getUserById,
+  getUserByUsername,
+};

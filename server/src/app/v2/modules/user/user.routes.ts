@@ -5,6 +5,7 @@ import { UserController } from "./user.controller";
 import { UserRole } from "../../../../../prisma/generated/enums";
 import { validateRequest } from "../../../middleware/validateRequest";
 import { userValidationSchema } from "./user.validation";
+
 const userRoutes = express.Router();
 
 userRoutes
@@ -22,9 +23,14 @@ userRoutes
   .put(UserController.updateUserById)
   .delete(UserController.deleteUserById);
 
-userRoutes.delete("/id/soft-delete/:id", UserController.softDeleteUserById);
+userRoutes.delete(
+  "/id/soft-delete/:id",
+  checkAuth(...Object.values(UserRole)),
+  UserController.softDeleteUserById,
+);
 userRoutes.delete(
   "/soft-delete/:username",
+  checkAuth(...Object.values(UserRole)),
   UserController.softDeleteUserByUsername,
 );
 
