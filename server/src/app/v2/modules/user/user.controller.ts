@@ -1,14 +1,17 @@
 import { pick } from "../../../helpers/pick";
 import { catchAsync } from "../../../utils/catchAsync";
 import { sendResponse } from "../../../utils/sendResponse";
-import { userFilterableFields } from "./user.constant";
+import { userFilterableFields, userPaginationFields } from "./user.constant";
 import { UserService } from "./user.service";
 
 const getUsers = catchAsync(async (req, res, next) => {
-  const options = pick(req.query, ["page", "limit", "sortBy", "sortOrder"]);
+  const options = pick(req.query, userPaginationFields);
   const filters = pick(req.query, userFilterableFields);
 
-  const users = await UserService.getUsersFromDB(options, filters);
+  const users = await UserService.getUsersFromDB(
+    options as Record<string, string>,
+    filters,
+  );
   sendResponse(res, {
     success: true,
     statusCode: 200,
@@ -45,7 +48,7 @@ const getUserByUsername = catchAsync(async (req, res, next) => {
     success: true,
     statusCode: 200,
     message: "User fetched successfully",
-    data: await UserService.getUserByUsername(req.params.username),
+    data: await UserService.getSingleUser("username", req.params.username),
   });
 });
 const getUserById = catchAsync(async (req, res, next) => {
@@ -53,7 +56,7 @@ const getUserById = catchAsync(async (req, res, next) => {
     success: true,
     statusCode: 200,
     message: "User fetched successfully",
-    data: await UserService.getUserById(req.params.id),
+    data: await UserService.getSingleUser("id", req.params.id),
   });
 });
 
@@ -79,7 +82,7 @@ const deleteUserByUsername = catchAsync(async (req, res, next) => {
     success: true,
     statusCode: 200,
     message: "User deleted successfully",
-    data: {},
+    data: await UserService.HardDeleteUser("username", req.params.username),
   });
 });
 const deleteUserById = catchAsync(async (req, res, next) => {
@@ -87,7 +90,7 @@ const deleteUserById = catchAsync(async (req, res, next) => {
     success: true,
     statusCode: 200,
     message: "User deleted successfully",
-    data: {},
+    data: await UserService.HardDeleteUser("id", req.params.id),
   });
 });
 
@@ -96,7 +99,7 @@ const softDeleteUserByUsername = catchAsync(async (req, res, next) => {
     success: true,
     statusCode: 200,
     message: "User deleted successfully",
-    data: {},
+    data: await UserService.softDeleteUser("username", req.params.username),
   });
 });
 const softDeleteUserById = catchAsync(async (req, res, next) => {
@@ -104,7 +107,7 @@ const softDeleteUserById = catchAsync(async (req, res, next) => {
     success: true,
     statusCode: 200,
     message: "User deleted successfully",
-    data: {},
+    data: await UserService.softDeleteUser("id", req.params.id),
   });
 });
 

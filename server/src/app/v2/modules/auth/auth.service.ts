@@ -40,12 +40,11 @@ const credentialsLogin = async (
     throw new Error("Invalid password");
   }
 
-  const twoFactor = user.twoFactor as { active: boolean; secret: string };
-  if (twoFactor.active) {
+  if (user.twoFactorEnabled && user.twoFactorSecret) {
     const otp = generateOtp(6);
     const token = generateJwt(
       { id: user.id, email: user.email, role: user.role },
-      twoFactor.secret,
+      user.twoFactorSecret,
       "10m",
     );
     await prisma.otp.create({

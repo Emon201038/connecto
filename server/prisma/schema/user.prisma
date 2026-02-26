@@ -11,18 +11,14 @@ model User {
   gender      Gender
   dateOfBirth DateTime?
 
-  // Followers / Following
-  followers Follower[] @relation("UserFollowers") // people who follow this user
-  following Follower[] @relation("UserFollowing") // people this user follows
-
-  // Friendships
+  followers          Follower[]   @relation("UserFollowers")
+  following          Follower[]   @relation("UserFollowing")
   friendshipsAsUser1 Friendship[] @relation("User1Friend")
   friendshipsAsUser2 Friendship[] @relation("User2Friend")
 
-  // JSON fields for flexible objects
-  twoFactor Json? @default("{}")
+  twoFactorEnabled Boolean @default(false)
+  twoFactorSecret  String? @default("")
 
-  // Flags
   isDeleted   Boolean   @default(false)
   deletedAt   DateTime?
   isDisabled  Boolean   @default(false)
@@ -45,8 +41,8 @@ model User {
 
 model Follower {
   id         String @id @default(uuid())
-  userId     String // The person being followed
-  followerId String // The person who follows
+  userId     String
+  followerId String
 
   createdAt DateTime @default(now())
 
@@ -75,7 +71,6 @@ enum FriendshipStatus {
   BLOCKED
 }
 
-// Enums
 enum UserRole {
   USER
   ADMIN

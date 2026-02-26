@@ -18,6 +18,8 @@ export const userFilterableFields = [
   "dateOfBirth",
 ];
 
+export const userPaginationFields = ["limit", "page", "sortBy", "sortOrder"];
+
 export const userBooleanFields = ["isVerified", "isDisabled", "isDeleted"];
 
 export const userDateFields = ["dateOfBirth"];

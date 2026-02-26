@@ -4,20 +4,19 @@ model Post {
   content String
   privacy PostPrivacy
 
-  // Relations
   authorId String
   author   User   @relation(fields: [authorId], references: [id])
 
   groupId String?
   group   Group?  @relation(fields: [groupId], references: [id])
 
-  // Embedded-like models as relations
   attachments PostAttachment[]
   entities    PostEntity[]
   shares      PostShare[]
 
-  // JSON (since feelings is flexible)
-  feelings Json?
+  feelingsType  String?
+  feelingsText  String?
+  feelingsEmoji String?
 
   isDeleted Boolean @default(false)
 

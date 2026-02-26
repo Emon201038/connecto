@@ -1,6 +1,7 @@
 model Hashtag {
-  id   String @id @default(uuid())
-  name String @unique
+  id       String @id @default(uuid())
+  name     String @unique
+  useCount Int    @default(0)
 
   posts PostEntity[]
 }

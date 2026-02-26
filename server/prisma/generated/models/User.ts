@@ -36,6 +36,8 @@ export type UserMinAggregateOutputType = {
   role: $Enums.UserRole | null
   gender: $Enums.Gender | null
   dateOfBirth: Date | null
+  twoFactorEnabled: boolean | null
+  twoFactorSecret: string | null
   isDeleted: boolean | null
   deletedAt: Date | null
   isDisabled: boolean | null
@@ -57,6 +59,8 @@ export type UserMaxAggregateOutputType = {
   role: $Enums.UserRole | null
   gender: $Enums.Gender | null
   dateOfBirth: Date | null
+  twoFactorEnabled: boolean | null
+  twoFactorSecret: string | null
   isDeleted: boolean | null
   deletedAt: Date | null
   isDisabled: boolean | null
@@ -78,7 +82,8 @@ export type UserCountAggregateOutputType = {
   role: number
   gender: number
   dateOfBirth: number
-  twoFactor: number
+  twoFactorEnabled: number
+  twoFactorSecret: number
   isDeleted: number
   deletedAt: number
   isDisabled: number
@@ -102,6 +107,8 @@ export type UserMinAggregateInputType = {
   role?: true
   gender?: true
   dateOfBirth?: true
+  twoFactorEnabled?: true
+  twoFactorSecret?: true
   isDeleted?: true
   deletedAt?: true
   isDisabled?: true
@@ -123,6 +130,8 @@ export type UserMaxAggregateInputType = {
   role?: true
   gender?: true
   dateOfBirth?: true
+  twoFactorEnabled?: true
+  twoFactorSecret?: true
   isDeleted?: true
   deletedAt?: true
   isDisabled?: true
@@ -144,7 +153,8 @@ export type UserCountAggregateInputType = {
   role?: true
   gender?: true
   dateOfBirth?: true
-  twoFactor?: true
+  twoFactorEnabled?: true
+  twoFactorSecret?: true
   isDeleted?: true
   deletedAt?: true
   isDisabled?: true
@@ -239,7 +249,8 @@ export type UserGroupByOutputType = {
   role: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth: Date | null
-  twoFactor: runtime.JsonValue | null
+  twoFactorEnabled: boolean
+  twoFactorSecret: string | null
   isDeleted: boolean
   deletedAt: Date | null
   isDisabled: boolean
@@ -282,7 +293,8 @@ export type UserWhereInput = {
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   gender?: Prisma.EnumGenderFilter<"User"> | $Enums.Gender
   dateOfBirth?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  twoFactor?: Prisma.JsonNullableFilter<"User">
+  twoFactorEnabled?: Prisma.BoolFilter<"User"> | boolean
+  twoFactorSecret?: Prisma.StringNullableFilter<"User"> | string | null
   isDeleted?: Prisma.BoolFilter<"User"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   isDisabled?: Prisma.BoolFilter<"User"> | boolean
@@ -318,7 +330,8 @@ export type UserOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrderInput | Prisma.SortOrder
-  twoFactor?: Prisma.SortOrderInput | Prisma.SortOrder
+  twoFactorEnabled?: Prisma.SortOrder
+  twoFactorSecret?: Prisma.SortOrderInput | Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   isDisabled?: Prisma.SortOrder
@@ -357,7 +370,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   role?: Prisma.EnumUserRoleFilter<"User"> | $Enums.UserRole
   gender?: Prisma.EnumGenderFilter<"User"> | $Enums.Gender
   dateOfBirth?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
-  twoFactor?: Prisma.JsonNullableFilter<"User">
+  twoFactorEnabled?: Prisma.BoolFilter<"User"> | boolean
+  twoFactorSecret?: Prisma.StringNullableFilter<"User"> | string | null
   isDeleted?: Prisma.BoolFilter<"User"> | boolean
   deletedAt?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   isDisabled?: Prisma.BoolFilter<"User"> | boolean
@@ -393,7 +407,8 @@ export type UserOrderByWithAggregationInput = {
   role?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrderInput | Prisma.SortOrder
-  twoFactor?: Prisma.SortOrderInput | Prisma.SortOrder
+  twoFactorEnabled?: Prisma.SortOrder
+  twoFactorSecret?: Prisma.SortOrderInput | Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrderInput | Prisma.SortOrder
   isDisabled?: Prisma.SortOrder
@@ -421,7 +436,8 @@ export type UserScalarWhereWithAggregatesInput = {
   role?: Prisma.EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
   gender?: Prisma.EnumGenderWithAggregatesFilter<"User"> | $Enums.Gender
   dateOfBirth?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
-  twoFactor?: Prisma.JsonNullableWithAggregatesFilter<"User">
+  twoFactorEnabled?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  twoFactorSecret?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   isDeleted?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   deletedAt?: Prisma.DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   isDisabled?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
@@ -443,7 +459,8 @@ export type UserCreateInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -479,7 +496,8 @@ export type UserUncheckedCreateInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -515,7 +533,8 @@ export type UserUpdateInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -551,7 +570,8 @@ export type UserUncheckedUpdateInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -587,7 +607,8 @@ export type UserCreateManyInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -609,7 +630,8 @@ export type UserUpdateManyMutationInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -631,7 +653,8 @@ export type UserUncheckedUpdateManyInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -663,7 +686,8 @@ export type UserCountOrderByAggregateInput = {
   role?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
-  twoFactor?: Prisma.SortOrder
+  twoFactorEnabled?: Prisma.SortOrder
+  twoFactorSecret?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   isDisabled?: Prisma.SortOrder
@@ -685,6 +709,8 @@ export type UserMaxOrderByAggregateInput = {
   role?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
+  twoFactorEnabled?: Prisma.SortOrder
+  twoFactorSecret?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   isDisabled?: Prisma.SortOrder
@@ -706,6 +732,8 @@ export type UserMinOrderByAggregateInput = {
   role?: Prisma.SortOrder
   gender?: Prisma.SortOrder
   dateOfBirth?: Prisma.SortOrder
+  twoFactorEnabled?: Prisma.SortOrder
+  twoFactorSecret?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   deletedAt?: Prisma.SortOrder
   isDisabled?: Prisma.SortOrder
@@ -933,7 +961,8 @@ export type UserCreateWithoutCommentsInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -968,7 +997,8 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -1019,7 +1049,8 @@ export type UserUpdateWithoutCommentsInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1054,7 +1085,8 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1089,7 +1121,8 @@ export type UserCreateWithoutConversationMembersInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -1124,7 +1157,8 @@ export type UserUncheckedCreateWithoutConversationMembersInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -1175,7 +1209,8 @@ export type UserUpdateWithoutConversationMembersInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1210,7 +1245,8 @@ export type UserUncheckedUpdateWithoutConversationMembersInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1245,7 +1281,8 @@ export type UserCreateWithoutPostEntitiesInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -1280,7 +1317,8 @@ export type UserUncheckedCreateWithoutPostEntitiesInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -1331,7 +1369,8 @@ export type UserUpdateWithoutPostEntitiesInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1366,7 +1405,8 @@ export type UserUncheckedUpdateWithoutPostEntitiesInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1401,7 +1441,8 @@ export type UserCreateWithoutGroupsInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -1436,7 +1477,8 @@ export type UserUncheckedCreateWithoutGroupsInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -1487,7 +1529,8 @@ export type UserUpdateWithoutGroupsInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1522,7 +1565,8 @@ export type UserUncheckedUpdateWithoutGroupsInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1557,7 +1601,8 @@ export type UserCreateWithoutGroupMembersInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -1592,7 +1637,8 @@ export type UserUncheckedCreateWithoutGroupMembersInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -1643,7 +1689,8 @@ export type UserUpdateWithoutGroupMembersInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1678,7 +1725,8 @@ export type UserUncheckedUpdateWithoutGroupMembersInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1713,7 +1761,8 @@ export type UserCreateWithoutMessagesInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -1748,7 +1797,8 @@ export type UserUncheckedCreateWithoutMessagesInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -1799,7 +1849,8 @@ export type UserUpdateWithoutMessagesInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1834,7 +1885,8 @@ export type UserUncheckedUpdateWithoutMessagesInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1869,7 +1921,8 @@ export type UserCreateWithoutMessageDeletedsInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -1904,7 +1957,8 @@ export type UserUncheckedCreateWithoutMessageDeletedsInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -1955,7 +2009,8 @@ export type UserUpdateWithoutMessageDeletedsInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -1990,7 +2045,8 @@ export type UserUncheckedUpdateWithoutMessageDeletedsInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2025,7 +2081,8 @@ export type UserCreateWithoutOtpsInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -2060,7 +2117,8 @@ export type UserUncheckedCreateWithoutOtpsInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -2111,7 +2169,8 @@ export type UserUpdateWithoutOtpsInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2146,7 +2205,8 @@ export type UserUncheckedUpdateWithoutOtpsInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2181,7 +2241,8 @@ export type UserCreateWithoutPostsInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -2216,7 +2277,8 @@ export type UserUncheckedCreateWithoutPostsInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -2267,7 +2329,8 @@ export type UserUpdateWithoutPostsInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2302,7 +2365,8 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2337,7 +2401,8 @@ export type UserCreateWithoutPostSharesInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -2372,7 +2437,8 @@ export type UserUncheckedCreateWithoutPostSharesInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -2423,7 +2489,8 @@ export type UserUpdateWithoutPostSharesInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2458,7 +2525,8 @@ export type UserUncheckedUpdateWithoutPostSharesInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2493,7 +2561,8 @@ export type UserCreateWithoutFollowersInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -2528,7 +2597,8 @@ export type UserUncheckedCreateWithoutFollowersInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -2568,7 +2638,8 @@ export type UserCreateWithoutFollowingInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -2603,7 +2674,8 @@ export type UserUncheckedCreateWithoutFollowingInput = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -2654,7 +2726,8 @@ export type UserUpdateWithoutFollowersInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2689,7 +2762,8 @@ export type UserUncheckedUpdateWithoutFollowersInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2735,7 +2809,8 @@ export type UserUpdateWithoutFollowingInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2770,7 +2845,8 @@ export type UserUncheckedUpdateWithoutFollowingInput = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -2805,7 +2881,8 @@ export type UserCreateWithoutFriendshipsAsUser1Input = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -2840,7 +2917,8 @@ export type UserUncheckedCreateWithoutFriendshipsAsUser1Input = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -2880,7 +2958,8 @@ export type UserCreateWithoutFriendshipsAsUser2Input = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -2915,7 +2994,8 @@ export type UserUncheckedCreateWithoutFriendshipsAsUser2Input = {
   role?: $Enums.UserRole
   gender: $Enums.Gender
   dateOfBirth?: Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: string | null
   isDeleted?: boolean
   deletedAt?: Date | string | null
   isDisabled?: boolean
@@ -2966,7 +3046,8 @@ export type UserUpdateWithoutFriendshipsAsUser1Input = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3001,7 +3082,8 @@ export type UserUncheckedUpdateWithoutFriendshipsAsUser1Input = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3047,7 +3129,8 @@ export type UserUpdateWithoutFriendshipsAsUser2Input = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3082,7 +3165,8 @@ export type UserUncheckedUpdateWithoutFriendshipsAsUser2Input = {
   role?: Prisma.EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
   gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   dateOfBirth?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  twoFactor?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  twoFactorEnabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  twoFactorSecret?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   deletedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   isDisabled?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -3265,7 +3349,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   role?: boolean
   gender?: boolean
   dateOfBirth?: boolean
-  twoFactor?: boolean
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: boolean
   isDeleted?: boolean
   deletedAt?: boolean
   isDisabled?: boolean
@@ -3302,7 +3387,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   role?: boolean
   gender?: boolean
   dateOfBirth?: boolean
-  twoFactor?: boolean
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: boolean
   isDeleted?: boolean
   deletedAt?: boolean
   isDisabled?: boolean
@@ -3324,7 +3410,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   role?: boolean
   gender?: boolean
   dateOfBirth?: boolean
-  twoFactor?: boolean
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: boolean
   isDeleted?: boolean
   deletedAt?: boolean
   isDisabled?: boolean
@@ -3346,7 +3433,8 @@ export type UserSelectScalar = {
   role?: boolean
   gender?: boolean
   dateOfBirth?: boolean
-  twoFactor?: boolean
+  twoFactorEnabled?: boolean
+  twoFactorSecret?: boolean
   isDeleted?: boolean
   deletedAt?: boolean
   isDisabled?: boolean
@@ -3356,7 +3444,7 @@ export type UserSelectScalar = {
   updatedAt?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "fullName" | "username" | "email" | "phone" | "password" | "role" | "gender" | "dateOfBirth" | "twoFactor" | "isDeleted" | "deletedAt" | "isDisabled" | "isOnboarded" | "isVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "fullName" | "username" | "email" | "phone" | "password" | "role" | "gender" | "dateOfBirth" | "twoFactorEnabled" | "twoFactorSecret" | "isDeleted" | "deletedAt" | "isDisabled" | "isOnboarded" | "isVerified" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   followers?: boolean | Prisma.User$followersArgs<ExtArgs>
   following?: boolean | Prisma.User$followingArgs<ExtArgs>
@@ -3407,7 +3495,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     role: $Enums.UserRole
     gender: $Enums.Gender
     dateOfBirth: Date | null
-    twoFactor: runtime.JsonValue | null
+    twoFactorEnabled: boolean
+    twoFactorSecret: string | null
     isDeleted: boolean
     deletedAt: Date | null
     isDisabled: boolean
@@ -3863,7 +3952,8 @@ export interface UserFieldRefs {
   readonly role: Prisma.FieldRef<"User", 'UserRole'>
   readonly gender: Prisma.FieldRef<"User", 'Gender'>
   readonly dateOfBirth: Prisma.FieldRef<"User", 'DateTime'>
-  readonly twoFactor: Prisma.FieldRef<"User", 'Json'>
+  readonly twoFactorEnabled: Prisma.FieldRef<"User", 'Boolean'>
+  readonly twoFactorSecret: Prisma.FieldRef<"User", 'String'>
   readonly isDeleted: Prisma.FieldRef<"User", 'Boolean'>
   readonly deletedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly isDisabled: Prisma.FieldRef<"User", 'Boolean'>

@@ -25,4 +25,5 @@ const calculatePagination = (options: IOptions): IOptionResult => {
 
 export const paginationHelper = {
   calculatePagination,
+  paginationFields: ["limit", "page", "sortBy", "sortOrder"],
 };

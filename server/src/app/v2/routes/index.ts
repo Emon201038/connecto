@@ -2,6 +2,7 @@ import express from "express";
 import userRoutes from "../modules/user/user.routes";
 import authRoutes from "../modules/auth/auth.routes";
 import otpRoutes from "../modules/otp/otp.routes";
+import postRoutes from "../modules/post/post.routes";
 
 const routerv2 = express.Router();
 const moduleRoutes = [
@@ -16,6 +17,10 @@ const moduleRoutes = [
   {
     path: "/otp",
     route: otpRoutes,
+  },
+  {
+    path: "/posts",
+    route: postRoutes,
   },
 ];
 

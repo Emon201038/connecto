@@ -20,40 +20,64 @@ export type HashtagModel = runtime.Types.Result.DefaultSelection<Prisma.$Hashtag
 
 export type AggregateHashtag = {
   _count: HashtagCountAggregateOutputType | null
+  _avg: HashtagAvgAggregateOutputType | null
+  _sum: HashtagSumAggregateOutputType | null
   _min: HashtagMinAggregateOutputType | null
   _max: HashtagMaxAggregateOutputType | null
+}
+
+export type HashtagAvgAggregateOutputType = {
+  useCount: number | null
+}
+
+export type HashtagSumAggregateOutputType = {
+  useCount: number | null
 }
 
 export type HashtagMinAggregateOutputType = {
   id: string | null
   name: string | null
+  useCount: number | null
 }
 
 export type HashtagMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  useCount: number | null
 }
 
 export type HashtagCountAggregateOutputType = {
   id: number
   name: number
+  useCount: number
   _all: number
 }
 
 
+export type HashtagAvgAggregateInputType = {
+  useCount?: true
+}
+
+export type HashtagSumAggregateInputType = {
+  useCount?: true
+}
+
 export type HashtagMinAggregateInputType = {
   id?: true
   name?: true
+  useCount?: true
 }
 
 export type HashtagMaxAggregateInputType = {
   id?: true
   name?: true
+  useCount?: true
 }
 
 export type HashtagCountAggregateInputType = {
   id?: true
   name?: true
+  useCount?: true
   _all?: true
 }
 
@@ -95,6 +119,18 @@ export type HashtagAggregateArgs<ExtArgs extends runtime.Types.Extensions.Intern
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: HashtagAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: HashtagSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: HashtagMinAggregateInputType
@@ -125,6 +161,8 @@ export type HashtagGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
   take?: number
   skip?: number
   _count?: HashtagCountAggregateInputType | true
+  _avg?: HashtagAvgAggregateInputType
+  _sum?: HashtagSumAggregateInputType
   _min?: HashtagMinAggregateInputType
   _max?: HashtagMaxAggregateInputType
 }
@@ -132,7 +170,10 @@ export type HashtagGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 export type HashtagGroupByOutputType = {
   id: string
   name: string
+  useCount: number
   _count: HashtagCountAggregateOutputType | null
+  _avg: HashtagAvgAggregateOutputType | null
+  _sum: HashtagSumAggregateOutputType | null
   _min: HashtagMinAggregateOutputType | null
   _max: HashtagMaxAggregateOutputType | null
 }
@@ -158,12 +199,14 @@ export type HashtagWhereInput = {
   NOT?: Prisma.HashtagWhereInput | Prisma.HashtagWhereInput[]
   id?: Prisma.StringFilter<"Hashtag"> | string
   name?: Prisma.StringFilter<"Hashtag"> | string
+  useCount?: Prisma.IntFilter<"Hashtag"> | number
   posts?: Prisma.PostEntityListRelationFilter
 }
 
 export type HashtagOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  useCount?: Prisma.SortOrder
   posts?: Prisma.PostEntityOrderByRelationAggregateInput
 }
 
@@ -173,15 +216,19 @@ export type HashtagWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.HashtagWhereInput | Prisma.HashtagWhereInput[]
   OR?: Prisma.HashtagWhereInput[]
   NOT?: Prisma.HashtagWhereInput | Prisma.HashtagWhereInput[]
+  useCount?: Prisma.IntFilter<"Hashtag"> | number
   posts?: Prisma.PostEntityListRelationFilter
 }, "id" | "name">
 
 export type HashtagOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  useCount?: Prisma.SortOrder
   _count?: Prisma.HashtagCountOrderByAggregateInput
+  _avg?: Prisma.HashtagAvgOrderByAggregateInput
   _max?: Prisma.HashtagMaxOrderByAggregateInput
   _min?: Prisma.HashtagMinOrderByAggregateInput
+  _sum?: Prisma.HashtagSumOrderByAggregateInput
 }
 
 export type HashtagScalarWhereWithAggregatesInput = {
@@ -190,45 +237,53 @@ export type HashtagScalarWhereWithAggregatesInput = {
   NOT?: Prisma.HashtagScalarWhereWithAggregatesInput | Prisma.HashtagScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Hashtag"> | string
   name?: Prisma.StringWithAggregatesFilter<"Hashtag"> | string
+  useCount?: Prisma.IntWithAggregatesFilter<"Hashtag"> | number
 }
 
 export type HashtagCreateInput = {
   id?: string
   name: string
+  useCount?: number
   posts?: Prisma.PostEntityCreateNestedManyWithoutHashtagInput
 }
 
 export type HashtagUncheckedCreateInput = {
   id?: string
   name: string
+  useCount?: number
   posts?: Prisma.PostEntityUncheckedCreateNestedManyWithoutHashtagInput
 }
 
 export type HashtagUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  useCount?: Prisma.IntFieldUpdateOperationsInput | number
   posts?: Prisma.PostEntityUpdateManyWithoutHashtagNestedInput
 }
 
 export type HashtagUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  useCount?: Prisma.IntFieldUpdateOperationsInput | number
   posts?: Prisma.PostEntityUncheckedUpdateManyWithoutHashtagNestedInput
 }
 
 export type HashtagCreateManyInput = {
   id?: string
   name: string
+  useCount?: number
 }
 
 export type HashtagUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  useCount?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type HashtagUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  useCount?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type HashtagNullableScalarRelationFilter = {
@@ -239,16 +294,27 @@ export type HashtagNullableScalarRelationFilter = {
 export type HashtagCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  useCount?: Prisma.SortOrder
+}
+
+export type HashtagAvgOrderByAggregateInput = {
+  useCount?: Prisma.SortOrder
 }
 
 export type HashtagMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  useCount?: Prisma.SortOrder
 }
 
 export type HashtagMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  useCount?: Prisma.SortOrder
+}
+
+export type HashtagSumOrderByAggregateInput = {
+  useCount?: Prisma.SortOrder
 }
 
 export type HashtagCreateNestedOneWithoutPostsInput = {
@@ -270,11 +336,13 @@ export type HashtagUpdateOneWithoutPostsNestedInput = {
 export type HashtagCreateWithoutPostsInput = {
   id?: string
   name: string
+  useCount?: number
 }
 
 export type HashtagUncheckedCreateWithoutPostsInput = {
   id?: string
   name: string
+  useCount?: number
 }
 
 export type HashtagCreateOrConnectWithoutPostsInput = {
@@ -296,11 +364,13 @@ export type HashtagUpdateToOneWithWhereWithoutPostsInput = {
 export type HashtagUpdateWithoutPostsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  useCount?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type HashtagUncheckedUpdateWithoutPostsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  useCount?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -337,6 +407,7 @@ export type HashtagCountOutputTypeCountPostsArgs<ExtArgs extends runtime.Types.E
 export type HashtagSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  useCount?: boolean
   posts?: boolean | Prisma.Hashtag$postsArgs<ExtArgs>
   _count?: boolean | Prisma.HashtagCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["hashtag"]>
@@ -344,19 +415,22 @@ export type HashtagSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
 export type HashtagSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  useCount?: boolean
 }, ExtArgs["result"]["hashtag"]>
 
 export type HashtagSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  useCount?: boolean
 }, ExtArgs["result"]["hashtag"]>
 
 export type HashtagSelectScalar = {
   id?: boolean
   name?: boolean
+  useCount?: boolean
 }
 
-export type HashtagOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name", ExtArgs["result"]["hashtag"]>
+export type HashtagOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "useCount", ExtArgs["result"]["hashtag"]>
 export type HashtagInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   posts?: boolean | Prisma.Hashtag$postsArgs<ExtArgs>
   _count?: boolean | Prisma.HashtagCountOutputTypeDefaultArgs<ExtArgs>
@@ -372,6 +446,7 @@ export type $HashtagPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    useCount: number
   }, ExtArgs["result"]["hashtag"]>
   composites: {}
 }
@@ -798,6 +873,7 @@ export interface Prisma__HashtagClient<T, Null = never, ExtArgs extends runtime.
 export interface HashtagFieldRefs {
   readonly id: Prisma.FieldRef<"Hashtag", 'String'>
   readonly name: Prisma.FieldRef<"Hashtag", 'String'>
+  readonly useCount: Prisma.FieldRef<"Hashtag", 'Int'>
 }
     
 

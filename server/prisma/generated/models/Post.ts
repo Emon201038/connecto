@@ -31,6 +31,9 @@ export type PostMinAggregateOutputType = {
   privacy: $Enums.PostPrivacy | null
   authorId: string | null
   groupId: string | null
+  feelingsType: string | null
+  feelingsText: string | null
+  feelingsEmoji: string | null
   isDeleted: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -43,6 +46,9 @@ export type PostMaxAggregateOutputType = {
   privacy: $Enums.PostPrivacy | null
   authorId: string | null
   groupId: string | null
+  feelingsType: string | null
+  feelingsText: string | null
+  feelingsEmoji: string | null
   isDeleted: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -55,7 +61,9 @@ export type PostCountAggregateOutputType = {
   privacy: number
   authorId: number
   groupId: number
-  feelings: number
+  feelingsType: number
+  feelingsText: number
+  feelingsEmoji: number
   isDeleted: number
   createdAt: number
   updatedAt: number
@@ -70,6 +78,9 @@ export type PostMinAggregateInputType = {
   privacy?: true
   authorId?: true
   groupId?: true
+  feelingsType?: true
+  feelingsText?: true
+  feelingsEmoji?: true
   isDeleted?: true
   createdAt?: true
   updatedAt?: true
@@ -82,6 +93,9 @@ export type PostMaxAggregateInputType = {
   privacy?: true
   authorId?: true
   groupId?: true
+  feelingsType?: true
+  feelingsText?: true
+  feelingsEmoji?: true
   isDeleted?: true
   createdAt?: true
   updatedAt?: true
@@ -94,7 +108,9 @@ export type PostCountAggregateInputType = {
   privacy?: true
   authorId?: true
   groupId?: true
-  feelings?: true
+  feelingsType?: true
+  feelingsText?: true
+  feelingsEmoji?: true
   isDeleted?: true
   createdAt?: true
   updatedAt?: true
@@ -180,7 +196,9 @@ export type PostGroupByOutputType = {
   privacy: $Enums.PostPrivacy
   authorId: string
   groupId: string | null
-  feelings: runtime.JsonValue | null
+  feelingsType: string | null
+  feelingsText: string | null
+  feelingsEmoji: string | null
   isDeleted: boolean
   createdAt: Date
   updatedAt: Date
@@ -214,7 +232,9 @@ export type PostWhereInput = {
   privacy?: Prisma.EnumPostPrivacyFilter<"Post"> | $Enums.PostPrivacy
   authorId?: Prisma.StringFilter<"Post"> | string
   groupId?: Prisma.StringNullableFilter<"Post"> | string | null
-  feelings?: Prisma.JsonNullableFilter<"Post">
+  feelingsType?: Prisma.StringNullableFilter<"Post"> | string | null
+  feelingsText?: Prisma.StringNullableFilter<"Post"> | string | null
+  feelingsEmoji?: Prisma.StringNullableFilter<"Post"> | string | null
   isDeleted?: Prisma.BoolFilter<"Post"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Post"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Post"> | Date | string
@@ -233,7 +253,9 @@ export type PostOrderByWithRelationInput = {
   privacy?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   groupId?: Prisma.SortOrderInput | Prisma.SortOrder
-  feelings?: Prisma.SortOrderInput | Prisma.SortOrder
+  feelingsType?: Prisma.SortOrderInput | Prisma.SortOrder
+  feelingsText?: Prisma.SortOrderInput | Prisma.SortOrder
+  feelingsEmoji?: Prisma.SortOrderInput | Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -255,7 +277,9 @@ export type PostWhereUniqueInput = Prisma.AtLeast<{
   privacy?: Prisma.EnumPostPrivacyFilter<"Post"> | $Enums.PostPrivacy
   authorId?: Prisma.StringFilter<"Post"> | string
   groupId?: Prisma.StringNullableFilter<"Post"> | string | null
-  feelings?: Prisma.JsonNullableFilter<"Post">
+  feelingsType?: Prisma.StringNullableFilter<"Post"> | string | null
+  feelingsText?: Prisma.StringNullableFilter<"Post"> | string | null
+  feelingsEmoji?: Prisma.StringNullableFilter<"Post"> | string | null
   isDeleted?: Prisma.BoolFilter<"Post"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Post"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Post"> | Date | string
@@ -274,7 +298,9 @@ export type PostOrderByWithAggregationInput = {
   privacy?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   groupId?: Prisma.SortOrderInput | Prisma.SortOrder
-  feelings?: Prisma.SortOrderInput | Prisma.SortOrder
+  feelingsType?: Prisma.SortOrderInput | Prisma.SortOrder
+  feelingsText?: Prisma.SortOrderInput | Prisma.SortOrder
+  feelingsEmoji?: Prisma.SortOrderInput | Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -293,7 +319,9 @@ export type PostScalarWhereWithAggregatesInput = {
   privacy?: Prisma.EnumPostPrivacyWithAggregatesFilter<"Post"> | $Enums.PostPrivacy
   authorId?: Prisma.StringWithAggregatesFilter<"Post"> | string
   groupId?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
-  feelings?: Prisma.JsonNullableWithAggregatesFilter<"Post">
+  feelingsType?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
+  feelingsText?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
+  feelingsEmoji?: Prisma.StringNullableWithAggregatesFilter<"Post"> | string | null
   isDeleted?: Prisma.BoolWithAggregatesFilter<"Post"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Post"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Post"> | Date | string
@@ -304,7 +332,9 @@ export type PostCreateInput = {
   type: $Enums.PostType
   content: string
   privacy: $Enums.PostPrivacy
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -323,7 +353,9 @@ export type PostUncheckedCreateInput = {
   privacy: $Enums.PostPrivacy
   authorId: string
   groupId?: string | null
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -338,7 +370,9 @@ export type PostUpdateInput = {
   type?: Prisma.EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
   content?: Prisma.StringFieldUpdateOperationsInput | string
   privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -357,7 +391,9 @@ export type PostUncheckedUpdateInput = {
   privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -374,7 +410,9 @@ export type PostCreateManyInput = {
   privacy: $Enums.PostPrivacy
   authorId: string
   groupId?: string | null
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -385,7 +423,9 @@ export type PostUpdateManyMutationInput = {
   type?: Prisma.EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
   content?: Prisma.StringFieldUpdateOperationsInput | string
   privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -398,7 +438,9 @@ export type PostUncheckedUpdateManyInput = {
   privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -426,7 +468,9 @@ export type PostCountOrderByAggregateInput = {
   privacy?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   groupId?: Prisma.SortOrder
-  feelings?: Prisma.SortOrder
+  feelingsType?: Prisma.SortOrder
+  feelingsText?: Prisma.SortOrder
+  feelingsEmoji?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -439,6 +483,9 @@ export type PostMaxOrderByAggregateInput = {
   privacy?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   groupId?: Prisma.SortOrder
+  feelingsType?: Prisma.SortOrder
+  feelingsText?: Prisma.SortOrder
+  feelingsEmoji?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -451,6 +498,9 @@ export type PostMinOrderByAggregateInput = {
   privacy?: Prisma.SortOrder
   authorId?: Prisma.SortOrder
   groupId?: Prisma.SortOrder
+  feelingsType?: Prisma.SortOrder
+  feelingsText?: Prisma.SortOrder
+  feelingsEmoji?: Prisma.SortOrder
   isDeleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -609,7 +659,9 @@ export type PostCreateWithoutCommentsInput = {
   type: $Enums.PostType
   content: string
   privacy: $Enums.PostPrivacy
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -627,7 +679,9 @@ export type PostUncheckedCreateWithoutCommentsInput = {
   privacy: $Enums.PostPrivacy
   authorId: string
   groupId?: string | null
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -657,7 +711,9 @@ export type PostUpdateWithoutCommentsInput = {
   type?: Prisma.EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
   content?: Prisma.StringFieldUpdateOperationsInput | string
   privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -675,7 +731,9 @@ export type PostUncheckedUpdateWithoutCommentsInput = {
   privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -689,7 +747,9 @@ export type PostCreateWithoutEntitiesInput = {
   type: $Enums.PostType
   content: string
   privacy: $Enums.PostPrivacy
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -707,7 +767,9 @@ export type PostUncheckedCreateWithoutEntitiesInput = {
   privacy: $Enums.PostPrivacy
   authorId: string
   groupId?: string | null
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -737,7 +799,9 @@ export type PostUpdateWithoutEntitiesInput = {
   type?: Prisma.EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
   content?: Prisma.StringFieldUpdateOperationsInput | string
   privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -755,7 +819,9 @@ export type PostUncheckedUpdateWithoutEntitiesInput = {
   privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -769,7 +835,9 @@ export type PostCreateWithoutGroupInput = {
   type: $Enums.PostType
   content: string
   privacy: $Enums.PostPrivacy
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -786,7 +854,9 @@ export type PostUncheckedCreateWithoutGroupInput = {
   content: string
   privacy: $Enums.PostPrivacy
   authorId: string
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -832,7 +902,9 @@ export type PostScalarWhereInput = {
   privacy?: Prisma.EnumPostPrivacyFilter<"Post"> | $Enums.PostPrivacy
   authorId?: Prisma.StringFilter<"Post"> | string
   groupId?: Prisma.StringNullableFilter<"Post"> | string | null
-  feelings?: Prisma.JsonNullableFilter<"Post">
+  feelingsType?: Prisma.StringNullableFilter<"Post"> | string | null
+  feelingsText?: Prisma.StringNullableFilter<"Post"> | string | null
+  feelingsEmoji?: Prisma.StringNullableFilter<"Post"> | string | null
   isDeleted?: Prisma.BoolFilter<"Post"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Post"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Post"> | Date | string
@@ -843,7 +915,9 @@ export type PostCreateWithoutAttachmentsInput = {
   type: $Enums.PostType
   content: string
   privacy: $Enums.PostPrivacy
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -861,7 +935,9 @@ export type PostUncheckedCreateWithoutAttachmentsInput = {
   privacy: $Enums.PostPrivacy
   authorId: string
   groupId?: string | null
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -891,7 +967,9 @@ export type PostUpdateWithoutAttachmentsInput = {
   type?: Prisma.EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
   content?: Prisma.StringFieldUpdateOperationsInput | string
   privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -909,7 +987,9 @@ export type PostUncheckedUpdateWithoutAttachmentsInput = {
   privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -923,7 +1003,9 @@ export type PostCreateWithoutSharesInput = {
   type: $Enums.PostType
   content: string
   privacy: $Enums.PostPrivacy
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -941,7 +1023,9 @@ export type PostUncheckedCreateWithoutSharesInput = {
   privacy: $Enums.PostPrivacy
   authorId: string
   groupId?: string | null
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -971,7 +1055,9 @@ export type PostUpdateWithoutSharesInput = {
   type?: Prisma.EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
   content?: Prisma.StringFieldUpdateOperationsInput | string
   privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -989,7 +1075,9 @@ export type PostUncheckedUpdateWithoutSharesInput = {
   privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
   groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1003,7 +1091,9 @@ export type PostCreateWithoutAuthorInput = {
   type: $Enums.PostType
   content: string
   privacy: $Enums.PostPrivacy
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1020,7 +1110,9 @@ export type PostUncheckedCreateWithoutAuthorInput = {
   content: string
   privacy: $Enums.PostPrivacy
   groupId?: string | null
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1062,7 +1154,9 @@ export type PostCreateManyGroupInput = {
   content: string
   privacy: $Enums.PostPrivacy
   authorId: string
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1073,7 +1167,9 @@ export type PostUpdateWithoutGroupInput = {
   type?: Prisma.EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
   content?: Prisma.StringFieldUpdateOperationsInput | string
   privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1090,7 +1186,9 @@ export type PostUncheckedUpdateWithoutGroupInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1106,7 +1204,9 @@ export type PostUncheckedUpdateManyWithoutGroupInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
   authorId?: Prisma.StringFieldUpdateOperationsInput | string
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1118,7 +1218,9 @@ export type PostCreateManyAuthorInput = {
   content: string
   privacy: $Enums.PostPrivacy
   groupId?: string | null
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
   isDeleted?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1129,7 +1231,9 @@ export type PostUpdateWithoutAuthorInput = {
   type?: Prisma.EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
   content?: Prisma.StringFieldUpdateOperationsInput | string
   privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1146,7 +1250,9 @@ export type PostUncheckedUpdateWithoutAuthorInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
   groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1162,7 +1268,9 @@ export type PostUncheckedUpdateManyWithoutAuthorInput = {
   content?: Prisma.StringFieldUpdateOperationsInput | string
   privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
   groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  feelings?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1233,7 +1341,9 @@ export type PostSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   privacy?: boolean
   authorId?: boolean
   groupId?: boolean
-  feelings?: boolean
+  feelingsType?: boolean
+  feelingsText?: boolean
+  feelingsEmoji?: boolean
   isDeleted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1253,7 +1363,9 @@ export type PostSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   privacy?: boolean
   authorId?: boolean
   groupId?: boolean
-  feelings?: boolean
+  feelingsType?: boolean
+  feelingsText?: boolean
+  feelingsEmoji?: boolean
   isDeleted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1268,7 +1380,9 @@ export type PostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   privacy?: boolean
   authorId?: boolean
   groupId?: boolean
-  feelings?: boolean
+  feelingsType?: boolean
+  feelingsText?: boolean
+  feelingsEmoji?: boolean
   isDeleted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1283,13 +1397,15 @@ export type PostSelectScalar = {
   privacy?: boolean
   authorId?: boolean
   groupId?: boolean
-  feelings?: boolean
+  feelingsType?: boolean
+  feelingsText?: boolean
+  feelingsEmoji?: boolean
   isDeleted?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type PostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "content" | "privacy" | "authorId" | "groupId" | "feelings" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["post"]>
+export type PostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "content" | "privacy" | "authorId" | "groupId" | "feelingsType" | "feelingsText" | "feelingsEmoji" | "isDeleted" | "createdAt" | "updatedAt", ExtArgs["result"]["post"]>
 export type PostInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   author?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   group?: boolean | Prisma.Post$groupArgs<ExtArgs>
@@ -1325,7 +1441,9 @@ export type $PostPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     privacy: $Enums.PostPrivacy
     authorId: string
     groupId: string | null
-    feelings: runtime.JsonValue | null
+    feelingsType: string | null
+    feelingsText: string | null
+    feelingsEmoji: string | null
     isDeleted: boolean
     createdAt: Date
     updatedAt: Date
@@ -1764,7 +1882,9 @@ export interface PostFieldRefs {
   readonly privacy: Prisma.FieldRef<"Post", 'PostPrivacy'>
   readonly authorId: Prisma.FieldRef<"Post", 'String'>
   readonly groupId: Prisma.FieldRef<"Post", 'String'>
-  readonly feelings: Prisma.FieldRef<"Post", 'Json'>
+  readonly feelingsType: Prisma.FieldRef<"Post", 'String'>
+  readonly feelingsText: Prisma.FieldRef<"Post", 'String'>
+  readonly feelingsEmoji: Prisma.FieldRef<"Post", 'String'>
   readonly isDeleted: Prisma.FieldRef<"Post", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Post", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Post", 'DateTime'>

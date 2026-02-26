@@ -164,7 +164,10 @@ const verifyUserRegister = async (
   });
 };
 
-const getUsersFromDB = async (options: any, filters: any) => {
+const getUsersFromDB = async (
+  options: Record<string, string>,
+  filters: Record<string, any>,
+) => {
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelper.calculatePagination(options);
 
@@ -240,9 +243,11 @@ const getUsersFromDB = async (options: any, filters: any) => {
   };
 };
 
-const getUserById = async (id: string) => {
+const getSingleUser = async (key: "username" | "id", value: string) => {
+  const where = key === "id" ? { id: value } : { username: value };
+
   const user = await prisma.user.findUnique({
-    where: { id },
+    where,
     omit: { password: true },
   });
   if (!user) {
@@ -251,10 +256,26 @@ const getUserById = async (id: string) => {
   return user;
 };
 
-const getUserByUsername = async (username: string) => {
-  const user = await prisma.user.findUnique({
-    where: { username },
-    omit: { password: true },
+const HardDeleteUser = async (key: "username" | "id", value: string) => {
+  const where = key === "id" ? { id: value } : { username: value };
+
+  const user = await prisma.user.delete({
+    where,
+  });
+  if (!user) {
+    throw new AppError(404, "User not found");
+  }
+  return user;
+};
+
+const softDeleteUser = async (key: "username" | "id", value: string) => {
+  const where = key === "id" ? { id: value } : { username: value };
+
+  const user = await prisma.user.update({
+    where,
+    data: {
+      isDeleted: true,
+    },
   });
   if (!user) {
     throw new AppError(404, "User not found");
@@ -266,6 +287,7 @@ export const UserService = {
   processRegister,
   verifyUserRegister,
   getUsersFromDB,
-  getUserById,
-  getUserByUsername,
+  getSingleUser,
+  HardDeleteUser,
+  softDeleteUser,
 };

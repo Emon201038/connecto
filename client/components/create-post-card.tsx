@@ -98,7 +98,7 @@ export default function CreatePostCard({
   const [createPost, { isLoading }] = useCreatePostMutation();
 
   const handleCreatePost = async () => {
-    const res = await createPost({
+    const obj = {
       content: rawText,
       type: images.length > 0 ? PostType.IMAGE : PostType.TEXT,
       privacy: privacy as PostPrivacy,
@@ -109,20 +109,59 @@ export default function CreatePostCard({
       })),
       group: groupId,
       feelings: selectedFeeling?.type ? selectedFeeling : null,
-      attachments: images.map((img) => img.file),
-    }).unwrap();
+      attachments: images.map((img) => img.file).filter(Boolean),
+    };
+    console.log(obj);
 
-    if (res?.data?.id) {
-      toast.success("Post created successfully");
-      setIsDialogOpen(false);
-      setEntities([]);
-      setRawText("");
-      setImages([]);
-    } else {
-      toast.error("Failed to create post", {
-        description: res?.errors?.[0]?.message,
-      });
-    }
+    await fetch("http://localhost:5000/api/v2/auth/login", {
+      method: "POST",
+      body: JSON.stringify({
+        email: "fb1@example.com",
+        password: "123456",
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+
+    const res = await fetch("http://localhost:5000/api/v2/posts", {
+      method: "POST",
+      body: JSON.stringify(obj),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+    });
+
+    const data = await res.json();
+
+    console.log(data);
+    // const res = await createPost({
+    //   content: rawText,
+    //   type: images.length > 0 ? PostType.IMAGE : PostType.TEXT,
+    //   privacy: privacy as PostPrivacy,
+    //   entities: entities.map(({ name, tag, id, ...rest }) => ({
+    //     text: name || tag,
+    //     target: id || tag,
+    //     ...rest,
+    //   })),
+    //   group: groupId,
+    //   feelings: selectedFeeling?.type ? selectedFeeling : null,
+    //   attachments: images.map((img) => img.file),
+    // }).unwrap();
+
+    // if (res?.data?.id) {
+    //   toast.success("Post created successfully");
+    //   setIsDialogOpen(false);
+    //   setEntities([]);
+    //   setRawText("");
+    //   setImages([]);
+    // } else {
+    //   toast.error("Failed to create post", {
+    //     description: res?.errors?.[0]?.message,
+    //   });
+    // }
   };
 
   const getPrivacyIcon = (privacy: string) => {
