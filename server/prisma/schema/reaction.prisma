@@ -1,0 +1,27 @@
+model Reaction {
+  id     String       @unique @default(uuid())
+  type   ReactionType
+  userId String
+  user   User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  postId String?
+  post   Post?   @relation(fields: [postId], references: [id])
+
+  commentId String?
+  comment   Comment? @relation(fields: [commentId], references: [id])
+
+  messageId String?
+  message   Message? @relation(fields: [messageId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum ReactionType {
+  LOVE
+  LIKE
+  SAD
+  CARE
+  ANGRY
+  WOW
+}

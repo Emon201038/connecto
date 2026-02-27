@@ -93,6 +93,11 @@ export type PostAttachment = Prisma.PostAttachmentModel
  */
 export type PostShare = Prisma.PostShareModel
 /**
+ * Model Reaction
+ * 
+ */
+export type Reaction = Prisma.ReactionModel
+/**
  * Model User
  * 
  */

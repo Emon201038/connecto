@@ -66,6 +66,7 @@ export const ModelName = {
   Post: 'Post',
   PostAttachment: 'PostAttachment',
   PostShare: 'PostShare',
+  Reaction: 'Reaction',
   User: 'User',
   Follower: 'Follower',
   Friendship: 'Friendship'
@@ -285,6 +286,20 @@ export const PostShareScalarFieldEnum = {
 } as const
 
 export type PostShareScalarFieldEnum = (typeof PostShareScalarFieldEnum)[keyof typeof PostShareScalarFieldEnum]
+
+
+export const ReactionScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  userId: 'userId',
+  postId: 'postId',
+  commentId: 'commentId',
+  messageId: 'messageId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReactionScalarFieldEnum = (typeof ReactionScalarFieldEnum)[keyof typeof ReactionScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

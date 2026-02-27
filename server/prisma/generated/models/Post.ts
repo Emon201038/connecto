@@ -244,6 +244,7 @@ export type PostWhereInput = {
   entities?: Prisma.PostEntityListRelationFilter
   shares?: Prisma.PostShareListRelationFilter
   comments?: Prisma.CommentListRelationFilter
+  reactions?: Prisma.ReactionListRelationFilter
 }
 
 export type PostOrderByWithRelationInput = {
@@ -265,6 +266,7 @@ export type PostOrderByWithRelationInput = {
   entities?: Prisma.PostEntityOrderByRelationAggregateInput
   shares?: Prisma.PostShareOrderByRelationAggregateInput
   comments?: Prisma.CommentOrderByRelationAggregateInput
+  reactions?: Prisma.ReactionOrderByRelationAggregateInput
 }
 
 export type PostWhereUniqueInput = Prisma.AtLeast<{
@@ -289,6 +291,7 @@ export type PostWhereUniqueInput = Prisma.AtLeast<{
   entities?: Prisma.PostEntityListRelationFilter
   shares?: Prisma.PostShareListRelationFilter
   comments?: Prisma.CommentListRelationFilter
+  reactions?: Prisma.ReactionListRelationFilter
 }, "id">
 
 export type PostOrderByWithAggregationInput = {
@@ -344,6 +347,7 @@ export type PostCreateInput = {
   entities?: Prisma.PostEntityCreateNestedManyWithoutPostInput
   shares?: Prisma.PostShareCreateNestedManyWithoutPostInput
   comments?: Prisma.CommentCreateNestedManyWithoutPostInput
+  reactions?: Prisma.ReactionCreateNestedManyWithoutPostInput
 }
 
 export type PostUncheckedCreateInput = {
@@ -363,6 +367,7 @@ export type PostUncheckedCreateInput = {
   entities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutPostInput
   shares?: Prisma.PostShareUncheckedCreateNestedManyWithoutPostInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutPostInput
+  reactions?: Prisma.ReactionUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type PostUpdateInput = {
@@ -382,6 +387,7 @@ export type PostUpdateInput = {
   entities?: Prisma.PostEntityUpdateManyWithoutPostNestedInput
   shares?: Prisma.PostShareUpdateManyWithoutPostNestedInput
   comments?: Prisma.CommentUpdateManyWithoutPostNestedInput
+  reactions?: Prisma.ReactionUpdateManyWithoutPostNestedInput
 }
 
 export type PostUncheckedUpdateInput = {
@@ -401,6 +407,7 @@ export type PostUncheckedUpdateInput = {
   entities?: Prisma.PostEntityUncheckedUpdateManyWithoutPostNestedInput
   shares?: Prisma.PostShareUncheckedUpdateManyWithoutPostNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutPostNestedInput
+  reactions?: Prisma.ReactionUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type PostCreateManyInput = {
@@ -504,6 +511,11 @@ export type PostMinOrderByAggregateInput = {
   isDeleted?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type PostNullableScalarRelationFilter = {
+  is?: Prisma.PostWhereInput | null
+  isNot?: Prisma.PostWhereInput | null
 }
 
 export type PostCreateNestedOneWithoutCommentsInput = {
@@ -612,6 +624,22 @@ export type PostUpdateOneRequiredWithoutSharesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.PostUpdateToOneWithWhereWithoutSharesInput, Prisma.PostUpdateWithoutSharesInput>, Prisma.PostUncheckedUpdateWithoutSharesInput>
 }
 
+export type PostCreateNestedOneWithoutReactionsInput = {
+  create?: Prisma.XOR<Prisma.PostCreateWithoutReactionsInput, Prisma.PostUncheckedCreateWithoutReactionsInput>
+  connectOrCreate?: Prisma.PostCreateOrConnectWithoutReactionsInput
+  connect?: Prisma.PostWhereUniqueInput
+}
+
+export type PostUpdateOneWithoutReactionsNestedInput = {
+  create?: Prisma.XOR<Prisma.PostCreateWithoutReactionsInput, Prisma.PostUncheckedCreateWithoutReactionsInput>
+  connectOrCreate?: Prisma.PostCreateOrConnectWithoutReactionsInput
+  upsert?: Prisma.PostUpsertWithoutReactionsInput
+  disconnect?: Prisma.PostWhereInput | boolean
+  delete?: Prisma.PostWhereInput | boolean
+  connect?: Prisma.PostWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.PostUpdateToOneWithWhereWithoutReactionsInput, Prisma.PostUpdateWithoutReactionsInput>, Prisma.PostUncheckedUpdateWithoutReactionsInput>
+}
+
 export type PostCreateNestedManyWithoutAuthorInput = {
   create?: Prisma.XOR<Prisma.PostCreateWithoutAuthorInput, Prisma.PostUncheckedCreateWithoutAuthorInput> | Prisma.PostCreateWithoutAuthorInput[] | Prisma.PostUncheckedCreateWithoutAuthorInput[]
   connectOrCreate?: Prisma.PostCreateOrConnectWithoutAuthorInput | Prisma.PostCreateOrConnectWithoutAuthorInput[]
@@ -670,6 +698,7 @@ export type PostCreateWithoutCommentsInput = {
   attachments?: Prisma.PostAttachmentCreateNestedManyWithoutPostInput
   entities?: Prisma.PostEntityCreateNestedManyWithoutPostInput
   shares?: Prisma.PostShareCreateNestedManyWithoutPostInput
+  reactions?: Prisma.ReactionCreateNestedManyWithoutPostInput
 }
 
 export type PostUncheckedCreateWithoutCommentsInput = {
@@ -688,6 +717,7 @@ export type PostUncheckedCreateWithoutCommentsInput = {
   attachments?: Prisma.PostAttachmentUncheckedCreateNestedManyWithoutPostInput
   entities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutPostInput
   shares?: Prisma.PostShareUncheckedCreateNestedManyWithoutPostInput
+  reactions?: Prisma.ReactionUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type PostCreateOrConnectWithoutCommentsInput = {
@@ -722,6 +752,7 @@ export type PostUpdateWithoutCommentsInput = {
   attachments?: Prisma.PostAttachmentUpdateManyWithoutPostNestedInput
   entities?: Prisma.PostEntityUpdateManyWithoutPostNestedInput
   shares?: Prisma.PostShareUpdateManyWithoutPostNestedInput
+  reactions?: Prisma.ReactionUpdateManyWithoutPostNestedInput
 }
 
 export type PostUncheckedUpdateWithoutCommentsInput = {
@@ -740,6 +771,7 @@ export type PostUncheckedUpdateWithoutCommentsInput = {
   attachments?: Prisma.PostAttachmentUncheckedUpdateManyWithoutPostNestedInput
   entities?: Prisma.PostEntityUncheckedUpdateManyWithoutPostNestedInput
   shares?: Prisma.PostShareUncheckedUpdateManyWithoutPostNestedInput
+  reactions?: Prisma.ReactionUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type PostCreateWithoutEntitiesInput = {
@@ -758,6 +790,7 @@ export type PostCreateWithoutEntitiesInput = {
   attachments?: Prisma.PostAttachmentCreateNestedManyWithoutPostInput
   shares?: Prisma.PostShareCreateNestedManyWithoutPostInput
   comments?: Prisma.CommentCreateNestedManyWithoutPostInput
+  reactions?: Prisma.ReactionCreateNestedManyWithoutPostInput
 }
 
 export type PostUncheckedCreateWithoutEntitiesInput = {
@@ -776,6 +809,7 @@ export type PostUncheckedCreateWithoutEntitiesInput = {
   attachments?: Prisma.PostAttachmentUncheckedCreateNestedManyWithoutPostInput
   shares?: Prisma.PostShareUncheckedCreateNestedManyWithoutPostInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutPostInput
+  reactions?: Prisma.ReactionUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type PostCreateOrConnectWithoutEntitiesInput = {
@@ -810,6 +844,7 @@ export type PostUpdateWithoutEntitiesInput = {
   attachments?: Prisma.PostAttachmentUpdateManyWithoutPostNestedInput
   shares?: Prisma.PostShareUpdateManyWithoutPostNestedInput
   comments?: Prisma.CommentUpdateManyWithoutPostNestedInput
+  reactions?: Prisma.ReactionUpdateManyWithoutPostNestedInput
 }
 
 export type PostUncheckedUpdateWithoutEntitiesInput = {
@@ -828,6 +863,7 @@ export type PostUncheckedUpdateWithoutEntitiesInput = {
   attachments?: Prisma.PostAttachmentUncheckedUpdateManyWithoutPostNestedInput
   shares?: Prisma.PostShareUncheckedUpdateManyWithoutPostNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutPostNestedInput
+  reactions?: Prisma.ReactionUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type PostCreateWithoutGroupInput = {
@@ -846,6 +882,7 @@ export type PostCreateWithoutGroupInput = {
   entities?: Prisma.PostEntityCreateNestedManyWithoutPostInput
   shares?: Prisma.PostShareCreateNestedManyWithoutPostInput
   comments?: Prisma.CommentCreateNestedManyWithoutPostInput
+  reactions?: Prisma.ReactionCreateNestedManyWithoutPostInput
 }
 
 export type PostUncheckedCreateWithoutGroupInput = {
@@ -864,6 +901,7 @@ export type PostUncheckedCreateWithoutGroupInput = {
   entities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutPostInput
   shares?: Prisma.PostShareUncheckedCreateNestedManyWithoutPostInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutPostInput
+  reactions?: Prisma.ReactionUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type PostCreateOrConnectWithoutGroupInput = {
@@ -926,6 +964,7 @@ export type PostCreateWithoutAttachmentsInput = {
   entities?: Prisma.PostEntityCreateNestedManyWithoutPostInput
   shares?: Prisma.PostShareCreateNestedManyWithoutPostInput
   comments?: Prisma.CommentCreateNestedManyWithoutPostInput
+  reactions?: Prisma.ReactionCreateNestedManyWithoutPostInput
 }
 
 export type PostUncheckedCreateWithoutAttachmentsInput = {
@@ -944,6 +983,7 @@ export type PostUncheckedCreateWithoutAttachmentsInput = {
   entities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutPostInput
   shares?: Prisma.PostShareUncheckedCreateNestedManyWithoutPostInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutPostInput
+  reactions?: Prisma.ReactionUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type PostCreateOrConnectWithoutAttachmentsInput = {
@@ -978,6 +1018,7 @@ export type PostUpdateWithoutAttachmentsInput = {
   entities?: Prisma.PostEntityUpdateManyWithoutPostNestedInput
   shares?: Prisma.PostShareUpdateManyWithoutPostNestedInput
   comments?: Prisma.CommentUpdateManyWithoutPostNestedInput
+  reactions?: Prisma.ReactionUpdateManyWithoutPostNestedInput
 }
 
 export type PostUncheckedUpdateWithoutAttachmentsInput = {
@@ -996,6 +1037,7 @@ export type PostUncheckedUpdateWithoutAttachmentsInput = {
   entities?: Prisma.PostEntityUncheckedUpdateManyWithoutPostNestedInput
   shares?: Prisma.PostShareUncheckedUpdateManyWithoutPostNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutPostNestedInput
+  reactions?: Prisma.ReactionUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type PostCreateWithoutSharesInput = {
@@ -1014,6 +1056,7 @@ export type PostCreateWithoutSharesInput = {
   attachments?: Prisma.PostAttachmentCreateNestedManyWithoutPostInput
   entities?: Prisma.PostEntityCreateNestedManyWithoutPostInput
   comments?: Prisma.CommentCreateNestedManyWithoutPostInput
+  reactions?: Prisma.ReactionCreateNestedManyWithoutPostInput
 }
 
 export type PostUncheckedCreateWithoutSharesInput = {
@@ -1032,6 +1075,7 @@ export type PostUncheckedCreateWithoutSharesInput = {
   attachments?: Prisma.PostAttachmentUncheckedCreateNestedManyWithoutPostInput
   entities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutPostInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutPostInput
+  reactions?: Prisma.ReactionUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type PostCreateOrConnectWithoutSharesInput = {
@@ -1066,6 +1110,7 @@ export type PostUpdateWithoutSharesInput = {
   attachments?: Prisma.PostAttachmentUpdateManyWithoutPostNestedInput
   entities?: Prisma.PostEntityUpdateManyWithoutPostNestedInput
   comments?: Prisma.CommentUpdateManyWithoutPostNestedInput
+  reactions?: Prisma.ReactionUpdateManyWithoutPostNestedInput
 }
 
 export type PostUncheckedUpdateWithoutSharesInput = {
@@ -1083,6 +1128,99 @@ export type PostUncheckedUpdateWithoutSharesInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attachments?: Prisma.PostAttachmentUncheckedUpdateManyWithoutPostNestedInput
   entities?: Prisma.PostEntityUncheckedUpdateManyWithoutPostNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutPostNestedInput
+  reactions?: Prisma.ReactionUncheckedUpdateManyWithoutPostNestedInput
+}
+
+export type PostCreateWithoutReactionsInput = {
+  id?: string
+  type: $Enums.PostType
+  content: string
+  privacy: $Enums.PostPrivacy
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
+  isDeleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  author: Prisma.UserCreateNestedOneWithoutPostsInput
+  group?: Prisma.GroupCreateNestedOneWithoutPostsInput
+  attachments?: Prisma.PostAttachmentCreateNestedManyWithoutPostInput
+  entities?: Prisma.PostEntityCreateNestedManyWithoutPostInput
+  shares?: Prisma.PostShareCreateNestedManyWithoutPostInput
+  comments?: Prisma.CommentCreateNestedManyWithoutPostInput
+}
+
+export type PostUncheckedCreateWithoutReactionsInput = {
+  id?: string
+  type: $Enums.PostType
+  content: string
+  privacy: $Enums.PostPrivacy
+  authorId: string
+  groupId?: string | null
+  feelingsType?: string | null
+  feelingsText?: string | null
+  feelingsEmoji?: string | null
+  isDeleted?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  attachments?: Prisma.PostAttachmentUncheckedCreateNestedManyWithoutPostInput
+  entities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutPostInput
+  shares?: Prisma.PostShareUncheckedCreateNestedManyWithoutPostInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutPostInput
+}
+
+export type PostCreateOrConnectWithoutReactionsInput = {
+  where: Prisma.PostWhereUniqueInput
+  create: Prisma.XOR<Prisma.PostCreateWithoutReactionsInput, Prisma.PostUncheckedCreateWithoutReactionsInput>
+}
+
+export type PostUpsertWithoutReactionsInput = {
+  update: Prisma.XOR<Prisma.PostUpdateWithoutReactionsInput, Prisma.PostUncheckedUpdateWithoutReactionsInput>
+  create: Prisma.XOR<Prisma.PostCreateWithoutReactionsInput, Prisma.PostUncheckedCreateWithoutReactionsInput>
+  where?: Prisma.PostWhereInput
+}
+
+export type PostUpdateToOneWithWhereWithoutReactionsInput = {
+  where?: Prisma.PostWhereInput
+  data: Prisma.XOR<Prisma.PostUpdateWithoutReactionsInput, Prisma.PostUncheckedUpdateWithoutReactionsInput>
+}
+
+export type PostUpdateWithoutReactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  author?: Prisma.UserUpdateOneRequiredWithoutPostsNestedInput
+  group?: Prisma.GroupUpdateOneWithoutPostsNestedInput
+  attachments?: Prisma.PostAttachmentUpdateManyWithoutPostNestedInput
+  entities?: Prisma.PostEntityUpdateManyWithoutPostNestedInput
+  shares?: Prisma.PostShareUpdateManyWithoutPostNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutPostNestedInput
+}
+
+export type PostUncheckedUpdateWithoutReactionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumPostTypeFieldUpdateOperationsInput | $Enums.PostType
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+  privacy?: Prisma.EnumPostPrivacyFieldUpdateOperationsInput | $Enums.PostPrivacy
+  authorId?: Prisma.StringFieldUpdateOperationsInput | string
+  groupId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  feelingsEmoji?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isDeleted?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  attachments?: Prisma.PostAttachmentUncheckedUpdateManyWithoutPostNestedInput
+  entities?: Prisma.PostEntityUncheckedUpdateManyWithoutPostNestedInput
+  shares?: Prisma.PostShareUncheckedUpdateManyWithoutPostNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutPostNestedInput
 }
 
@@ -1102,6 +1240,7 @@ export type PostCreateWithoutAuthorInput = {
   entities?: Prisma.PostEntityCreateNestedManyWithoutPostInput
   shares?: Prisma.PostShareCreateNestedManyWithoutPostInput
   comments?: Prisma.CommentCreateNestedManyWithoutPostInput
+  reactions?: Prisma.ReactionCreateNestedManyWithoutPostInput
 }
 
 export type PostUncheckedCreateWithoutAuthorInput = {
@@ -1120,6 +1259,7 @@ export type PostUncheckedCreateWithoutAuthorInput = {
   entities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutPostInput
   shares?: Prisma.PostShareUncheckedCreateNestedManyWithoutPostInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutPostInput
+  reactions?: Prisma.ReactionUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type PostCreateOrConnectWithoutAuthorInput = {
@@ -1178,6 +1318,7 @@ export type PostUpdateWithoutGroupInput = {
   entities?: Prisma.PostEntityUpdateManyWithoutPostNestedInput
   shares?: Prisma.PostShareUpdateManyWithoutPostNestedInput
   comments?: Prisma.CommentUpdateManyWithoutPostNestedInput
+  reactions?: Prisma.ReactionUpdateManyWithoutPostNestedInput
 }
 
 export type PostUncheckedUpdateWithoutGroupInput = {
@@ -1196,6 +1337,7 @@ export type PostUncheckedUpdateWithoutGroupInput = {
   entities?: Prisma.PostEntityUncheckedUpdateManyWithoutPostNestedInput
   shares?: Prisma.PostShareUncheckedUpdateManyWithoutPostNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutPostNestedInput
+  reactions?: Prisma.ReactionUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type PostUncheckedUpdateManyWithoutGroupInput = {
@@ -1242,6 +1384,7 @@ export type PostUpdateWithoutAuthorInput = {
   entities?: Prisma.PostEntityUpdateManyWithoutPostNestedInput
   shares?: Prisma.PostShareUpdateManyWithoutPostNestedInput
   comments?: Prisma.CommentUpdateManyWithoutPostNestedInput
+  reactions?: Prisma.ReactionUpdateManyWithoutPostNestedInput
 }
 
 export type PostUncheckedUpdateWithoutAuthorInput = {
@@ -1260,6 +1403,7 @@ export type PostUncheckedUpdateWithoutAuthorInput = {
   entities?: Prisma.PostEntityUncheckedUpdateManyWithoutPostNestedInput
   shares?: Prisma.PostShareUncheckedUpdateManyWithoutPostNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutPostNestedInput
+  reactions?: Prisma.ReactionUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type PostUncheckedUpdateManyWithoutAuthorInput = {
@@ -1286,6 +1430,7 @@ export type PostCountOutputType = {
   entities: number
   shares: number
   comments: number
+  reactions: number
 }
 
 export type PostCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1293,6 +1438,7 @@ export type PostCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   entities?: boolean | PostCountOutputTypeCountEntitiesArgs
   shares?: boolean | PostCountOutputTypeCountSharesArgs
   comments?: boolean | PostCountOutputTypeCountCommentsArgs
+  reactions?: boolean | PostCountOutputTypeCountReactionsArgs
 }
 
 /**
@@ -1333,6 +1479,13 @@ export type PostCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.E
   where?: Prisma.CommentWhereInput
 }
 
+/**
+ * PostCountOutputType without action
+ */
+export type PostCountOutputTypeCountReactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ReactionWhereInput
+}
+
 
 export type PostSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1353,6 +1506,7 @@ export type PostSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   entities?: boolean | Prisma.Post$entitiesArgs<ExtArgs>
   shares?: boolean | Prisma.Post$sharesArgs<ExtArgs>
   comments?: boolean | Prisma.Post$commentsArgs<ExtArgs>
+  reactions?: boolean | Prisma.Post$reactionsArgs<ExtArgs>
   _count?: boolean | Prisma.PostCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["post"]>
 
@@ -1413,6 +1567,7 @@ export type PostInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   entities?: boolean | Prisma.Post$entitiesArgs<ExtArgs>
   shares?: boolean | Prisma.Post$sharesArgs<ExtArgs>
   comments?: boolean | Prisma.Post$commentsArgs<ExtArgs>
+  reactions?: boolean | Prisma.Post$reactionsArgs<ExtArgs>
   _count?: boolean | Prisma.PostCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type PostIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1433,6 +1588,7 @@ export type $PostPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     entities: Prisma.$PostEntityPayload<ExtArgs>[]
     shares: Prisma.$PostSharePayload<ExtArgs>[]
     comments: Prisma.$CommentPayload<ExtArgs>[]
+    reactions: Prisma.$ReactionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1847,6 +2003,7 @@ export interface Prisma__PostClient<T, Null = never, ExtArgs extends runtime.Typ
   entities<T extends Prisma.Post$entitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Post$entitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostEntityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   shares<T extends Prisma.Post$sharesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Post$sharesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostSharePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   comments<T extends Prisma.Post$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Post$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reactions<T extends Prisma.Post$reactionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Post$reactionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2396,6 +2553,30 @@ export type Post$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.CommentScalarFieldEnum | Prisma.CommentScalarFieldEnum[]
+}
+
+/**
+ * Post.reactions
+ */
+export type Post$reactionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Reaction
+   */
+  select?: Prisma.ReactionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Reaction
+   */
+  omit?: Prisma.ReactionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ReactionInclude<ExtArgs> | null
+  where?: Prisma.ReactionWhereInput
+  orderBy?: Prisma.ReactionOrderByWithRelationInput | Prisma.ReactionOrderByWithRelationInput[]
+  cursor?: Prisma.ReactionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ReactionScalarFieldEnum | Prisma.ReactionScalarFieldEnum[]
 }
 
 /**

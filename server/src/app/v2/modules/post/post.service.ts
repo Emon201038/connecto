@@ -1,4 +1,4 @@
-import { Prisma } from "../../../../../prisma/generated/browser";
+import { Prisma, ReactionType } from "../../../../../prisma/generated/browser";
 import { PostCreateInput } from "../../../../../prisma/generated/models";
 import prisma from "../../../config/db";
 import { paginationHelper } from "../../../helpers/paginationHelper";
@@ -108,6 +108,18 @@ const getPostsFromDB = async (options: any, filters: any) => {
     },
   });
 
+  const postIds = posts.map((p) => p.id);
+
+  const reactionSummary = await prisma.reaction.groupBy({
+    by: ["type"],
+    where: {
+      postId: { in: postIds },
+    },
+    _count: {
+      type: true,
+    },
+  });
+
   const total = await prisma.post.count({
     where: {
       AND: andConditions,
@@ -121,7 +133,10 @@ const getPostsFromDB = async (options: any, filters: any) => {
       page,
       limit,
     },
-    data: posts,
+    data: posts.map((p) => ({
+      ...p,
+      reactionSummary,
+    })),
   };
 };
 

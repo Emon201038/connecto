@@ -18,8 +18,9 @@ model Message {
 
   type MessageType @default(TEXT)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  reactions Reaction[]
 
   @@index([conversationId])
   @@index([createdAt])

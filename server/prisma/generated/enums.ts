@@ -135,6 +135,18 @@ export const PostPrivacy = {
 export type PostPrivacy = (typeof PostPrivacy)[keyof typeof PostPrivacy]
 
 
+export const ReactionType = {
+  LOVE: 'LOVE',
+  LIKE: 'LIKE',
+  SAD: 'SAD',
+  CARE: 'CARE',
+  ANGRY: 'ANGRY',
+  WOW: 'WOW'
+} as const
+
+export type ReactionType = (typeof ReactionType)[keyof typeof ReactionType]
+
+
 export const FriendshipStatus = {
   PENDING: 'PENDING',
   ACCEPTED: 'ACCEPTED',
