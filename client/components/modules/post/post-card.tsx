@@ -32,7 +32,6 @@ import { ReactionButton2 } from "../../reaction-button-2";
 import { useTogglePostReactionMutation } from "@/redux/features/reaction/reactionApi";
 import { ReactionType } from "@/interface/reaction.interface";
 import { toast } from "sonner";
-import { cn } from "@/lib/utils";
 import { ShareModal } from "../share/share-modal";
 import { reactions as allReact } from "@/constants/reactions";
 import ImageGrid from "./post-image";

@@ -105,7 +105,17 @@ const getPostsFromDB = async (options: any, filters: any) => {
           name: true,
         },
       },
+      comments: {
+        include: {
+          _count: true,
+        },
+      },
     },
+    orderBy: {
+      [sortBy]: sortOrder,
+    },
+    skip,
+    take: limit,
   });
 
   const postIds = posts.map((p) => p.id);

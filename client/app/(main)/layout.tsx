@@ -36,7 +36,7 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
                   priority
                 />
               </Link>
-              <div className="ml-4 flex-shrink-0">
+              <div className="ml-4 shrink-0">
                 <Input
                   type="text"
                   placeholder="Search Connecto"
@@ -181,7 +181,7 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
           </nav>
         </div>
       </header>
-      <div className="mt-24 md:mt-[54px]">{children}</div>
+      <div className="mt-24 md:mt-13.5">{children}</div>
     </div>
   );
 };
