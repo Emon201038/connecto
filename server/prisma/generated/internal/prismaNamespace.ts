@@ -1987,6 +1987,7 @@ export const MessageScalarFieldEnum = {
   senderId: 'senderId',
   content: 'content',
   replyToId: 'replyToId',
+  isDeleted: 'isDeleted',
   type: 'type',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -2070,7 +2071,9 @@ export type PostShareScalarFieldEnum = (typeof PostShareScalarFieldEnum)[keyof t
 export const ReactionScalarFieldEnum = {
   id: 'id',
   type: 'type',
+  reactionFor: 'reactionFor',
   userId: 'userId',
+  targetId: 'targetId',
   postId: 'postId',
   commentId: 'commentId',
   messageId: 'messageId',
@@ -2400,6 +2403,20 @@ export type EnumReactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$Pri
  * Reference to a field of type 'ReactionType[]'
  */
 export type ListEnumReactionTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReactionType[]'>
+    
+
+
+/**
+ * Reference to a field of type 'ReactionFor'
+ */
+export type EnumReactionForFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReactionFor'>
+    
+
+
+/**
+ * Reference to a field of type 'ReactionFor[]'
+ */
+export type ListEnumReactionForFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ReactionFor[]'>
     
 
 

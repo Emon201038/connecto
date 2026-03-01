@@ -27,7 +27,9 @@ export type AggregateReaction = {
 export type ReactionMinAggregateOutputType = {
   id: string | null
   type: $Enums.ReactionType | null
+  reactionFor: $Enums.ReactionFor | null
   userId: string | null
+  targetId: string | null
   postId: string | null
   commentId: string | null
   messageId: string | null
@@ -38,7 +40,9 @@ export type ReactionMinAggregateOutputType = {
 export type ReactionMaxAggregateOutputType = {
   id: string | null
   type: $Enums.ReactionType | null
+  reactionFor: $Enums.ReactionFor | null
   userId: string | null
+  targetId: string | null
   postId: string | null
   commentId: string | null
   messageId: string | null
@@ -49,7 +53,9 @@ export type ReactionMaxAggregateOutputType = {
 export type ReactionCountAggregateOutputType = {
   id: number
   type: number
+  reactionFor: number
   userId: number
+  targetId: number
   postId: number
   commentId: number
   messageId: number
@@ -62,7 +68,9 @@ export type ReactionCountAggregateOutputType = {
 export type ReactionMinAggregateInputType = {
   id?: true
   type?: true
+  reactionFor?: true
   userId?: true
+  targetId?: true
   postId?: true
   commentId?: true
   messageId?: true
@@ -73,7 +81,9 @@ export type ReactionMinAggregateInputType = {
 export type ReactionMaxAggregateInputType = {
   id?: true
   type?: true
+  reactionFor?: true
   userId?: true
+  targetId?: true
   postId?: true
   commentId?: true
   messageId?: true
@@ -84,7 +94,9 @@ export type ReactionMaxAggregateInputType = {
 export type ReactionCountAggregateInputType = {
   id?: true
   type?: true
+  reactionFor?: true
   userId?: true
+  targetId?: true
   postId?: true
   commentId?: true
   messageId?: true
@@ -168,7 +180,9 @@ export type ReactionGroupByArgs<ExtArgs extends runtime.Types.Extensions.Interna
 export type ReactionGroupByOutputType = {
   id: string
   type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
   userId: string
+  targetId: string
   postId: string | null
   commentId: string | null
   messageId: string | null
@@ -200,7 +214,9 @@ export type ReactionWhereInput = {
   NOT?: Prisma.ReactionWhereInput | Prisma.ReactionWhereInput[]
   id?: Prisma.StringFilter<"Reaction"> | string
   type?: Prisma.EnumReactionTypeFilter<"Reaction"> | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFilter<"Reaction"> | $Enums.ReactionFor
   userId?: Prisma.StringFilter<"Reaction"> | string
+  targetId?: Prisma.StringFilter<"Reaction"> | string
   postId?: Prisma.StringNullableFilter<"Reaction"> | string | null
   commentId?: Prisma.StringNullableFilter<"Reaction"> | string | null
   messageId?: Prisma.StringNullableFilter<"Reaction"> | string | null
@@ -215,7 +231,9 @@ export type ReactionWhereInput = {
 export type ReactionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  reactionFor?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  targetId?: Prisma.SortOrder
   postId?: Prisma.SortOrderInput | Prisma.SortOrder
   commentId?: Prisma.SortOrderInput | Prisma.SortOrder
   messageId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -229,11 +247,14 @@ export type ReactionOrderByWithRelationInput = {
 
 export type ReactionWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  userId_reactionFor_targetId_type?: Prisma.ReactionUserIdReactionForTargetIdTypeCompoundUniqueInput
   AND?: Prisma.ReactionWhereInput | Prisma.ReactionWhereInput[]
   OR?: Prisma.ReactionWhereInput[]
   NOT?: Prisma.ReactionWhereInput | Prisma.ReactionWhereInput[]
   type?: Prisma.EnumReactionTypeFilter<"Reaction"> | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFilter<"Reaction"> | $Enums.ReactionFor
   userId?: Prisma.StringFilter<"Reaction"> | string
+  targetId?: Prisma.StringFilter<"Reaction"> | string
   postId?: Prisma.StringNullableFilter<"Reaction"> | string | null
   commentId?: Prisma.StringNullableFilter<"Reaction"> | string | null
   messageId?: Prisma.StringNullableFilter<"Reaction"> | string | null
@@ -243,12 +264,14 @@ export type ReactionWhereUniqueInput = Prisma.AtLeast<{
   post?: Prisma.XOR<Prisma.PostNullableScalarRelationFilter, Prisma.PostWhereInput> | null
   comment?: Prisma.XOR<Prisma.CommentNullableScalarRelationFilter, Prisma.CommentWhereInput> | null
   message?: Prisma.XOR<Prisma.MessageNullableScalarRelationFilter, Prisma.MessageWhereInput> | null
-}, "id">
+}, "id" | "userId_reactionFor_targetId_type">
 
 export type ReactionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  reactionFor?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  targetId?: Prisma.SortOrder
   postId?: Prisma.SortOrderInput | Prisma.SortOrder
   commentId?: Prisma.SortOrderInput | Prisma.SortOrder
   messageId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -265,7 +288,9 @@ export type ReactionScalarWhereWithAggregatesInput = {
   NOT?: Prisma.ReactionScalarWhereWithAggregatesInput | Prisma.ReactionScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Reaction"> | string
   type?: Prisma.EnumReactionTypeWithAggregatesFilter<"Reaction"> | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForWithAggregatesFilter<"Reaction"> | $Enums.ReactionFor
   userId?: Prisma.StringWithAggregatesFilter<"Reaction"> | string
+  targetId?: Prisma.StringWithAggregatesFilter<"Reaction"> | string
   postId?: Prisma.StringNullableWithAggregatesFilter<"Reaction"> | string | null
   commentId?: Prisma.StringNullableWithAggregatesFilter<"Reaction"> | string | null
   messageId?: Prisma.StringNullableWithAggregatesFilter<"Reaction"> | string | null
@@ -276,6 +301,8 @@ export type ReactionScalarWhereWithAggregatesInput = {
 export type ReactionCreateInput = {
   id?: string
   type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
+  targetId: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutReactionsInput
@@ -287,7 +314,9 @@ export type ReactionCreateInput = {
 export type ReactionUncheckedCreateInput = {
   id?: string
   type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
   userId: string
+  targetId: string
   postId?: string | null
   commentId?: string | null
   messageId?: string | null
@@ -298,6 +327,8 @@ export type ReactionUncheckedCreateInput = {
 export type ReactionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutReactionsNestedInput
@@ -309,7 +340,9 @@ export type ReactionUpdateInput = {
 export type ReactionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
   postId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   messageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -320,7 +353,9 @@ export type ReactionUncheckedUpdateInput = {
 export type ReactionCreateManyInput = {
   id?: string
   type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
   userId: string
+  targetId: string
   postId?: string | null
   commentId?: string | null
   messageId?: string | null
@@ -331,6 +366,8 @@ export type ReactionCreateManyInput = {
 export type ReactionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -338,7 +375,9 @@ export type ReactionUpdateManyMutationInput = {
 export type ReactionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
   postId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   messageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -356,10 +395,19 @@ export type ReactionOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type ReactionUserIdReactionForTargetIdTypeCompoundUniqueInput = {
+  userId: string
+  reactionFor: $Enums.ReactionFor
+  targetId: string
+  type: $Enums.ReactionType
+}
+
 export type ReactionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  reactionFor?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  targetId?: Prisma.SortOrder
   postId?: Prisma.SortOrder
   commentId?: Prisma.SortOrder
   messageId?: Prisma.SortOrder
@@ -370,7 +418,9 @@ export type ReactionCountOrderByAggregateInput = {
 export type ReactionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  reactionFor?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  targetId?: Prisma.SortOrder
   postId?: Prisma.SortOrder
   commentId?: Prisma.SortOrder
   messageId?: Prisma.SortOrder
@@ -381,7 +431,9 @@ export type ReactionMaxOrderByAggregateInput = {
 export type ReactionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   type?: Prisma.SortOrder
+  reactionFor?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  targetId?: Prisma.SortOrder
   postId?: Prisma.SortOrder
   commentId?: Prisma.SortOrder
   messageId?: Prisma.SortOrder
@@ -519,6 +571,10 @@ export type EnumReactionTypeFieldUpdateOperationsInput = {
   set?: $Enums.ReactionType
 }
 
+export type EnumReactionForFieldUpdateOperationsInput = {
+  set?: $Enums.ReactionFor
+}
+
 export type ReactionCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.ReactionCreateWithoutUserInput, Prisma.ReactionUncheckedCreateWithoutUserInput> | Prisma.ReactionCreateWithoutUserInput[] | Prisma.ReactionUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutUserInput | Prisma.ReactionCreateOrConnectWithoutUserInput[]
@@ -564,6 +620,8 @@ export type ReactionUncheckedUpdateManyWithoutUserNestedInput = {
 export type ReactionCreateWithoutCommentInput = {
   id?: string
   type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
+  targetId: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutReactionsInput
@@ -574,7 +632,9 @@ export type ReactionCreateWithoutCommentInput = {
 export type ReactionUncheckedCreateWithoutCommentInput = {
   id?: string
   type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
   userId: string
+  targetId: string
   postId?: string | null
   messageId?: string | null
   createdAt?: Date | string
@@ -613,7 +673,9 @@ export type ReactionScalarWhereInput = {
   NOT?: Prisma.ReactionScalarWhereInput | Prisma.ReactionScalarWhereInput[]
   id?: Prisma.StringFilter<"Reaction"> | string
   type?: Prisma.EnumReactionTypeFilter<"Reaction"> | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFilter<"Reaction"> | $Enums.ReactionFor
   userId?: Prisma.StringFilter<"Reaction"> | string
+  targetId?: Prisma.StringFilter<"Reaction"> | string
   postId?: Prisma.StringNullableFilter<"Reaction"> | string | null
   commentId?: Prisma.StringNullableFilter<"Reaction"> | string | null
   messageId?: Prisma.StringNullableFilter<"Reaction"> | string | null
@@ -624,6 +686,8 @@ export type ReactionScalarWhereInput = {
 export type ReactionCreateWithoutMessageInput = {
   id?: string
   type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
+  targetId: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutReactionsInput
@@ -634,7 +698,9 @@ export type ReactionCreateWithoutMessageInput = {
 export type ReactionUncheckedCreateWithoutMessageInput = {
   id?: string
   type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
   userId: string
+  targetId: string
   postId?: string | null
   commentId?: string | null
   createdAt?: Date | string
@@ -670,6 +736,8 @@ export type ReactionUpdateManyWithWhereWithoutMessageInput = {
 export type ReactionCreateWithoutPostInput = {
   id?: string
   type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
+  targetId: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutReactionsInput
@@ -680,7 +748,9 @@ export type ReactionCreateWithoutPostInput = {
 export type ReactionUncheckedCreateWithoutPostInput = {
   id?: string
   type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
   userId: string
+  targetId: string
   commentId?: string | null
   messageId?: string | null
   createdAt?: Date | string
@@ -716,6 +786,8 @@ export type ReactionUpdateManyWithWhereWithoutPostInput = {
 export type ReactionCreateWithoutUserInput = {
   id?: string
   type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
+  targetId: string
   createdAt?: Date | string
   updatedAt?: Date | string
   post?: Prisma.PostCreateNestedOneWithoutReactionsInput
@@ -726,6 +798,8 @@ export type ReactionCreateWithoutUserInput = {
 export type ReactionUncheckedCreateWithoutUserInput = {
   id?: string
   type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
+  targetId: string
   postId?: string | null
   commentId?: string | null
   messageId?: string | null
@@ -762,7 +836,9 @@ export type ReactionUpdateManyWithWhereWithoutUserInput = {
 export type ReactionCreateManyCommentInput = {
   id?: string
   type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
   userId: string
+  targetId: string
   postId?: string | null
   messageId?: string | null
   createdAt?: Date | string
@@ -772,6 +848,8 @@ export type ReactionCreateManyCommentInput = {
 export type ReactionUpdateWithoutCommentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutReactionsNestedInput
@@ -782,7 +860,9 @@ export type ReactionUpdateWithoutCommentInput = {
 export type ReactionUncheckedUpdateWithoutCommentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
   postId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   messageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -792,7 +872,9 @@ export type ReactionUncheckedUpdateWithoutCommentInput = {
 export type ReactionUncheckedUpdateManyWithoutCommentInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
   postId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   messageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -802,7 +884,9 @@ export type ReactionUncheckedUpdateManyWithoutCommentInput = {
 export type ReactionCreateManyMessageInput = {
   id?: string
   type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
   userId: string
+  targetId: string
   postId?: string | null
   commentId?: string | null
   createdAt?: Date | string
@@ -812,6 +896,8 @@ export type ReactionCreateManyMessageInput = {
 export type ReactionUpdateWithoutMessageInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutReactionsNestedInput
@@ -822,7 +908,9 @@ export type ReactionUpdateWithoutMessageInput = {
 export type ReactionUncheckedUpdateWithoutMessageInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
   postId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -832,7 +920,9 @@ export type ReactionUncheckedUpdateWithoutMessageInput = {
 export type ReactionUncheckedUpdateManyWithoutMessageInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
   postId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -842,7 +932,9 @@ export type ReactionUncheckedUpdateManyWithoutMessageInput = {
 export type ReactionCreateManyPostInput = {
   id?: string
   type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
   userId: string
+  targetId: string
   commentId?: string | null
   messageId?: string | null
   createdAt?: Date | string
@@ -852,6 +944,8 @@ export type ReactionCreateManyPostInput = {
 export type ReactionUpdateWithoutPostInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutReactionsNestedInput
@@ -862,7 +956,9 @@ export type ReactionUpdateWithoutPostInput = {
 export type ReactionUncheckedUpdateWithoutPostInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
   commentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   messageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -872,7 +968,9 @@ export type ReactionUncheckedUpdateWithoutPostInput = {
 export type ReactionUncheckedUpdateManyWithoutPostInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
   commentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   messageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -882,6 +980,8 @@ export type ReactionUncheckedUpdateManyWithoutPostInput = {
 export type ReactionCreateManyUserInput = {
   id?: string
   type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
+  targetId: string
   postId?: string | null
   commentId?: string | null
   messageId?: string | null
@@ -892,6 +992,8 @@ export type ReactionCreateManyUserInput = {
 export type ReactionUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   post?: Prisma.PostUpdateOneWithoutReactionsNestedInput
@@ -902,6 +1004,8 @@ export type ReactionUpdateWithoutUserInput = {
 export type ReactionUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
   postId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   messageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -912,6 +1016,8 @@ export type ReactionUncheckedUpdateWithoutUserInput = {
 export type ReactionUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
   postId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   messageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -924,7 +1030,9 @@ export type ReactionUncheckedUpdateManyWithoutUserInput = {
 export type ReactionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
+  reactionFor?: boolean
   userId?: boolean
+  targetId?: boolean
   postId?: boolean
   commentId?: boolean
   messageId?: boolean
@@ -939,7 +1047,9 @@ export type ReactionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 export type ReactionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
+  reactionFor?: boolean
   userId?: boolean
+  targetId?: boolean
   postId?: boolean
   commentId?: boolean
   messageId?: boolean
@@ -954,7 +1064,9 @@ export type ReactionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type ReactionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   type?: boolean
+  reactionFor?: boolean
   userId?: boolean
+  targetId?: boolean
   postId?: boolean
   commentId?: boolean
   messageId?: boolean
@@ -969,7 +1081,9 @@ export type ReactionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type ReactionSelectScalar = {
   id?: boolean
   type?: boolean
+  reactionFor?: boolean
   userId?: boolean
+  targetId?: boolean
   postId?: boolean
   commentId?: boolean
   messageId?: boolean
@@ -977,7 +1091,7 @@ export type ReactionSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ReactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "userId" | "postId" | "commentId" | "messageId" | "createdAt" | "updatedAt", ExtArgs["result"]["reaction"]>
+export type ReactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "reactionFor" | "userId" | "targetId" | "postId" | "commentId" | "messageId" | "createdAt" | "updatedAt", ExtArgs["result"]["reaction"]>
 export type ReactionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   post?: boolean | Prisma.Reaction$postArgs<ExtArgs>
@@ -1008,7 +1122,9 @@ export type $ReactionPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     type: $Enums.ReactionType
+    reactionFor: $Enums.ReactionFor
     userId: string
+    targetId: string
     postId: string | null
     commentId: string | null
     messageId: string | null
@@ -1443,7 +1559,9 @@ export interface Prisma__ReactionClient<T, Null = never, ExtArgs extends runtime
 export interface ReactionFieldRefs {
   readonly id: Prisma.FieldRef<"Reaction", 'String'>
   readonly type: Prisma.FieldRef<"Reaction", 'ReactionType'>
+  readonly reactionFor: Prisma.FieldRef<"Reaction", 'ReactionFor'>
   readonly userId: Prisma.FieldRef<"Reaction", 'String'>
+  readonly targetId: Prisma.FieldRef<"Reaction", 'String'>
   readonly postId: Prisma.FieldRef<"Reaction", 'String'>
   readonly commentId: Prisma.FieldRef<"Reaction", 'String'>
   readonly messageId: Prisma.FieldRef<"Reaction", 'String'>

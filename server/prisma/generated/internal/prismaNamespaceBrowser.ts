@@ -208,6 +208,7 @@ export const MessageScalarFieldEnum = {
   senderId: 'senderId',
   content: 'content',
   replyToId: 'replyToId',
+  isDeleted: 'isDeleted',
   type: 'type',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -291,7 +292,9 @@ export type PostShareScalarFieldEnum = (typeof PostShareScalarFieldEnum)[keyof t
 export const ReactionScalarFieldEnum = {
   id: 'id',
   type: 'type',
+  reactionFor: 'reactionFor',
   userId: 'userId',
+  targetId: 'targetId',
   postId: 'postId',
   commentId: 'commentId',
   messageId: 'messageId',

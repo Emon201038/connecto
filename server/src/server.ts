@@ -1,4 +1,4 @@
-// server.ts
+import "module-alias/register";
 import { Request, Response } from "express";
 import { ApolloServer } from "@apollo/server";
 import { createServer } from "http";

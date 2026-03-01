@@ -1,20 +1,24 @@
 model Reaction {
-  id     String       @unique @default(uuid())
-  type   ReactionType
-  userId String
-  user   User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id          String       @id @default(uuid())
+  type        ReactionType
+  reactionFor ReactionFor
+  userId      String
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  targetId    String
 
   postId String?
-  post   Post?   @relation(fields: [postId], references: [id])
+  post   Post?   @relation(fields: [postId], references: [id], onDelete: Cascade)
 
   commentId String?
-  comment   Comment? @relation(fields: [commentId], references: [id])
+  comment   Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
 
   messageId String?
-  message   Message? @relation(fields: [messageId], references: [id])
+  message   Message? @relation(fields: [messageId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@unique([userId, reactionFor, targetId, type])
 }
 
 enum ReactionType {
@@ -24,4 +28,10 @@ enum ReactionType {
   CARE
   ANGRY
   WOW
+}
+
+enum ReactionFor {
+  POST
+  MESSAGE
+  COMMENT
 }

@@ -403,6 +403,13 @@ export type EnumReactionTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumReactionTypeFilter<$PrismaModel> | $Enums.ReactionType
 }
 
+export type EnumReactionForFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReactionFor | Prisma.EnumReactionForFieldRefInput<$PrismaModel>
+  in?: $Enums.ReactionFor[] | Prisma.ListEnumReactionForFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReactionFor[] | Prisma.ListEnumReactionForFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReactionForFilter<$PrismaModel> | $Enums.ReactionFor
+}
+
 export type EnumReactionTypeWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.ReactionType | Prisma.EnumReactionTypeFieldRefInput<$PrismaModel>
   in?: $Enums.ReactionType[] | Prisma.ListEnumReactionTypeFieldRefInput<$PrismaModel>
@@ -411,6 +418,16 @@ export type EnumReactionTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumReactionTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumReactionTypeFilter<$PrismaModel>
+}
+
+export type EnumReactionForWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReactionFor | Prisma.EnumReactionForFieldRefInput<$PrismaModel>
+  in?: $Enums.ReactionFor[] | Prisma.ListEnumReactionForFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReactionFor[] | Prisma.ListEnumReactionForFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReactionForWithAggregatesFilter<$PrismaModel> | $Enums.ReactionFor
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumReactionForFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumReactionForFilter<$PrismaModel>
 }
 
 export type EnumUserRoleFilter<$PrismaModel = never> = {
@@ -866,6 +883,13 @@ export type NestedEnumReactionTypeFilter<$PrismaModel = never> = {
   not?: Prisma.NestedEnumReactionTypeFilter<$PrismaModel> | $Enums.ReactionType
 }
 
+export type NestedEnumReactionForFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReactionFor | Prisma.EnumReactionForFieldRefInput<$PrismaModel>
+  in?: $Enums.ReactionFor[] | Prisma.ListEnumReactionForFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReactionFor[] | Prisma.ListEnumReactionForFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReactionForFilter<$PrismaModel> | $Enums.ReactionFor
+}
+
 export type NestedEnumReactionTypeWithAggregatesFilter<$PrismaModel = never> = {
   equals?: $Enums.ReactionType | Prisma.EnumReactionTypeFieldRefInput<$PrismaModel>
   in?: $Enums.ReactionType[] | Prisma.ListEnumReactionTypeFieldRefInput<$PrismaModel>
@@ -874,6 +898,16 @@ export type NestedEnumReactionTypeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumReactionTypeFilter<$PrismaModel>
   _max?: Prisma.NestedEnumReactionTypeFilter<$PrismaModel>
+}
+
+export type NestedEnumReactionForWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.ReactionFor | Prisma.EnumReactionForFieldRefInput<$PrismaModel>
+  in?: $Enums.ReactionFor[] | Prisma.ListEnumReactionForFieldRefInput<$PrismaModel>
+  notIn?: $Enums.ReactionFor[] | Prisma.ListEnumReactionForFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumReactionForWithAggregatesFilter<$PrismaModel> | $Enums.ReactionFor
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumReactionForFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumReactionForFilter<$PrismaModel>
 }
 
 export type NestedEnumUserRoleFilter<$PrismaModel = never> = {

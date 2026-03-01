@@ -147,6 +147,15 @@ export const ReactionType = {
 export type ReactionType = (typeof ReactionType)[keyof typeof ReactionType]
 
 
+export const ReactionFor = {
+  POST: 'POST',
+  MESSAGE: 'MESSAGE',
+  COMMENT: 'COMMENT'
+} as const
+
+export type ReactionFor = (typeof ReactionFor)[keyof typeof ReactionFor]
+
+
 export const FriendshipStatus = {
   PENDING: 'PENDING',
   ACCEPTED: 'ACCEPTED',

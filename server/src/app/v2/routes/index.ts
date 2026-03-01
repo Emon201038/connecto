@@ -3,6 +3,7 @@ import userRoutes from "../modules/user/user.routes";
 import authRoutes from "../modules/auth/auth.routes";
 import otpRoutes from "../modules/otp/otp.routes";
 import postRoutes from "../modules/post/post.routes";
+import reactionRoutes from "../modules/reaction/reaction.routes";
 
 const routerv2 = express.Router();
 const moduleRoutes = [
@@ -21,6 +22,10 @@ const moduleRoutes = [
   {
     path: "/posts",
     route: postRoutes,
+  },
+  {
+    path: "/reactions",
+    route: reactionRoutes,
   },
 ];
 

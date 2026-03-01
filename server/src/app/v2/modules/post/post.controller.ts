@@ -9,7 +9,10 @@ import { PostService } from "./post.service";
 const getPosts = catchAsync(async (req, res, next) => {
   const options = pick(req.query, paginationHelper.paginationFields);
   const filters = pick(req.query, postFilterableFields);
-  const data = await PostService.getPostsFromDB(options, filters);
+
+  const user = req.user;
+  if (!user) throw new AppError(403, "You are not logged in");
+  const data = await PostService.getPostsFromDB(options, filters, user.id);
   sendResponse(res, {
     success: true,
     statusCode: 200,

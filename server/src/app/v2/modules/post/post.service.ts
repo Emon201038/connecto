@@ -5,7 +5,7 @@ import { paginationHelper } from "../../../helpers/paginationHelper";
 import { postSearchableFields } from "./post.constant";
 import { CreatePostInput } from "./post.interface";
 
-const getPostsFromDB = async (options: any, filters: any) => {
+const getPostsFromDB = async (options: any, filters: any, userId?: string) => {
   const { page, limit, skip, sortBy, sortOrder } =
     paginationHelper.calculatePagination(options);
 
@@ -108,6 +108,17 @@ const getPostsFromDB = async (options: any, filters: any) => {
       comments: {
         include: {
           _count: true,
+        },
+      },
+      reactions: {
+        where: {
+          userId,
+        },
+        select: {
+          type: true,
+          reactionFor: true,
+          targetId: true,
+          userId: true,
         },
       },
     },

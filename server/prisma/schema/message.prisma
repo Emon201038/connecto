@@ -15,6 +15,7 @@ model Message {
 
   attachments Attachment[]
   deletedBy   MessageDeleted[]
+  isDeleted   Boolean          @default(false)
 
   type MessageType @default(TEXT)
 
