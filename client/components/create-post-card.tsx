@@ -111,7 +111,6 @@ export default function CreatePostCard({
       feelings: selectedFeeling?.type ? selectedFeeling : null,
       attachments: images.map((img) => img.file).filter(Boolean),
     };
-    console.log(obj);
 
     await fetch("http://localhost:5000/api/v2/auth/login", {
       method: "POST",

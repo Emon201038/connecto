@@ -105,11 +105,6 @@ const getPostsFromDB = async (options: any, filters: any, userId?: string) => {
           name: true,
         },
       },
-      comments: {
-        include: {
-          _count: true,
-        },
-      },
       reactions: {
         where: {
           userId,
@@ -119,6 +114,13 @@ const getPostsFromDB = async (options: any, filters: any, userId?: string) => {
           reactionFor: true,
           targetId: true,
           userId: true,
+        },
+      },
+      _count: {
+        select: {
+          comments: true,
+          reactions: true,
+          shares: true,
         },
       },
     },
@@ -132,13 +134,26 @@ const getPostsFromDB = async (options: any, filters: any, userId?: string) => {
   const postIds = posts.map((p) => p.id);
 
   const reactionSummary = await prisma.reaction.groupBy({
-    by: ["type"],
+    by: ["postId", "type"],
     where: {
       postId: { in: postIds },
     },
     _count: {
       type: true,
     },
+  });
+
+  const reactionMap: Record<string, any[]> = {};
+
+  reactionSummary.forEach((r) => {
+    if (!reactionMap[r.postId!]) {
+      reactionMap[r.postId!] = [];
+    }
+
+    reactionMap[r.postId!].push({
+      type: r.type,
+      count: r._count.type,
+    });
   });
 
   const total = await prisma.post.count({
@@ -154,9 +169,10 @@ const getPostsFromDB = async (options: any, filters: any, userId?: string) => {
       page,
       limit,
     },
-    data: posts.map((p) => ({
+    data: posts.map(({ reactions, ...p }) => ({
       ...p,
-      reactionSummary,
+      reactionSummary: reactionMap[p.id] || [],
+      myReaction: reactions.length ? reactions[0] : null,
     })),
   };
 };

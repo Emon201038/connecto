@@ -5,7 +5,7 @@ export interface IOptions {
   sortOrder?: string;
 }
 
-interface IOptionResult {
+export interface IOptionResult {
   page: number;
   limit: number;
   skip: number;

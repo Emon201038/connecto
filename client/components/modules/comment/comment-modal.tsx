@@ -198,7 +198,7 @@ const CommentsContent = ({ post }: { post: IPost }) => {
               {post?.author?.fullName}
             </Link>
             <span className="text-xs text-muted-foreground">
-              {timeAgo(Number(post.createdAt))}
+              {timeAgo(post.createdAt)}
             </span>
           </div>
         </div>
@@ -224,19 +224,19 @@ const CommentsContent = ({ post }: { post: IPost }) => {
               <div className="flex items-center justify-center rounded-full  text-white">
                 {post?.reactionSummary?.length &&
                 post?.reactionSummary?.length > 0
-                  ? [...post.reactionSummary]
-                      .sort((a, b) => b.count - a.count)
+                  ? [...(post.reactionSummary as any)]
+                      .sort((a, b) => b._count.type - a._count.type)
                       .slice(0, 3)
                       .map((reaction, index) => (
                         <div
-                          key={reaction.reactionType}
+                          key={reaction.type}
                           className={`relative`}
                           style={{
                             marginLeft: index > 0 ? "-4px" : "0",
                             zIndex: 3 - index,
                           }}
                         >
-                          {reactionEmojis[reaction.reactionType].emoji}
+                          {reactionEmojis[reaction.type as "LIKE"].emoji}
                         </div>
                       ))
                   : null}

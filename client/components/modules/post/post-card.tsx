@@ -198,15 +198,15 @@ export default function PostCard({ post: rootPost }: { post: IPost }) {
                 <Link href={`/${post.author.username}`}>
                   {post.author.fullName}
                 </Link>
-                {post?.feelings?.type && (
+                {(post as any)?.feelingsType && (
                   <span>
-                    is {post?.feelings?.emoji} {post?.feelings?.type}{" "}
-                    {post?.feelings?.text}
+                    is {(post as any)?.feelingsEmoji}{" "}
+                    {(post as any)?.feelingsType} {(post as any)?.feelingsText}
                   </span>
                 )}
               </div>
               <span className="text-xs text-muted-foreground">
-                {timeAgo(Number(post.createdAt))}
+                {timeAgo(post.createdAt)}
               </span>
             </div>
           )}
@@ -266,16 +266,18 @@ export default function PostCard({ post: rootPost }: { post: IPost }) {
                 <div className="flex gap-1">
                   <div className="flex items-center justify-center rounded-full  text-white">
                     {post.reactionSummary && post?.reactionSummary.length > 0
-                      ? [...post.reactionSummary]
-                          .sort((a, b) => b.count - a.count)
+                      ? [...(post.reactionSummary as any)]
+                          .sort((a, b) => b._count.type - a._count.type)
                           .slice(0, 3)
                           .map((reaction, index) => {
                             const targetedReact = allReact.find(
-                              (r) => r.type === reaction.reactionType,
+                              (r) => r.type === reaction.type,
                             );
+
+                            console.log(post.reactionSummary);
                             return (
                               <div
-                                key={reaction.reactionType}
+                                key={reaction.type}
                                 className={`relative`}
                                 style={{
                                   marginLeft: index > 0 ? "-4px" : "0",
@@ -294,8 +296,10 @@ export default function PostCard({ post: rootPost }: { post: IPost }) {
                           })
                       : null}
                   </div>
-                  <p className={`${reactions.length > 0 ? "block" : "hidden"}`}>
-                    {reactions.length}
+                  <p
+                    className={`${(post as any)._count.reactions ? "block" : "hidden"}`}
+                  >
+                    {(post as any)._count.reactions}
                   </p>
                 </div>
               </Tooltip>
@@ -315,11 +319,11 @@ export default function PostCard({ post: rootPost }: { post: IPost }) {
                         .slice(0, 3)
                         .map((reaction, index) => {
                           const targetedReact = allReact.find(
-                            (r) => r.type === reaction.reactionType,
+                            (r) => r.type === (reaction as any).type,
                           );
                           return (
                             <div
-                              key={reaction.reactionType}
+                              key={(reaction as any).type}
                               className={`relative`}
                               style={{
                                 marginLeft: index > 0 ? "-4px" : "0",
@@ -338,8 +342,10 @@ export default function PostCard({ post: rootPost }: { post: IPost }) {
                         })
                     : null}
                 </div>
-                <p className={`${reactions.length > 0 ? "block" : "hidden"}`}>
-                  {reactions.length}
+                <p
+                  className={`${(post as any)._count.reactions > 0 ? "block" : "hidden"}`}
+                >
+                  {(post as any)._count.reactions}
                 </p>
               </button>
             )}
@@ -369,16 +375,16 @@ export default function PostCard({ post: rootPost }: { post: IPost }) {
                 }
               >
                 <button className="hover:underline">
-                  {post.commentCount} comments
+                  {(post as any)._count.comments} comments
                 </button>
               </Tooltip>
             ) : (
               <button className="hover:underline">
-                {post.commentCount} comments
+                {(post as any)._count.comments} comments
               </button>
             )}
             <button className="hover:underline">
-              {post.shareCount} shares
+              {(post as any)._count.shares} shares
             </button>
           </div>
           {/* {showModal && (

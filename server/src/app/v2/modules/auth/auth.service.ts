@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import prisma from "../../../config/db";
 import { Response } from "express";
-import { generateJwt } from "../../../utils/jwt";
+import { generateJwt, JwtPayload, verifyJwt } from "../../../utils/jwt";
 import { envVars } from "../../../config/env";
 import { setAuthCookies } from "../../../utils/cookie";
 import AppError from "../../../helpers/appError";
@@ -111,4 +111,52 @@ const credentialsLogin = async (
   };
 };
 
-export const AuthService = { credentialsLogin };
+const refreshToken = async (res: Response, token: string) => {
+  if (!token) {
+    throw new AppError(401, "Refresh token is required");
+  }
+
+  let decoded: JwtPayload;
+  try {
+    decoded = verifyJwt<JwtPayload>(token, envVars.JWT_REFRESH_TOKEN_SECRET);
+  } catch {
+    throw new AppError(401, "Invalid or expired refresh token");
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { id: decoded.id },
+  });
+
+  if (!user) {
+    throw new AppError(404, "User not found");
+  }
+
+  if (user.isDisabled) {
+    throw new AppError(400, "User is disabled");
+  }
+
+  if (user.isDeleted) {
+    throw new AppError(400, "User is deleted");
+  }
+
+  const accessToken = generateJwt(
+    { id: user.id, role: user.role, email: user.email },
+    envVars.JWT_ACCESS_TOKEN_SECRET,
+    envVars.JWT_ACCESS_TOKEN_EXPIRES_IN,
+  );
+
+  const refreshToken = generateJwt(
+    { id: user.id, role: user.role, email: user.email },
+    envVars.JWT_REFRESH_TOKEN_SECRET,
+    envVars.JWT_REFRESH_TOKEN_EXPIRES_IN,
+  );
+
+  setAuthCookies(res, { accessToken, refreshToken });
+
+  return {
+    accessToken,
+    refreshToken,
+  };
+};
+
+export const AuthService = { credentialsLogin, refreshToken };

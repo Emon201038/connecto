@@ -24,7 +24,6 @@ const toggleReaction = async (payload: ReactionCreateInput, userId: string) => {
   return await prisma.$transaction(async (tx) => {
     const deleted = await tx.reaction.deleteMany({
       where: {
-        type: payload.type,
         userId,
         reactionFor: payload.reactionFor,
         [targetField]: payload.targetId,
