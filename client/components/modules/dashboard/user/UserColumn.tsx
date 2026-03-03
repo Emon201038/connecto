@@ -1,5 +1,5 @@
 import { UserInfoCell } from "@/components/shared/cell/UserInfoCell";
-import { IColumn } from "@/components/shared/ManagementTable";
+import { IColumn } from "@/components/shared/dashboard/ManagementTable";
 import { formatDateTime } from "@/lib/formatters";
 import { IUser } from "@/types";
 

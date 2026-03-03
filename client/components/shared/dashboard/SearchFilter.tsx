@@ -1,7 +1,7 @@
 "use client";
 import { Search } from "lucide-react";
 import { useEffect, useState, useTransition } from "react";
-import { Input } from "../ui/input";
+import { Input } from "../../ui/input";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useDebounce } from "@/hooks/use-debounce";
 

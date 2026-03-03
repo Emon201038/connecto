@@ -11,7 +11,7 @@ import { useAppDispatch } from "@/redux/hooks";
 import { setSelectedPost } from "@/redux/features/post/postSlice";
 import { reactionEmojis } from "@/constants/emoji";
 import { Entity, IUser } from "@/types";
-import { EntityInput, EntityInputRef } from "../../entity-form";
+import { EntityInput, EntityInputRef } from "../../shared/form/entity-form";
 import { Button } from "@/components/ui/button";
 import { Camera, Loader, SendHorizontal, Smile, SmilePlus } from "lucide-react";
 import { IPost } from "@/interface/post.interface";

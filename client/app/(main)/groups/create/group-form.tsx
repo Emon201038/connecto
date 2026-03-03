@@ -1,6 +1,6 @@
 "use client";
-import { RHFInput } from "@/components/rhf-input";
-import { RHFSelect } from "@/components/rhf-select";
+import { RHFInput } from "@/components/shared/form/rhf-input";
+import { RHFSelect } from "@/components/shared/form/rhf-select";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";

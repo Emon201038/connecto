@@ -17,14 +17,14 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../ui/table";
+} from "../../ui/table";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { Button } from "../ui/button";
+} from "../../ui/dropdown-menu";
+import { Button } from "../../ui/button";
 import { set } from "zod";
 import ManagementTableRow from "./ManagementTableRow";
 import { useRouter, useSearchParams } from "next/navigation";

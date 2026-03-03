@@ -34,7 +34,7 @@ import {
   useGetConversationInfoQuery,
   useUpdateEmojiMutation,
 } from "@/redux/features/conversation/conversationApi";
-import CustomEmojiPicker from "@/components/EmojiPicker";
+import CustomEmojiPicker from "@/components/modules/reaction/EmojiPicker";
 
 const RightSideBar = () => {
   const [openEmojiModal, setOpenEmojiModal] = React.useState(false);
@@ -55,7 +55,7 @@ const RightSideBar = () => {
   });
   const theme =
     messengerThemes.find(
-      (t) => t.id.toLowerCase() === conversation?.theme.toLowerCase()
+      (t) => t.id.toLowerCase() === conversation?.theme.toLowerCase(),
     ) || messengerThemes[0];
   const [updateEmoji] = useUpdateEmojiMutation();
 

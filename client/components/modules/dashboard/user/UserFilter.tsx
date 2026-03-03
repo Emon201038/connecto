@@ -1,7 +1,7 @@
 "use client";
-import RefreshButton from "@/components/shared/RefreshButton";
-import SearchFilter from "@/components/shared/SearchFilter";
-import SelectFilter from "@/components/shared/SelectFilter";
+import RefreshButton from "@/components/shared/dashboard/RefreshButton";
+import SearchFilter from "@/components/shared/dashboard/SearchFilter";
+import SelectFilter from "@/components/shared/dashboard/SelectFilter";
 import { Button } from "@/components/ui/button";
 import {
   Select,

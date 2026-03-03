@@ -1,5 +1,5 @@
 "use client";
-import { RHFInput } from "@/components/rhf-input";
+import { RHFInput } from "@/components/shared/form/rhf-input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";
@@ -126,7 +126,7 @@ const TwoFactorForm = ({ s_id, o_id }: { s_id: string; o_id: string }) => {
       toast.error(
         (error as any).data.errors?.[0]?.message ||
           (error as any)?.message ||
-          error
+          error,
       );
     }
   };

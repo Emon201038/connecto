@@ -200,6 +200,55 @@ const createPost = async (payload: any, userId: string) => {
         feelingsEmoji: feelings?.emoji,
         authorId: userId,
       },
+      include: {
+        entities: {
+          select: {
+            id: true,
+            end: true,
+            offset: true,
+            type: true,
+            text: true,
+            hashtag: {
+              select: {
+                name: true,
+                useCount: true,
+                id: true,
+              },
+            },
+          },
+        },
+        author: {
+          select: {
+            id: true,
+            username: true,
+            fullName: true,
+          },
+        },
+        group: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        reactions: {
+          where: {
+            userId,
+          },
+          select: {
+            type: true,
+            reactionFor: true,
+            targetId: true,
+            userId: true,
+          },
+        },
+        _count: {
+          select: {
+            comments: true,
+            reactions: true,
+            shares: true,
+          },
+        },
+      },
     });
 
     if (!entities?.length) return post;

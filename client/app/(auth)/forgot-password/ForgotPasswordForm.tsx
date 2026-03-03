@@ -1,4 +1,4 @@
-import { RHFInput } from "@/components/rhf-input";
+import { RHFInput } from "@/components/shared/form/rhf-input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Form } from "@/components/ui/form";

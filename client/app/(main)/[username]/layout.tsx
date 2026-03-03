@@ -95,7 +95,7 @@ const layout = async ({
   return (
     <div className=" min-h-screen mt-24 md:mt-12">
       {/* Cover Photo */}
-      <div className="relative w-full h-[200px] md:h-[350px] bg-shade">
+      <div className="relative w-full h-50 md:h-87.5 bg-shade">
         <CoverPhoto
           containerClass="relative w-full h-[200px] md:h-[350px] bg-shade"
           imageClass="object-cover w-full h-full"

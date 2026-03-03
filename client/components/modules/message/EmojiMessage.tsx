@@ -1,7 +1,7 @@
 "use client";
 import { IConversationMember, IMessage } from "@/types";
 import { useSession } from "next-auth/react";
-import { EmojiDisplay } from "@/components/Emoji";
+import { EmojiDisplay } from "@/components/modules/reaction/Emoji";
 import Like from "@/components/icons/like";
 
 interface TextMessageProps {

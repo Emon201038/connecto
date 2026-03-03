@@ -3,6 +3,8 @@ import { IReaction } from "@/interface/reaction.interface";
 export interface IResponse<T = unknown> {
   data: T;
   errors: { message: string }[];
+  success?: boolean;
+  message?: string;
 }
 
 export enum UserRole {

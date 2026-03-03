@@ -17,9 +17,9 @@ import GroupIcon from "@/components/icons/Group";
 const layout = async ({ children }: { children: React.ReactNode }) => {
   const session = await auth();
 
-  if (!session) {
-    redirect("/login");
-  }
+  // if (!session) {
+  //   redirect("/login");
+  // }
   // if (session.user.role === "ADMIN") redirect("/admin");
   return (
     <div className="  min-h-[calc(100vh-96px)] md:min-h-[calc(100vh-56px)]">

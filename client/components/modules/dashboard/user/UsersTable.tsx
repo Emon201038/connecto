@@ -1,5 +1,5 @@
 "use client";
-import ManagementTable from "@/components/shared/ManagementTable";
+import ManagementTable from "@/components/shared/dashboard/ManagementTable";
 import { IUser } from "@/types";
 import { useRouter } from "next/navigation";
 import React, { useState, useTransition } from "react";

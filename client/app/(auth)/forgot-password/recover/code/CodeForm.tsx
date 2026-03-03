@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { RHFInput } from "@/components/rhf-input";
+import { RHFInput } from "@/components/shared/form/rhf-input";
 
 const CodeForm = () => {
   const selectMethodSchema = z.object({

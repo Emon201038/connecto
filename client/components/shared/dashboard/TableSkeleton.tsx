@@ -7,8 +7,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../ui/table";
-import { Skeleton } from "../ui/skeleton";
+} from "../../ui/table";
+import { Skeleton } from "../../ui/skeleton";
 
 interface TableSkeletonProps {
   columns: number;

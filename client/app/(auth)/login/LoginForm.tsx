@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import z from "zod";
-import { RHFInput } from "@/components/rhf-input";
+import { RHFInput } from "@/components/shared/form/rhf-input";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { zodResolver } from "@hookform/resolvers/zod";

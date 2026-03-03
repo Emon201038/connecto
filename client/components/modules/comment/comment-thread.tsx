@@ -9,14 +9,14 @@ import { Balancer } from "react-wrap-balancer";
 import timeAgo from "@/lib/time-ago";
 import { useAppSelector } from "@/redux/hooks";
 import { IComment } from "@/interface/comment.interfce";
-import { HighlightHashtags } from "../../highlight-hashtag";
-import { ReactionButton2 } from "../../reaction-button-2";
+import { HighlightHashtags } from "../../shared/form/highlight-hashtag";
+import { ReactionButton2 } from "../reaction/reaction-button-2";
 import { ReactionType } from "@/interface/reaction.interface";
 import { useToggleCommentReactionMutation } from "@/redux/features/reaction/reactionApi";
 import { toast } from "sonner";
 import ReusableTooltip from "../../Tooltip";
 import Image from "next/image";
-import ReactorsModal from "../../reactors-modal";
+import ReactorsModal from "../reaction/reactors-modal";
 import { IUser } from "@/types";
 
 const reactions = [

@@ -1,7 +1,7 @@
 "use client";
-import { RHFDate } from "@/components/rhf-date";
-import { RHFInput } from "@/components/rhf-input";
-import { RHFRadio } from "@/components/rhf-radio";
+import { RHFDate } from "@/components/shared/form/rhf-date";
+import { RHFInput } from "@/components/shared/form/rhf-input";
+import { RHFRadio } from "@/components/shared/form/rhf-radio";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";

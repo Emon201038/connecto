@@ -31,7 +31,7 @@ import { Like } from "./RightSideBar";
 import { toast } from "sonner";
 import { useGetConversationInfoQuery } from "@/redux/features/conversation/conversationApi";
 import HeaderLoading from "./HeaderLoading";
-import { EmojiDisplay } from "@/components/Emoji";
+import { EmojiDisplay } from "@/components/modules/reaction/Emoji";
 import { Skeleton } from "@/components/ui/skeleton";
 import Messages from "@/components/modules/message/messages";
 

@@ -1,13 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { TableCell, TableRow } from "../ui/table";
+import { TableCell, TableRow } from "../../ui/table";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { Button } from "../ui/button";
+} from "../../ui/dropdown-menu";
+import { Button } from "../../ui/button";
 import { Edit, Eye, MoreHorizontal, Trash } from "lucide-react";
 import { IColumn } from "./ManagementTable";
 

@@ -1,5 +1,5 @@
 "use client";
-import { StoriesContainer } from "@/components/story-container";
+import { StoriesContainer } from "@/components/modules/story/story-container";
 import { useGetStoriesQuery } from "@/redux/features/story/storyApi";
 import { Plus } from "lucide-react";
 import React from "react";
@@ -8,7 +8,7 @@ const StoryPage = () => {
   const [page, setPage] = React.useState(1);
   const { data, isLoading } = useGetStoriesQuery(
     { page, limit: 20 },
-    { refetchOnMountOrArgChange: true, skip: false }
+    { refetchOnMountOrArgChange: true, skip: false },
   );
 
   return (

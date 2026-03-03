@@ -7,7 +7,7 @@ import z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "@/components/ui/form";
-import { RHFRadio } from "@/components/rhf-radio";
+import { RHFRadio } from "@/components/shared/form/rhf-radio";
 import { Button } from "@/components/ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -23,7 +23,7 @@ const AccountInfo = ({ user }: IProps) => {
   const selectMethodSchema = z.object({
     method: z.enum(
       user.methods.map((method) => method.type),
-      { error: "Method is required" }
+      { error: "Method is required" },
     ),
   });
 
@@ -47,7 +47,7 @@ const AccountInfo = ({ user }: IProps) => {
       }).unwrap();
       if (res.data?.sendResetCode) {
         router.push(
-          `/forgot-password/recover/code?method=${data.method}&o_id=${res?.data?.sendResetCode}`
+          `/forgot-password/recover/code?method=${data.method}&o_id=${res?.data?.sendResetCode}`,
         );
       } else {
         toast.error("Failed to send otp" + res.errors[0].message);

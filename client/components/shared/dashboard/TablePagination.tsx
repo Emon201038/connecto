@@ -3,14 +3,14 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "../../ui/select";
 
 interface TablePaginationProps {
   currentPage: number;

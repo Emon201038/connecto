@@ -262,6 +262,30 @@ export const postApi = baseApi.injectEndpoints({
         }
       },
     }),
+    createPost2: builder.mutation<IPost, ICreatePost>({
+      query: (input) => ({
+        url: "/api/v2/posts",
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: input,
+      }),
+      transformResponse: (response: IResponse<IPost>) => response.data,
+      onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
+        try {
+          const post = await queryFulfilled;
+          dispatch(
+            postApi.util.updateQueryData("getAllPosts", {}, (draft) => {
+              draft.posts.unshift(post.data);
+            }),
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
     getAllPosts: builder.query<
       {
         posts: IPost[];
@@ -294,4 +318,5 @@ export const {
   useGetAllPostsQuery,
   useLazyGetPostQuery,
   useCreatePostMutation,
+  useCreatePost2Mutation,
 } = postApi;

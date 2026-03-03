@@ -1,4 +1,4 @@
-import CreatePostCard from "@/components/create-post-card";
+import CreatePostCard from "@/components/modules/post/create-post-card";
 import React from "react";
 
 const page = () => {

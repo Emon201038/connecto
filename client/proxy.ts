@@ -1,48 +1,102 @@
-import { NextResponse } from "next/server";
-import { auth } from "./auth";
+import { NextRequest, NextResponse } from "next/server";
+import jwt, { JwtPayload } from "jsonwebtoken";
+import { UserRole } from "./interface/user.interface";
 import {
-  API_AUTH_PREFIX,
-  AUTH_ROUTES,
-  PUBLIC_ROUTES,
-} from "./constants/routes";
+  getDefaultDashboardRoute,
+  getRouteOwner,
+  isAuthRoute,
+} from "./lib/auth-utils";
+import { getNewAccessToken } from "./services/auth/auth.service";
+import { deleteCookie } from "./lib/cookies";
 
-export default auth((req) => {
-  const { nextUrl } = req;
-  const isAuthenticated = !!req.auth;
+export async function proxy(request: NextRequest) {
+  const pathname = request.nextUrl.pathname;
+  const hasTokenRefreshedParam =
+    request.nextUrl.searchParams.has("tokenRefreshed");
 
-  const pathname = nextUrl.pathname;
-
-  const isApiRoute = pathname.startsWith(API_AUTH_PREFIX);
-  const isPublicRoute = PUBLIC_ROUTES.includes(pathname);
-  const isAuthRoute = AUTH_ROUTES.includes(pathname);
-
-  // --- 1. Skip API routes
-  if (isApiRoute) return null;
-
-  // --- 2. If user is logged in but tries to access login/register → send home
-  if (isAuthRoute && isAuthenticated) {
-    return NextResponse.redirect(new URL("/", nextUrl));
+  // If coming back after token refresh, remove the param and continue
+  if (hasTokenRefreshedParam) {
+    const url = request.nextUrl.clone();
+    url.searchParams.delete("tokenRefreshed");
+    return NextResponse.redirect(url);
   }
 
-  // --- 3. If user is NOT logged in and route is protected → send login
-  if (!isAuthenticated && !isPublicRoute && !isAuthRoute) {
-    return NextResponse.redirect(new URL("/login", nextUrl));
+  const tokenRefreshResult = await getNewAccessToken();
+
+  // If token was refreshed, redirect to same page to fetch with new token
+  if (tokenRefreshResult?.tokenRefreshed) {
+    const url = request.nextUrl.clone();
+    url.searchParams.set("tokenRefreshed", "true");
+    return NextResponse.redirect(url);
   }
 
-  // --- 4. Otherwise → allow
+  const accessToken = request.cookies.get("accessToken")?.value || null;
+  let userRole: UserRole | null = null;
+  if (accessToken) {
+    const verifiedToken: JwtPayload | string = jwt.verify(
+      accessToken,
+      process.env.JWT_ACCESS_TOKEN_SECRET as string,
+    );
+
+    if (typeof verifiedToken === "string") {
+      await deleteCookie("accessToken");
+      await deleteCookie("refreshToken");
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+
+    userRole = verifiedToken.role;
+  }
+
+  const routerOwner = getRouteOwner(pathname);
+  const isAuthRouter = isAuthRoute(pathname);
+
+  // user trying to access auth route while loggedin
+  if (accessToken && isAuthRouter) {
+    return NextResponse.redirect(
+      new URL(getDefaultDashboardRoute(userRole as UserRole), request.url),
+    );
+  }
+
+  // user is trying to access open public route
+  if (routerOwner === null) {
+    return NextResponse.next();
+  }
+
+  if (!accessToken) {
+    const loginUrl = new URL("/login", request.url);
+    loginUrl.searchParams.set("redirect", pathname);
+    return NextResponse.redirect(loginUrl);
+  }
+
+  //  user is trying to access common protected route
+  if (routerOwner === "COMMON") {
+    return NextResponse.next();
+  }
+
+  if (
+    routerOwner === "ADMIN" ||
+    routerOwner === "GUIDE" ||
+    routerOwner === "TOURIST"
+  ) {
+    if (userRole !== routerOwner) {
+      return NextResponse.redirect(
+        new URL(getDefaultDashboardRoute(userRole as UserRole), request.url),
+      );
+    }
+    return NextResponse.next();
+  }
+
   return NextResponse.next();
-});
+}
 
 export const config = {
   matcher: [
-    /**
-     * Run middleware on all routes except:
-     * - /api (API routes)
-     * - /_next/static (Next.js internals)
-     * - /_next/image (Next.js image optimizer)
-     * - favicon.ico, sitemap.xml, robots.txt
-     * - Any file with an extension (.png, .jpg, .svg, etc.)
+    /*
+     * Match all paths except for:
+     * 1. API routes   : /api/...
+     * 2. Next.js internals: /_next/...
+     * 3. Static files: files with a dot (.) like favicon.ico, .png, etc.
      */
-    "/((?!api|_next/static|_next/image|favicon\\.ico|sitemap\\.xml|robots\\.txt|.*\\.(?:png|jpg|jpeg|svg|gif|webp|ico)).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)",
   ],
 };

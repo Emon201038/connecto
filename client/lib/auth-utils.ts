@@ -67,10 +67,10 @@ export const getDefaultDashboardRoute = (role: UserRole) => {
     return "/admin/dashboard";
   }
   if (role === UserRole.MODARATOR) {
-    return "/modarator/dashboard";
+    return "/";
   }
   if (role === UserRole.USER) {
-    return "/dashboard";
+    return "/";
   }
   return "/";
 };

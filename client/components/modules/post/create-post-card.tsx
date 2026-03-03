@@ -14,9 +14,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import PostFeelings from "./modules/post/post-feelings";
+import PostFeelings from "./post-feelings";
 import { toast } from "sonner";
-import { EntityInput } from "./entity-form";
+import { EntityInput } from "../../shared/form/entity-form";
 import { Entity } from "@/types";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -26,7 +26,7 @@ import {
   ResponsiveDialogTitle,
   ResponsiveDialogTrigger,
 } from "@/components/ui/responsive-dialog";
-import { useCreatePostMutation } from "@/redux/features/post/postApi";
+import { useCreatePost2Mutation } from "@/redux/features/post/postApi";
 import { PostPrivacy, PostType } from "@/interface/post.interface";
 import { PostCreationSkeleton } from "./create-post-card-loading";
 import { Session } from "next-auth";
@@ -95,10 +95,10 @@ export default function CreatePostCard({
   };
   const { status, data } = useSession();
 
-  const [createPost, { isLoading }] = useCreatePostMutation();
+  const [createPost, { isLoading }] = useCreatePost2Mutation();
 
   const handleCreatePost = async () => {
-    const obj = {
+    const res = await createPost({
       content: rawText,
       type: images.length > 0 ? PostType.IMAGE : PostType.TEXT,
       privacy: privacy as PostPrivacy,
@@ -109,58 +109,18 @@ export default function CreatePostCard({
       })),
       group: groupId,
       feelings: selectedFeeling?.type ? selectedFeeling : null,
-      attachments: images.map((img) => img.file).filter(Boolean),
-    };
+      attachments: images.map((img) => img.file),
+    }).unwrap();
 
-    await fetch("http://localhost:5000/api/v2/auth/login", {
-      method: "POST",
-      body: JSON.stringify({
-        email: "fb1@example.com",
-        password: "123456",
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    });
-
-    const res = await fetch("http://localhost:5000/api/v2/posts", {
-      method: "POST",
-      body: JSON.stringify(obj),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    });
-
-    const data = await res.json();
-
-    console.log(data);
-    // const res = await createPost({
-    //   content: rawText,
-    //   type: images.length > 0 ? PostType.IMAGE : PostType.TEXT,
-    //   privacy: privacy as PostPrivacy,
-    //   entities: entities.map(({ name, tag, id, ...rest }) => ({
-    //     text: name || tag,
-    //     target: id || tag,
-    //     ...rest,
-    //   })),
-    //   group: groupId,
-    //   feelings: selectedFeeling?.type ? selectedFeeling : null,
-    //   attachments: images.map((img) => img.file),
-    // }).unwrap();
-
-    // if (res?.data?.id) {
-    //   toast.success("Post created successfully");
-    //   setIsDialogOpen(false);
-    //   setEntities([]);
-    //   setRawText("");
-    //   setImages([]);
-    // } else {
-    //   toast.error("Failed to create post", {
-    //     description: res?.errors?.[0]?.message,
-    //   });
-    // }
+    if (res?.id) {
+      toast.success("Post created successfully");
+      setIsDialogOpen(false);
+      setEntities([]);
+      setRawText("");
+      setImages([]);
+    } else {
+      toast.error("Failed to create post");
+    }
   };
 
   const getPrivacyIcon = (privacy: string) => {
@@ -318,7 +278,7 @@ export default function CreatePostCard({
                   placeholder={`What's on your mind, ${
                     authSession?.user?.fullName || data?.user?.fullName
                   }?`}
-                  className="max-h-50 min-h-12.5 md:max-h-25 border-none focus-visible:ring-0 focus:ring-0 focus-visible:shadow-none focus-visible:ring-offset-0 focus:ring-offset-transparent focus:ring-transparent"
+                  className="max-h-50 min-h-12.5 md:max-h-25 border-none focus-visible:ring-0 focus:ring-0 focus-visible:shadow-none focus-visible:ring-offset-0 focus:ring-offset-transparent focus:ring-transparent bg-transparent resize-none overflow-y-auto"
                 />
               </div>
               {/* Image Previews */}

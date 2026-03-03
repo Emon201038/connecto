@@ -3,7 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import { Camera, MoreHorizontal, Share } from "lucide-react";
 import React from "react";
 import Link from "./Link";
-import CreatePostCard from "@/components/create-post-card";
+import CreatePostCard from "@/components/modules/post/create-post-card";
 import GroupIcon from "@/components/icons/Group";
 import { store } from "@/redux/store";
 import { groupApi } from "@/redux/features/group/groupApi";
@@ -19,7 +19,7 @@ const layout = async ({
   const { groupId } = await params;
 
   const res = await store.dispatch(
-    groupApi.endpoints.group.initiate({ id: groupId })
+    groupApi.endpoints.group.initiate({ id: groupId }),
   );
 
   const routes = [

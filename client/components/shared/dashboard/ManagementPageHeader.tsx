@@ -1,7 +1,7 @@
 "use client";
 import { LucideIcon, Plus } from "lucide-react";
 import React from "react";
-import { Button } from "../ui/button";
+import { Button } from "../../ui/button";
 
 interface ManagementPageHeaderProps {
   title: string;
