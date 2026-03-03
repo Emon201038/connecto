@@ -233,7 +233,7 @@ export default function PostCard({ post: rootPost }: { post: IPost }) {
       <div className="p-3">
         <HighlightHashtags text={post.content} />
       </div>
-      {post.type === "image" &&
+      {post.type === "IMAGE" &&
         post.attachments &&
         post.attachments.length > 0 && (
           <ImageGrid attachments={post.attachments} />

@@ -98,19 +98,34 @@ export default function CreatePostCard({
   const [createPost, { isLoading }] = useCreatePost2Mutation();
 
   const handleCreatePost = async () => {
-    const res = await createPost({
+    const obj = {
       content: rawText,
       type: images.length > 0 ? PostType.IMAGE : PostType.TEXT,
       privacy: privacy as PostPrivacy,
-      entities: entities.map(({ name, tag, id, ...rest }) => ({
-        text: name || tag,
-        target: id || tag,
-        ...rest,
-      })),
-      group: groupId,
-      feelings: selectedFeeling?.type ? selectedFeeling : null,
-      attachments: images.map((img) => img.file),
-    }).unwrap();
+      group: groupId as string,
+    };
+
+    const formData = new FormData();
+
+    Object.entries(obj).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+
+    if (selectedFeeling?.type) {
+      formData.append("feelings", JSON.stringify(selectedFeeling));
+    }
+
+    if (entities.length > 0) {
+      formData.append("entities", JSON.stringify(entities));
+    }
+
+    if (images.length > 0) {
+      images.forEach((img) => {
+        formData.append("attachments", img.file);
+      });
+    }
+
+    const res = await createPost(formData).unwrap();
 
     if (res?.id) {
       toast.success("Post created successfully");

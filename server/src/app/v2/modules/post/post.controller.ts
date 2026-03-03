@@ -12,6 +12,7 @@ const getPosts = catchAsync(async (req, res, next) => {
 
   const user = req.user;
   if (!user) throw new AppError(403, "You are not logged in");
+
   const data = await PostService.getPostsFromDB(options, filters, user.id);
   sendResponse(res, {
     success: true,
@@ -24,11 +25,16 @@ const getPosts = catchAsync(async (req, res, next) => {
 
 const createPost = catchAsync(async (req, res, next) => {
   if (!req.user) throw new AppError(403, "You are not logged in");
+
   sendResponse(res, {
     success: true,
     statusCode: 200,
     message: "Post created successfully",
-    data: await PostService.createPost(req.body, req.user.id),
+    data: await PostService.createPost(
+      req.body,
+      req.files as Express.Multer.File[],
+      req.user.id,
+    ),
   });
 });
 

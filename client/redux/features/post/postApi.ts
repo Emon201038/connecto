@@ -262,13 +262,10 @@ export const postApi = baseApi.injectEndpoints({
         }
       },
     }),
-    createPost2: builder.mutation<IPost, ICreatePost>({
+    createPost2: builder.mutation<IPost, FormData>({
       query: (input) => ({
         url: "/api/v2/posts",
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         credentials: "include",
         body: input,
       }),

@@ -5,7 +5,7 @@ import { IGroup } from "./group.interface";
 
 export enum PostType {
   TEXT = "text",
-  IMAGE = "image",
+  IMAGE = "IMAGE",
   VIDEO = "video",
   LINK = "link",
 }

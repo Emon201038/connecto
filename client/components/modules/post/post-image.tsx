@@ -1,4 +1,5 @@
-import { cn } from "@/lib/utils";
+import { generateBlurUrl } from "@/helper/renderImage";
+import { cn, getBlurDataUrl } from "@/lib/utils";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -9,6 +10,7 @@ const ImageGrid = ({
 }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
+  console.log(attachments, "attatchments");
   if (!attachments || attachments.length === 0) return null;
 
   const renderImageGrid = () => {
@@ -26,9 +28,7 @@ const ImageGrid = ({
             width={600}
             height={400}
             placeholder="blur"
-            blurDataURL={
-              "https://res.cloudinary.com/emadul-hoque-emon/image/upload/e_blur:10000,q_1,q_auto:low,f_webp/v1757695325/facebook/post/dmrgspqrq8knztdrw6wj.png"
-            }
+            blurDataURL={generateBlurUrl(attachments[0].url)}
             className="w-full h-full object-cover hover:opacity-95 transition-opacity"
           />
         </div>
