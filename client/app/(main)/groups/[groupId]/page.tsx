@@ -20,7 +20,7 @@ import {
 import { useParams } from "next/navigation";
 import { useSingleGroupPostsQuery } from "@/redux/features/group/groupApi";
 import PostCard from "@/components/modules/post/post-card";
-import { LoadingFeed } from "@/components/loading-feed";
+import { LoadingFeed } from "@/components/modules/post/loading-feed";
 
 export default function GroupDetailsPage() {
   const params = useParams<{ groupId: string }>();

@@ -2,7 +2,7 @@
 import PostCard from "@/components/modules/post/post-card";
 import { useGetPostsQuery } from "@/redux/features/post/postApi";
 import React from "react";
-import { LoadingFeed } from "@/components/loading-feed";
+import { LoadingFeed } from "@/components/modules/post/loading-feed";
 import { useSession } from "next-auth/react";
 
 const Posts = () => {

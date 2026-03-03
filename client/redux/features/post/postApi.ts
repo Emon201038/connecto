@@ -129,7 +129,7 @@ export const postApi = baseApi.injectEndpoints({
             posts: IPost[];
             meta: { total: number; page: number; limit: number };
           };
-        }>
+        }>,
       ) => {
         return {
           data: {
@@ -212,11 +212,11 @@ export const postApi = baseApi.injectEndpoints({
               input: {
                 ...input,
                 attachments: Array.from(input.attachments || []).map(
-                  () => null
+                  () => null,
                 ),
               },
             },
-          })
+          }),
         );
 
         // 2. Map
@@ -254,13 +254,36 @@ export const postApi = baseApi.injectEndpoints({
               { page: 1, limit: 15 },
               (draft) => {
                 draft.data.posts.unshift(post.data.data);
-              }
-            )
+              },
+            ),
           );
         } catch (error) {
           console.log(error);
         }
       },
+    }),
+    getAllPosts: builder.query<
+      {
+        posts: IPost[];
+        meta: { hasMore: boolean; nextCursor: string | null };
+      },
+      { cursor?: string; limit?: number }
+    >({
+      query: (args) => ({
+        url: "/api/v2/posts",
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      }),
+      transformResponse: (response: {
+        data: IPost[];
+        meta: { hasMore: boolean; nextCursor: string | null };
+      }) => ({
+        posts: response.data,
+        meta: response.meta,
+      }),
     }),
   }),
 });
@@ -268,6 +291,7 @@ export const postApi = baseApi.injectEndpoints({
 export const {
   useGetPostQuery,
   useGetPostsQuery,
+  useGetAllPostsQuery,
   useLazyGetPostQuery,
   useCreatePostMutation,
 } = postApi;

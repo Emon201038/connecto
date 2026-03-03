@@ -1,5 +1,5 @@
 "use client";
-import { LoadingFeed } from "@/components/loading-feed";
+import { LoadingFeed } from "@/components/modules/post/loading-feed";
 import PostCard from "@/components/modules/post/post-card";
 import { useGroupPostsQuery } from "@/redux/features/group/groupApi";
 import { useSession } from "next-auth/react";

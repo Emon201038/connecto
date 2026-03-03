@@ -24,6 +24,9 @@ model Post {
   updatedAt DateTime   @updatedAt
   comments  Comment[]
   reactions Reaction[]
+
+  @@index([createdAt])
+  @@index([authorId])
 }
 
 model PostAttachment {

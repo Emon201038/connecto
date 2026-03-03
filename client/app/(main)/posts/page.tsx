@@ -1,7 +1,5 @@
-import PostCard from "@/components/modules/post/post-card";
-import { IPost } from "@/interface/post.interface";
 import { serverFetch } from "@/lib/server-fetch";
-import Login from "./login";
+import Posts from "@/components/modules/post/posts";
 
 const page = async () => {
   const res = await serverFetch.get("/posts", {
@@ -14,15 +12,9 @@ const page = async () => {
 
   const data = await res.json();
 
-  console.log(data);
   return (
-    <div className="w-screen mx-auto">
-      <div className="space-y-4 max-w-lg w-full mx-auto">
-        <Login />
-        {data?.data?.map((post: IPost) => (
-          <PostCard key={post.id} post={post} />
-        ))}
-      </div>
+    <div className="w-screen mx-auto py-6">
+      <Posts meta={data?.meta} posts={data?.data} />
     </div>
   );
 };

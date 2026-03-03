@@ -7,12 +7,14 @@ export const sendResponse = <T>(
     statusCode: number;
     message: string;
     meta?: {
-      page: number;
-      limit: number;
-      total: number;
+      page?: number;
+      limit?: number;
+      total?: number;
+      nextCursor?: string | null;
+      hasMore?: boolean;
     };
     data: T | null | undefined;
-  }
+  },
 ) => {
   res.status(jsonData.statusCode).json(jsonData);
 };

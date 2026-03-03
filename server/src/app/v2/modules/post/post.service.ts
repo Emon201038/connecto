@@ -3,10 +3,10 @@ import { PostCreateInput } from "../../../../../prisma/generated/models";
 import prisma from "../../../config/db";
 import { paginationHelper } from "../../../helpers/paginationHelper";
 import { postSearchableFields } from "./post.constant";
-import { CreatePostInput } from "./post.interface";
+import { PostWithRelations } from "./post.interface";
 
 const getPostsFromDB = async (options: any, filters: any, userId?: string) => {
-  const { page, limit, skip, sortBy, sortOrder } =
+  const { limit, sortBy, sortOrder } =
     paginationHelper.calculatePagination(options);
 
   const { searchTerm, ...filterData } = filters;
@@ -71,6 +71,14 @@ const getPostsFromDB = async (options: any, filters: any, userId?: string) => {
     where: {
       AND: andConditions,
     },
+    cursor: options?.cursor ? { id: options?.cursor } : undefined,
+    skip: options?.cursor ? 1 : undefined,
+    orderBy: sortBy
+      ? {
+          [sortBy]: sortOrder,
+        }
+      : [{ createdAt: "desc" }, { id: "desc" }],
+    take: limit + 1,
     omit: {
       authorId: true,
       groupId: true,
@@ -124,24 +132,22 @@ const getPostsFromDB = async (options: any, filters: any, userId?: string) => {
         },
       },
     },
-    orderBy: {
-      [sortBy]: sortOrder,
-    },
-    skip,
-    take: limit,
   });
 
   const postIds = posts.map((p) => p.id);
 
-  const reactionSummary = await prisma.reaction.groupBy({
-    by: ["postId", "type"],
-    where: {
-      postId: { in: postIds },
-    },
-    _count: {
-      type: true,
-    },
-  });
+  const reactionSummary =
+    posts.length > 0
+      ? await prisma.reaction.groupBy({
+          by: ["postId", "type"],
+          where: {
+            postId: { in: postIds },
+          },
+          _count: {
+            type: true,
+          },
+        })
+      : [];
 
   const reactionMap: Record<string, any[]> = {};
 
@@ -156,24 +162,27 @@ const getPostsFromDB = async (options: any, filters: any, userId?: string) => {
     });
   });
 
-  const total = await prisma.post.count({
-    where: {
-      AND: andConditions,
-    },
-  });
+  const meta = {
+    nextCursor: posts.length > limit ? posts[posts.length - 1].id : null,
+    hasMore: posts.length > limit,
+  };
+  const hasMore = posts.length > limit;
+
+  if (hasMore) {
+    posts.pop();
+  }
 
   return {
-    meta: {
-      total,
-      totalPages: Math.ceil(total / limit) || 0,
-      page,
-      limit,
-    },
-    data: posts.map(({ reactions, ...p }) => ({
-      ...p,
-      reactionSummary: reactionMap[p.id] || [],
-      myReaction: reactions.length ? reactions[0] : null,
-    })),
+    meta,
+    data: posts.map(({ reactions, ...post }) => {
+      const myReaction = reactions[0] ?? null;
+
+      return {
+        ...post,
+        reactionSummary: reactionMap[post.id] || [],
+        myReaction,
+      };
+    }),
   };
 };
 

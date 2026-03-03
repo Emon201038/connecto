@@ -4,7 +4,7 @@ import { getSession } from "next-auth/react";
 const serverUrl = process.env.NEXT_PUBLIC_API_URL;
 export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: `${serverUrl}/graphql`,
+    baseUrl: `${serverUrl}`,
     credentials: "include",
     prepareHeaders: async (headers, { extra }) => {
       if (typeof window === "undefined") {
