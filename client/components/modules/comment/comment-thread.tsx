@@ -10,7 +10,7 @@ import timeAgo from "@/lib/time-ago";
 import { useAppSelector } from "@/redux/hooks";
 import { IComment } from "@/interface/comment.interfce";
 import { HighlightHashtags } from "../../shared/form/highlight-hashtag";
-import { ReactionButton2 } from "../reaction/reaction-button-2";
+import { ReactionButton2 } from "../reaction/reaction-button";
 import { ReactionType } from "@/interface/reaction.interface";
 import { useToggleCommentReactionMutation } from "@/redux/features/reaction/reactionApi";
 import { toast } from "sonner";

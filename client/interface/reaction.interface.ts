@@ -13,9 +13,9 @@ export enum ReactionType {
 }
 
 export enum ReactionTargetType {
-  POST = "Post",
-  COMMENT = "Comment",
-  MESSAGE = "Message",
+  POST = "POST",
+  COMMENT = "COMMENT",
+  MESSAGE = "MESSAGE",
 }
 
 export interface IReaction {

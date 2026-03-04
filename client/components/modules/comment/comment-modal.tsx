@@ -28,7 +28,6 @@ import {
 import { useAddCommentMutation } from "@/redux/features/comments/commentsApi";
 import { toast } from "sonner";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import { useMeQuery } from "@/redux/features/auth/authApi";
 
 interface CommentModalProps {
@@ -225,7 +224,7 @@ const CommentsContent = ({ post }: { post: IPost }) => {
                 {post?.reactionSummary?.length &&
                 post?.reactionSummary?.length > 0
                   ? [...(post.reactionSummary as any)]
-                      .sort((a, b) => b._count.type - a._count.type)
+                      .sort((a, b) => b.count - a.count)
                       .slice(0, 3)
                       .map((reaction, index) => (
                         <div
@@ -236,7 +235,7 @@ const CommentsContent = ({ post }: { post: IPost }) => {
                             zIndex: 3 - index,
                           }}
                         >
-                          {reactionEmojis[reaction.type as "LIKE"].emoji}
+                          {reactionEmojis[reaction.type as "LIKE"]?.emoji}
                         </div>
                       ))
                   : null}

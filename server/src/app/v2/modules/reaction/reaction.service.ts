@@ -22,7 +22,14 @@ const toggleReaction = async (payload: ReactionCreateInput, userId: string) => {
       break;
   }
   return await prisma.$transaction(async (tx) => {
-    const deleted = await tx.reaction.deleteMany({
+    const existingReaction = await tx.reaction.findFirst({
+      where: {
+        userId,
+        reactionFor: payload.reactionFor,
+        [targetField]: payload.targetId,
+      },
+    });
+    await tx.reaction.deleteMany({
       where: {
         userId,
         reactionFor: payload.reactionFor,
@@ -30,7 +37,7 @@ const toggleReaction = async (payload: ReactionCreateInput, userId: string) => {
       },
     });
 
-    if (deleted.count > 0) {
+    if (existingReaction?.type === payload.type) {
       return { added: false };
     }
 

@@ -51,6 +51,11 @@ export interface IPost {
   reactionCount: number;
   commentCount: number;
   shareCount: number;
+  _count: {
+    reactions: number;
+    comments: number;
+    shares: number;
+  };
   myReaction: { type: ReactionType } | null;
   reactionSummary: {
     count: number;

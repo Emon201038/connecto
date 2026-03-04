@@ -1,174 +1,299 @@
-import { useIsMobile } from "@/hooks/use-mobile";
-import { useAppSelector } from "@/redux/hooks";
-import Image from "next/image";
-import React, { useRef, useState } from "react";
+"use client";
+
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ThumbsUp } from "lucide-react";
-import ReactionsModal from "./reactions-modal";
-import { IPost } from "@/interface/post.interface";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import {
+  ReactionTargetType,
+  ReactionType,
+} from "@/interface/reaction.interface";
+import { toast } from "sonner";
 
-const ReactionButton = ({ post: rootPost }: { post: IPost }) => {
-  const [showReactionsModal, setShowReactionsModal] = useState(false);
-  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
-  const likeButtonRef = useRef<HTMLButtonElement>(null);
-  const longPressTimerRef = useRef<NodeJS.Timeout | null>(null);
-  const [isLongPress, setIsLongPress] = useState(false);
-  const isMobile = useIsMobile();
-  const hoverTimerRef = useRef<NodeJS.Timeout | null>(null);
+interface ReactionButtonProps {
+  userReaction?: "like" | "love" | "haha" | "wow" | "sad" | "angry" | null;
+  onReaction: (
+    reaction: "like" | "love" | "haha" | "wow" | "sad" | "angry" | null,
+  ) => void;
+  children: React.ReactNode;
+  className?: string;
+  handleButtonClick?: () => void;
+  targetId: string;
+  reactionFor: string;
+}
 
-  const { posts } = useAppSelector((state) => state.post);
-  const post = posts.find((p) => p.id === rootPost.id) || rootPost;
+const reactions = [
+  {
+    type: "like" as const,
+    icon: "/images/like.svg",
+    label: "Like",
+    color: "text-blue-500",
+  },
+  {
+    type: "love" as const,
+    icon: "/images/love.svg",
+    label: "Love",
+    color: "text-red-500",
+  },
+  {
+    type: "haha" as const,
+    icon: "/images/haha.svg",
+    label: "Haha",
+    color: "text-yellow-500",
+  },
+  {
+    type: "wow" as const,
+    icon: "/images/wow.svg",
+    label: "Wow",
+    color: "text-yellow-500",
+  },
+  {
+    type: "sad" as const,
+    icon: "/images/sad.svg",
+    label: "Sad",
+    color: "text-yellow-500",
+  },
+  {
+    type: "angry" as const,
+    icon: "/images/angry.svg",
+    label: "Angry",
+    color: "text-red-500",
+  },
+];
 
-  // Define the reactions with their emojis
-  const reactionEmojis: Record<string, React.ReactNode> = {
-    like: (
-      <Image
-        src="/images/like.svg"
-        alt="like"
-        width={18}
-        height={18}
-        priority
-      />
-    ),
-    love: (
-      <Image
-        src="/images/love.svg"
-        alt="love"
-        width={18}
-        height={18}
-        priority
-      />
-    ),
-    haha: (
-      <Image
-        src="/images/haha.svg"
-        alt="haha"
-        width={18}
-        height={18}
-        priority
-      />
-    ),
-    wow: (
-      <Image src="/images/wow.svg" alt="wow" width={18} height={18} priority />
-    ),
-    sad: (
-      <Image src="/images/sad.svg" alt="sad" width={18} height={18} priority />
-    ),
-    angry: (
-      <Image
-        src="/images/angry.svg"
-        alt="angry"
-        width={18}
-        height={18}
-        priority
-      />
-    ),
-  };
+export function ReactionButton2({
+  userReaction,
+  onReaction,
+  children,
+  className,
+  handleButtonClick,
+  targetId,
+  reactionFor,
+}: ReactionButtonProps) {
+  const [showPicker, setShowPicker] = useState(false);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const hideTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const longPressTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const pickerRef = useRef<HTMLDivElement>(null);
+  const [pickerPosition, setPickerPosition] = useState<"top" | "bottom">("top");
 
-  // Define the reactions with their colors
-  const reactionColors: Record<string, string> = {
-    like: "text-blue-600",
-    love: "text-red-500",
-    haha: "text-yellow-500",
-    wow: "text-yellow-500",
-    sad: "text-yellow-500",
-    angry: "text-orange-500",
-  };
+  const calculatePickerPosition = () => {
+    if (!buttonRef.current) return;
 
-  const handleReactionSelect = (reaction: string) => {};
+    const buttonRect = buttonRef.current.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    const spaceAbove = buttonRect.top;
+    const spaceBelow = viewportHeight - buttonRect.bottom;
 
-  const handleLikeClick = () => {
-    if (!isLongPress) {
-    }
-    setIsLongPress(false);
-  };
-
-  // Update modal position based on button position
-  const updateModalPosition = () => {
-    if (likeButtonRef.current) {
-      const rect = likeButtonRef.current.getBoundingClientRect();
-      setModalPosition({ x: rect.left + rect.width / 2, y: rect.top });
-    }
-  };
-
-  // Handle mouse/touch down for long press
-  const handleMouseDown = () => {
-    updateModalPosition();
-
-    // Start timer for long press
-    longPressTimerRef.current = setTimeout(() => {
-      setIsLongPress(true);
-      setShowReactionsModal(true);
-    }, 500); // 500ms for long press
-  };
-
-  // Handle mouse/touch up to clear timer
-  const handleMouseUp = () => {
-    if (longPressTimerRef.current) {
-      clearTimeout(longPressTimerRef.current);
-      longPressTimerRef.current = null;
+    // If there's more space below or if we're in the top half, show below
+    if (spaceBelow > spaceAbove || buttonRect.top < viewportHeight / 2) {
+      setPickerPosition("bottom");
+    } else {
+      setPickerPosition("top");
     }
   };
 
-  // Handle mouse enter for hover
   const handleMouseEnter = () => {
-    if (!isMobile) {
-      updateModalPosition();
-
-      // Start timer for hover
-      hoverTimerRef.current = setTimeout(() => {
-        setShowReactionsModal(true);
-      }, 500); // 500ms hover delay
+    // Clear any pending hide timeout
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
     }
+
+    hoverTimeoutRef.current = setTimeout(() => {
+      calculatePickerPosition();
+      setShowPicker(true);
+    }, 800); // 1000ms delay for long hover
   };
 
-  // Handle mouse leave to clear hover timer
   const handleMouseLeave = () => {
-    if (hoverTimerRef.current) {
-      clearTimeout(hoverTimerRef.current);
-      hoverTimerRef.current = null;
+    // Clear the hover timeout if user leaves before picker shows
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
     }
 
-    handleMouseUp(); // Also clear long press timer
+    // Delay hiding the picker to allow mouse movement to picker
+    hideTimeoutRef.current = setTimeout(() => {
+      setShowPicker(false);
+    }, 300);
   };
+
+  const handleTouchStart = () => {
+    longPressTimeoutRef.current = setTimeout(() => {
+      calculatePickerPosition();
+      setShowPicker(true);
+    }, 800); // 800ms for long press on mobile
+  };
+
+  const handleTouchEnd = () => {
+    if (longPressTimeoutRef.current) {
+      clearTimeout(longPressTimeoutRef.current);
+    }
+  };
+
+  const handlePickerMouseEnter = () => {
+    // Cancel any pending hide timeout when entering picker
+    if (hideTimeoutRef.current) {
+      clearTimeout(hideTimeoutRef.current);
+    }
+  };
+
+  const handlePickerMouseLeave = () => {
+    // Hide picker immediately when leaving picker area
+    setShowPicker(false);
+  };
+
+  // const handleReactionChange = async (reaction: ReactionType) => {
+  //     try {
+  //       const obj = {
+  //         type: reaction,
+  //         reactionFor: ReactionTargetType.POST,
+  //         targetId: targetId,
+  //       };
+  //       await toggleReaction(obj).unwrap();
+  //     } catch (error) {
+  //       toast.error("Failed to react");
+  //     }
+  //   };
+
+  //   const handleReactionClick = async () => {
+  //     if (post.myReaction) {
+  //       handleReactionChange(post.myReaction.type as ReactionType);
+  //     } else {
+  //       handleReactionChange("LIKE" as ReactionType);
+  //     }
+  //   };
+
+  const handleClick = () => {
+    if (showPicker) {
+      setShowPicker(false);
+      return;
+    }
+
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+
+    // If user has already reacted, remove reaction
+    handleButtonClick?.();
+  };
+
+  const handleReactionSelect = (reaction: (typeof reactions)[0]["type"]) => {
+    onReaction(reaction);
+    setShowPicker(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        showPicker &&
+        buttonRef.current &&
+        pickerRef.current &&
+        !buttonRef.current.contains(event.target as Node) &&
+        !pickerRef.current.contains(event.target as Node)
+      ) {
+        setShowPicker(false);
+      }
+    };
+
+    const handleScroll = () => {
+      if (showPicker) {
+        setShowPicker(false);
+      }
+    };
+
+    if (showPicker) {
+      document.addEventListener("mousedown", handleClickOutside);
+      window.addEventListener("scroll", handleScroll, true); // Use capture to catch all scroll events
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll, true);
+    };
+  }, [showPicker]);
+
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+      if (hideTimeoutRef.current) {
+        clearTimeout(hideTimeoutRef.current);
+      }
+      if (longPressTimeoutRef.current) {
+        clearTimeout(longPressTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  const currentReaction = reactions.find((r) => r.type === userReaction);
+
   return (
-    <>
+    <div className="relative flex justify-center items-center">
       <Button
-        ref={likeButtonRef}
+        ref={buttonRef}
         variant="ghost"
-        onClick={handleLikeClick}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
+        className={cn(
+          "flex-1 transition-colors duration-200",
+          userReaction
+            ? "text-primary hover:text-primary"
+            : "text-muted-foreground hover:text-foreground",
+          className,
+        )}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onTouchStart={handleMouseDown}
-        onTouchEnd={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onClick={handleClick}
       >
-        {post.myReaction ? (
-          <>
-            <span className="mr-2 text-lg text-white">
-              {/* {reactionEmojis[post.myReaction.reactionType.toLowerCase()]} */}
-            </span>
-            <span className="capitalize">
-              {/* {post.myReaction.reactionType.toLowerCase()} */}
-            </span>
-          </>
-        ) : (
-          <>
-            <ThumbsUp className="h-4 w-4 mr-2" />
-            Like
-          </>
-        )}
+        {children}
       </Button>
-      <ReactionsModal
-        isOpen={showReactionsModal}
-        onClose={() => setShowReactionsModal(false)}
-        onReactionSelect={handleReactionSelect}
-        position={modalPosition}
-        ref={likeButtonRef}
-      />
-    </>
-  );
-};
 
-export default ReactionButton;
+      {/* Reaction Picker */}
+      {showPicker && (
+        <motion.div
+          ref={pickerRef}
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.8, opacity: 0 }}
+          transition={{ type: "spring", damping: 20, stiffness: 300 }}
+          className={cn(
+            "absolute left-0 transform translate-x-0 rounded-full shadow-lg p-1 flex z-110 animate-in fade-in-0 zoom-in-95 duration-200 max-w-xs bg-background border ",
+            pickerPosition === "top" ? "bottom-full mb-0" : "top-full mt-0",
+          )}
+          onMouseEnter={handlePickerMouseEnter}
+          onMouseLeave={handlePickerMouseLeave}
+        >
+          {reactions.map((reaction) => (
+            <motion.div
+              key={reaction.type}
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-10 h-10 rounded-full flex items-center justify-center relative group/reaction"
+              onClick={() => handleReactionSelect(reaction.type)}
+              title={reaction.label}
+            >
+              <Image
+                src={reaction.icon || "/placeholder.svg"}
+                alt={reaction.label}
+                width={34}
+                height={34}
+                className="text-xl"
+              />
+              <div
+                className={cn(
+                  "absolute opacity-0 group-hover/reaction:opacity-100 transition-opacity bg-black text-white text-xs rounded px-1 py-0.5 capitalize",
+                  pickerPosition === "top" ? "-top-6" : "-bottom-6",
+                )}
+              >
+                {reaction.label}
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
+      )}
+    </div>
+  );
+}

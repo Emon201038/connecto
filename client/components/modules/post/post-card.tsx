@@ -28,9 +28,12 @@ import CommentModal from "../comment/comment-modal";
 import { IPost } from "@/interface/post.interface";
 import { useGetPostsQuery } from "@/redux/features/post/postApi";
 import { HighlightHashtags } from "../../shared/form/highlight-hashtag";
-import { ReactionButton2 } from "../reaction/reaction-button-2";
+import { ReactionButton2 } from "../reaction/reaction-button";
 import { useTogglePostReactionMutation } from "@/redux/features/reaction/reactionApi";
-import { ReactionType } from "@/interface/reaction.interface";
+import {
+  ReactionTargetType,
+  ReactionType,
+} from "@/interface/reaction.interface";
 import { toast } from "sonner";
 import { ShareModal } from "../share/share-modal";
 import { reactions as allReact } from "@/constants/reactions";
@@ -83,11 +86,12 @@ export default function PostCard({ post: rootPost }: { post: IPost }) {
 
   const handleReactionChange = async (reaction: ReactionType) => {
     try {
-      await toggleReaction({
-        target: post.id,
-        targetType: "Post",
+      const obj = {
         type: reaction,
-      }).unwrap();
+        reactionFor: ReactionTargetType.POST,
+        targetId: post.id,
+      };
+      await toggleReaction(obj).unwrap();
     } catch (error) {
       toast.error("Failed to react");
     }
@@ -267,7 +271,7 @@ export default function PostCard({ post: rootPost }: { post: IPost }) {
                   <div className="flex items-center justify-center rounded-full  text-white">
                     {post.reactionSummary && post?.reactionSummary.length > 0
                       ? [...(post.reactionSummary as any)]
-                          .sort((a, b) => b._count.type - a._count.type)
+                          .sort((a, b) => b.count - a.count)
                           .slice(0, 3)
                           .map((reaction, index) => {
                             const targetedReact = allReact.find(
@@ -403,6 +407,8 @@ export default function PostCard({ post: rootPost }: { post: IPost }) {
             }
             handleButtonClick={handleReactionClick}
             className="w-full"
+            targetId={post.id}
+            reactionFor="POST"
           >
             <div className="w-full p-1 flex justify-center items-center gap-2">
               {post.myReaction ? (

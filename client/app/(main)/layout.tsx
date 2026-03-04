@@ -36,7 +36,7 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
                   priority
                 />
               </Link>
-              <div className="ml-4 shrink-0">
+              <div className="hidden lg:block ml-4 shrink-0">
                 <Input
                   type="text"
                   placeholder="Search Connecto"
@@ -44,7 +44,7 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
                 />
               </div>
             </div>
-            <nav className="flex w-1/2 h-12 sticky justify-between items-center *:flex-1 *:justify-center *:px-2">
+            <nav className="flex w-full lg:w-1/2 md:w-2/3  h-12 sticky justify-between items-center *:flex-1 *:justify-center *:px-2 lg:px-20 mx-auto md:mx-0 md:mr-[25%] lg:mx-auto">
               {/* <Tooltip content="Home"> */}
               <div data-title="Home" className="tooltip" dir="bottom">
                 <CustomLink href="/">
@@ -145,8 +145,8 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
             </div>
           </div>
         </div>
-        <div className="w-full md:hidden block">
-          <nav className="flex dark:bg-[#1c1c1d] w-full h-10 sticky justify-between items-center border-b *:flex-1 *:justify-center *:px-2">
+        <div className="w-full md:hidden block ">
+          <nav className="flex dark:bg-[#1c1c1d] w-full h-10 sticky justify-between items-center border-b *:flex-1 *:justify-center *:px-2 lg:px-20 mx-auto md:mx-0 md:mr-[25%] lg:mx-auto">
             <div data-title="Home" data-position="top" className="tooltip">
               <CustomLink href="/">
                 <HomeIcon className="h-5 w-5" fill="currentColor" />
