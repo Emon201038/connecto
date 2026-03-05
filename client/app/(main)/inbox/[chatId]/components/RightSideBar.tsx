@@ -64,7 +64,7 @@ const RightSideBar = () => {
   if (!openRightSidebar) return null;
 
   return (
-    <div className="w-full md:max-w-[360px] md:min-w-[300px] p-4 flex flex-col bg-background rounded-sm relative">
+    <div className="w-full md:max-w-90 md:min-w-75 p-4 flex flex-col bg-background rounded-sm relative">
       <Button
         onClick={handleClick}
         variant="ghost"
@@ -93,7 +93,7 @@ const RightSideBar = () => {
             className="flex gap-0 size-9 rounded-full bg-shade"
             onClick={() => router.push(`/${conversation?.user?.username}`)}
           >
-            <UserCircle2 className="size-[18px]" />
+            <UserCircle2 className="size-4.5" />
           </Button>
           <p className="text-sm">Profile</p>
         </div>
@@ -103,7 +103,7 @@ const RightSideBar = () => {
             size="sm"
             className="flex gap-0 size-9 rounded-full bg-shade"
           >
-            <Bell className="size-[18px]" />
+            <Bell className="size-4.5" />
           </Button>
           <p className="text-sm">Mute</p>
         </div>
@@ -113,7 +113,7 @@ const RightSideBar = () => {
             size="sm"
             className="flex gap-0 size-9 rounded-full bg-shade"
           >
-            <Search className="size-[18px]" />
+            <Search className="size-4.5" />
           </Button>
           <p className="text-sm">Search</p>
         </div>
@@ -132,7 +132,7 @@ const RightSideBar = () => {
           </CollapsibleTrigger>
           <CollapsibleContent className="mt-4">
             <div className="flex gap-2 items-center cursor-pointer hover:bg-secondary-btn-bg p-2 rounded-sm">
-              <div className="rounded-full !aspect-square w-9 h-9 bg-shade flex justify-center items-center">
+              <div className="rounded-full aspect-square! w-9 h-9 bg-shade flex justify-center items-center">
                 <div
                   style={{ backgroundColor: theme.colors.accent }}
                   className="size-5 aspect-square rounded-full flex justify-center items-center"
@@ -152,7 +152,7 @@ const RightSideBar = () => {
                   onClick={() => setOpenEmojiModal(true)}
                   className="flex gap-2 items-center cursor-pointer hover:bg-secondary-btn-bg p-2 rounded-sm"
                 >
-                  <div className="rounded-full !aspect-square w-9 h-9 bg-muted flex justify-center items-center">
+                  <div className="rounded-full aspect-square! w-9 h-9 bg-muted flex justify-center items-center">
                     <div
                       // style={{ backgroundColor: theme.colors.accent }}
                       className="size-5 aspect-square rounded-full flex justify-center items-center"
@@ -188,7 +188,7 @@ const RightSideBar = () => {
               </DialogContent>
             </Dialog>
             <div className="flex gap-2 items-center cursor-pointer hover:bg-secondary-btn-bg p-2 rounded-sm">
-              <div className="rounded-full !aspect-square w-9 h-9 bg-muted flex justify-center items-center">
+              <div className="rounded-full aspect-square! w-9 h-9 bg-muted flex justify-center items-center">
                 <div
                   // style={{ backgroundColor: theme.colors.accent }}
                   className="size-5 aspect-square rounded-full flex justify-center items-center"

@@ -179,9 +179,9 @@ export default function CreatePostCard({
     [],
   );
 
-  if (status === "loading") {
-    return <PostCreationSkeleton />;
-  }
+  // if (status === "loading") {
+  //   return <PostCreationSkeleton />;
+  // }
 
   return (
     <Card className="mb-4 gap-2 pt-3 pb-2.5">

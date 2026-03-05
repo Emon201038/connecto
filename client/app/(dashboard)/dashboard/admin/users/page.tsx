@@ -131,7 +131,6 @@ const page = async ({
     }),
   });
 
-  console.log(res);
   return (
     <div className="space-y-4 p-6">
       <UserManagementHeader />

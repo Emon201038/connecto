@@ -9,7 +9,7 @@ export const metadata = {
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="flex w-screen overflow-hidden h-[calc(100vh_-_96px)] md:h-[calc(100vh_-_54px)]">
+    <div className="flex w-screen overflow-hidden h-[calc(100vh-96px)] md:h-[calc(100vh-54px)]">
       <div className="hidden md:flex bg-background">
         {/* Left Sidebar */}
         <LeftSidebar />

@@ -89,24 +89,18 @@ const CommentsContent = ({ post }: { post: IPost }) => {
   } | null>(null);
   const inputRef = useRef<HTMLDivElement>(null);
 
-  const session = useSession();
+  const { data: session, isLoading: sessionLoading } = useMeQuery();
   const [createComment, { isLoading: creatingComment }] =
     useAddCommentMutation();
   const { data } = useMeQuery(
     void {
-      skip: session.status === "loading",
+      skip: sessionLoading,
     },
   );
 
-  if (session.status === "loading") {
+  if (sessionLoading) {
     // Optional: show a loader while the session is being fetched
     return <p>Loading...</p>;
-  }
-
-  if (session.status === "unauthenticated" && !session.data) {
-    // Optional: user is not logged in
-    // router.refresh();
-    // window.location.reload();
   }
 
   const handleCommentSubmit = async (e: React.FormEvent) => {
@@ -124,7 +118,7 @@ const CommentsContent = ({ post }: { post: IPost }) => {
     } = {
       text: comment.text,
       post: post.id,
-      author: session?.data?.user?.id as string,
+      author: session?.id as string,
       parent: null,
       entities:
         comment?.entities?.map(({ id, tag, name, ...rest }) => ({
@@ -252,7 +246,7 @@ const CommentsContent = ({ post }: { post: IPost }) => {
           <div className="text-xs opacity-50 flex items-center gap-1">
             <p>
               Replying to{" "}
-              {replyTo?.author.id === session?.data?.user?.id
+              {replyTo?.author.id === session?.id
                 ? "yourself"
                 : replyTo.author.fullName}{" "}
               .{" "}
@@ -268,7 +262,7 @@ const CommentsContent = ({ post }: { post: IPost }) => {
           }}
           // ref={inputRef2}
           // onSubmit={() => alert("form is submitted")}
-          placeholder={"Comment as " + session?.data?.user?.fullName}
+          placeholder={"Comment as " + session?.fullName}
           className="min-h-15 p-2 pb-7 border rounded-lg focus:outline-0 focus:ring-0 focus:border-transparent text-sm font-primary dark:text-[rgb(226,229,233)] tracking-tighter"
         >
           <div className="relative w-full h-full ">

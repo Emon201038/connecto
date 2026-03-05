@@ -114,45 +114,14 @@ export const authApi = baseApi.injectEndpoints({
         },
       }),
     }),
-    me: build.query<
-      IResponse<Pick<
-        IUser,
-        "fullName" | "email" | "role" | "id" | "profilePicture"
-      > | null>,
-      void
-    >({
+    me: build.query<IUser, void>({
       query: () => ({
-        url: "/",
-        method: "POST",
-        body: {
-          query: `
-            query GetSession {
-              me {
-                fullName
-                id
-                email
-                profilePicture {
-                  url
-                  pub_id
-                }
-              }
-            }
-          `,
-        },
+        url: "/api/v2/auth/me",
+        method: "GET",
         cache: "no-store",
         credentials: "include",
       }),
-      transformResponse: (res: {
-        data: {
-          me: Pick<
-            IUser,
-            "fullName" | "email" | "role" | "id" | "profilePicture"
-          >;
-        };
-        errors: { message: string }[];
-      }) => {
-        return { data: res.data.me, errors: res.errors };
-      },
+      transformResponse: (res: { data: IUser }) => res.data,
     }),
     sendResetCode: build.mutation<
       IResponse<{ sendResetCode: string }>,

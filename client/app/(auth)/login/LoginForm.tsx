@@ -1,67 +1,24 @@
 "use client";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import z from "zod";
-import { RHFInput } from "@/components/shared/form/rhf-input";
+import React, { useActionState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Form } from "@/components/ui/form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
-import { handleLogin } from "./action";
-import { signIn } from "next-auth/react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { MessageSquareWarningIcon } from "lucide-react";
-
-const loginPageSchema = z.object({
-  email: z
-    .string({ error: "email number is required" })
-    .min(1, "email number is required"),
-  password: z
-    .string({ error: "Password is required" })
-    .min(1, "Password is required"),
-});
+import { login } from "@/services/auth/auth.service";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import InputFieldError from "@/components/shared/InputFieldError";
+import { IInputErrorState } from "@/lib/getInputFieldError";
+import { toast } from "sonner";
 
 interface Props {}
 
 const LoginForm: React.FC<Props> = () => {
-  const form = useForm({
-    resolver: zodResolver(loginPageSchema),
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
-  const [isLoading, setIsLoading] = useState(false);
-
   const router = useRouter();
   const searchParams = useSearchParams();
+  const formRef = React.useRef<HTMLFormElement>(null);
 
-  const callbackUrl = searchParams.get("callback");
-  const [error, setError] = React.useState<string | null>(null);
-
-  const handleSubmit = async (data: z.infer<typeof loginPageSchema>) => {
-    setIsLoading(true);
-    try {
-      setError(null);
-      const res = await signIn("credentials", {
-        ...data,
-        redirect: false,
-      });
-      // I want to send additional api call to set cookie. How could I get response from next auth
-      if (res?.error) {
-        setError(res?.error);
-      } else {
-        if (callbackUrl && callbackUrl.startsWith("/")) {
-          router.push(callbackUrl);
-        } else router.push("/");
-      }
-    } catch (error) {
-      setError((error as any)?.data?.message || error);
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const [data, loginAction, isPending] = useActionState(login, null);
 
   const handleNavigate = (url = "/") => {
     const current = new URLSearchParams(Array.from(searchParams.entries()));
@@ -69,75 +26,105 @@ const LoginForm: React.FC<Props> = () => {
   };
 
   const userLogin = () => {
-    form.setValue("email", process.env.NEXT_PUBLIC_USER_EMAIL as string);
-    form.setValue("password", process.env.NEXT_PUBLIC_USER_PASSWORD as string);
+    const emailInput = formRef.current?.querySelector(
+      "input[name='email']",
+    ) as HTMLInputElement;
+
+    const passwordInput = formRef.current?.querySelector(
+      "input[name='password']",
+    ) as HTMLInputElement;
+
+    if (emailInput && passwordInput) {
+      emailInput.value = process.env.NEXT_PUBLIC_USER_EMAIL as string;
+      passwordInput.value = process.env.NEXT_PUBLIC_USER_PASSWORD as string;
+    }
   };
 
   const adminUserLogin = () => {
-    form.setValue("email", process.env.NEXT_PUBLIC_ADMIN_EMAIL as string);
-    form.setValue("password", process.env.NEXT_PUBLIC_ADMIN_PASSWORD as string);
+    const emailInput = formRef.current?.querySelector(
+      "input[name='email']",
+    ) as HTMLInputElement;
+
+    const passwordInput = formRef.current?.querySelector(
+      "input[name='password']",
+    ) as HTMLInputElement;
+
+    if (emailInput && passwordInput) {
+      emailInput.value = process.env.NEXT_PUBLIC_ADMIN_EMAIL as string;
+      passwordInput.value = process.env.NEXT_PUBLIC_ADMIN_PASSWORD as string;
+    }
   };
 
+  useEffect(() => {
+    if (data?.errors?.length === 0 && !data?.success) {
+      toast.error(data?.message);
+    }
+  }, [data]);
+
   return (
-    <Form {...form}>
-      <form className="space-y-3" onSubmit={form.handleSubmit(handleSubmit)}>
-        <RHFInput
-          control={form.control}
-          name={"email"}
-          label="Email or Phone"
-          placeholder="Enter your email or number"
+    <form ref={formRef} className="space-y-3" action={loginAction}>
+      <div className="space-y-2">
+        <Label htmlFor="email">Email</Label>
+        <Input
+          id="email"
+          type="text"
+          placeholder="Enter your email or phone"
+          name="email"
+          defaultValue={data?.formData?.email || undefined}
         />
+        <InputFieldError state={data as IInputErrorState} field={"email"} />
+      </div>
 
-        <RHFInput
-          control={form.control}
-          name={"password"}
+      <div className="space-y-2">
+        <Label htmlFor="password">Password</Label>
+        <Input
+          id="password"
           type="password"
-          label="Password"
-          placeholder="Enter your password"
+          placeholder="********"
+          name="password"
+          defaultValue={data?.formData?.password || undefined}
         />
-        <p className="text-red-500 text-sm w-full">
-          {error ? "Invalid credentials" : null}
-        </p>
-        <Button
-          disabled={isLoading}
-          className="w-full dark:text-accent-foreground"
-        >
-          {isLoading ? "please wait..." : "Login"}
-        </Button>
-        <div
-          onClick={() => handleNavigate("/forgot-password")}
-          className="w-full text-primary dark:text-blue-400 text-sm tracking-tighter hover:underline flex justify-center items-center cursor-pointer"
-        >
-          Forgot Password?
-        </div>
+        <InputFieldError state={data as IInputErrorState} field={"password"} />
+      </div>
+      <Button
+        disabled={isPending}
+        className="w-full dark:text-accent-foreground"
+      >
+        {isPending ? "please wait..." : "Login"}
+      </Button>
+      <div
+        onClick={() => handleNavigate("/forgot-password")}
+        className="w-full text-primary dark:text-blue-400 text-sm tracking-tighter hover:underline flex justify-center items-center cursor-pointer"
+      >
+        Forgot Password?
+      </div>
 
-        <Alert variant="default">
-          <MessageSquareWarningIcon />
-          <AlertTitle>For Testing only!</AlertTitle>
-          <AlertDescription className="w-full">
-            <p>Please, do not missuse this form for testing purposes.</p>
-            <div className="flex flex-wrap justify-center items-center gap-2 w-full">
-              <Button
-                type="button"
-                onClick={userLogin}
-                variant={"outline"}
-                className="w-full cursor-pointer"
-              >
-                User Login
-              </Button>
-              <Button
-                type="button"
-                onClick={adminUserLogin}
-                variant={"outline"}
-                className="w-full cursor-pointer"
-              >
-                Admin Login
-              </Button>
-            </div>
-          </AlertDescription>
-        </Alert>
-      </form>
-    </Form>
+      <Alert variant="default">
+        <MessageSquareWarningIcon />
+        <AlertTitle>For Testing only!</AlertTitle>
+        <AlertDescription className="w-full">
+          <p>Please, do not missuse this form for testing purposes.</p>
+          <div className="flex flex-wrap justify-center items-center gap-2 w-full">
+            <Button
+              type="button"
+              onClick={userLogin}
+              variant={"outline"}
+              className="w-full cursor-pointer"
+            >
+              User Login
+            </Button>
+            <Button
+              type="button"
+              onClick={adminUserLogin}
+              variant={"outline"}
+              className="w-full cursor-pointer"
+            >
+              Admin Login
+            </Button>
+          </div>
+        </AlertDescription>
+      </Alert>
+    </form>
   );
 };
 

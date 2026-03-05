@@ -233,10 +233,6 @@ export const messageApi = baseApi.injectEndpoints({
       }),
       onQueryStarted: async (arg, { queryFulfilled, dispatch, getState }) => {
         const state = getState() as any;
-        console.log("cache keys:", Object.keys(state.api.queries));
-        console.log("looking for key:", `getMessages-${arg.conversationId}`);
-        console.log("arg.conversationId:", arg.conversationId);
-        console.log("arg:", JSON.stringify(arg));
         const patchResult = dispatch(
           messageApi.util.updateQueryData(
             "getMessages",
@@ -248,11 +244,7 @@ export const messageApi = baseApi.injectEndpoints({
               search: "",
             },
             (draft) => {
-              console.log("draft messages count:", draft?.messages?.length);
-              console.log("looking for message id:", arg.target);
-
               const message = draft.messages.find((m) => m.id === arg.target);
-              console.log("found message:", message);
               if (!message) return;
 
               const myReaction = message.reactions.find(

@@ -10,7 +10,6 @@ const ImageGrid = ({
 }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-  console.log(attachments, "attatchments");
   if (!attachments || attachments.length === 0) return null;
 
   const renderImageGrid = () => {

@@ -1,18 +1,9 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  ImageIcon,
-  Mic,
-  Pause,
-  Plus,
-  Send,
-  Square,
-  ThumbsUp,
-  X,
-} from "lucide-react";
-import React, { ChangeEvent } from "react";
-import { type SyntheticEvent, useEffect, useRef, useState } from "react";
+import { ImageIcon, Mic, Pause, Plus, Send, Square, X } from "lucide-react";
+import { ChangeEvent, useRef } from "react";
+import { type SyntheticEvent, useState } from "react";
 import { type Message } from "@/lib/type";
 import { useParams } from "next/navigation";
 import { ChattingIndicator } from "./chatIndicator";
@@ -20,26 +11,23 @@ import { useSocket } from "@/providers/socket-provider";
 import { useAppSelector } from "@/redux/hooks";
 import { cn } from "@/lib/utils";
 import Header from "./Header";
-import { IConversationMember, IMessageType } from "@/types";
+import { IConversationMember, IMessageType, IUser } from "@/types";
 import { useSession } from "next-auth/react";
-import {
-  useGetMessagesQuery,
-  useSendMessageMutation,
-} from "@/redux/features/message/messageApi";
-import { messengerThemes } from "@/constants/themes";
-import { Like } from "./RightSideBar";
+import { useSendMessageMutation } from "@/redux/features/message/messageApi";
 import { toast } from "sonner";
 import { useGetConversationInfoQuery } from "@/redux/features/conversation/conversationApi";
 import HeaderLoading from "./HeaderLoading";
 import { EmojiDisplay } from "@/components/modules/reaction/Emoji";
 import { Skeleton } from "@/components/ui/skeleton";
 import Messages from "@/components/modules/message/messages";
+import { Like } from "./RightSideBar";
 
 interface Props {
-  conversation: IConversationMember;
+  // conversation: IConversationMember;
+  session?: IUser | null;
 }
 
-const ChatArea = () => {
+const ChatArea = ({ session }: Props) => {
   const [inputValue, setInputValue] = useState("");
   const [msgs, setMsgs] = useState<Message[]>([]);
   const [isRecording, setIsRecording] = useState(false);
@@ -48,7 +36,6 @@ const ChatArea = () => {
   const [isPaused, setIsPaused] = useState(false);
   const [typingUsers, setTypingUsers] = useState<Set<string>>(new Set());
 
-  const session = useSession();
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -333,7 +320,7 @@ const ChatArea = () => {
         content: inputValue,
         createdAt: new Date().toString(),
         conversationId: params.chatId,
-        sender: session?.data?.user.id as string,
+        sender: session?.id as string,
         type: IMessageType.TEXT,
       };
 
@@ -355,7 +342,7 @@ const ChatArea = () => {
         content: conversation?.emoji as string,
         createdAt: new Date().toString(),
         conversationId: params.chatId,
-        sender: session?.data?.user.id as string,
+        sender: session?.id as string,
         type: IMessageType.EMOJI,
       };
 

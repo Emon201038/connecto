@@ -23,13 +23,13 @@ function RootLayout({
         <ThemeProvider>
           <ApolloClientProvider>
             <ReduxProvider>
-              <SessionProvider>
-                <SocketProvider>
-                  <TooltipProvider delayDuration={300}>
-                    {children}
-                  </TooltipProvider>
-                </SocketProvider>
-              </SessionProvider>
+              {/* <SessionProvider> */}
+              <SocketProvider>
+                <TooltipProvider delayDuration={300}>
+                  {children}
+                </TooltipProvider>
+              </SocketProvider>
+              {/* </SessionProvider> */}
             </ReduxProvider>
           </ApolloClientProvider>
         </ThemeProvider>

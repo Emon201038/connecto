@@ -29,7 +29,7 @@ import {
   Laptop,
 } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
-import { useLogoutMutation } from "@/redux/features/auth/authApi";
+import { useLogoutMutation, useMeQuery } from "@/redux/features/auth/authApi";
 import { usePathname, useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { toast } from "sonner";
@@ -55,6 +55,7 @@ export function ProfilePopover({
   const [currentView, setCurrentView] = useState<ViewType>("main");
   const [isAnimating, setIsAnimating] = useState(false);
   // const [logout, { isLoading }] = useLogoutMutation();
+  const { data: session, isLoading: sessionLoading } = useMeQuery();
 
   const router = useRouter();
   const themes = [
@@ -226,29 +227,18 @@ export function ProfilePopover({
     }
   };
 
-  const session = useSession();
-
   const handleLogout = async () => {
     try {
-      // 1. Call your backend logout via RTK Query
-      // await logout({}).unwrap();
-
-      // 2. Clear NextAuth session
       await logout();
-      // console.log(res);
-      // if (res) {
-      await signOut();
       toast.success("Logged out successfully");
       router.push("/login");
-      // }
     } catch (err) {
       console.log(err);
       toast.error("Logout failed:");
     }
   };
 
-  if (session.status === "loading")
-    return <Skeleton className="size-10 rounded-full" />;
+  if (sessionLoading) return <Skeleton className="size-10 rounded-full" />;
 
   return (
     <Popover>
@@ -257,14 +247,11 @@ export function ProfilePopover({
           <Avatar className="size-6">
             <AvatarImage
               src={
-                session?.data?.user?.profilePicture?.url ||
-                "/images/default-profile.jpeg"
+                session?.profilePicture?.url || "/images/default-profile.jpeg"
               }
               alt="User"
             />
-            <AvatarFallback>
-              {session?.data?.user?.fullName?.charAt(0)}
-            </AvatarFallback>
+            <AvatarFallback>{session?.fullName?.charAt(0)}</AvatarFallback>
           </Avatar>
           <div className="absolute bottom-0 -right-px size-3 bg-[#e2e5eb] dark:bg-muted rounded-full">
             <ChevronDown size={15} />
@@ -289,7 +276,7 @@ export function ProfilePopover({
                     alt={userName}
                   />
                   <AvatarFallback>
-                    {session?.data?.user?.fullName
+                    {session?.fullName
                       .split(" ")
                       .map((n) => n[0])
                       .join("")
@@ -297,11 +284,9 @@ export function ProfilePopover({
                   </AvatarFallback>
                 </Avatar>
                 <div className="flex flex-col">
-                  <p className="font-medium text-sm">
-                    {session?.data?.user?.fullName}
-                  </p>
+                  <p className="font-medium text-sm">{session?.fullName}</p>
                   <p className="text-xs text-muted-foreground">
-                    {session?.data?.user?.email}
+                    {session?.email}
                   </p>
                 </div>
               </div>

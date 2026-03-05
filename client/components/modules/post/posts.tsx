@@ -44,7 +44,6 @@ const Posts = (initialData: IProps) => {
 
   return (
     <div className="space-y-4">
-      <Button onClick={() => handleClick()}>Login</Button>
       {data?.posts &&
         data.posts?.map((post) => <PostCard key={post.id} post={post} />)}
     </div>

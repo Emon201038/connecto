@@ -33,8 +33,6 @@ const SingleMessage = ({ message, conversation }: Props) => {
 
   const session = useSession();
 
-  console.log(message);
-
   const groupedReactions = React.useMemo(() => {
     const grouped = message.reactions.reduce<
       Record<string, { count: number; type: ReactionType; user: IUser }>

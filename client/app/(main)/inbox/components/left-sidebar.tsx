@@ -2,14 +2,10 @@
 import React from "react";
 import Header from "./header";
 import SearchForm from "./SearchForm";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Link from "next/link";
 import { useSession } from "next-auth/react";
 import timeAgo from "@/lib/time-ago";
 import SearchedConversation from "./searched-conversation";
-import { IConversation, IUser, IUsersConversation } from "@/types";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { IUser } from "@/types";
 import { useGetConversationsQuery } from "@/redux/features/conversation/conversationApi";
 import { Skeleton } from "@/components/ui/skeleton";
 import Conversation from "./conversation";
@@ -19,8 +15,6 @@ const LeftSidebar = () => {
   const [searchedUser, setSearchedUser] = React.useState<IUser[]>([]);
   const [inp, setInp] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
-  const session = useSession();
-  const pathname = usePathname();
 
   const { data, isLoading: isLoadingConversations } = useGetConversationsQuery({
     page: 1,
@@ -29,7 +23,7 @@ const LeftSidebar = () => {
   });
   const conversations = data?.conversations || [];
   return (
-    <div className="w-[360px] min-w-[360px] border-r flex flex-col">
+    <div className="w-90 min-w-90 border-r flex flex-col">
       <div className="p-4 space-y-4">
         <div className="">
           <Header />
@@ -59,10 +53,7 @@ const LeftSidebar = () => {
           <div className="space-y-2">
             {Array.from({ length: 4 }).map((_, i) => (
               <div key={i} className="flex items-center gap-3">
-                <Skeleton
-                  key={i}
-                  className="size-[50px] rounded-full"
-                ></Skeleton>
+                <Skeleton key={i} className="size-12.5 rounded-full"></Skeleton>
                 <div className="space-y-2">
                   <Skeleton className="h-4 w-32" />
                   <Skeleton className="h-2 w-25" />

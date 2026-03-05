@@ -75,8 +75,6 @@ const Messages = forwardRef<
     }
   }, [messages, page]);
 
-  console.log(conversation);
-
   return (
     <div className="w-full h-full flex-1 overflow-auto flex flex-col-reverse gap-3 p-4">
       {/* bottom spacer for scroll */}

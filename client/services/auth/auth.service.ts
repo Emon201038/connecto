@@ -133,12 +133,12 @@ const loginSchema = z.object({
 });
 
 export const login = async (prevState: unknown, formData: FormData) => {
+  const payload = {
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
+  };
   try {
     const redirectTo = formData.get("redirect") || null;
-    const payload = {
-      email: formData.get("email"),
-      password: formData.get("password"),
-    };
 
     const validatedPayload = zodValidator(payload, loginSchema);
     if (!validatedPayload.success) {
@@ -226,7 +226,7 @@ export const login = async (prevState: unknown, formData: FormData) => {
       redirect(getDefaultDashboardRoute(verifiedToken.role));
     }
   } catch (error: any) {
-    console.log(error);
+    console.log("Error: ", error?.message);
     if (error?.digest?.startsWith("NEXT_REDIRECT")) {
       throw error;
     }
@@ -234,6 +234,7 @@ export const login = async (prevState: unknown, formData: FormData) => {
       success: false,
       message: error?.message,
       errors: [],
+      formData: payload,
     };
   }
 };

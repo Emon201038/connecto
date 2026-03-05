@@ -1,4 +1,4 @@
-import { VideoCard } from "@/components/video-card"
+import { VideoCard } from "@/components/modules/video/video-card";
 
 const mockVideos = [
   {
@@ -10,7 +10,8 @@ const mockVideos = [
     duration: "12:34",
     views: "2.1M",
     timeAgo: "2 days ago",
-    description: "Explore the breathtaking world of wildlife in stunning 4K resolution...",
+    description:
+      "Explore the breathtaking world of wildlife in stunning 4K resolution...",
   },
   {
     id: "2",
@@ -21,7 +22,8 @@ const mockVideos = [
     duration: "8:45",
     views: "856K",
     timeAgo: "1 day ago",
-    description: "Learn the secrets to making restaurant-quality pasta at home...",
+    description:
+      "Learn the secrets to making restaurant-quality pasta at home...",
   },
   {
     id: "3",
@@ -32,7 +34,8 @@ const mockVideos = [
     duration: "15:22",
     views: "3.4M",
     timeAgo: "3 hours ago",
-    description: "Complete review of the new iPhone 15 Pro Max with all features...",
+    description:
+      "Complete review of the new iPhone 15 Pro Max with all features...",
   },
   {
     id: "4",
@@ -54,7 +57,8 @@ const mockVideos = [
     duration: "18:30",
     views: "945K",
     timeAgo: "4 days ago",
-    description: "Discover amazing places in Japan that most tourists never see...",
+    description:
+      "Discover amazing places in Japan that most tourists never see...",
   },
   {
     id: "6",
@@ -65,9 +69,10 @@ const mockVideos = [
     duration: "25:10",
     views: "678K",
     timeAgo: "5 days ago",
-    description: "Complete 30-day fitness program for beginners and advanced...",
+    description:
+      "Complete 30-day fitness program for beginners and advanced...",
   },
-]
+];
 
 export function VideoFeed() {
   return (
@@ -90,5 +95,5 @@ export function VideoFeed() {
         ))}
       </div>
     </div>
-  )
+  );
 }

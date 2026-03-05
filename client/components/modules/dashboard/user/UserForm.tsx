@@ -97,7 +97,6 @@ const UserForm: React.FC<Props> = ({ user, onSuccess, onClose, isSignUp }) => {
         : await register(data as SignupValues).unwrap();
 
       toast.success(isEdit ? "User updated successfully" : "Account created");
-      console.log(res);
 
       onSuccess?.();
       onClose?.();

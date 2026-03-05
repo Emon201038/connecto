@@ -63,8 +63,6 @@ const MessageReactModal = React.forwardRef<HTMLDivElement, Props>(
     const session = useSession();
     const params = useParams<{ chatId: string }>();
 
-    console.log(params);
-
     const handleReaction = (reaction: string) => {
       toggleReaction({
         target: messageId,

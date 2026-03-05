@@ -1,4 +1,3 @@
-import React from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -41,7 +40,7 @@ const ProfileDropdown = async () => {
           </div>
         </div>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-[360px]">
+      <DropdownMenuContent className="w-90">
         <DropdownMenuLabel className="flex justify-start items-center">
           <Avatar className="size-9">
             <AvatarImage src={session?.profilePicture?.url} alt="User" />

@@ -43,7 +43,6 @@ export const adminApi = baseApi.injectEndpoints({
           };
         };
       }) => {
-        console.log(response, "res");
         return response.data.adminDashboardAnalytics.kpis;
       },
     }),

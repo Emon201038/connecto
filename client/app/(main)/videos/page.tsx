@@ -1,6 +1,6 @@
-import { VideoFeed } from "@/components/video-feed";
-import { VideoSidebar } from "@/components/video-sidebar";
-import { VideoHeader } from "@/components/video-header";
+import { VideoFeed } from "@/components/modules/video/video-feed";
+import { VideoSidebar } from "@/components/modules/video/video-sidebar";
+import { VideoHeader } from "@/components/modules/video/video-header";
 
 export default function VideosPage() {
   return (

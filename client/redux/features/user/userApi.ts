@@ -230,7 +230,6 @@ export const userApi = baseApi.injectEndpoints({
         },
       }),
       transformResponse: (response: IResponse<{ update: boolean }>) => {
-        console.log(response);
         return response;
       },
     }),
