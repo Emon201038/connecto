@@ -10,17 +10,13 @@ import Tooltip from "@/components/Tooltip";
 import HomeIcon from "@/components/icons/HomeIcon";
 import { redirect } from "next/navigation";
 import { ProfilePopover } from "@/components/profile-popover";
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import Image from "next/image";
 import GroupIcon from "@/components/icons/Group";
 
 const layout = async ({ children }: { children: React.ReactNode }) => {
   const session = await auth();
 
-  // if (!session) {
-  //   redirect("/login");
-  // }
-  // if (session.user.role === "ADMIN") redirect("/admin");
   return (
     <div className="  min-h-[calc(100vh-96px)] md:min-h-[calc(100vh-56px)]">
       <header className="fixed dark:bg-[#1c1c1d] bg-white w-full top-0 z-10 shadow-sm">
@@ -163,7 +159,7 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
               </CustomLink>
             </div>
             <div data-title="Account" data-position="top" className="tooltip">
-              <CustomLink href={`/${session?.user?.username}`}>
+              <CustomLink href={`/${session?.username}`}>
                 <div className="size-7 flex justify-center items-center rounded-full border bg-slate-100">
                   <User className="h-5 w-5" />
                 </div>

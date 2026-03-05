@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import Posts from "../components/post-wraper";
 import { redirect } from "next/navigation";
 import { store } from "@/redux/store";
@@ -14,9 +14,9 @@ export default async function ProfilePage() {
   const res = await store.dispatch(
     userApi.endpoints.getUserPosts.initiate({
       field: "",
-      username: session?.user?.username,
+      username: session?.username,
       cookie: undefined,
-    })
+    }),
   );
 
   return (

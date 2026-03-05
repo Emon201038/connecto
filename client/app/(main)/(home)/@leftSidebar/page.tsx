@@ -12,7 +12,7 @@ import {
   Video,
 } from "lucide-react";
 import { redirect } from "next/navigation";
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 
 export default async function LeftSidebar() {
   const session = await auth();
@@ -80,26 +80,23 @@ export default async function LeftSidebar() {
     <div className="p-4 space-y-6">
       <div className="space-y-1">
         <Link
-          href={`/${session?.user?.username}`}
+          href={`/${session?.username}`}
           className="flex items-center p-2 rounded-md hover:bg-muted"
         >
           <Avatar className="h-8 w-8 mr-3">
             <AvatarImage
               src={
-                session?.user?.profilePicture?.url ||
-                "/images/default-profile.jpeg"
+                session?.profilePicture?.url || "/images/default-profile.jpeg"
               }
               alt="user"
             />
-            <AvatarFallback>
-              {session?.user?.fullName?.charAt(0)}
-            </AvatarFallback>
+            <AvatarFallback>{session?.fullName?.charAt(0)}</AvatarFallback>
           </Avatar>
           <span className="font-medium">
-            {session?.user?.fullName?.split(" ")[0]}
+            {session?.fullName?.split(" ")[0]}
           </span>
         </Link>
-        {session?.user?.role === "ADMIN" && (
+        {session?.role === "ADMIN" && (
           <Link
             href={"/dashboard/admin"}
             className="flex items-center p-2 rounded-md hover:bg-muted"

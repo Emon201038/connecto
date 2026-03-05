@@ -59,7 +59,7 @@ export interface IPost {
   myReaction: { type: ReactionType } | null;
   reactionSummary: {
     count: number;
-    reactionType: "LIKE" | "CARE" | "WOW" | "LOVE" | "HAHA" | "SAD" | "ANGRY";
+    type: "LIKE" | "CARE" | "WOW" | "LOVE" | "HAHA" | "SAD" | "ANGRY";
   }[];
   comments: IComment[];
   group?: IGroup;

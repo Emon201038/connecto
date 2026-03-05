@@ -5,7 +5,7 @@ import { MessageCircle, MoreHorizontal } from "lucide-react";
 import { cookies } from "next/headers";
 import { store } from "@/redux/store";
 import { friendApi } from "@/redux/features/friend/friendApi";
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import FriendCard from "../components/friend-card";
 import Link from "next/link";
@@ -21,7 +21,7 @@ export default async function FriendsPage() {
     .join("; ");
 
   const friendsRes = await store.dispatch(
-    friendApi.endpoints.myFriends.initiate({ cookie: cookieList })
+    friendApi.endpoints.myFriends.initiate({ cookie: cookieList }),
   );
 
   const friends = friendsRes?.data?.data?.myFriends || [];

@@ -91,6 +91,20 @@ const getSingleUnitReactions = async (
 
   const reactions = await prisma.reaction.findMany({
     where: reactionAndCondition,
+    include: {
+      user: {
+        select: {
+          id: true,
+          username: true,
+          firstName: true,
+          lastName: true,
+          fullName: true,
+        },
+      },
+    },
+    omit: {
+      userId: true,
+    },
   });
 
   return reactions;

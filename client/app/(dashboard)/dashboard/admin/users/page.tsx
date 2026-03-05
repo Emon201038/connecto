@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import UserFilter from "@/components/modules/dashboard/user/UserFilter";
 import UserManagementHeader from "@/components/modules/dashboard/user/UserManagementHeader";
 import UsersTable from "@/components/modules/dashboard/user/UsersTable";

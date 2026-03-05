@@ -1,11 +1,11 @@
 import React from "react";
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import ConversationList from "./components/conversations-list";
 
 const page = () => {
   // const session = await auth();
-  // if (!session?.user?.id) {
+  // if (!session?.id) {
   //   redirect("/login?callback=/inbox");
   // }
 

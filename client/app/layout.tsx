@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "@/providers/theme-provider";
 
-async function RootLayout({
+function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

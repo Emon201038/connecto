@@ -5,7 +5,7 @@ import Image from "next/image";
 import { notFound, redirect } from "next/navigation";
 import React from "react";
 import Link from "./link";
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import { cookies } from "next/headers";
@@ -161,21 +161,21 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
             <nav className="sticky md:top-12 top-24 bg-shade border-b z-10 shadow-sm px-4">
               <ul className="w-full max-w-5xl mx-auto flex gap-3 items-center justify-start h-full py-2">
                 {[
-                  { id: 1, name: "Posts", href: `/${session?.user?.username}` },
+                  { id: 1, name: "Posts", href: `/${session?.username}` },
                   {
                     id: 2,
                     name: "About",
-                    href: `/${session?.user?.username}/about`,
+                    href: `/${session?.username}/about`,
                   },
                   {
                     id: 3,
                     name: "Friends",
-                    href: `/${session?.user?.username}/friends`,
+                    href: `/${session?.username}/friends`,
                   },
                   {
                     id: 4,
                     name: "Photos",
-                    href: `/${session?.user?.username}/photos`,
+                    href: `/${session?.username}/photos`,
                   },
                 ].map((item) => (
                   <li key={item.id}>

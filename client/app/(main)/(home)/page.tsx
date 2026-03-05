@@ -1,7 +1,7 @@
-import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { serverFetch } from "@/lib/server-fetch";
 import Posts from "@/components/modules/post/posts";
+import { auth } from "@/lib/auth";
 
 const NewsFeed = async () => {
   const session = await auth();

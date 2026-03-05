@@ -19,7 +19,7 @@ import {
   Settings,
 } from "lucide-react";
 import LogoutButton from "./LogoutButton";
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 
 const ProfileDropdown = async () => {
   const session = await auth();
@@ -30,14 +30,11 @@ const ProfileDropdown = async () => {
           <Avatar className="size-10 ">
             <AvatarImage
               src={
-                session?.user?.profilePicture?.url ||
-                "/images/default-profile.jpeg"
+                session?.profilePicture?.url || "/images/default-profile.jpeg"
               }
               alt="User"
             />
-            <AvatarFallback>
-              {session?.user?.fullName?.charAt(0)}
-            </AvatarFallback>
+            <AvatarFallback>{session?.fullName?.charAt(0)}</AvatarFallback>
           </Avatar>
           <div className="absolute bottom-0 -right-px size-3 bg-[#e2e5eb] rounded-full">
             <ChevronDown size={15} />
@@ -47,12 +44,10 @@ const ProfileDropdown = async () => {
       <DropdownMenuContent className="w-[360px]">
         <DropdownMenuLabel className="flex justify-start items-center">
           <Avatar className="size-9">
-            <AvatarImage src={session?.user?.profilePicture?.url} alt="User" />
-            <AvatarFallback>
-              {session?.user?.fullName?.charAt(0)}
-            </AvatarFallback>
+            <AvatarImage src={session?.profilePicture?.url} alt="User" />
+            <AvatarFallback>{session?.fullName?.charAt(0)}</AvatarFallback>
           </Avatar>
-          <p className="px-2">{session?.user?.fullName}</p>
+          <p className="px-2">{session?.fullName}</p>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup className="*:font-semibold *:text-[15px] *:py-3 *:cursor-pointer">

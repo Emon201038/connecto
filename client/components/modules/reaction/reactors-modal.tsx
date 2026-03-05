@@ -1,290 +1,132 @@
 "use client";
-
-import React, { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { X, ThumbsUp, Heart, Plus, ChevronLeft } from "lucide-react";
-import Image from "next/image";
+import { Loader2 } from "lucide-react";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { useGetReactionsQuery } from "@/redux/features/reaction/reactionApi";
+import {
+  ReactionTargetType,
+  ReactionType,
+} from "@/interface/reaction.interface";
 import {
   ResponsiveDialog,
   ResponsiveDialogContent,
   ResponsiveDialogHeader,
   ResponsiveDialogTitle,
 } from "@/components/ui/responsive-dialog";
-import { useGetReactionsQuery } from "@/redux/features/reaction/reactionApi";
-import { IReaction, ReactionType } from "@/interface/reaction.interface";
+import React, { useMemo, useState } from "react";
 import { reactionEmojis } from "@/constants/emoji";
-import Link from "next/link";
-import { toast } from "sonner";
-import { Skeleton } from "@/components/ui/skeleton";
 
-type TReactionType = "ALL" | ReactionType;
-
-const reactionTabs = [
-  {
-    key: "ALL" as TReactionType,
-    label: "All",
-    icon: null,
-    emoji: "",
-    color: "text-blue-600",
-  },
-  {
-    key: "LIKE" as TReactionType,
-    label: "Like",
-    icon: ThumbsUp,
-    emoji: <Image width={20} height={20} src="/images/like.svg" alt="like" />,
-    color: "text-blue-500",
-  },
-  {
-    key: "LOVE" as TReactionType,
-    label: "Love",
-    icon: Heart,
-    emoji: <Image width={20} height={20} src="/images/love.svg" alt="love" />,
-    color: "text-red-500",
-  },
-  {
-    key: "CARE" as TReactionType,
-    label: "Care",
-    icon: null,
-    emoji: <Image width={20} height={20} src="/images/care.svg" alt="like" />,
-    color: "text-orange-500",
-  },
-  {
-    key: "WOW" as TReactionType,
-    label: "Wow",
-    icon: null,
-    emoji: <Image width={20} height={20} src="/images/wow.svg" alt="wow" />,
-    color: "text-yellow-500",
-  },
-  {
-    key: "SAD" as TReactionType,
-    label: "Sad",
-    icon: null,
-    emoji: <Image width={20} height={20} src="/images/sad.svg" alt="like" />,
-    color: "text-yellow-600",
-  },
-  {
-    key: "ANGRY" as TReactionType,
-    label: "Angry",
-    icon: null,
-    emoji: <Image width={20} height={20} src="/images/angry.svg" alt="angry" />,
-    color: "text-red-600",
-  },
-];
-
-function LoadingSkeleton() {
-  return (
-    <div className="space-y-3 p-3">
-      {[...Array(6)].map((_, i) => (
-        <div
-          key={i}
-          className="flex items-center justify-between animate-pulse"
-        >
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gray-200 rounded-full"></div>
-            <div className="h-4 bg-gray-200 rounded w-32"></div>
-          </div>
-          <div className="h-8 bg-gray-200 rounded w-20"></div>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-interface ReactionsModalProps {
-  onClose: React.Dispatch<React.SetStateAction<boolean>>;
+interface Props {
+  postId: string;
   open: boolean;
-  target: string;
+  onOpenChange: (open: React.SetStateAction<boolean>) => void;
 }
 
-export default function ReactorsModal({
-  onClose,
-  open,
-  target,
-}: ReactionsModalProps) {
-  const [activeFilter, setActiveFilter] = useState<TReactionType>("ALL");
-
+export default function ReactorsModal({ postId, open, onOpenChange }: Props) {
+  const [currentTab, setCurrentTab] = useState<ReactionType | "ALL">("ALL");
+  // 🔥 Only call API when modal is open
   const { data, isLoading } = useGetReactionsQuery(
     {
-      target: target,
-      type: activeFilter === "ALL" ? undefined : (activeFilter as ReactionType),
+      target: postId,
+      targetType: ReactionTargetType.POST,
+      type: currentTab === "ALL" ? undefined : currentTab,
     },
     {
-      skip: !target,
-      refetchOnMountOrArgChange: true,
+      skip: !open,
     },
   );
 
-  const handleClose = (state: boolean) => {
-    onClose(state);
-    setTimeout(onClose, 200); // Wait for exit animation
-  };
-
-  if (isLoading) {
+  const reactionTabs = useMemo(() => {
     return (
-      <ResponsiveDialog open={open} onOpenChange={handleClose}>
-        {/* Header */}
-        <ResponsiveDialogContent>
-          <ResponsiveDialogHeader>
-            <ResponsiveDialogTitle className="sr-only">f</ResponsiveDialogTitle>
-            <div className="flex w-full items-center gap-2! overflow-x-auto">
-              {reactionTabs.map((tab) => (
-                <Skeleton key={tab.key} className="w-10 h-8 rounded-md" />
-              ))}
-            </div>
-            <LoadingSkeleton />
-          </ResponsiveDialogHeader>
-        </ResponsiveDialogContent>
-      </ResponsiveDialog>
+      data?.map((reaction) => {
+        return {
+          label: reaction.type as ReactionType | "ALL",
+          src: `/images/${reaction.type.toLowerCase()}.svg`,
+        };
+      }) || []
     );
-  }
+  }, [data]);
 
-  const initialValue: Record<ReactionType, IReaction[]> = {
-    LIKE: [],
-    LOVE: [],
-    CARE: [],
-    HAHA: [],
-    WOW: [],
-    SAD: [],
-    ANGRY: [],
-  };
-
-  const grouped = data?.data.reduce<Record<ReactionType, IReaction[]>>(
-    (acc, reaction) => {
-      if (!acc[reaction!.type as ReactionType]) {
-        acc[reaction!.type as ReactionType] = [];
-      }
-      acc[reaction!.type as ReactionType].push(reaction);
-      return acc;
-    },
-    initialValue,
-  );
-
-  const getReactionCount = (reactionType: TReactionType) => {
-    if (reactionType === "ALL") return data?.data.length;
-    return data?.data.filter((user) => user.type === reactionType).length;
+  const getReactionCount = (reactionType: ReactionType | "ALL") => {
+    if (currentTab === "ALL") return data?.length || 0;
+    return (
+      data?.filter((reaction) => reaction.type === reactionType)?.length || 0
+    );
   };
 
   return (
-    <ResponsiveDialog open={open} onOpenChange={handleClose}>
-      {/* Header */}
-      <ResponsiveDialogContent>
-        <ResponsiveDialogHeader>
-          <ResponsiveDialogTitle className="sr-only">f</ResponsiveDialogTitle>
-          <div className="flex w-full items-center gap-2! overflow-x-auto">
-            {reactionTabs.map((tab) => {
-              const count = getReactionCount(tab.key as TReactionType);
-              // Show all tabs, but dim the ones with 0 count
+    <ResponsiveDialog open={open} onOpenChange={onOpenChange}>
+      <ResponsiveDialogContent className="pt-0">
+        <ResponsiveDialogHeader className="sr-only">
+          <ResponsiveDialogTitle>Reactions</ResponsiveDialogTitle>
+        </ResponsiveDialogHeader>
 
-              const isActive = activeFilter === tab.key;
+        {isLoading && (
+          <div className="flex justify-center py-6">
+            <Loader2 className="animate-spin" />
+          </div>
+        )}
 
+        <div className="space-y-3 mt-4 pb-1 max-h-100 overflow-y-auto">
+          <div className="flex gap-1 justify-start items-center">
+            {[
+              { label: "ALL" as const, src: "/images/all.svg" },
+              ...reactionTabs,
+            ].map((tab) => {
+              const count = getReactionCount(tab.label);
+              const isActive = currentTab === tab.label;
               return (
                 <button
-                  key={tab.key}
+                  key={tab.label}
                   onClick={(e) => {
                     e.stopPropagation();
-                    setActiveFilter(tab.key);
+                    setCurrentTab(tab.label);
                   }}
-                  className={`flex flex-1 justify-center gap-1 items-center px-2 py-2 ransition-all duration-200 whitespace-nowrap ${
+                  className={`flex justify-center gap-1 items-center px-2 py-2 ransition-all duration-200 whitespace-nowrap ${
                     isActive
                       ? `${
-                          tab.key !== "ALL" &&
-                          reactionEmojis[tab.key as ReactionType].classes.text
+                          tab.label !== "ALL" &&
+                          reactionEmojis[tab.label as ReactionType].classes.text
                         } border-b-2 border-current`
-                      : count === 0 && tab.key !== "ALL"
+                      : count === 0 && tab.label !== "ALL"
                         ? "text-gray-400 cursor-not-allowed"
-                        : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
+                        : "text-gray-600 hover:text-gray-800 "
                   }`}
-                  disabled={count === 0 && tab.key !== "ALL"}
+                  disabled={count === 0 && tab.label !== "ALL"}
                 >
-                  {tab.key !== ("ALL" as TReactionType) && (
+                  {tab.label !== "ALL" && (
                     <>
-                      {reactionEmojis[tab.key as ReactionType].emoji}
+                      {reactionEmojis[tab.label as ReactionType].emoji}
                       {
-                        <span className="text-sm font-medium">
-                          {
-                            (data?.data || [])?.filter(
-                              (r) => r.type === tab.key,
-                            ).length
-                          }
+                        <span className="text-sm font-medium capitalize">
+                          {tab.label}
                         </span>
                       }
                     </>
                   )}
-                  {tab.key === ("ALL" as TReactionType) && (
-                    <>
-                      <span className="text-sm font-medium">{tab.key}</span>
-
-                      <span className="text-sm font-medium">
-                        {(data?.data || []).length}
-                      </span>
-                    </>
+                  {tab.label === "ALL" && (
+                    <span className="text-sm font-medium">{tab.label}</span>
                   )}
                 </button>
               );
             })}
           </div>
-          <div className="overflow-y-auto md:max-h-96 h-full pb-6">
-            {/* scroll area */}
-            <div className="space-y-1">
-              {data?.data?.length === 0 ? (
-                <div className="text-center py-8 text-gray-500">
-                  <div className="text-4xl mb-2">😔</div>
-                  <p>No reactions of this type yet</p>
+          {data?.map((reaction) => (
+            <div key={reaction.id} className="flex items-center gap-3">
+              <div className="size-10 relative">
+                <Avatar className="size-10">
+                  <AvatarImage src={reaction?.user?.profilePicture?.url} />
+                  <AvatarFallback>
+                    {reaction?.user?.fullName?.slice(0, 2)}
+                  </AvatarFallback>
+                </Avatar>
+                <div className="absolute -right-1 -bottom-0.5 size-4">
+                  {reactionEmojis[reaction.type as ReactionType].emoji}
                 </div>
-              ) : (
-                data?.data?.map((reaction, index) => (
-                  <div
-                    key={reaction.id}
-                    className="flex items-center justify-between p-3 hover:bg-accent transition-colors duration-150 animate-fadeIn"
-                    style={{ animationDelay: `${index * 50}ms` }}
-                  >
-                    <Link
-                      href={`/${reaction.user?.username}`}
-                      className="flex items-center space-x-3"
-                    >
-                      <div className="relative">
-                        <Image
-                          src={
-                            reaction.user?.profilePicture?.url ||
-                            "/images/default-profile.jpeg"
-                          }
-                          alt={reaction.user?.fullName || "User"}
-                          width={40}
-                          height={40}
-                          className="rounded-full transition-transform duration-200 hover:scale-105"
-                        />
-                        <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-white rounded-full flex items-center justify-center border border-gray-200 shadow-sm">
-                          <span className="text-xs">
-                            {
-                              reactionEmojis[reaction!.type as ReactionType]
-                                .emoji
-                            }
-                          </span>
-                        </div>
-                      </div>
-                      <span className="font-medium">
-                        {reaction.user?.fullName}
-                      </span>
-                    </Link>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => {
-                        toast.success("Feature not implemented yet", {
-                          description: "This feature will be implemented soon",
-                        });
-                      }}
-                      className="flex items-center space-x-1 hover:transition-all duration-200 hover:scale-105"
-                    >
-                      <Plus className="w-4 h-4" />
-                      <span>Add friend</span>
-                    </Button>
-                  </div>
-                ))
-              )}
+              </div>
+              <span>{reaction.user.fullName}</span>
             </div>
-          </div>
-        </ResponsiveDialogHeader>
+          ))}
+        </div>
       </ResponsiveDialogContent>
     </ResponsiveDialog>
   );

@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useRef, useState } from "react";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -17,7 +16,7 @@ import {
 import PostFeelings from "./post-feelings";
 import { toast } from "sonner";
 import { EntityInput } from "../../shared/form/entity-form";
-import { Entity } from "@/types";
+import { Entity, IUser } from "@/types";
 import { Separator } from "@/components/ui/separator";
 import {
   ResponsiveDialog,
@@ -29,7 +28,6 @@ import {
 import { useCreatePost2Mutation } from "@/redux/features/post/postApi";
 import { PostPrivacy, PostType } from "@/interface/post.interface";
 import { PostCreationSkeleton } from "./create-post-card-loading";
-import { Session } from "next-auth";
 
 interface ImagePreview {
   id: string;
@@ -38,10 +36,10 @@ interface ImagePreview {
 }
 
 export default function CreatePostCard({
-  session: authSession,
+  session,
   groupId,
 }: {
-  session?: Session;
+  session?: IUser | null;
   groupId?: string;
 }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -93,8 +91,6 @@ export default function CreatePostCard({
       return prev.filter((img) => img.id !== id);
     });
   };
-  const { status, data } = useSession();
-
   const [createPost, { isLoading }] = useCreatePost2Mutation();
 
   const handleCreatePost = async () => {
@@ -191,22 +187,15 @@ export default function CreatePostCard({
     <Card className="mb-4 gap-2 pt-3 pb-2.5">
       <CardContent className="px-4">
         <div className="flex gap-2">
-          <Link
-            href={`/${authSession?.user?.username || data?.user?.username}`}
-          >
+          <Link href={`/${session?.username}`}>
             <Avatar className="w-10 h-10">
               <AvatarImage
                 src={
-                  authSession?.user?.profilePicture?.url ||
-                  data?.user?.profilePicture?.url ||
-                  "/images/default-profile.jpeg"
+                  session?.profilePicture?.url || "/images/default-profile.jpeg"
                 }
                 alt="Your avatar"
               />
-              <AvatarFallback>
-                {authSession?.user?.fullName?.charAt(0) ||
-                  data?.user?.fullName?.charAt(0)}
-              </AvatarFallback>
+              <AvatarFallback>{session?.fullName?.charAt(0)}</AvatarFallback>
             </Avatar>
           </Link>
           <ResponsiveDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -217,10 +206,7 @@ export default function CreatePostCard({
               >
                 {rawText
                   ? rawText
-                  : `What's on your mind, ${
-                      authSession?.user?.fullName?.split(" ")[0] ||
-                      data?.user?.fullName?.split(" ")[0]
-                    }?`}
+                  : `What's on your mind, ${session?.fullName?.split(" ")[0]}?`}
               </Button>
             </ResponsiveDialogTrigger>
             <ResponsiveDialogContent className="gap-0 p-0 mt-0!">
@@ -237,13 +223,12 @@ export default function CreatePostCard({
                     alt="Your avatar"
                   />
                   <AvatarFallback>
-                    {authSession?.user?.fullName?.charAt(0) ||
-                      data?.user?.fullName?.charAt(0)}
+                    {session?.fullName?.charAt(0)}
                   </AvatarFallback>
                 </Avatar>
                 <div>
                   <div className="font-semibold text-sm flex flex-wrap gap-1 items-center">
-                    <p>{authSession?.user?.fullName || data?.user?.fullName}</p>
+                    <p>{session?.fullName}</p>
                     {selectedFeeling?.type && (
                       <p className="text-[13px]">
                         is {selectedFeeling?.emoji} {selectedFeeling.type}{" "}
@@ -290,9 +275,7 @@ export default function CreatePostCard({
                   value={rawText}
                   entities={entities}
                   onChange={handleDataChange}
-                  placeholder={`What's on your mind, ${
-                    authSession?.user?.fullName || data?.user?.fullName
-                  }?`}
+                  placeholder={`What's on your mind, ${session?.fullName}?`}
                   className="max-h-50 min-h-12.5 md:max-h-25 border-none focus-visible:ring-0 focus:ring-0 focus-visible:shadow-none focus-visible:ring-offset-0 focus:ring-offset-transparent focus:ring-transparent bg-transparent resize-none overflow-y-auto"
                 />
               </div>

@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -22,7 +22,7 @@ const page = async () => {
     .map((c) => `${c.name}=${c.value}`)
     .join("; ");
   const suggestedRes = await store.dispatch(
-    friendApi.endpoints.getSuggestedUsers.initiate({ cookie: cookieList })
+    friendApi.endpoints.getSuggestedUsers.initiate({ cookie: cookieList }),
   );
 
   const suggested = suggestedRes?.data?.data?.users || [];

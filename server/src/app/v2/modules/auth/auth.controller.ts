@@ -29,4 +29,14 @@ const refreshToken = catchAsync(async (req, res, next) => {
   });
 });
 
-export const AuthController = { login, refreshToken };
+const me = catchAsync(async (req, res, next) => {
+  if (!req.user) throw new Error("You are not logged in");
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "User logged in successfully",
+    data: await AuthService.getMe(req.user.id),
+  });
+});
+
+export const AuthController = { login, refreshToken, me };

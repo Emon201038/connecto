@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import { Card } from "@/components/ui/card";
 import { friendApi } from "@/redux/features/friend/friendApi";
 import { userApi } from "@/redux/features/user/userApi";
@@ -10,7 +10,7 @@ import React from "react";
 
 const page = async () => {
   const res = await store.dispatch(
-    friendApi.endpoints.myFriends.initiate({ cookie: undefined })
+    friendApi.endpoints.myFriends.initiate({ cookie: undefined }),
   );
 
   return (

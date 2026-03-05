@@ -10,52 +10,49 @@ import {
   ReactionType,
 } from "@/interface/reaction.interface";
 import { toast } from "sonner";
+import { useTogglePostReactionMutation } from "@/redux/features/reaction/reactionApi";
 
 interface ReactionButtonProps {
-  userReaction?: "like" | "love" | "haha" | "wow" | "sad" | "angry" | null;
-  onReaction: (
-    reaction: "like" | "love" | "haha" | "wow" | "sad" | "angry" | null,
-  ) => void;
+  userReaction?: ReactionType | null;
   children: React.ReactNode;
   className?: string;
-  handleButtonClick?: () => void;
   targetId: string;
-  reactionFor: string;
+  reactionFor: ReactionTargetType;
 }
 
 const reactions = [
   {
-    type: "like" as const,
+    type: ReactionType.LIKE,
     icon: "/images/like.svg",
     label: "Like",
     color: "text-blue-500",
   },
   {
-    type: "love" as const,
+    type: ReactionType.LOVE,
     icon: "/images/love.svg",
     label: "Love",
     color: "text-red-500",
   },
   {
-    type: "haha" as const,
+    type: ReactionType.HAHA,
     icon: "/images/haha.svg",
     label: "Haha",
     color: "text-yellow-500",
   },
   {
-    type: "wow" as const,
+    type: ReactionType.WOW,
     icon: "/images/wow.svg",
     label: "Wow",
     color: "text-yellow-500",
   },
   {
-    type: "sad" as const,
+    type: ReactionType.SAD,
     icon: "/images/sad.svg",
     label: "Sad",
     color: "text-yellow-500",
   },
   {
-    type: "angry" as const,
+    type: ReactionType.ANGRY,
     icon: "/images/angry.svg",
     label: "Angry",
     color: "text-red-500",
@@ -64,10 +61,8 @@ const reactions = [
 
 export function ReactionButton2({
   userReaction,
-  onReaction,
   children,
   className,
-  handleButtonClick,
   targetId,
   reactionFor,
 }: ReactionButtonProps) {
@@ -78,6 +73,8 @@ export function ReactionButton2({
   const buttonRef = useRef<HTMLButtonElement>(null);
   const pickerRef = useRef<HTMLDivElement>(null);
   const [pickerPosition, setPickerPosition] = useState<"top" | "bottom">("top");
+
+  const [toggleReaction] = useTogglePostReactionMutation();
 
   const calculatePickerPosition = () => {
     if (!buttonRef.current) return;
@@ -144,27 +141,6 @@ export function ReactionButton2({
     setShowPicker(false);
   };
 
-  // const handleReactionChange = async (reaction: ReactionType) => {
-  //     try {
-  //       const obj = {
-  //         type: reaction,
-  //         reactionFor: ReactionTargetType.POST,
-  //         targetId: targetId,
-  //       };
-  //       await toggleReaction(obj).unwrap();
-  //     } catch (error) {
-  //       toast.error("Failed to react");
-  //     }
-  //   };
-
-  //   const handleReactionClick = async () => {
-  //     if (post.myReaction) {
-  //       handleReactionChange(post.myReaction.type as ReactionType);
-  //     } else {
-  //       handleReactionChange("LIKE" as ReactionType);
-  //     }
-  //   };
-
   const handleClick = () => {
     if (showPicker) {
       setShowPicker(false);
@@ -176,12 +152,26 @@ export function ReactionButton2({
     }
 
     // If user has already reacted, remove reaction
-    handleButtonClick?.();
+    if (userReaction) {
+      handleReactionSelect(userReaction as ReactionType);
+    } else {
+      handleReactionSelect(ReactionType.LIKE);
+    }
   };
 
-  const handleReactionSelect = (reaction: (typeof reactions)[0]["type"]) => {
-    onReaction(reaction);
-    setShowPicker(false);
+  const handleReactionSelect = async (reaction: ReactionType) => {
+    try {
+      setShowPicker(false);
+      const obj = {
+        type: reaction,
+        reactionFor: reactionFor,
+        targetId: targetId,
+      };
+      await toggleReaction(obj).unwrap();
+    } catch (error) {
+      toast.error("Failed to react");
+    } finally {
+    }
   };
 
   useEffect(() => {
@@ -227,8 +217,6 @@ export function ReactionButton2({
       }
     };
   }, []);
-
-  const currentReaction = reactions.find((r) => r.type === userReaction);
 
   return (
     <div className="relative flex justify-center items-center">

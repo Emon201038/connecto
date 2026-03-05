@@ -1,7 +1,7 @@
 import React from "react";
 import ChatArea from "./components/ChatArea";
 import RightSideBar from "./components/RightSideBar";
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import { IConversationMember } from "@/types";
 
 const page = async ({ params }: { params: Promise<{ chatId: string }> }) => {

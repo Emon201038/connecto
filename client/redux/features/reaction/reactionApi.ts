@@ -86,6 +86,7 @@ export const reactionApi = baseApi.injectEndpoints({
         credentials: "include",
         body: data,
       }),
+      invalidatesTags: ["REACTIONS"],
       transformResponse: (response: { data: IReaction | { added: false } }) =>
         response.data,
       onQueryStarted: async (arg, { queryFulfilled, dispatch }) => {
@@ -264,43 +265,23 @@ export const reactionApi = baseApi.injectEndpoints({
     }),
 
     getReactions: builder.query<
-      IResponse<IReaction[]>,
-      { target: string; type?: ReactionType }
+      IReaction[],
+      {
+        target: string;
+        targetType?: ReactionTargetType;
+        type?: ReactionType | null;
+      }
     >({
       query: (data) => ({
-        url: "/",
-        method: "POST",
+        url: `/api/v2/reactions/${data.target}/${data.targetType?.toLowerCase()}?type=${data.type ?? ""}`,
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({
-          query: `
-            query GetReactions($type: ReactionType, $target: ID!) {
-              getReactions(type: $type, target: $target) {
-                id
-                type
-                user {
-                  id
-                  fullName
-                  username
-                  profilePicture {
-                    url
-                    pub_id
-                  }
-                }
-              }
-            }
-          `,
-          variables: data,
-        }),
       }),
-      transformResponse: (
-        response: IResponse<{ getReactions: IReaction[] }>,
-      ) => ({
-        data: response.data.getReactions,
-        errors: response.errors,
-      }),
+      providesTags: ["REACTIONS"],
+      transformResponse: (response: { data: IReaction[] }) => response.data,
     }),
   }),
 });

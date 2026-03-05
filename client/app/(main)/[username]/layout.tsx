@@ -5,7 +5,7 @@ import Image from "next/image";
 import { notFound, redirect } from "next/navigation";
 import React from "react";
 import Link from "./link";
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import { cookies } from "next/headers";

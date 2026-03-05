@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import SignupForm from "./SignupForm";
 import { redirect } from "next/navigation";
-import { auth } from "@/auth";
+import { auth } from "@/lib/auth";
 
 export default async function SignupPage({
   searchParams,
@@ -20,7 +20,7 @@ export default async function SignupPage({
   const session = await auth();
   const params = await searchParams;
   const callback = params?.callback;
-  if (session?.user?.id) {
+  if (session?.id) {
     redirect(callback && callback.startsWith("/") ? callback : "/");
   }
 
