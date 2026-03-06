@@ -1,18 +1,25 @@
-model PostEntity {
+model Entity {
   id String @id @default(uuid())
 
-  type   String
   offset Int
   end    Int
   text   String
+  type   EntityType
 
-  // Optional polymorphic targets
   userId String?
   user   User?   @relation(fields: [userId], references: [id])
 
   hashtagId String?
   hashtag   Hashtag? @relation(fields: [hashtagId], references: [id])
 
-  postId String
-  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String?
+  post   Post?   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  commentId String?
+  comment   Comment? @relation(fields: [commentId], references: [id], onDelete: Cascade)
+}
+
+enum EntityType {
+  HASHTAG
+  MENTION
 }

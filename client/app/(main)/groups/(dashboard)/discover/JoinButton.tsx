@@ -11,7 +11,6 @@ const JoinButton = ({ groupId }: { groupId: string }) => {
   const handleJoin = async () => {
     try {
       const res = await joinGroup({ groupId }).unwrap();
-      console.log(res);
       toast.success("Success!!!", {
         description: `Joined ${res.data.name} group successfully`,
       });

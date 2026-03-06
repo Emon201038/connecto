@@ -40,26 +40,35 @@ export default function PostFooter({ post }: { post: IPost }) {
           }}
           className="flex gap-1 cursor-pointer"
         >
-          {topReactions.map((reaction) => {
-            const config = allReact.find((r) => r.type === reaction.type);
-            return (
-              <Image
-                key={reaction.type}
-                src={config?.src || "images/like.svg"}
-                alt="react"
-                width={16}
-                height={16}
-              />
-            );
-          })}
+          <div className="flex cursor-pointer">
+            {topReactions.map((reaction, index) => {
+              const config = allReact.find((r) => r.type === reaction.type);
+              return (
+                <Image
+                  key={reaction.type}
+                  src={config?.src || "images/like.svg"}
+                  alt="react"
+                  width={16}
+                  height={16}
+                  className="relative"
+                  style={{
+                    marginLeft: index > 0 ? "-4px" : "0",
+                    zIndex: 3 - index,
+                  }}
+                />
+              );
+            })}
+          </div>
           <span className={`${post._count.reactions === 0 && "hidden"}`}>
             {post._count.reactions}
           </span>
         </div>
         <ReactorsModal
-          postId={post.id}
+          type={ReactionTargetType.POST}
+          targetId={post.id}
           open={showReactorsModal}
           onOpenChange={setShowReactorsModal}
+          reactionSummary={post.reactionSummary}
         />
 
         <div className="flex gap-4">

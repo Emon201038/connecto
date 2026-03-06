@@ -7,7 +7,7 @@ const commentRoutes = express.Router();
 
 commentRoutes
   .route("/")
-  .get(CommentController.getAllComments)
+  .get(checkAuth(...Object.values(UserRole)), CommentController.getAllComments)
   .post(checkAuth(...Object.values(UserRole)), CommentController.createComment);
 
 export default commentRoutes;

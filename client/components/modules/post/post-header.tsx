@@ -67,7 +67,7 @@ export default function PostHeader({ post }: { post: IPost }) {
               {post.group.name}
             </Link>
             <span className="text-xs text-muted-foreground">
-              {post.author.fullName} · {timeAgo(Number(post.createdAt))}
+              {post.author.fullName} · {timeAgo(post.createdAt)}
             </span>
           </>
         ) : (

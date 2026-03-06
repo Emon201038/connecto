@@ -2,6 +2,7 @@ import { IUser } from "@/types";
 import { IComment } from "./comment.interfce";
 import { IReaction, ReactionType } from "./reaction.interface";
 import { IGroup } from "./group.interface";
+import { ReactionSummary } from ".";
 
 export enum PostType {
   TEXT = "text",
@@ -36,6 +37,7 @@ export interface IPost {
   content: string;
   author: IUser;
   attachments?: {
+    id: string;
     url: string;
     pub_id: string;
   }[];
@@ -57,10 +59,7 @@ export interface IPost {
     shares: number;
   };
   myReaction: { type: ReactionType } | null;
-  reactionSummary: {
-    count: number;
-    type: "LIKE" | "CARE" | "WOW" | "LOVE" | "HAHA" | "SAD" | "ANGRY";
-  }[];
+  reactionSummary: ReactionSummary[];
   comments: IComment[];
   group?: IGroup;
 }

@@ -394,6 +394,19 @@ export function EntityInput({
     ) {
       e.preventDefault();
       // Basic navigation could be implemented here
+      return;
+    }
+    if (e.key === "Enter") {
+      if (e.shiftKey) {
+        // allow newline
+        return;
+      }
+
+      // submit instead of newline
+      e.preventDefault();
+      if (value.trim()) {
+        onSubmit?.();
+      }
     }
   };
 

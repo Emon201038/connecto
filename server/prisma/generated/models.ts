@@ -9,10 +9,9 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/Comment'
-export type * from './models/CommentEntity'
 export type * from './models/Conversation'
 export type * from './models/ConversationMember'
-export type * from './models/PostEntity'
+export type * from './models/Entity'
 export type * from './models/Group'
 export type * from './models/GroupMember'
 export type * from './models/Hashtag'

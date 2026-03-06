@@ -43,11 +43,6 @@ export { Prisma }
  */
 export type Comment = Prisma.CommentModel
 /**
- * Model CommentEntity
- * 
- */
-export type CommentEntity = Prisma.CommentEntityModel
-/**
  * Model Conversation
  * 
  */
@@ -58,10 +53,10 @@ export type Conversation = Prisma.ConversationModel
  */
 export type ConversationMember = Prisma.ConversationMemberModel
 /**
- * Model PostEntity
+ * Model Entity
  * 
  */
-export type PostEntity = Prisma.PostEntityModel
+export type Entity = Prisma.EntityModel
 /**
  * Model Group
  * 

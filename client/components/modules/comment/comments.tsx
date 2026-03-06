@@ -4,13 +4,13 @@ import type React from "react";
 import CommentThread from "./comment-thread";
 import { IPost } from "@/interface/post.interface";
 import { IComment } from "@/interface/comment.interfce";
-import { useGetCommentsQuery } from "@/redux/features/comments/commentsApi";
-import { useSession } from "next-auth/react";
 import { IUser } from "@/types";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useEffect, useState } from "react";
 import { serverFetch } from "@/lib/server-fetch";
 import { toast } from "sonner";
+import { useMeQuery } from "@/redux/features/auth/authApi";
+import { useGetCommentsQuery } from "@/redux/features/comments/commentsApi";
 
 export default function PostComments({
   post,
@@ -19,42 +19,10 @@ export default function PostComments({
   post: IPost;
   onReply: (commentId: string, author: IComment["author"]) => void;
 }) {
-  // const { data: comments, isLoading } = useGetCommentsQuery(
-  //   { page: 1, limit: 15, post: post.id },
-  //   {
-  //     skip: !post.id,
-  //     refetchOnMountOrArgChange: true,
-  //   },
-  // );
-
-  const [isLoading, setIsLoading] = useState(true);
-  const [comments, setComments] = useState<IComment[]>([]);
-
-  useEffect(() => {
-    const fetchComments = async () => {
-      try {
-        setIsLoading(true);
-        const res = await serverFetch.get(`/comments?postId=${post.id}`, {
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          cache: "force-cache",
-        });
-
-        const data = await res.json();
-        setComments(data.data || []);
-      } catch (error) {
-        toast.error("Failed to fetch comments");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchComments();
-  }, [post.id]);
-
-  const session = useSession();
+  const { data: session, isLoading: sessionLoading } = useMeQuery();
+  const { data, isLoading } = useGetCommentsQuery({
+    postId: post.id,
+  });
 
   if (!post) {
     return null;
@@ -80,21 +48,21 @@ export default function PostComments({
   }
 
   return (
-    <div className="p-4 pt-0 flex flex-col h-full justify-between">
-      <div className="flex-1 py-2 md:max-h-75 overflow-y-auto">
-        {comments?.length === 0 ? (
+    <div className="flex flex-col flex-1 min-h-0">
+      <div className="flex-1 overflow-y-auto p-4 pt-0">
+        {data?.comments?.length === 0 ? (
           <div className="text-sm text-muted-foreground h-full flex items-center justify-center">
             No comments yet
           </div>
         ) : (
-          comments
-            ?.filter((c: IComment) => !c.parent)
+          data?.comments
+            ?.filter((c: IComment) => !c.parentId)
             ?.map((comment: IComment) => (
               <CommentThread
                 key={comment.id}
                 comment={comment}
                 postAuthorId={post?.author.id}
-                currentUser={session?.data?.user as unknown as IUser}
+                currentUser={session as IUser}
                 onReply={onReply}
               />
             ))

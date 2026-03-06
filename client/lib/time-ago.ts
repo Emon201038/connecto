@@ -2,7 +2,7 @@ import { m } from "framer-motion";
 
 function timeAgo(
   inputDate: Date | string | number,
-  nowText = "just now"
+  nowText = "just now",
 ): string {
   const date =
     typeof inputDate === "string" || typeof inputDate === "number"

@@ -3,5 +3,5 @@ model Hashtag {
   name     String @unique
   useCount Int    @default(0)
 
-  posts PostEntity[]
+  posts Entity[]
 }

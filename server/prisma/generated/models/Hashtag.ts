@@ -200,14 +200,14 @@ export type HashtagWhereInput = {
   id?: Prisma.StringFilter<"Hashtag"> | string
   name?: Prisma.StringFilter<"Hashtag"> | string
   useCount?: Prisma.IntFilter<"Hashtag"> | number
-  posts?: Prisma.PostEntityListRelationFilter
+  posts?: Prisma.EntityListRelationFilter
 }
 
 export type HashtagOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   useCount?: Prisma.SortOrder
-  posts?: Prisma.PostEntityOrderByRelationAggregateInput
+  posts?: Prisma.EntityOrderByRelationAggregateInput
 }
 
 export type HashtagWhereUniqueInput = Prisma.AtLeast<{
@@ -217,7 +217,7 @@ export type HashtagWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.HashtagWhereInput[]
   NOT?: Prisma.HashtagWhereInput | Prisma.HashtagWhereInput[]
   useCount?: Prisma.IntFilter<"Hashtag"> | number
-  posts?: Prisma.PostEntityListRelationFilter
+  posts?: Prisma.EntityListRelationFilter
 }, "id" | "name">
 
 export type HashtagOrderByWithAggregationInput = {
@@ -244,28 +244,28 @@ export type HashtagCreateInput = {
   id?: string
   name: string
   useCount?: number
-  posts?: Prisma.PostEntityCreateNestedManyWithoutHashtagInput
+  posts?: Prisma.EntityCreateNestedManyWithoutHashtagInput
 }
 
 export type HashtagUncheckedCreateInput = {
   id?: string
   name: string
   useCount?: number
-  posts?: Prisma.PostEntityUncheckedCreateNestedManyWithoutHashtagInput
+  posts?: Prisma.EntityUncheckedCreateNestedManyWithoutHashtagInput
 }
 
 export type HashtagUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   useCount?: Prisma.IntFieldUpdateOperationsInput | number
-  posts?: Prisma.PostEntityUpdateManyWithoutHashtagNestedInput
+  posts?: Prisma.EntityUpdateManyWithoutHashtagNestedInput
 }
 
 export type HashtagUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   useCount?: Prisma.IntFieldUpdateOperationsInput | number
-  posts?: Prisma.PostEntityUncheckedUpdateManyWithoutHashtagNestedInput
+  posts?: Prisma.EntityUncheckedUpdateManyWithoutHashtagNestedInput
 }
 
 export type HashtagCreateManyInput = {
@@ -400,7 +400,7 @@ export type HashtagCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
  * HashtagCountOutputType without action
  */
 export type HashtagCountOutputTypeCountPostsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PostEntityWhereInput
+  where?: Prisma.EntityWhereInput
 }
 
 
@@ -441,7 +441,7 @@ export type HashtagIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $HashtagPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Hashtag"
   objects: {
-    posts: Prisma.$PostEntityPayload<ExtArgs>[]
+    posts: Prisma.$EntityPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -841,7 +841,7 @@ readonly fields: HashtagFieldRefs;
  */
 export interface Prisma__HashtagClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  posts<T extends Prisma.Hashtag$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Hashtag$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostEntityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  posts<T extends Prisma.Hashtag$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Hashtag$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EntityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1266,23 +1266,23 @@ export type HashtagDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
  */
 export type Hashtag$postsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the PostEntity
+   * Select specific fields to fetch from the Entity
    */
-  select?: Prisma.PostEntitySelect<ExtArgs> | null
+  select?: Prisma.EntitySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the PostEntity
+   * Omit specific fields from the Entity
    */
-  omit?: Prisma.PostEntityOmit<ExtArgs> | null
+  omit?: Prisma.EntityOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.PostEntityInclude<ExtArgs> | null
-  where?: Prisma.PostEntityWhereInput
-  orderBy?: Prisma.PostEntityOrderByWithRelationInput | Prisma.PostEntityOrderByWithRelationInput[]
-  cursor?: Prisma.PostEntityWhereUniqueInput
+  include?: Prisma.EntityInclude<ExtArgs> | null
+  where?: Prisma.EntityWhereInput
+  orderBy?: Prisma.EntityOrderByWithRelationInput | Prisma.EntityOrderByWithRelationInput[]
+  cursor?: Prisma.EntityWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.PostEntityScalarFieldEnum | Prisma.PostEntityScalarFieldEnum[]
+  distinct?: Prisma.EntityScalarFieldEnum | Prisma.EntityScalarFieldEnum[]
 }
 
 /**

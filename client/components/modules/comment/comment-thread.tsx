@@ -2,7 +2,7 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
-import { ThumbsUp, Heart, Laugh, Angry, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import React, { useState, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Balancer } from "react-wrap-balancer";
@@ -11,35 +11,16 @@ import { useAppSelector } from "@/redux/hooks";
 import { IComment } from "@/interface/comment.interfce";
 import { HighlightHashtags } from "../../shared/form/highlight-hashtag";
 import { ReactionButton2 } from "../reaction/reaction-button";
-import { ReactionType } from "@/interface/reaction.interface";
-import { useToggleCommentReactionMutation } from "@/redux/features/reaction/reactionApi";
+import {
+  ReactionTargetType,
+  ReactionType,
+} from "@/interface/reaction.interface";
 import { toast } from "sonner";
 import ReusableTooltip from "../../Tooltip";
 import Image from "next/image";
 import ReactorsModal from "../reaction/reactors-modal";
 import { IUser } from "@/types";
 
-const reactions = [
-  {
-    name: "like",
-    icon: ThumbsUp,
-    color: "text-primary",
-    fillColor: "fill-primary",
-  },
-  {
-    name: "love",
-    icon: Heart,
-    color: "text-red-500",
-    fillColor: "fill-red-500",
-  },
-  {
-    name: "haha",
-    icon: Laugh,
-    color: "text-yellow-500",
-    fillColor: "fill-yellow-500",
-  },
-  { name: "angry", icon: Angry, color: "text-orange-500", fillColor: null },
-];
 const reactionEmojis: Record<
   "LIKE" | "CARE" | "WOW" | "LOVE" | "HAHA" | "SAD" | "ANGRY",
   { emoji: React.ReactNode; bg: string; name: string; text: string }
@@ -115,14 +96,10 @@ const CommentThread = ({
   currentUser: IUser;
   onReply: (commentId: string, author: IComment["author"]) => void;
 }) => {
-  const [selectedReaction, setSelectedReaction] = useState<string | null>(null);
-
   const [showModal, setShowModal] = useState(false);
-  const hoverTimeoutRef = useRef<number | null>(null);
   const [showingAllReplies, setShowingAllReplies] = useState(false);
   const { posts } = useAppSelector((state) => state.post);
-  const selectedPost = posts.find((p) => p.id === comment.post.id);
-  const [toggleReaction] = useToggleCommentReactionMutation();
+  const selectedPost = posts.find((p) => p.id === comment.postId);
 
   useEffect(() => {
     if (selectedPost) {
@@ -138,27 +115,6 @@ const CommentThread = ({
   }, [selectedPost, comment]);
 
   const handleShowMoreReplies = async () => {};
-
-  const handleReactionChange = async (reaction: ReactionType) => {
-    try {
-      const res = await toggleReaction({
-        target: comment.id,
-        targetType: "Comment",
-        type: reaction,
-        post: comment.post.id,
-      }).unwrap();
-    } catch (error) {
-      toast.error("Failed to react");
-    }
-  };
-
-  const handleReactionClick = async () => {
-    if (comment.myReaction) {
-      handleReactionChange(comment.myReaction.type as ReactionType);
-    } else {
-      handleReactionChange("LIKE" as ReactionType);
-    }
-  };
 
   return (
     <div id={`comment-${comment.id}`}>
@@ -205,10 +161,10 @@ const CommentThread = ({
                     {timeAgo(Number(comment.createdAt))}
                   </span>
                   <ReactionButton2
-                    onReaction={(e) =>
-                      handleReactionChange(e?.toUpperCase() as ReactionType)
-                    }
-                    handleButtonClick={handleReactionClick}
+                    userReaction={comment.myReaction?.type}
+                    targetId={comment.id}
+                    postId={comment.postId}
+                    reactionFor={ReactionTargetType.COMMENT}
                     className="w-fit hover:bg-none hover:bg-transparent dark:hover:bg-transparent p-0 h-fit! justify-center items-center"
                   >
                     <div
@@ -269,11 +225,7 @@ const CommentThread = ({
                                 key={index}
                                 className="text-xs flex gap-2 items-center"
                               >
-                                {
-                                  reactionEmojis[
-                                    reaction.reactionType as ReactionType
-                                  ].emoji
-                                }{" "}
+                                {reactionEmojis[reaction.type].emoji}{" "}
                                 {reaction.count}
                               </span>
                             ))}
@@ -291,18 +243,14 @@ const CommentThread = ({
                               .filter((r) => r.count > 0)
                               .map((reaction, index) => (
                                 <div
-                                  key={reaction.reactionType}
+                                  key={reaction.type}
                                   className={`relative`}
                                   style={{
                                     marginLeft: index > 0 ? "-4px" : "0",
                                     zIndex: 3 - index,
                                   }}
                                 >
-                                  {
-                                    reactionEmojis[
-                                      reaction.reactionType as ReactionType
-                                    ].emoji
-                                  }
+                                  {reactionEmojis[reaction.type].emoji}
                                 </div>
                               ))
                           : null}
@@ -358,29 +306,15 @@ const CommentThread = ({
       </div>
       {showModal && (
         <ReactorsModal
+          targetId={comment.id}
           open={showModal}
-          onClose={setShowModal}
-          target={comment.id}
+          onOpenChange={setShowModal}
+          type={ReactionTargetType.COMMENT}
+          reactionSummary={comment.reactionSummary}
         />
       )}
     </div>
   );
 };
-
-// const ReactorsModal = ({
-//   open,
-//   onOpenChange,
-// }: {
-//   open?: boolean;
-//   onOpenChange?: (open: boolean) => void;
-// }) => {
-//   return (
-//     <ResponsiveDialog open={open} onOpenChange={onOpenChange}>
-//       <ResponsiveDialogContent>
-//         <ResponsiveDialogHeader>People who reacted</ResponsiveDialogHeader>
-//       </ResponsiveDialogContent>
-//     </ResponsiveDialog>
-//   );
-// };
 
 export default CommentThread;

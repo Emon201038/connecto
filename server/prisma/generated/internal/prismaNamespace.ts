@@ -385,10 +385,9 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   Comment: 'Comment',
-  CommentEntity: 'CommentEntity',
   Conversation: 'Conversation',
   ConversationMember: 'ConversationMember',
-  PostEntity: 'PostEntity',
+  Entity: 'Entity',
   Group: 'Group',
   GroupMember: 'GroupMember',
   Hashtag: 'Hashtag',
@@ -418,7 +417,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "comment" | "commentEntity" | "conversation" | "conversationMember" | "postEntity" | "group" | "groupMember" | "hashtag" | "message" | "attachment" | "messageDeleted" | "otp" | "post" | "postAttachment" | "postShare" | "reaction" | "user" | "follower" | "friendship"
+    modelProps: "comment" | "conversation" | "conversationMember" | "entity" | "group" | "groupMember" | "hashtag" | "message" | "attachment" | "messageDeleted" | "otp" | "post" | "postAttachment" | "postShare" | "reaction" | "user" | "follower" | "friendship"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -493,80 +492,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.CommentCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.CommentCountAggregateOutputType> | number
-        }
-      }
-    }
-    CommentEntity: {
-      payload: Prisma.$CommentEntityPayload<ExtArgs>
-      fields: Prisma.CommentEntityFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.CommentEntityFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommentEntityPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.CommentEntityFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommentEntityPayload>
-        }
-        findFirst: {
-          args: Prisma.CommentEntityFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommentEntityPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.CommentEntityFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommentEntityPayload>
-        }
-        findMany: {
-          args: Prisma.CommentEntityFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommentEntityPayload>[]
-        }
-        create: {
-          args: Prisma.CommentEntityCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommentEntityPayload>
-        }
-        createMany: {
-          args: Prisma.CommentEntityCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.CommentEntityCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommentEntityPayload>[]
-        }
-        delete: {
-          args: Prisma.CommentEntityDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommentEntityPayload>
-        }
-        update: {
-          args: Prisma.CommentEntityUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommentEntityPayload>
-        }
-        deleteMany: {
-          args: Prisma.CommentEntityDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.CommentEntityUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.CommentEntityUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommentEntityPayload>[]
-        }
-        upsert: {
-          args: Prisma.CommentEntityUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$CommentEntityPayload>
-        }
-        aggregate: {
-          args: Prisma.CommentEntityAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateCommentEntity>
-        }
-        groupBy: {
-          args: Prisma.CommentEntityGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CommentEntityGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.CommentEntityCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.CommentEntityCountAggregateOutputType> | number
         }
       }
     }
@@ -718,77 +643,77 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    PostEntity: {
-      payload: Prisma.$PostEntityPayload<ExtArgs>
-      fields: Prisma.PostEntityFieldRefs
+    Entity: {
+      payload: Prisma.$EntityPayload<ExtArgs>
+      fields: Prisma.EntityFieldRefs
       operations: {
         findUnique: {
-          args: Prisma.PostEntityFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostEntityPayload> | null
+          args: Prisma.EntityFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityPayload> | null
         }
         findUniqueOrThrow: {
-          args: Prisma.PostEntityFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostEntityPayload>
+          args: Prisma.EntityFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityPayload>
         }
         findFirst: {
-          args: Prisma.PostEntityFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostEntityPayload> | null
+          args: Prisma.EntityFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityPayload> | null
         }
         findFirstOrThrow: {
-          args: Prisma.PostEntityFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostEntityPayload>
+          args: Prisma.EntityFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityPayload>
         }
         findMany: {
-          args: Prisma.PostEntityFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostEntityPayload>[]
+          args: Prisma.EntityFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityPayload>[]
         }
         create: {
-          args: Prisma.PostEntityCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostEntityPayload>
+          args: Prisma.EntityCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityPayload>
         }
         createMany: {
-          args: Prisma.PostEntityCreateManyArgs<ExtArgs>
+          args: Prisma.EntityCreateManyArgs<ExtArgs>
           result: BatchPayload
         }
         createManyAndReturn: {
-          args: Prisma.PostEntityCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostEntityPayload>[]
+          args: Prisma.EntityCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityPayload>[]
         }
         delete: {
-          args: Prisma.PostEntityDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostEntityPayload>
+          args: Prisma.EntityDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityPayload>
         }
         update: {
-          args: Prisma.PostEntityUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostEntityPayload>
+          args: Prisma.EntityUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityPayload>
         }
         deleteMany: {
-          args: Prisma.PostEntityDeleteManyArgs<ExtArgs>
+          args: Prisma.EntityDeleteManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateMany: {
-          args: Prisma.PostEntityUpdateManyArgs<ExtArgs>
+          args: Prisma.EntityUpdateManyArgs<ExtArgs>
           result: BatchPayload
         }
         updateManyAndReturn: {
-          args: Prisma.PostEntityUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostEntityPayload>[]
+          args: Prisma.EntityUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityPayload>[]
         }
         upsert: {
-          args: Prisma.PostEntityUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$PostEntityPayload>
+          args: Prisma.EntityUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$EntityPayload>
         }
         aggregate: {
-          args: Prisma.PostEntityAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregatePostEntity>
+          args: Prisma.EntityAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateEntity>
         }
         groupBy: {
-          args: Prisma.PostEntityGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.PostEntityGroupByOutputType>[]
+          args: Prisma.EntityGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntityGroupByOutputType>[]
         }
         count: {
-          args: Prisma.PostEntityCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.PostEntityCountAggregateOutputType> | number
+          args: Prisma.EntityCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.EntityCountAggregateOutputType> | number
         }
       }
     }
@@ -1881,20 +1806,6 @@ export const CommentScalarFieldEnum = {
 export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
 
 
-export const CommentEntityScalarFieldEnum = {
-  id: 'id',
-  commentId: 'commentId',
-  type: 'type',
-  offset: 'offset',
-  end: 'end',
-  model: 'model',
-  targetId: 'targetId',
-  text: 'text'
-} as const
-
-export type CommentEntityScalarFieldEnum = (typeof CommentEntityScalarFieldEnum)[keyof typeof CommentEntityScalarFieldEnum]
-
-
 export const ConversationScalarFieldEnum = {
   id: 'id',
   type: 'type',
@@ -1926,18 +1837,19 @@ export const ConversationMemberScalarFieldEnum = {
 export type ConversationMemberScalarFieldEnum = (typeof ConversationMemberScalarFieldEnum)[keyof typeof ConversationMemberScalarFieldEnum]
 
 
-export const PostEntityScalarFieldEnum = {
+export const EntityScalarFieldEnum = {
   id: 'id',
-  type: 'type',
   offset: 'offset',
   end: 'end',
   text: 'text',
+  type: 'type',
   userId: 'userId',
   hashtagId: 'hashtagId',
-  postId: 'postId'
+  postId: 'postId',
+  commentId: 'commentId'
 } as const
 
-export type PostEntityScalarFieldEnum = (typeof PostEntityScalarFieldEnum)[keyof typeof PostEntityScalarFieldEnum]
+export type EntityScalarFieldEnum = (typeof EntityScalarFieldEnum)[keyof typeof EntityScalarFieldEnum]
 
 
 export const GroupScalarFieldEnum = {
@@ -2197,34 +2109,6 @@ export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaM
 
 
 /**
- * Reference to a field of type 'Int'
- */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-/**
- * Reference to a field of type 'Int[]'
- */
-export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-/**
- * Reference to a field of type 'EntityModel'
- */
-export type EnumEntityModelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EntityModel'>
-    
-
-
-/**
- * Reference to a field of type 'EntityModel[]'
- */
-export type ListEnumEntityModelFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EntityModel[]'>
-    
-
-
-/**
  * Reference to a field of type 'ConversationType'
  */
 export type EnumConversationTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConversationType'>
@@ -2263,6 +2147,34 @@ export type EnumConversationThemeFieldRefInput<$PrismaModel> = FieldRefInputType
  * Reference to a field of type 'ConversationTheme[]'
  */
 export type ListEnumConversationThemeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConversationTheme[]'>
+    
+
+
+/**
+ * Reference to a field of type 'Int'
+ */
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
+ * Reference to a field of type 'Int[]'
+ */
+export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+/**
+ * Reference to a field of type 'EntityType'
+ */
+export type EnumEntityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EntityType'>
+    
+
+
+/**
+ * Reference to a field of type 'EntityType[]'
+ */
+export type ListEnumEntityTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'EntityType[]'>
     
 
 
@@ -2571,10 +2483,9 @@ export type PrismaClientOptions = ({
 }
 export type GlobalOmitConfig = {
   comment?: Prisma.CommentOmit
-  commentEntity?: Prisma.CommentEntityOmit
   conversation?: Prisma.ConversationOmit
   conversationMember?: Prisma.ConversationMemberOmit
-  postEntity?: Prisma.PostEntityOmit
+  entity?: Prisma.EntityOmit
   group?: Prisma.GroupOmit
   groupMember?: Prisma.GroupMemberOmit
   hashtag?: Prisma.HashtagOmit

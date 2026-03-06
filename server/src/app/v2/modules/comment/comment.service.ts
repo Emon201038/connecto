@@ -2,8 +2,12 @@ import { paginationHelper } from "../../../../app/helpers/paginationHelper";
 import prisma from "../../../../app/config/db";
 import { Prisma } from "../../../../../prisma/generated/client";
 
-const getComments = async (options: any, filters: Record<string, any>) => {
-  const { limit, skip, sortBy, sortOrder, page } =
+const getComments = async (
+  options: any,
+  filters: Record<string, any>,
+  userId: string,
+) => {
+  const { limit, sortBy, sortOrder } =
     paginationHelper.calculatePagination(options);
 
   const commentsAndConditions: Prisma.CommentWhereInput[] = [];
@@ -15,15 +19,19 @@ const getComments = async (options: any, filters: Record<string, any>) => {
     commentsAndConditions.push({
       postId: filters.postId,
     });
-  return await prisma.comment.findMany({
-    skip,
-    take: limit,
-    orderBy: {
-      [sortBy]: sortOrder,
-    },
+  const comments = await prisma.comment.findMany({
     where: {
       AND: commentsAndConditions,
     },
+    cursor: options?.cursor ? { id: options?.cursor } : undefined,
+    skip: options?.cursor ? 1 : undefined,
+    orderBy: sortBy
+      ? {
+          [sortBy]: sortOrder,
+        }
+      : [{ createdAt: "desc" }, { id: "desc" }],
+    take: limit + 1,
+
     include: {
       author: {
         select: {
@@ -34,8 +42,86 @@ const getComments = async (options: any, filters: Record<string, any>) => {
           fullName: true,
         },
       },
+      entities: {
+        select: {
+          id: true,
+          type: true,
+          text: true,
+          offset: true,
+          end: true,
+        },
+      },
+      reactions: {
+        where: {
+          userId,
+        },
+        select: {
+          type: true,
+          reactionFor: true,
+          targetId: true,
+          userId: true,
+        },
+      },
+      _count: {
+        select: {
+          reactions: true,
+          replies: true,
+        },
+      },
     },
   });
+
+  const commentIds = comments.map((p) => p.id);
+
+  const reactionSummary =
+    comments.length > 0
+      ? await prisma.reaction.groupBy({
+          by: ["commentId", "type"],
+          where: {
+            commentId: { in: commentIds },
+          },
+          _count: {
+            type: true,
+          },
+        })
+      : [];
+
+  const reactionMap: Record<string, any[]> = {};
+
+  reactionSummary.forEach((r) => {
+    if (!reactionMap[r.commentId!]) {
+      reactionMap[r.commentId!] = [];
+    }
+
+    reactionMap[r.commentId!].push({
+      type: r.type,
+      count: r._count.type,
+    });
+  });
+
+  const meta = {
+    nextCursor:
+      comments.length > limit ? comments[comments.length - 1].id : null,
+    hasMore: comments.length > limit,
+  };
+  const hasMore = comments.length > limit;
+
+  if (hasMore) {
+    comments.pop();
+  }
+
+  return {
+    meta,
+    data: comments.map(({ reactions, ...comment }) => {
+      const myReaction = reactions[0] ?? null;
+
+      return {
+        ...comment,
+        reactionSummary: reactionMap[comment.id] || [],
+        myReaction,
+      };
+    }),
+  };
 };
 
 const createComment = async (data: any) => {
@@ -55,6 +141,32 @@ const createComment = async (data: any) => {
         text,
         authorId: userId as string,
         postId: data.postId,
+      },
+      include: {
+        author: {
+          select: {
+            id: true,
+            username: true,
+            firstName: true,
+            lastName: true,
+            fullName: true,
+          },
+        },
+        entities: {
+          select: {
+            id: true,
+            type: true,
+            text: true,
+            offset: true,
+            end: true,
+          },
+        },
+        _count: {
+          select: {
+            reactions: true,
+            replies: true,
+          },
+        },
       },
     });
 
@@ -100,7 +212,7 @@ const createComment = async (data: any) => {
     }
 
     if (commentEntitiesData.length) {
-      await tx.commentEntity.createMany({
+      await tx.entity.createMany({
         data: commentEntitiesData,
       });
     }

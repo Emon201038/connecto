@@ -14,6 +14,7 @@ const applyReactionUpdate = (
   arg: {
     type: ReactionType;
     targetId: string;
+    postId?: string;
   },
 ) => {
   const currentReaction = item.myReaction?.type;
@@ -75,6 +76,7 @@ export const reactionApi = baseApi.injectEndpoints({
         type: ReactionType;
         reactionFor: ReactionTargetType;
         targetId: string;
+        postId?: string;
       }
     >({
       query: (data) => ({
@@ -109,9 +111,9 @@ export const reactionApi = baseApi.injectEndpoints({
             patchResult = dispatch(
               commentsApi.util.updateQueryData(
                 "getComments",
-                { post: arg.targetId },
+                { postId: arg.postId! },
                 (draft) => {
-                  const comment = draft.data.comments.find(
+                  const comment = draft.comments.find(
                     (c) => c.id === arg.targetId,
                   );
                   if (!comment) return;
@@ -185,83 +187,6 @@ export const reactionApi = baseApi.injectEndpoints({
           variables: data,
         }),
       }),
-      onQueryStarted: async (arg, { queryFulfilled, dispatch }) => {
-        // optimistic cache update start
-        const patchResult = dispatch(
-          commentsApi.util.updateQueryData(
-            "getComments",
-            { post: arg.post },
-            (draft) => {
-              const commentIndex = draft.data.comments.findIndex(
-                (p) => p.id === arg.target,
-              );
-              if (commentIndex === -1) return;
-
-              const targetedComment = draft.data.comments[commentIndex];
-              const myReaction = targetedComment?.myReaction?.type;
-              const reactionIndex = targetedComment.reactionSummary.findIndex(
-                (r) => r.reactionType === arg.type,
-              );
-
-              if (myReaction) {
-                if (myReaction === arg.type) {
-                  // remove my reaction
-                  targetedComment.myReaction = null;
-                  targetedComment.reactionCount -= 1;
-
-                  // decrement summary count
-                  const existing = targetedComment.reactionSummary.find(
-                    (r) => r.reactionType === myReaction,
-                  );
-                  if (existing) existing.count -= 1;
-                } else {
-                  // change my reaction
-                  targetedComment!.myReaction!.type = arg.type as ReactionType;
-
-                  // decrement old one
-                  const old = targetedComment.reactionSummary.find(
-                    (r) => r.reactionType === myReaction,
-                  );
-                  if (old) old.count -= 1;
-
-                  // increment or add new one
-                  if (reactionIndex !== -1) {
-                    targetedComment.reactionSummary[reactionIndex].count += 1;
-                  } else {
-                    targetedComment.reactionSummary.push({
-                      count: 1,
-                      reactionType: arg.type as ReactionType,
-                    });
-                  }
-                }
-              } else {
-                // first time reacting
-                targetedComment.myReaction = {
-                  type: arg.type as ReactionType,
-                };
-                targetedComment.reactionCount += 1;
-
-                if (reactionIndex !== -1) {
-                  targetedComment.reactionSummary[reactionIndex].count += 1;
-                } else {
-                  targetedComment.reactionSummary.push({
-                    count: 1,
-                    reactionType: arg.type as ReactionType,
-                  });
-                }
-              }
-            },
-          ),
-        );
-        // optimistic cache update end
-
-        try {
-          await queryFulfilled;
-        } catch (error) {
-          patchResult.undo();
-          console.log(error);
-        }
-      },
     }),
 
     getReactions: builder.query<

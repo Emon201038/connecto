@@ -17,6 +17,7 @@ interface ReactionButtonProps {
   children: React.ReactNode;
   className?: string;
   targetId: string;
+  postId?: string;
   reactionFor: ReactionTargetType;
 }
 
@@ -64,6 +65,7 @@ export function ReactionButton2({
   children,
   className,
   targetId,
+  postId,
   reactionFor,
 }: ReactionButtonProps) {
   const [showPicker, setShowPicker] = useState(false);
@@ -166,6 +168,7 @@ export function ReactionButton2({
         type: reaction,
         reactionFor: reactionFor,
         targetId: targetId,
+        postId: postId,
       };
       await toggleReaction(obj).unwrap();
     } catch (error) {

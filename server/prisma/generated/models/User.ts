@@ -308,7 +308,7 @@ export type UserWhereInput = {
   friendshipsAsUser2?: Prisma.FriendshipListRelationFilter
   posts?: Prisma.PostListRelationFilter
   postShares?: Prisma.PostShareListRelationFilter
-  postEntities?: Prisma.PostEntityListRelationFilter
+  postEntities?: Prisma.EntityListRelationFilter
   groups?: Prisma.GroupListRelationFilter
   groupMembers?: Prisma.GroupMemberListRelationFilter
   comments?: Prisma.CommentListRelationFilter
@@ -346,7 +346,7 @@ export type UserOrderByWithRelationInput = {
   friendshipsAsUser2?: Prisma.FriendshipOrderByRelationAggregateInput
   posts?: Prisma.PostOrderByRelationAggregateInput
   postShares?: Prisma.PostShareOrderByRelationAggregateInput
-  postEntities?: Prisma.PostEntityOrderByRelationAggregateInput
+  postEntities?: Prisma.EntityOrderByRelationAggregateInput
   groups?: Prisma.GroupOrderByRelationAggregateInput
   groupMembers?: Prisma.GroupMemberOrderByRelationAggregateInput
   comments?: Prisma.CommentOrderByRelationAggregateInput
@@ -387,7 +387,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   friendshipsAsUser2?: Prisma.FriendshipListRelationFilter
   posts?: Prisma.PostListRelationFilter
   postShares?: Prisma.PostShareListRelationFilter
-  postEntities?: Prisma.PostEntityListRelationFilter
+  postEntities?: Prisma.EntityListRelationFilter
   groups?: Prisma.GroupListRelationFilter
   groupMembers?: Prisma.GroupMemberListRelationFilter
   comments?: Prisma.CommentListRelationFilter
@@ -477,7 +477,7 @@ export type UserCreateInput = {
   friendshipsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
@@ -515,7 +515,7 @@ export type UserUncheckedCreateInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityUncheckedCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupUncheckedCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
@@ -553,7 +553,7 @@ export type UserUpdateInput = {
   friendshipsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
@@ -591,7 +591,7 @@ export type UserUncheckedUpdateInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUncheckedUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUncheckedUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUncheckedUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
@@ -997,7 +997,7 @@ export type UserCreateWithoutCommentsInput = {
   friendshipsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberCreateNestedManyWithoutUserInput
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
@@ -1034,7 +1034,7 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityUncheckedCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupUncheckedCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberUncheckedCreateNestedManyWithoutUserInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
@@ -1087,7 +1087,7 @@ export type UserUpdateWithoutCommentsInput = {
   friendshipsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUpdateManyWithoutUserNestedInput
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
@@ -1124,7 +1124,7 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUncheckedUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUncheckedUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUncheckedUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUncheckedUpdateManyWithoutUserNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
@@ -1161,7 +1161,7 @@ export type UserCreateWithoutConversationMembersInput = {
   friendshipsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
@@ -1198,7 +1198,7 @@ export type UserUncheckedCreateWithoutConversationMembersInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityUncheckedCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupUncheckedCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
@@ -1251,7 +1251,7 @@ export type UserUpdateWithoutConversationMembersInput = {
   friendshipsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
@@ -1288,7 +1288,7 @@ export type UserUncheckedUpdateWithoutConversationMembersInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUncheckedUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUncheckedUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUncheckedUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
@@ -1489,7 +1489,7 @@ export type UserCreateWithoutGroupsInput = {
   friendshipsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityCreateNestedManyWithoutUserInput
   groupMembers?: Prisma.GroupMemberCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
@@ -1526,7 +1526,7 @@ export type UserUncheckedCreateWithoutGroupsInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityUncheckedCreateNestedManyWithoutUserInput
   groupMembers?: Prisma.GroupMemberUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
@@ -1579,7 +1579,7 @@ export type UserUpdateWithoutGroupsInput = {
   friendshipsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUpdateManyWithoutUserNestedInput
   groupMembers?: Prisma.GroupMemberUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
@@ -1616,7 +1616,7 @@ export type UserUncheckedUpdateWithoutGroupsInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUncheckedUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUncheckedUpdateManyWithoutUserNestedInput
   groupMembers?: Prisma.GroupMemberUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
@@ -1653,7 +1653,7 @@ export type UserCreateWithoutGroupMembersInput = {
   friendshipsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupCreateNestedManyWithoutCreatedByInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
   messages?: Prisma.MessageCreateNestedManyWithoutSenderInput
@@ -1690,7 +1690,7 @@ export type UserUncheckedCreateWithoutGroupMembersInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityUncheckedCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupUncheckedCreateNestedManyWithoutCreatedByInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
   messages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
@@ -1743,7 +1743,7 @@ export type UserUpdateWithoutGroupMembersInput = {
   friendshipsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUpdateManyWithoutCreatedByNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
   messages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
@@ -1780,7 +1780,7 @@ export type UserUncheckedUpdateWithoutGroupMembersInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUncheckedUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUncheckedUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUncheckedUpdateManyWithoutCreatedByNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
   messages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
@@ -1817,7 +1817,7 @@ export type UserCreateWithoutMessagesInput = {
   friendshipsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
@@ -1854,7 +1854,7 @@ export type UserUncheckedCreateWithoutMessagesInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityUncheckedCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupUncheckedCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
@@ -1907,7 +1907,7 @@ export type UserUpdateWithoutMessagesInput = {
   friendshipsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
@@ -1944,7 +1944,7 @@ export type UserUncheckedUpdateWithoutMessagesInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUncheckedUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUncheckedUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUncheckedUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
@@ -1981,7 +1981,7 @@ export type UserCreateWithoutMessageDeletedsInput = {
   friendshipsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
@@ -2018,7 +2018,7 @@ export type UserUncheckedCreateWithoutMessageDeletedsInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityUncheckedCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupUncheckedCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
@@ -2071,7 +2071,7 @@ export type UserUpdateWithoutMessageDeletedsInput = {
   friendshipsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
@@ -2108,7 +2108,7 @@ export type UserUncheckedUpdateWithoutMessageDeletedsInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUncheckedUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUncheckedUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUncheckedUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
@@ -2145,7 +2145,7 @@ export type UserCreateWithoutOtpsInput = {
   friendshipsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
@@ -2182,7 +2182,7 @@ export type UserUncheckedCreateWithoutOtpsInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityUncheckedCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupUncheckedCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
@@ -2235,7 +2235,7 @@ export type UserUpdateWithoutOtpsInput = {
   friendshipsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
@@ -2272,7 +2272,7 @@ export type UserUncheckedUpdateWithoutOtpsInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUncheckedUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUncheckedUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUncheckedUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
@@ -2308,7 +2308,7 @@ export type UserCreateWithoutPostsInput = {
   friendshipsAsUser1?: Prisma.FriendshipCreateNestedManyWithoutUser1Input
   friendshipsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
   postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
@@ -2345,7 +2345,7 @@ export type UserUncheckedCreateWithoutPostsInput = {
   friendshipsAsUser1?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser1Input
   friendshipsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
   postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityUncheckedCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupUncheckedCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
@@ -2398,7 +2398,7 @@ export type UserUpdateWithoutPostsInput = {
   friendshipsAsUser1?: Prisma.FriendshipUpdateManyWithoutUser1NestedInput
   friendshipsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
   postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
@@ -2435,7 +2435,7 @@ export type UserUncheckedUpdateWithoutPostsInput = {
   friendshipsAsUser1?: Prisma.FriendshipUncheckedUpdateManyWithoutUser1NestedInput
   friendshipsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
   postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUncheckedUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUncheckedUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUncheckedUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
@@ -2472,7 +2472,7 @@ export type UserCreateWithoutPostSharesInput = {
   friendshipsAsUser1?: Prisma.FriendshipCreateNestedManyWithoutUser1Input
   friendshipsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
-  postEntities?: Prisma.PostEntityCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
@@ -2509,7 +2509,7 @@ export type UserUncheckedCreateWithoutPostSharesInput = {
   friendshipsAsUser1?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser1Input
   friendshipsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
-  postEntities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityUncheckedCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupUncheckedCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
@@ -2562,7 +2562,7 @@ export type UserUpdateWithoutPostSharesInput = {
   friendshipsAsUser1?: Prisma.FriendshipUpdateManyWithoutUser1NestedInput
   friendshipsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
-  postEntities?: Prisma.PostEntityUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
@@ -2599,7 +2599,7 @@ export type UserUncheckedUpdateWithoutPostSharesInput = {
   friendshipsAsUser1?: Prisma.FriendshipUncheckedUpdateManyWithoutUser1NestedInput
   friendshipsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
-  postEntities?: Prisma.PostEntityUncheckedUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUncheckedUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUncheckedUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
@@ -2637,7 +2637,7 @@ export type UserCreateWithoutReactionsInput = {
   friendshipsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
@@ -2674,7 +2674,7 @@ export type UserUncheckedCreateWithoutReactionsInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityUncheckedCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupUncheckedCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
@@ -2727,7 +2727,7 @@ export type UserUpdateWithoutReactionsInput = {
   friendshipsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
@@ -2764,7 +2764,7 @@ export type UserUncheckedUpdateWithoutReactionsInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUncheckedUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUncheckedUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUncheckedUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
@@ -2800,7 +2800,7 @@ export type UserCreateWithoutFollowersInput = {
   friendshipsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
@@ -2837,7 +2837,7 @@ export type UserUncheckedCreateWithoutFollowersInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityUncheckedCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupUncheckedCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
@@ -2879,7 +2879,7 @@ export type UserCreateWithoutFollowingInput = {
   friendshipsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
@@ -2916,7 +2916,7 @@ export type UserUncheckedCreateWithoutFollowingInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityUncheckedCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupUncheckedCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
@@ -2969,7 +2969,7 @@ export type UserUpdateWithoutFollowersInput = {
   friendshipsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
@@ -3006,7 +3006,7 @@ export type UserUncheckedUpdateWithoutFollowersInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUncheckedUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUncheckedUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUncheckedUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
@@ -3054,7 +3054,7 @@ export type UserUpdateWithoutFollowingInput = {
   friendshipsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
@@ -3091,7 +3091,7 @@ export type UserUncheckedUpdateWithoutFollowingInput = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUncheckedUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUncheckedUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUncheckedUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
@@ -3128,7 +3128,7 @@ export type UserCreateWithoutFriendshipsAsUser1Input = {
   friendshipsAsUser2?: Prisma.FriendshipCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
@@ -3165,7 +3165,7 @@ export type UserUncheckedCreateWithoutFriendshipsAsUser1Input = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser2Input
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityUncheckedCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupUncheckedCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
@@ -3207,7 +3207,7 @@ export type UserCreateWithoutFriendshipsAsUser2Input = {
   friendshipsAsUser1?: Prisma.FriendshipCreateNestedManyWithoutUser1Input
   posts?: Prisma.PostCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentCreateNestedManyWithoutAuthorInput
@@ -3244,7 +3244,7 @@ export type UserUncheckedCreateWithoutFriendshipsAsUser2Input = {
   friendshipsAsUser1?: Prisma.FriendshipUncheckedCreateNestedManyWithoutUser1Input
   posts?: Prisma.PostUncheckedCreateNestedManyWithoutAuthorInput
   postShares?: Prisma.PostShareUncheckedCreateNestedManyWithoutUserInput
-  postEntities?: Prisma.PostEntityUncheckedCreateNestedManyWithoutUserInput
+  postEntities?: Prisma.EntityUncheckedCreateNestedManyWithoutUserInput
   groups?: Prisma.GroupUncheckedCreateNestedManyWithoutCreatedByInput
   groupMembers?: Prisma.GroupMemberUncheckedCreateNestedManyWithoutUserInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutAuthorInput
@@ -3297,7 +3297,7 @@ export type UserUpdateWithoutFriendshipsAsUser1Input = {
   friendshipsAsUser2?: Prisma.FriendshipUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
@@ -3334,7 +3334,7 @@ export type UserUncheckedUpdateWithoutFriendshipsAsUser1Input = {
   friendshipsAsUser2?: Prisma.FriendshipUncheckedUpdateManyWithoutUser2NestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUncheckedUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUncheckedUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUncheckedUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
@@ -3382,7 +3382,7 @@ export type UserUpdateWithoutFriendshipsAsUser2Input = {
   friendshipsAsUser1?: Prisma.FriendshipUpdateManyWithoutUser1NestedInput
   posts?: Prisma.PostUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUpdateManyWithoutAuthorNestedInput
@@ -3419,7 +3419,7 @@ export type UserUncheckedUpdateWithoutFriendshipsAsUser2Input = {
   friendshipsAsUser1?: Prisma.FriendshipUncheckedUpdateManyWithoutUser1NestedInput
   posts?: Prisma.PostUncheckedUpdateManyWithoutAuthorNestedInput
   postShares?: Prisma.PostShareUncheckedUpdateManyWithoutUserNestedInput
-  postEntities?: Prisma.PostEntityUncheckedUpdateManyWithoutUserNestedInput
+  postEntities?: Prisma.EntityUncheckedUpdateManyWithoutUserNestedInput
   groups?: Prisma.GroupUncheckedUpdateManyWithoutCreatedByNestedInput
   groupMembers?: Prisma.GroupMemberUncheckedUpdateManyWithoutUserNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutAuthorNestedInput
@@ -3527,7 +3527,7 @@ export type UserCountOutputTypeCountPostSharesArgs<ExtArgs extends runtime.Types
  * UserCountOutputType without action
  */
 export type UserCountOutputTypeCountPostEntitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.PostEntityWhereInput
+  where?: Prisma.EntityWhereInput
 }
 
 /**
@@ -3726,7 +3726,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     friendshipsAsUser2: Prisma.$FriendshipPayload<ExtArgs>[]
     posts: Prisma.$PostPayload<ExtArgs>[]
     postShares: Prisma.$PostSharePayload<ExtArgs>[]
-    postEntities: Prisma.$PostEntityPayload<ExtArgs>[]
+    postEntities: Prisma.$EntityPayload<ExtArgs>[]
     groups: Prisma.$GroupPayload<ExtArgs>[]
     groupMembers: Prisma.$GroupMemberPayload<ExtArgs>[]
     comments: Prisma.$CommentPayload<ExtArgs>[]
@@ -4157,7 +4157,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   friendshipsAsUser2<T extends Prisma.User$friendshipsAsUser2Args<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$friendshipsAsUser2Args<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FriendshipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   posts<T extends Prisma.User$postsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   postShares<T extends Prisma.User$postSharesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postSharesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostSharePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  postEntities<T extends Prisma.User$postEntitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postEntitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PostEntityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  postEntities<T extends Prisma.User$postEntitiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$postEntitiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EntityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   groups<T extends Prisma.User$groupsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$groupsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   groupMembers<T extends Prisma.User$groupMembersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$groupMembersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GroupMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   comments<T extends Prisma.User$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4751,23 +4751,23 @@ export type User$postSharesArgs<ExtArgs extends runtime.Types.Extensions.Interna
  */
 export type User$postEntitiesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the PostEntity
+   * Select specific fields to fetch from the Entity
    */
-  select?: Prisma.PostEntitySelect<ExtArgs> | null
+  select?: Prisma.EntitySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the PostEntity
+   * Omit specific fields from the Entity
    */
-  omit?: Prisma.PostEntityOmit<ExtArgs> | null
+  omit?: Prisma.EntityOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.PostEntityInclude<ExtArgs> | null
-  where?: Prisma.PostEntityWhereInput
-  orderBy?: Prisma.PostEntityOrderByWithRelationInput | Prisma.PostEntityOrderByWithRelationInput[]
-  cursor?: Prisma.PostEntityWhereUniqueInput
+  include?: Prisma.EntityInclude<ExtArgs> | null
+  where?: Prisma.EntityWhereInput
+  orderBy?: Prisma.EntityOrderByWithRelationInput | Prisma.EntityOrderByWithRelationInput[]
+  cursor?: Prisma.EntityWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.PostEntityScalarFieldEnum | Prisma.PostEntityScalarFieldEnum[]
+  distinct?: Prisma.EntityScalarFieldEnum | Prisma.EntityScalarFieldEnum[]
 }
 
 /**

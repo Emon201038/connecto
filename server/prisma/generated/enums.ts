@@ -9,14 +9,6 @@
 * 🟢 You can import this file directly.
 */
 
-export const EntityModel = {
-  USER: 'USER',
-  HASHTAG: 'HASHTAG'
-} as const
-
-export type EntityModel = (typeof EntityModel)[keyof typeof EntityModel]
-
-
 export const ConversationType = {
   DIRECT: 'DIRECT',
   GROUP: 'GROUP'
@@ -47,6 +39,14 @@ export const ConversationTheme = {
 } as const
 
 export type ConversationTheme = (typeof ConversationTheme)[keyof typeof ConversationTheme]
+
+
+export const EntityType = {
+  HASHTAG: 'HASHTAG',
+  MENTION: 'MENTION'
+} as const
+
+export type EntityType = (typeof EntityType)[keyof typeof EntityType]
 
 
 export const GroupType = {

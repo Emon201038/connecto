@@ -11,7 +11,7 @@ model Post {
   group   Group?  @relation(fields: [groupId], references: [id])
 
   attachments PostAttachment[]
-  entities    PostEntity[]
+  entities    Entity[]
   shares      PostShare[]
 
   feelingsType  String?

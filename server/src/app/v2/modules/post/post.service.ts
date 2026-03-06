@@ -1,5 +1,5 @@
 import streamifier from "streamifier";
-import { Prisma } from "../../../../../prisma/generated/browser";
+import { EntityType, Prisma } from "../../../../../prisma/generated/browser";
 import prisma from "../../../config/db";
 import { paginationHelper } from "../../../helpers/paginationHelper";
 import { postSearchableFields } from "./post.constant";
@@ -102,6 +102,13 @@ const getPostsFromDB = async (options: any, filters: any, userId?: string) => {
               id: true,
             },
           },
+          user: {
+            select: {
+              id: true,
+              username: true,
+              fullName: true,
+            },
+          },
         },
       },
       author: {
@@ -202,7 +209,8 @@ const createPost = async (
   files: Express.Multer.File[],
   userId: string,
 ) => {
-  const { content, type, privacy, entities, feelings } = payload;
+  const { content, type, privacy, entities: rawEntities, feelings } = payload;
+  const entities = JSON.parse(rawEntities || []);
 
   let uploadedImages: UploadedFile[] = [];
 
@@ -253,6 +261,29 @@ const createPost = async (
               shares: true,
             },
           },
+          entities: {
+            select: {
+              id: true,
+              end: true,
+              offset: true,
+              type: true,
+              text: true,
+              hashtag: {
+                select: {
+                  name: true,
+                  useCount: true,
+                  id: true,
+                },
+              },
+              user: {
+                select: {
+                  id: true,
+                  username: true,
+                  fullName: true,
+                },
+              },
+            },
+          },
         },
       });
 
@@ -262,15 +293,15 @@ const createPost = async (
         for (const entity of entities) {
           if (entity.type === "hashtag") {
             const hashtag = await tx.hashtag.upsert({
-              where: { name: entity.text.toLowerCase() },
+              where: { name: entity.name.toLowerCase() },
               update: { useCount: { increment: 1 } },
-              create: { name: entity.text.toLowerCase(), useCount: 1 },
+              create: { name: entity.name.toLowerCase(), useCount: 1 },
             });
 
             postEntitiesData.push({
               postId: post.id,
-              type: "hashtag",
-              text: entity.text,
+              type: EntityType.HASHTAG,
+              text: entity.name,
               offset: entity.offset,
               end: entity.end,
               hashtagId: hashtag.id,
@@ -280,8 +311,8 @@ const createPost = async (
           if (entity.type === "mention") {
             postEntitiesData.push({
               postId: post.id,
-              type: "mention",
-              text: entity.text,
+              type: EntityType.MENTION,
+              text: entity.name,
               offset: entity.offset,
               end: entity.end,
               userId: entity.target,
@@ -290,7 +321,7 @@ const createPost = async (
         }
 
         if (postEntitiesData.length) {
-          await tx.postEntity.createMany({
+          await tx.entity.createMany({
             data: postEntitiesData,
           });
         }

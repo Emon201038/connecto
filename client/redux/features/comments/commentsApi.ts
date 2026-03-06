@@ -1,207 +1,92 @@
 import { IComment } from "@/interface/comment.interfce";
 import { IMeta } from "@/lib/type";
 import { baseApi } from "@/redux/baseApi";
-import { IResponse } from "@/types";
+import { IEntity } from "@/interface/post.interface";
 import { postApi } from "../post/postApi";
 
 export const commentsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getComments: builder.query<
-      IResponse<{ comments: IComment[]; meta: IMeta }>,
-      { post: string; page?: number; limit?: number }
+      { comments: IComment[]; meta: IMeta },
+      { postId: string; limit?: number; cursor?: string }
     >({
-      query: ({ post, page = 1, limit = 15 }) => ({
-        url: `/`,
-        method: "POST",
+      query: ({ postId, cursor, limit }) => ({
+        url: `/api/v2/comments`,
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({
-          query: `
-            query($post: ID!,$page: Int,$limit: Int) {
-              comments(post: $post, page: $page, limit: $limit) {
-                comments {
-                  id
-                  parent {
-                    id
-                  }
-                  post {
-                    id
-                  }
-                  text
-                  replyCount
-                  reactionCount
-                  createdAt
-                  updatedAt
-                  reactionSummary {
-                    count
-                    reactionType
-                  }
-                  myReaction {
-                    type
-                  }
-                  entities {
-                    offset
-                    end
-                    type
-                    target {
-                      ...on User {
-                        id
-                        fullName
-                      }
-                      ...on Hashtag{
-                        id
-                        tag
-                      }
-                    }
-                  }
-                  author {
-                    fullName
-                    username
-                    id
-                    profilePicture {
-                      pub_id
-                      url
-                    }
-                  }
-                }
-                meta {
-                  page
-                  totalPage
-                  totalResult
-                }
-              }
-            }`,
-          variables: { post, page, limit },
-        }),
+        params: {
+          postId,
+          ...(cursor && { cursor }),
+          ...(limit && { limit }),
+        },
       }),
       // transform response data
-      transformResponse: (
-        response: IResponse<{ comments: { comments: IComment[]; meta: IMeta } }>
-      ) => ({
-        data: {
-          comments: response.data.comments.comments,
-          meta: response.data.comments.meta,
-        },
-        errors: response.errors,
+      transformResponse: (response: { data: IComment[]; meta: IMeta }) => ({
+        comments: response.data,
+        meta: response.meta,
       }),
       // provide a stable cache key
       serializeQueryArgs: ({ queryArgs }) => {
-        return { post: queryArgs.post }; // only postId matters
+        return { post: queryArgs.postId }; // only postId matters
       },
       // merge new pages into same cache
       merge: (currentCache, newCache, { arg }) => {
-        if (arg.page === 1) {
+        if (!arg.cursor) {
           // replace first page
-          currentCache.data.comments = newCache.data.comments;
-          currentCache.data.meta = newCache.data.meta;
+          currentCache.comments = newCache.comments;
+          currentCache.meta = newCache.meta;
         } else {
           // append new comments (infinite scroll style)
-          currentCache.data.comments.push(...newCache.data.comments);
-          currentCache.data.meta = newCache.data.meta;
+          currentCache.comments.push(...newCache.comments);
+          currentCache.meta = newCache.meta;
         }
       },
       forceRefetch({ currentArg, previousArg }) {
-        return currentArg?.post !== previousArg?.post;
+        return currentArg?.postId !== previousArg?.postId;
       },
     }),
-    addComment: builder.mutation<IResponse<IComment>, any>({
+    addComment: builder.mutation<
+      IComment,
+      {
+        postId: string;
+        text: string;
+        entities?: IEntity[];
+        parent?: string | null;
+      }
+    >({
       query: (data) => ({
-        url: `/`,
+        url: `/api/v2/comments`,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         credentials: "include",
-        body: JSON.stringify({
-          query: `
-            mutation CreateComment($post: ID!, $text: String!, $parent: ID, $entities: [EntityInput]) {
-              createComment(post: $post, text: $text, parent: $parent, entities: $entities) {
-                id
-                post {
-                  id
-                }
-                text
-                replyCount
-                reactionCount
-                createdAt
-                updatedAt
-                parent {
-                  id
-                }
-                reactionSummary {
-                  count
-                  reactionType
-                }
-                myReaction {
-                  type
-                }
-                entities {
-                  offset
-                  end
-                  type
-                  target {
-                    ...on User {
-                      id
-                      fullName
-                    }
-                    ...on Hashtag{
-                      id
-                      tag
-                    }
-                  }
-                }
-                author {
-                  fullName
-                  username
-                  id
-                  profilePicture {
-                    pub_id
-                    url
-                  }
-                }
-              }
-            }`,
-          variables: data,
-        }),
+        body: data,
       }),
-      transformResponse: (
-        response: IResponse<{ createComment: IComment }>
-      ) => ({
-        data: response.data.createComment,
-        errors: response.errors,
-      }),
+      transformResponse: (response: { data: IComment }) => response.data,
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
-          const { data } = await queryFulfilled;
-          const newComment = data?.data;
-
-          if (!newComment) return;
+          const { data: newComment } = await queryFulfilled;
 
           dispatch(
             commentsApi.util.updateQueryData(
               "getComments",
-              { post: arg.post }, // stable key
+              { postId: arg.postId }, // must match endpoint args
               (draft) => {
-                draft.data.comments.unshift(newComment);
-                draft.data.meta.totalResult += 1;
-              }
-            )
+                draft.comments.unshift(newComment);
+              },
+            ),
           );
 
           dispatch(
-            postApi.util.updateQueryData(
-              "getPosts",
-              { page: 1, limit: 15 },
-              (draft) => {
-                const postIndex = draft.data.posts.findIndex(
-                  (p) => p.id === arg.post
-                );
-                if (postIndex === -1) return;
-                draft.data.posts[postIndex].commentCount += 1;
-              }
-            )
+            postApi.util.updateQueryData("getAllPosts", {}, (draft) => {
+              const post = draft.posts.find((p) => p.id === arg.postId);
+              if (!post) return;
+              post._count.comments += 1;
+            }),
           );
         } catch (err) {
           console.error("cache update failed", err);

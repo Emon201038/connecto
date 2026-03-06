@@ -52,10 +52,9 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   Comment: 'Comment',
-  CommentEntity: 'CommentEntity',
   Conversation: 'Conversation',
   ConversationMember: 'ConversationMember',
-  PostEntity: 'PostEntity',
+  Entity: 'Entity',
   Group: 'Group',
   GroupMember: 'GroupMember',
   Hashtag: 'Hashtag',
@@ -102,20 +101,6 @@ export const CommentScalarFieldEnum = {
 export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
 
 
-export const CommentEntityScalarFieldEnum = {
-  id: 'id',
-  commentId: 'commentId',
-  type: 'type',
-  offset: 'offset',
-  end: 'end',
-  model: 'model',
-  targetId: 'targetId',
-  text: 'text'
-} as const
-
-export type CommentEntityScalarFieldEnum = (typeof CommentEntityScalarFieldEnum)[keyof typeof CommentEntityScalarFieldEnum]
-
-
 export const ConversationScalarFieldEnum = {
   id: 'id',
   type: 'type',
@@ -147,18 +132,19 @@ export const ConversationMemberScalarFieldEnum = {
 export type ConversationMemberScalarFieldEnum = (typeof ConversationMemberScalarFieldEnum)[keyof typeof ConversationMemberScalarFieldEnum]
 
 
-export const PostEntityScalarFieldEnum = {
+export const EntityScalarFieldEnum = {
   id: 'id',
-  type: 'type',
   offset: 'offset',
   end: 'end',
   text: 'text',
+  type: 'type',
   userId: 'userId',
   hashtagId: 'hashtagId',
-  postId: 'postId'
+  postId: 'postId',
+  commentId: 'commentId'
 } as const
 
-export type PostEntityScalarFieldEnum = (typeof PostEntityScalarFieldEnum)[keyof typeof PostEntityScalarFieldEnum]
+export type EntityScalarFieldEnum = (typeof EntityScalarFieldEnum)[keyof typeof EntityScalarFieldEnum]
 
 
 export const GroupScalarFieldEnum = {

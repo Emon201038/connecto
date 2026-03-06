@@ -12,22 +12,31 @@ import {
   ResponsiveDialogHeader,
   ResponsiveDialogTitle,
 } from "@/components/ui/responsive-dialog";
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { reactionEmojis } from "@/constants/emoji";
+import { ReactionSummary } from "@/interface";
 
 interface Props {
-  postId: string;
+  targetId: string;
   open: boolean;
   onOpenChange: (open: React.SetStateAction<boolean>) => void;
+  type: ReactionTargetType;
+  reactionSummary: ReactionSummary[];
 }
 
-export default function ReactorsModal({ postId, open, onOpenChange }: Props) {
+export default function ReactorsModal({
+  targetId,
+  open,
+  onOpenChange,
+  type,
+  reactionSummary,
+}: Props) {
   const [currentTab, setCurrentTab] = useState<ReactionType | "ALL">("ALL");
   // 🔥 Only call API when modal is open
   const { data, isLoading } = useGetReactionsQuery(
     {
-      target: postId,
-      targetType: ReactionTargetType.POST,
+      target: targetId,
+      targetType: type,
       type: currentTab === "ALL" ? undefined : currentTab,
     },
     {
@@ -37,21 +46,25 @@ export default function ReactorsModal({ postId, open, onOpenChange }: Props) {
 
   const reactionTabs = useMemo(() => {
     return (
-      data?.map((reaction) => {
+      reactionSummary?.map((reaction) => {
         return {
           label: reaction.type as ReactionType | "ALL",
           src: `/images/${reaction.type.toLowerCase()}.svg`,
         };
       }) || []
     );
-  }, [data]);
+  }, [reactionSummary]);
 
-  const getReactionCount = (reactionType: ReactionType | "ALL") => {
-    if (currentTab === "ALL") return data?.length || 0;
-    return (
-      data?.filter((reaction) => reaction.type === reactionType)?.length || 0
-    );
-  };
+  const getReactionCount = useCallback(
+    (reactionType: ReactionType | "ALL") => {
+      if (currentTab === "ALL") return reactionSummary?.length || 0;
+      return (
+        reactionSummary?.filter((reaction) => reaction.type === reactionType)
+          ?.length || 0
+      );
+    },
+    [ReactionType, currentTab, reactionSummary],
+  );
 
   return (
     <ResponsiveDialog open={open} onOpenChange={onOpenChange}>
