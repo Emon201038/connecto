@@ -122,3 +122,23 @@ export const messengerThemes = [
     },
   },
 ];
+
+export const STORY_BACKGROUNDS = [
+  { id: "blue", type: "gradient", colors: ["#00c6ff", "#0072ff"] },
+  { id: "sunset", type: "gradient", colors: ["#ff7e5f", "#feb47b"] },
+  {
+    id: "instagram",
+    type: "gradient",
+    colors: ["#f09433", "#e6683c", "#dc2743"],
+  },
+  { id: "purple", type: "gradient", colors: ["#7F00FF", "#E100FF"] },
+  { id: "mint", type: "gradient", colors: ["#00b09b", "#96c93d"] },
+  { id: "sunrise", type: "gradient", colors: ["#ff512f", "#dd2476"] },
+
+  { id: "fb-blue", type: "color", color: "#1877F2" },
+  { id: "pink", type: "color", color: "#E1306C" },
+  { id: "purple-solid", type: "color", color: "#833AB4" },
+  { id: "orange", type: "color", color: "#FF6A00" },
+  { id: "black", type: "color", color: "#111827" },
+  { id: "white", type: "color", color: "#ffffff" },
+];
