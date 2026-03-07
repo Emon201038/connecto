@@ -113,6 +113,16 @@ export type PostShare = Prisma.PostShareModel
  */
 export type Reaction = Prisma.ReactionModel
 /**
+ * Model Story
+ * 
+ */
+export type Story = Prisma.StoryModel
+/**
+ * Model StoryViewer
+ * 
+ */
+export type StoryViewer = Prisma.StoryViewerModel
+/**
  * Model User
  * 
  */

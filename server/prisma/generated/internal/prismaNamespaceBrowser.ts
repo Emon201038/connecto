@@ -66,6 +66,8 @@ export const ModelName = {
   PostAttachment: 'PostAttachment',
   PostShare: 'PostShare',
   Reaction: 'Reaction',
+  Story: 'Story',
+  StoryViewer: 'StoryViewer',
   User: 'User',
   Follower: 'Follower',
   Friendship: 'Friendship'
@@ -285,10 +287,34 @@ export const ReactionScalarFieldEnum = {
   commentId: 'commentId',
   messageId: 'messageId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  storyId: 'storyId'
 } as const
 
 export type ReactionScalarFieldEnum = (typeof ReactionScalarFieldEnum)[keyof typeof ReactionScalarFieldEnum]
+
+
+export const StoryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  mediaUrl: 'mediaUrl',
+  expiresAt: 'expiresAt',
+  isDeleted: 'isDeleted',
+  duration: 'duration',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StoryScalarFieldEnum = (typeof StoryScalarFieldEnum)[keyof typeof StoryScalarFieldEnum]
+
+
+export const StoryViewerScalarFieldEnum = {
+  id: 'id',
+  storyId: 'storyId',
+  userId: 'userId'
+} as const
+
+export type StoryViewerScalarFieldEnum = (typeof StoryViewerScalarFieldEnum)[keyof typeof StoryViewerScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {

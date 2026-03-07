@@ -152,7 +152,7 @@ export interface IMessageStatus extends Document {
   seenBy?: IUser[];
 }
 
-export interface IStory extends Document {
+export interface IStory {
   mediaUrl: string;
   expiresAt: Date;
   viewers: IUser[];
@@ -160,4 +160,5 @@ export interface IStory extends Document {
   isDeleted: boolean;
   createdAt: Date;
   updatedAt: Date;
+  duration: number;
 }

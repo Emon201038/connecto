@@ -85,8 +85,8 @@ export async function generateAndUploadStory(payload: any) {
 
   // upload to cloudinary
   const uploadResult = await new Promise<{
-    secure_url: string;
-    public_id: string;
+    url: string;
+    pub_id: string;
   }>((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
       {
@@ -96,7 +96,11 @@ export async function generateAndUploadStory(payload: any) {
       },
       (error, result) => {
         if (error) reject(error);
-        else resolve(result as { secure_url: string; public_id: string });
+        else
+          resolve({
+            url: result?.secure_url as string,
+            pub_id: result?.public_id as string,
+          } as { url: string; pub_id: string });
       },
     );
 

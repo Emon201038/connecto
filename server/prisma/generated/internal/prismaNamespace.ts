@@ -399,6 +399,8 @@ export const ModelName = {
   PostAttachment: 'PostAttachment',
   PostShare: 'PostShare',
   Reaction: 'Reaction',
+  Story: 'Story',
+  StoryViewer: 'StoryViewer',
   User: 'User',
   Follower: 'Follower',
   Friendship: 'Friendship'
@@ -417,7 +419,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "comment" | "conversation" | "conversationMember" | "entity" | "group" | "groupMember" | "hashtag" | "message" | "attachment" | "messageDeleted" | "otp" | "post" | "postAttachment" | "postShare" | "reaction" | "user" | "follower" | "friendship"
+    modelProps: "comment" | "conversation" | "conversationMember" | "entity" | "group" | "groupMember" | "hashtag" | "message" | "attachment" | "messageDeleted" | "otp" | "post" | "postAttachment" | "postShare" | "reaction" | "story" | "storyViewer" | "user" | "follower" | "friendship"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1531,6 +1533,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Story: {
+      payload: Prisma.$StoryPayload<ExtArgs>
+      fields: Prisma.StoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryPayload>
+        }
+        findFirst: {
+          args: Prisma.StoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryPayload>
+        }
+        findMany: {
+          args: Prisma.StoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryPayload>[]
+        }
+        create: {
+          args: Prisma.StoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryPayload>
+        }
+        createMany: {
+          args: Prisma.StoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryPayload>[]
+        }
+        delete: {
+          args: Prisma.StoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryPayload>
+        }
+        update: {
+          args: Prisma.StoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.StoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.StoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryPayload>
+        }
+        aggregate: {
+          args: Prisma.StoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStory>
+        }
+        groupBy: {
+          args: Prisma.StoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StoryCountAggregateOutputType> | number
+        }
+      }
+    }
+    StoryViewer: {
+      payload: Prisma.$StoryViewerPayload<ExtArgs>
+      fields: Prisma.StoryViewerFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.StoryViewerFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryViewerPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.StoryViewerFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryViewerPayload>
+        }
+        findFirst: {
+          args: Prisma.StoryViewerFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryViewerPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.StoryViewerFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryViewerPayload>
+        }
+        findMany: {
+          args: Prisma.StoryViewerFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryViewerPayload>[]
+        }
+        create: {
+          args: Prisma.StoryViewerCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryViewerPayload>
+        }
+        createMany: {
+          args: Prisma.StoryViewerCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.StoryViewerCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryViewerPayload>[]
+        }
+        delete: {
+          args: Prisma.StoryViewerDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryViewerPayload>
+        }
+        update: {
+          args: Prisma.StoryViewerUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryViewerPayload>
+        }
+        deleteMany: {
+          args: Prisma.StoryViewerDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.StoryViewerUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.StoryViewerUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryViewerPayload>[]
+        }
+        upsert: {
+          args: Prisma.StoryViewerUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$StoryViewerPayload>
+        }
+        aggregate: {
+          args: Prisma.StoryViewerAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateStoryViewer>
+        }
+        groupBy: {
+          args: Prisma.StoryViewerGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StoryViewerGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.StoryViewerCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.StoryViewerCountAggregateOutputType> | number
+        }
+      }
+    }
     User: {
       payload: Prisma.$UserPayload<ExtArgs>
       fields: Prisma.UserFieldRefs
@@ -1990,10 +2140,34 @@ export const ReactionScalarFieldEnum = {
   commentId: 'commentId',
   messageId: 'messageId',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  storyId: 'storyId'
 } as const
 
 export type ReactionScalarFieldEnum = (typeof ReactionScalarFieldEnum)[keyof typeof ReactionScalarFieldEnum]
+
+
+export const StoryScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  mediaUrl: 'mediaUrl',
+  expiresAt: 'expiresAt',
+  isDeleted: 'isDeleted',
+  duration: 'duration',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StoryScalarFieldEnum = (typeof StoryScalarFieldEnum)[keyof typeof StoryScalarFieldEnum]
+
+
+export const StoryViewerScalarFieldEnum = {
+  id: 'id',
+  storyId: 'storyId',
+  userId: 'userId'
+} as const
+
+export type StoryViewerScalarFieldEnum = (typeof StoryViewerScalarFieldEnum)[keyof typeof StoryViewerScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -2497,6 +2671,8 @@ export type GlobalOmitConfig = {
   postAttachment?: Prisma.PostAttachmentOmit
   postShare?: Prisma.PostShareOmit
   reaction?: Prisma.ReactionOmit
+  story?: Prisma.StoryOmit
+  storyViewer?: Prisma.StoryViewerOmit
   user?: Prisma.UserOmit
   follower?: Prisma.FollowerOmit
   friendship?: Prisma.FriendshipOmit

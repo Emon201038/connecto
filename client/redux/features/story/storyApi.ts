@@ -49,7 +49,7 @@ export const storyApi = baseApi.injectEndpoints({
             stories: { stories: IStory[]; user: IUser }[];
             meta: IMeta;
           };
-        }>
+        }>,
       ) => {
         return {
           data: {
@@ -59,6 +59,17 @@ export const storyApi = baseApi.injectEndpoints({
           errors: response.errors,
         };
       },
+    }),
+    getAllStories: builder.query<{ user: IUser; stories: IStory[] }[], void>({
+      query: () => ({
+        url: "/api/v2/stories",
+        method: "GET",
+        credentials: "include",
+      }),
+      providesTags: ["STORIES"],
+      transformResponse: (
+        response: IResponse<{ user: IUser; stories: IStory[] }[]>,
+      ) => response.data,
     }),
     createStory: builder.mutation<
       IResponse<{ id: string }>,
@@ -83,12 +94,12 @@ export const storyApi = baseApi.injectEndpoints({
                 privacy: input.privacy || "PUBLIC",
               },
             },
-          })
+          }),
         );
 
         formData.append(
           "map",
-          JSON.stringify({ "0": ["variables.input.image"] })
+          JSON.stringify({ "0": ["variables.input.image"] }),
         );
         formData.append("0", input.image);
 
@@ -104,7 +115,7 @@ export const storyApi = baseApi.injectEndpoints({
       },
 
       transformResponse: (
-        response: IResponse<{ createStory: { id: string } }>
+        response: IResponse<{ createStory: { id: string } }>,
       ) => ({
         data: response.data.createStory,
         errors: response.errors,

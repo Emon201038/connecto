@@ -35,6 +35,7 @@ export type ReactionMinAggregateOutputType = {
   messageId: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  storyId: string | null
 }
 
 export type ReactionMaxAggregateOutputType = {
@@ -48,6 +49,7 @@ export type ReactionMaxAggregateOutputType = {
   messageId: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  storyId: string | null
 }
 
 export type ReactionCountAggregateOutputType = {
@@ -61,6 +63,7 @@ export type ReactionCountAggregateOutputType = {
   messageId: number
   createdAt: number
   updatedAt: number
+  storyId: number
   _all: number
 }
 
@@ -76,6 +79,7 @@ export type ReactionMinAggregateInputType = {
   messageId?: true
   createdAt?: true
   updatedAt?: true
+  storyId?: true
 }
 
 export type ReactionMaxAggregateInputType = {
@@ -89,6 +93,7 @@ export type ReactionMaxAggregateInputType = {
   messageId?: true
   createdAt?: true
   updatedAt?: true
+  storyId?: true
 }
 
 export type ReactionCountAggregateInputType = {
@@ -102,6 +107,7 @@ export type ReactionCountAggregateInputType = {
   messageId?: true
   createdAt?: true
   updatedAt?: true
+  storyId?: true
   _all?: true
 }
 
@@ -188,6 +194,7 @@ export type ReactionGroupByOutputType = {
   messageId: string | null
   createdAt: Date
   updatedAt: Date
+  storyId: string | null
   _count: ReactionCountAggregateOutputType | null
   _min: ReactionMinAggregateOutputType | null
   _max: ReactionMaxAggregateOutputType | null
@@ -222,10 +229,12 @@ export type ReactionWhereInput = {
   messageId?: Prisma.StringNullableFilter<"Reaction"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Reaction"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Reaction"> | Date | string
+  storyId?: Prisma.StringNullableFilter<"Reaction"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   post?: Prisma.XOR<Prisma.PostNullableScalarRelationFilter, Prisma.PostWhereInput> | null
   comment?: Prisma.XOR<Prisma.CommentNullableScalarRelationFilter, Prisma.CommentWhereInput> | null
   message?: Prisma.XOR<Prisma.MessageNullableScalarRelationFilter, Prisma.MessageWhereInput> | null
+  story?: Prisma.XOR<Prisma.StoryNullableScalarRelationFilter, Prisma.StoryWhereInput> | null
 }
 
 export type ReactionOrderByWithRelationInput = {
@@ -239,10 +248,12 @@ export type ReactionOrderByWithRelationInput = {
   messageId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  storyId?: Prisma.SortOrderInput | Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
   post?: Prisma.PostOrderByWithRelationInput
   comment?: Prisma.CommentOrderByWithRelationInput
   message?: Prisma.MessageOrderByWithRelationInput
+  story?: Prisma.StoryOrderByWithRelationInput
 }
 
 export type ReactionWhereUniqueInput = Prisma.AtLeast<{
@@ -260,10 +271,12 @@ export type ReactionWhereUniqueInput = Prisma.AtLeast<{
   messageId?: Prisma.StringNullableFilter<"Reaction"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Reaction"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Reaction"> | Date | string
+  storyId?: Prisma.StringNullableFilter<"Reaction"> | string | null
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   post?: Prisma.XOR<Prisma.PostNullableScalarRelationFilter, Prisma.PostWhereInput> | null
   comment?: Prisma.XOR<Prisma.CommentNullableScalarRelationFilter, Prisma.CommentWhereInput> | null
   message?: Prisma.XOR<Prisma.MessageNullableScalarRelationFilter, Prisma.MessageWhereInput> | null
+  story?: Prisma.XOR<Prisma.StoryNullableScalarRelationFilter, Prisma.StoryWhereInput> | null
 }, "id" | "userId_reactionFor_targetId_type">
 
 export type ReactionOrderByWithAggregationInput = {
@@ -277,6 +290,7 @@ export type ReactionOrderByWithAggregationInput = {
   messageId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  storyId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ReactionCountOrderByAggregateInput
   _max?: Prisma.ReactionMaxOrderByAggregateInput
   _min?: Prisma.ReactionMinOrderByAggregateInput
@@ -296,6 +310,7 @@ export type ReactionScalarWhereWithAggregatesInput = {
   messageId?: Prisma.StringNullableWithAggregatesFilter<"Reaction"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Reaction"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Reaction"> | Date | string
+  storyId?: Prisma.StringNullableWithAggregatesFilter<"Reaction"> | string | null
 }
 
 export type ReactionCreateInput = {
@@ -309,6 +324,7 @@ export type ReactionCreateInput = {
   post?: Prisma.PostCreateNestedOneWithoutReactionsInput
   comment?: Prisma.CommentCreateNestedOneWithoutReactionsInput
   message?: Prisma.MessageCreateNestedOneWithoutReactionsInput
+  story?: Prisma.StoryCreateNestedOneWithoutReactionsInput
 }
 
 export type ReactionUncheckedCreateInput = {
@@ -322,6 +338,7 @@ export type ReactionUncheckedCreateInput = {
   messageId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  storyId?: string | null
 }
 
 export type ReactionUpdateInput = {
@@ -335,6 +352,7 @@ export type ReactionUpdateInput = {
   post?: Prisma.PostUpdateOneWithoutReactionsNestedInput
   comment?: Prisma.CommentUpdateOneWithoutReactionsNestedInput
   message?: Prisma.MessageUpdateOneWithoutReactionsNestedInput
+  story?: Prisma.StoryUpdateOneWithoutReactionsNestedInput
 }
 
 export type ReactionUncheckedUpdateInput = {
@@ -348,6 +366,7 @@ export type ReactionUncheckedUpdateInput = {
   messageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  storyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReactionCreateManyInput = {
@@ -361,6 +380,7 @@ export type ReactionCreateManyInput = {
   messageId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  storyId?: string | null
 }
 
 export type ReactionUpdateManyMutationInput = {
@@ -383,6 +403,7 @@ export type ReactionUncheckedUpdateManyInput = {
   messageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  storyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReactionListRelationFilter = {
@@ -413,6 +434,7 @@ export type ReactionCountOrderByAggregateInput = {
   messageId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  storyId?: Prisma.SortOrder
 }
 
 export type ReactionMaxOrderByAggregateInput = {
@@ -426,6 +448,7 @@ export type ReactionMaxOrderByAggregateInput = {
   messageId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  storyId?: Prisma.SortOrder
 }
 
 export type ReactionMinOrderByAggregateInput = {
@@ -439,6 +462,7 @@ export type ReactionMinOrderByAggregateInput = {
   messageId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  storyId?: Prisma.SortOrder
 }
 
 export type ReactionCreateNestedManyWithoutCommentInput = {
@@ -575,6 +599,48 @@ export type EnumReactionForFieldUpdateOperationsInput = {
   set?: $Enums.ReactionFor
 }
 
+export type ReactionCreateNestedManyWithoutStoryInput = {
+  create?: Prisma.XOR<Prisma.ReactionCreateWithoutStoryInput, Prisma.ReactionUncheckedCreateWithoutStoryInput> | Prisma.ReactionCreateWithoutStoryInput[] | Prisma.ReactionUncheckedCreateWithoutStoryInput[]
+  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutStoryInput | Prisma.ReactionCreateOrConnectWithoutStoryInput[]
+  createMany?: Prisma.ReactionCreateManyStoryInputEnvelope
+  connect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+}
+
+export type ReactionUncheckedCreateNestedManyWithoutStoryInput = {
+  create?: Prisma.XOR<Prisma.ReactionCreateWithoutStoryInput, Prisma.ReactionUncheckedCreateWithoutStoryInput> | Prisma.ReactionCreateWithoutStoryInput[] | Prisma.ReactionUncheckedCreateWithoutStoryInput[]
+  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutStoryInput | Prisma.ReactionCreateOrConnectWithoutStoryInput[]
+  createMany?: Prisma.ReactionCreateManyStoryInputEnvelope
+  connect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+}
+
+export type ReactionUpdateManyWithoutStoryNestedInput = {
+  create?: Prisma.XOR<Prisma.ReactionCreateWithoutStoryInput, Prisma.ReactionUncheckedCreateWithoutStoryInput> | Prisma.ReactionCreateWithoutStoryInput[] | Prisma.ReactionUncheckedCreateWithoutStoryInput[]
+  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutStoryInput | Prisma.ReactionCreateOrConnectWithoutStoryInput[]
+  upsert?: Prisma.ReactionUpsertWithWhereUniqueWithoutStoryInput | Prisma.ReactionUpsertWithWhereUniqueWithoutStoryInput[]
+  createMany?: Prisma.ReactionCreateManyStoryInputEnvelope
+  set?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  disconnect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  delete?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  connect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  update?: Prisma.ReactionUpdateWithWhereUniqueWithoutStoryInput | Prisma.ReactionUpdateWithWhereUniqueWithoutStoryInput[]
+  updateMany?: Prisma.ReactionUpdateManyWithWhereWithoutStoryInput | Prisma.ReactionUpdateManyWithWhereWithoutStoryInput[]
+  deleteMany?: Prisma.ReactionScalarWhereInput | Prisma.ReactionScalarWhereInput[]
+}
+
+export type ReactionUncheckedUpdateManyWithoutStoryNestedInput = {
+  create?: Prisma.XOR<Prisma.ReactionCreateWithoutStoryInput, Prisma.ReactionUncheckedCreateWithoutStoryInput> | Prisma.ReactionCreateWithoutStoryInput[] | Prisma.ReactionUncheckedCreateWithoutStoryInput[]
+  connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutStoryInput | Prisma.ReactionCreateOrConnectWithoutStoryInput[]
+  upsert?: Prisma.ReactionUpsertWithWhereUniqueWithoutStoryInput | Prisma.ReactionUpsertWithWhereUniqueWithoutStoryInput[]
+  createMany?: Prisma.ReactionCreateManyStoryInputEnvelope
+  set?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  disconnect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  delete?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  connect?: Prisma.ReactionWhereUniqueInput | Prisma.ReactionWhereUniqueInput[]
+  update?: Prisma.ReactionUpdateWithWhereUniqueWithoutStoryInput | Prisma.ReactionUpdateWithWhereUniqueWithoutStoryInput[]
+  updateMany?: Prisma.ReactionUpdateManyWithWhereWithoutStoryInput | Prisma.ReactionUpdateManyWithWhereWithoutStoryInput[]
+  deleteMany?: Prisma.ReactionScalarWhereInput | Prisma.ReactionScalarWhereInput[]
+}
+
 export type ReactionCreateNestedManyWithoutUserInput = {
   create?: Prisma.XOR<Prisma.ReactionCreateWithoutUserInput, Prisma.ReactionUncheckedCreateWithoutUserInput> | Prisma.ReactionCreateWithoutUserInput[] | Prisma.ReactionUncheckedCreateWithoutUserInput[]
   connectOrCreate?: Prisma.ReactionCreateOrConnectWithoutUserInput | Prisma.ReactionCreateOrConnectWithoutUserInput[]
@@ -627,6 +693,7 @@ export type ReactionCreateWithoutCommentInput = {
   user: Prisma.UserCreateNestedOneWithoutReactionsInput
   post?: Prisma.PostCreateNestedOneWithoutReactionsInput
   message?: Prisma.MessageCreateNestedOneWithoutReactionsInput
+  story?: Prisma.StoryCreateNestedOneWithoutReactionsInput
 }
 
 export type ReactionUncheckedCreateWithoutCommentInput = {
@@ -639,6 +706,7 @@ export type ReactionUncheckedCreateWithoutCommentInput = {
   messageId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  storyId?: string | null
 }
 
 export type ReactionCreateOrConnectWithoutCommentInput = {
@@ -681,6 +749,7 @@ export type ReactionScalarWhereInput = {
   messageId?: Prisma.StringNullableFilter<"Reaction"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Reaction"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Reaction"> | Date | string
+  storyId?: Prisma.StringNullableFilter<"Reaction"> | string | null
 }
 
 export type ReactionCreateWithoutMessageInput = {
@@ -693,6 +762,7 @@ export type ReactionCreateWithoutMessageInput = {
   user: Prisma.UserCreateNestedOneWithoutReactionsInput
   post?: Prisma.PostCreateNestedOneWithoutReactionsInput
   comment?: Prisma.CommentCreateNestedOneWithoutReactionsInput
+  story?: Prisma.StoryCreateNestedOneWithoutReactionsInput
 }
 
 export type ReactionUncheckedCreateWithoutMessageInput = {
@@ -705,6 +775,7 @@ export type ReactionUncheckedCreateWithoutMessageInput = {
   commentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  storyId?: string | null
 }
 
 export type ReactionCreateOrConnectWithoutMessageInput = {
@@ -743,6 +814,7 @@ export type ReactionCreateWithoutPostInput = {
   user: Prisma.UserCreateNestedOneWithoutReactionsInput
   comment?: Prisma.CommentCreateNestedOneWithoutReactionsInput
   message?: Prisma.MessageCreateNestedOneWithoutReactionsInput
+  story?: Prisma.StoryCreateNestedOneWithoutReactionsInput
 }
 
 export type ReactionUncheckedCreateWithoutPostInput = {
@@ -755,6 +827,7 @@ export type ReactionUncheckedCreateWithoutPostInput = {
   messageId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  storyId?: string | null
 }
 
 export type ReactionCreateOrConnectWithoutPostInput = {
@@ -783,6 +856,58 @@ export type ReactionUpdateManyWithWhereWithoutPostInput = {
   data: Prisma.XOR<Prisma.ReactionUpdateManyMutationInput, Prisma.ReactionUncheckedUpdateManyWithoutPostInput>
 }
 
+export type ReactionCreateWithoutStoryInput = {
+  id?: string
+  type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
+  targetId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutReactionsInput
+  post?: Prisma.PostCreateNestedOneWithoutReactionsInput
+  comment?: Prisma.CommentCreateNestedOneWithoutReactionsInput
+  message?: Prisma.MessageCreateNestedOneWithoutReactionsInput
+}
+
+export type ReactionUncheckedCreateWithoutStoryInput = {
+  id?: string
+  type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
+  userId: string
+  targetId: string
+  postId?: string | null
+  commentId?: string | null
+  messageId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ReactionCreateOrConnectWithoutStoryInput = {
+  where: Prisma.ReactionWhereUniqueInput
+  create: Prisma.XOR<Prisma.ReactionCreateWithoutStoryInput, Prisma.ReactionUncheckedCreateWithoutStoryInput>
+}
+
+export type ReactionCreateManyStoryInputEnvelope = {
+  data: Prisma.ReactionCreateManyStoryInput | Prisma.ReactionCreateManyStoryInput[]
+  skipDuplicates?: boolean
+}
+
+export type ReactionUpsertWithWhereUniqueWithoutStoryInput = {
+  where: Prisma.ReactionWhereUniqueInput
+  update: Prisma.XOR<Prisma.ReactionUpdateWithoutStoryInput, Prisma.ReactionUncheckedUpdateWithoutStoryInput>
+  create: Prisma.XOR<Prisma.ReactionCreateWithoutStoryInput, Prisma.ReactionUncheckedCreateWithoutStoryInput>
+}
+
+export type ReactionUpdateWithWhereUniqueWithoutStoryInput = {
+  where: Prisma.ReactionWhereUniqueInput
+  data: Prisma.XOR<Prisma.ReactionUpdateWithoutStoryInput, Prisma.ReactionUncheckedUpdateWithoutStoryInput>
+}
+
+export type ReactionUpdateManyWithWhereWithoutStoryInput = {
+  where: Prisma.ReactionScalarWhereInput
+  data: Prisma.XOR<Prisma.ReactionUpdateManyMutationInput, Prisma.ReactionUncheckedUpdateManyWithoutStoryInput>
+}
+
 export type ReactionCreateWithoutUserInput = {
   id?: string
   type: $Enums.ReactionType
@@ -793,6 +918,7 @@ export type ReactionCreateWithoutUserInput = {
   post?: Prisma.PostCreateNestedOneWithoutReactionsInput
   comment?: Prisma.CommentCreateNestedOneWithoutReactionsInput
   message?: Prisma.MessageCreateNestedOneWithoutReactionsInput
+  story?: Prisma.StoryCreateNestedOneWithoutReactionsInput
 }
 
 export type ReactionUncheckedCreateWithoutUserInput = {
@@ -805,6 +931,7 @@ export type ReactionUncheckedCreateWithoutUserInput = {
   messageId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  storyId?: string | null
 }
 
 export type ReactionCreateOrConnectWithoutUserInput = {
@@ -843,6 +970,7 @@ export type ReactionCreateManyCommentInput = {
   messageId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  storyId?: string | null
 }
 
 export type ReactionUpdateWithoutCommentInput = {
@@ -855,6 +983,7 @@ export type ReactionUpdateWithoutCommentInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutReactionsNestedInput
   post?: Prisma.PostUpdateOneWithoutReactionsNestedInput
   message?: Prisma.MessageUpdateOneWithoutReactionsNestedInput
+  story?: Prisma.StoryUpdateOneWithoutReactionsNestedInput
 }
 
 export type ReactionUncheckedUpdateWithoutCommentInput = {
@@ -867,6 +996,7 @@ export type ReactionUncheckedUpdateWithoutCommentInput = {
   messageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  storyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReactionUncheckedUpdateManyWithoutCommentInput = {
@@ -879,6 +1009,7 @@ export type ReactionUncheckedUpdateManyWithoutCommentInput = {
   messageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  storyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReactionCreateManyMessageInput = {
@@ -891,6 +1022,7 @@ export type ReactionCreateManyMessageInput = {
   commentId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  storyId?: string | null
 }
 
 export type ReactionUpdateWithoutMessageInput = {
@@ -903,6 +1035,7 @@ export type ReactionUpdateWithoutMessageInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutReactionsNestedInput
   post?: Prisma.PostUpdateOneWithoutReactionsNestedInput
   comment?: Prisma.CommentUpdateOneWithoutReactionsNestedInput
+  story?: Prisma.StoryUpdateOneWithoutReactionsNestedInput
 }
 
 export type ReactionUncheckedUpdateWithoutMessageInput = {
@@ -915,6 +1048,7 @@ export type ReactionUncheckedUpdateWithoutMessageInput = {
   commentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  storyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReactionUncheckedUpdateManyWithoutMessageInput = {
@@ -927,6 +1061,7 @@ export type ReactionUncheckedUpdateManyWithoutMessageInput = {
   commentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  storyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReactionCreateManyPostInput = {
@@ -939,6 +1074,7 @@ export type ReactionCreateManyPostInput = {
   messageId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  storyId?: string | null
 }
 
 export type ReactionUpdateWithoutPostInput = {
@@ -951,6 +1087,7 @@ export type ReactionUpdateWithoutPostInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutReactionsNestedInput
   comment?: Prisma.CommentUpdateOneWithoutReactionsNestedInput
   message?: Prisma.MessageUpdateOneWithoutReactionsNestedInput
+  story?: Prisma.StoryUpdateOneWithoutReactionsNestedInput
 }
 
 export type ReactionUncheckedUpdateWithoutPostInput = {
@@ -963,6 +1100,7 @@ export type ReactionUncheckedUpdateWithoutPostInput = {
   messageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  storyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReactionUncheckedUpdateManyWithoutPostInput = {
@@ -971,6 +1109,59 @@ export type ReactionUncheckedUpdateManyWithoutPostInput = {
   reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   targetId?: Prisma.StringFieldUpdateOperationsInput | string
+  commentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  messageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  storyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type ReactionCreateManyStoryInput = {
+  id?: string
+  type: $Enums.ReactionType
+  reactionFor: $Enums.ReactionFor
+  userId: string
+  targetId: string
+  postId?: string | null
+  commentId?: string | null
+  messageId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type ReactionUpdateWithoutStoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutReactionsNestedInput
+  post?: Prisma.PostUpdateOneWithoutReactionsNestedInput
+  comment?: Prisma.CommentUpdateOneWithoutReactionsNestedInput
+  message?: Prisma.MessageUpdateOneWithoutReactionsNestedInput
+}
+
+export type ReactionUncheckedUpdateWithoutStoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  commentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  messageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type ReactionUncheckedUpdateManyWithoutStoryInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumReactionTypeFieldUpdateOperationsInput | $Enums.ReactionType
+  reactionFor?: Prisma.EnumReactionForFieldUpdateOperationsInput | $Enums.ReactionFor
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  targetId?: Prisma.StringFieldUpdateOperationsInput | string
+  postId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   commentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   messageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -987,6 +1178,7 @@ export type ReactionCreateManyUserInput = {
   messageId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  storyId?: string | null
 }
 
 export type ReactionUpdateWithoutUserInput = {
@@ -999,6 +1191,7 @@ export type ReactionUpdateWithoutUserInput = {
   post?: Prisma.PostUpdateOneWithoutReactionsNestedInput
   comment?: Prisma.CommentUpdateOneWithoutReactionsNestedInput
   message?: Prisma.MessageUpdateOneWithoutReactionsNestedInput
+  story?: Prisma.StoryUpdateOneWithoutReactionsNestedInput
 }
 
 export type ReactionUncheckedUpdateWithoutUserInput = {
@@ -1011,6 +1204,7 @@ export type ReactionUncheckedUpdateWithoutUserInput = {
   messageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  storyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ReactionUncheckedUpdateManyWithoutUserInput = {
@@ -1023,6 +1217,7 @@ export type ReactionUncheckedUpdateManyWithoutUserInput = {
   messageId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  storyId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -1038,10 +1233,12 @@ export type ReactionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   messageId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  storyId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   post?: boolean | Prisma.Reaction$postArgs<ExtArgs>
   comment?: boolean | Prisma.Reaction$commentArgs<ExtArgs>
   message?: boolean | Prisma.Reaction$messageArgs<ExtArgs>
+  story?: boolean | Prisma.Reaction$storyArgs<ExtArgs>
 }, ExtArgs["result"]["reaction"]>
 
 export type ReactionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1055,10 +1252,12 @@ export type ReactionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   messageId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  storyId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   post?: boolean | Prisma.Reaction$postArgs<ExtArgs>
   comment?: boolean | Prisma.Reaction$commentArgs<ExtArgs>
   message?: boolean | Prisma.Reaction$messageArgs<ExtArgs>
+  story?: boolean | Prisma.Reaction$storyArgs<ExtArgs>
 }, ExtArgs["result"]["reaction"]>
 
 export type ReactionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1072,10 +1271,12 @@ export type ReactionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   messageId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  storyId?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   post?: boolean | Prisma.Reaction$postArgs<ExtArgs>
   comment?: boolean | Prisma.Reaction$commentArgs<ExtArgs>
   message?: boolean | Prisma.Reaction$messageArgs<ExtArgs>
+  story?: boolean | Prisma.Reaction$storyArgs<ExtArgs>
 }, ExtArgs["result"]["reaction"]>
 
 export type ReactionSelectScalar = {
@@ -1089,26 +1290,30 @@ export type ReactionSelectScalar = {
   messageId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  storyId?: boolean
 }
 
-export type ReactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "reactionFor" | "userId" | "targetId" | "postId" | "commentId" | "messageId" | "createdAt" | "updatedAt", ExtArgs["result"]["reaction"]>
+export type ReactionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "reactionFor" | "userId" | "targetId" | "postId" | "commentId" | "messageId" | "createdAt" | "updatedAt" | "storyId", ExtArgs["result"]["reaction"]>
 export type ReactionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   post?: boolean | Prisma.Reaction$postArgs<ExtArgs>
   comment?: boolean | Prisma.Reaction$commentArgs<ExtArgs>
   message?: boolean | Prisma.Reaction$messageArgs<ExtArgs>
+  story?: boolean | Prisma.Reaction$storyArgs<ExtArgs>
 }
 export type ReactionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   post?: boolean | Prisma.Reaction$postArgs<ExtArgs>
   comment?: boolean | Prisma.Reaction$commentArgs<ExtArgs>
   message?: boolean | Prisma.Reaction$messageArgs<ExtArgs>
+  story?: boolean | Prisma.Reaction$storyArgs<ExtArgs>
 }
 export type ReactionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   post?: boolean | Prisma.Reaction$postArgs<ExtArgs>
   comment?: boolean | Prisma.Reaction$commentArgs<ExtArgs>
   message?: boolean | Prisma.Reaction$messageArgs<ExtArgs>
+  story?: boolean | Prisma.Reaction$storyArgs<ExtArgs>
 }
 
 export type $ReactionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1118,6 +1323,7 @@ export type $ReactionPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     post: Prisma.$PostPayload<ExtArgs> | null
     comment: Prisma.$CommentPayload<ExtArgs> | null
     message: Prisma.$MessagePayload<ExtArgs> | null
+    story: Prisma.$StoryPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1130,6 +1336,7 @@ export type $ReactionPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     messageId: string | null
     createdAt: Date
     updatedAt: Date
+    storyId: string | null
   }, ExtArgs["result"]["reaction"]>
   composites: {}
 }
@@ -1528,6 +1735,7 @@ export interface Prisma__ReactionClient<T, Null = never, ExtArgs extends runtime
   post<T extends Prisma.Reaction$postArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Reaction$postArgs<ExtArgs>>): Prisma.Prisma__PostClient<runtime.Types.Result.GetResult<Prisma.$PostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   comment<T extends Prisma.Reaction$commentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Reaction$commentArgs<ExtArgs>>): Prisma.Prisma__CommentClient<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   message<T extends Prisma.Reaction$messageArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Reaction$messageArgs<ExtArgs>>): Prisma.Prisma__MessageClient<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  story<T extends Prisma.Reaction$storyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Reaction$storyArgs<ExtArgs>>): Prisma.Prisma__StoryClient<runtime.Types.Result.GetResult<Prisma.$StoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1567,6 +1775,7 @@ export interface ReactionFieldRefs {
   readonly messageId: Prisma.FieldRef<"Reaction", 'String'>
   readonly createdAt: Prisma.FieldRef<"Reaction", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Reaction", 'DateTime'>
+  readonly storyId: Prisma.FieldRef<"Reaction", 'String'>
 }
     
 
@@ -2017,6 +2226,25 @@ export type Reaction$messageArgs<ExtArgs extends runtime.Types.Extensions.Intern
    */
   include?: Prisma.MessageInclude<ExtArgs> | null
   where?: Prisma.MessageWhereInput
+}
+
+/**
+ * Reaction.story
+ */
+export type Reaction$storyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Story
+   */
+  select?: Prisma.StorySelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Story
+   */
+  omit?: Prisma.StoryOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StoryInclude<ExtArgs> | null
+  where?: Prisma.StoryWhereInput
 }
 
 /**
