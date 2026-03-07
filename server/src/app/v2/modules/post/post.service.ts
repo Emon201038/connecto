@@ -8,6 +8,7 @@ import {
   uploadStreamToCloudinary,
 } from "../../../../app/utils/upload-cloudinary";
 import cloudinary from "../../../../app/lib/cloudinary";
+import AppError from "../../../../app/helpers/appError";
 
 const getPostsFromDB = async (options: any, filters: any, userId?: string) => {
   const { limit, sortBy, sortOrder } =
@@ -70,6 +71,10 @@ const getPostsFromDB = async (options: any, filters: any, userId?: string) => {
       },
     });
   }
+
+  andConditions.push({
+    isDeleted: false,
+  });
 
   const posts = await prisma.post.findMany({
     where: {
@@ -342,4 +347,16 @@ const createPost = async (
   }
 };
 
-export const PostService = { getPostsFromDB, createPost };
+const softDeletePost = async (postId: string, userId: string) => {
+  const post = await prisma.post.findUnique({
+    where: { id: postId, authorId: userId },
+  });
+
+  if (!post) throw new AppError(403, "You are not allowed to delete this post");
+  return await prisma.post.update({
+    where: { id: postId },
+    data: { isDeleted: true },
+  });
+};
+
+export const PostService = { getPostsFromDB, createPost, softDeletePost };

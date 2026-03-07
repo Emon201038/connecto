@@ -5,6 +5,7 @@ import otpRoutes from "../modules/otp/otp.routes";
 import postRoutes from "../modules/post/post.routes";
 import reactionRoutes from "../modules/reaction/reaction.routes";
 import commentRoutes from "../modules/comment/comment.routes";
+import storyRoutes from "../modules/story/story.routes";
 
 const routerv2 = express.Router();
 const moduleRoutes = [
@@ -31,6 +32,10 @@ const moduleRoutes = [
   {
     path: "/comments",
     route: commentRoutes,
+  },
+  {
+    path: "/stories",
+    route: storyRoutes,
   },
 ];
 

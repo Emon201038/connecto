@@ -1,0 +1,26 @@
+model Story {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  mediaUrl  String
+  expiresAt DateTime
+  isDeleted Boolean  @default(false)
+
+  viewers   StoryViewer[]
+  reactions Reaction[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model StoryViewer {
+  id      String @id @default(uuid())
+  storyId String
+  userId  String
+
+  story Story @relation(fields: [storyId], references: [id])
+  user  User  @relation(fields: [userId], references: [id])
+
+  @@unique([storyId, userId])
+}

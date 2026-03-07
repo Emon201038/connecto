@@ -306,6 +306,26 @@ export const postApi = baseApi.injectEndpoints({
         meta: response.meta,
       }),
     }),
+    softDeletePost: builder.mutation<IPost, string>({
+      query: (id) => ({
+        url: `/api/v2/posts/soft-delete/${id}`,
+        method: "DELETE",
+        credentials: "include",
+      }),
+      transformResponse: (response: IResponse<IPost>) => response.data,
+      onQueryStarted: async (arg, { dispatch, queryFulfilled }) => {
+        try {
+          const post = await queryFulfilled;
+          dispatch(
+            postApi.util.updateQueryData("getAllPosts", {}, (draft) => {
+              draft.posts = draft.posts.filter((p) => p.id !== post.data.id);
+            }),
+          );
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
   }),
 });
 
@@ -316,4 +336,5 @@ export const {
   useLazyGetPostQuery,
   useCreatePostMutation,
   useCreatePost2Mutation,
+  useSoftDeletePostMutation,
 } = postApi;

@@ -38,6 +38,8 @@ model User {
   conversationMembers ConversationMember[]
   otps                Otp[]
   reactions           Reaction[]
+  stories             Story[]
+  storyViewers        StoryViewer[]
 }
 
 model Follower {

@@ -17,6 +17,8 @@ model Reaction {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  story     Story?   @relation(fields: [storyId], references: [id])
+  storyId   String?
 
   @@unique([userId, reactionFor, targetId, type])
 }

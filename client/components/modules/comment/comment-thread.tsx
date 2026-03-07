@@ -116,6 +116,8 @@ const CommentThread = ({
 
   const handleShowMoreReplies = async () => {};
 
+  console.log(timeAgo(comment.createdAt), comment.text, comment.createdAt);
+
   return (
     <div id={`comment-${comment.id}`}>
       <div className="flex items-start gap-2">
@@ -158,7 +160,7 @@ const CommentThread = ({
               <div className="w-full flex justify-between items-center gap-2">
                 <div className="flex items-center gap-2 px-3 py-1">
                   <span className="text-xs text-muted-foreground">
-                    {timeAgo(Number(comment.createdAt))}
+                    {timeAgo(comment.createdAt)}
                   </span>
                   <ReactionButton2
                     userReaction={comment.myReaction?.type}

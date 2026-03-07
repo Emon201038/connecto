@@ -38,4 +38,14 @@ const createPost = catchAsync(async (req, res, next) => {
   });
 });
 
-export const PostController = { getPosts, createPost };
+const softDeletePost = catchAsync(async (req, res, next) => {
+  if (!req.user) throw new AppError(403, "You are not logged in");
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "Post deleted successfully",
+    data: await PostService.softDeletePost(req.params.id, req.user.id),
+  });
+});
+
+export const PostController = { getPosts, createPost, softDeletePost };

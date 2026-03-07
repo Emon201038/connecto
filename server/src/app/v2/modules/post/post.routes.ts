@@ -15,4 +15,10 @@ postRoutes
     PostController.createPost,
   );
 
+postRoutes.delete(
+  "/soft-delete/:id",
+  checkAuth(...Object.values(UserRole)),
+  PostController.softDeletePost,
+);
+
 export default postRoutes;
