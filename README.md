@@ -1,3 +1,4 @@
+## this project is under construction!!! 
 # Connecto - a social media Project
 
 A full-stack connecto built with Next.js (client) and Node.js/Express (server), featuring social networking, groups, posts, friends, authentication, and admin analytics.
